@@ -134,11 +134,11 @@ fin.getline(s, 256);
 
 Prob #852
 
-()[]([])([va aici poate sa urmeze doar ( sau ] sau [
+`()[]([])([` va aici poate sa urmeze doar `(` sau `]` sau `[`
 
-DAR NU )
+DAR NU `)`
 
-([ urmeaza ) am un sir prost
+`([` urmeaza `)` am un sir prost
 
 Cand caracterul curent este:
 

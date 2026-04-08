@@ -1,6 +1,6 @@
 # Citirea și scrierea în limbajul C
 
-Pt citire/afisare in c trebuie sa includem <cstdio>.
+Pt citire/afisare in c trebuie sa includem `<cstdio>`.
 
 ```cpp
 Citire - scanf()
