@@ -1,3 +1,6 @@
+# Cmmdc
+
+```cpp
 // cmmdc
 #include <iostream>
 using namespace std;
@@ -22,3 +25,4 @@ int main()
     cout << "CMMDC este: " << a << endl;
     return 0;
 }
+```

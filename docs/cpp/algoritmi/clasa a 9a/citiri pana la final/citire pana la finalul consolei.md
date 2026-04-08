@@ -1,3 +1,6 @@
+# Citire pana la finalul consolei
+
+```cpp
 // citire pana la finalul consolei
 #include <iostream>
 using namespace std;
@@ -15,3 +18,4 @@ int main()
     cout << "Suma numerelor citite este: " << suma << endl;
     return 0;
 }
+```

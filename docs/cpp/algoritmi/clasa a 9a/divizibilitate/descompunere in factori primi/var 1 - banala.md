@@ -1,3 +1,6 @@
+# Var 1 - banala
+
+```cpp
 // descompunere in factori primi - varianta 1 - banala.cpp
 #include <iostream>
 using namespace std;
@@ -26,3 +29,4 @@ int main()
     }
     return 0;
 }
+```

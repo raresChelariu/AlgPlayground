@@ -1,3 +1,6 @@
+# Var 2 - 2 este singurul prim par
+
+```cpp
 // var 2 descompunere in factori primi
 // 2 este singurul prim par.cpp
 #include <iostream>
@@ -41,3 +44,4 @@ int main()
         }
     }
 }
+```

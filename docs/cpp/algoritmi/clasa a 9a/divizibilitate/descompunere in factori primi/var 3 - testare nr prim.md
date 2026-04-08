@@ -1,3 +1,6 @@
+# Var 3 - testare nr prim
+
+```cpp
 // var 2 descompunere in factori primi
 // 2 este singurul prim par.cpp
 // descompunere in factori primi - varianta 3 - testare nr prim.cpp
@@ -53,3 +56,4 @@ int main()
 
     return 0;
 }
+```

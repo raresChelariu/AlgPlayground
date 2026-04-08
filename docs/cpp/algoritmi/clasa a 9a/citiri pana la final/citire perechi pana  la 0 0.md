@@ -1,3 +1,6 @@
+# Citire perechi pana  la 0 0
+
+```cpp
 // citire perechi pana la 0 0
 #include <iostream>
 using namespace std;
@@ -14,3 +17,4 @@ int main()
     }
     return 0;
 }
+```

@@ -1,3 +1,6 @@
+# Oglindit
+
+```cpp
 // oglinditul unui numar
 #include <iostream>
 using namespace std;
@@ -21,3 +24,4 @@ int main()
     cout << "Oglinditul numarului este: " << oglindit << endl;
     return 0;
 }
+```

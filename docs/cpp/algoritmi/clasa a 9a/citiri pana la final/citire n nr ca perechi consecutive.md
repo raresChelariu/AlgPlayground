@@ -1,3 +1,6 @@
+# Citire n nr ca perechi consecutive
+
+```cpp
 // se citesc n numere; sa se numere cate perechi consecutive
 // se termina in aceiasi ultima cifra
 #include <iostream>
@@ -33,3 +36,4 @@ int main()
     cout << "Numarul de perechi consecutive cu ultima cifra egala este: " << contor << endl;
     return 0;
 }
+```

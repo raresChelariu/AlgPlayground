@@ -1,3 +1,6 @@
+# Citire pana la finalul fisierului
+
+```cpp
 // citire pana la finalul fisierului
 #include <iostream>
 #include <fstream>
@@ -17,3 +20,4 @@ int main()
     cout << "Suma numerelor din fisier este: " << suma << endl;
     return 0;
 }
+```

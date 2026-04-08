@@ -1,3 +1,6 @@
+# Divizori - merg pana la jumatate
+
+```cpp
 // divizori - merg pana la jumatate.cpp
 #include <iostream>
 using namespace std;
@@ -27,3 +30,4 @@ int main()
 
     return 0;
 }
+```

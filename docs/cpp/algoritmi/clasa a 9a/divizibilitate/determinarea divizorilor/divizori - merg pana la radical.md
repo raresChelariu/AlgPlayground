@@ -1,3 +1,6 @@
+# Divizori - merg pana la radical
+
+```cpp
 // diviziori - merg pana cand d*d < n.cpp
 
 #include <iostream>
@@ -28,3 +31,4 @@ int main()
     cout << endl;
     return 0;
 }
+```

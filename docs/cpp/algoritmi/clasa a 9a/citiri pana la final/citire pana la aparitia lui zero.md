@@ -1,3 +1,6 @@
+# Citire pana la aparitia lui zero
+
+```cpp
 // citire pana la aparitia lui zero.cpp
 #include <iostream>
 using namespace std;
@@ -16,3 +19,4 @@ int main()
     cout << "Suma numerelor citite este: " << suma << endl;
     return 0;
 }
+```

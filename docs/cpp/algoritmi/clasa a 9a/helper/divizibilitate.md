@@ -11,6 +11,7 @@ Primul scop - Vreau să găsesc divizorii lui n (să îi afișez pe toți)
 
 //  Obs 2 : Nu exista divizor propriu >n/2
 
+
 ```
 
 Demonstrație:
@@ -35,12 +36,14 @@ dacă d divizor pt n și x=n/d  =>  x este divizor
 
 ```cpp
 // Obs 3 : Pornind crescător cu d =1, perechile (d, n/d) încep sa se repete când d > n/d
+
 ```
 
 n = 36
 
 ```cpp
 Pt cele roșii d < n/d; pt cele verzi d > n/d
+
 ```
 
 > **Obs:** Dacă n este pătrat perfect, vei ajunge la momentul când d == n/d, deci la aceasta pereche nu obțin 2 divizori noi, ci doar UNUL.
@@ -77,6 +80,7 @@ La mate (divizibilitate):
 
 ```cpp
 Proprietate : (a, b) * [a, b] = a*b;
+
 ```
 
 => [a,b] = a * b / (a,b)
@@ -100,6 +104,7 @@ Presupun că d este compus => d = a*b. (a>1, b>1)
 ```cpp
 d = a*b;   (II)
 n = d*x; (d este divizor) (I)
+
 ```
 
 I + II => a este divizor pt n (III)
@@ -149,6 +154,7 @@ Obs1: Un nr n este prim dacă în intervalul [1,n] el are doar 2 divizori (pe ce
 ```cpp
 if (n <= 1)
 cout << "este neprim";
+
 ```
 
 else
@@ -159,18 +165,21 @@ else
 bool estePrim = 1;
 int jumatate = n / 2;
 for (i = 2; i <= jumatate && estePrim == 1; i++)
+
 ```
 
 {
 
 ```cpp
 if (n % i == 0)
+
 ```
 
 {
 
 ```cpp
 estePrim = 0;
+
 ```
 
 }
@@ -180,12 +189,14 @@ estePrim = 0;
 ```cpp
 if (estePrim)
 cout << "este prim";
+
 ```
 
 else
 
 ```cpp
 cout << "este compus/neprim";
+
 ```
 
 }
@@ -193,6 +204,7 @@ cout << "este compus/neprim";
 ```cpp
 if (n <= 1)
 cout << "este neprim";
+
 ```
 
 else
@@ -203,18 +215,21 @@ else
 bool estePrim = 1;
 int jumatate = n / 2;
 for (i = 2; i <= jumatate; i++)
+
 ```
 
 {
 
 ```cpp
 if (n % i == 0)
+
 ```
 
 {
 
 ```cpp
 estePrim = 0; break;
+
 ```
 
 }
@@ -224,12 +239,14 @@ estePrim = 0; break;
 ```cpp
 if (estePrim)
 cout << "este prim";
+
 ```
 
 else
 
 ```cpp
 cout << "este compus/neprim";
+
 ```
 
 }
@@ -253,6 +270,7 @@ else if (n == 2)
 cout << "este prim";
 else if (n % 2 == 0)
 cout << "este compus";
+
 ```
 
 else
@@ -262,18 +280,21 @@ else
 ```cpp
 bool estePrim = 1;
 for (i = 3; i * i <= n && estePrim == 1; i += 2)
+
 ```
 
 {
 
 ```cpp
 if (n % i == 0)
+
 ```
 
 {
 
 ```cpp
 estePrim = 0;
+
 ```
 
 }
@@ -283,12 +304,14 @@ estePrim = 0;
 ```cpp
 if (estePrim)
 cout << "este prim";
+
 ```
 
 else
 
 ```cpp
 cout << "este compus/neprim";
+
 ```
 
 }
@@ -303,6 +326,7 @@ Pp ca d ( d >= 2, n%d == 0) este COMPUS.
 
 ```cpp
 => d = a * b ( a, b > 1, a <= b) => a este divizor pt d ; a < d
+
 ```
 
 Dar stiu si ca d < n, d este divizor pt n => a este divizor pt n, a < d < n =>

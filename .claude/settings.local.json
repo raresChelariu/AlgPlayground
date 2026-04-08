@@ -4,7 +4,11 @@
       "Bash(python3 -c \"import docx; print\\(''python-docx available''\\)\")",
       "Bash(python -c \"import docx; print\\(''python-docx available''\\)\")",
       "Bash(python3 -c \"import sys; sys.stdout.buffer.write\\(sys.stdin.buffer.read\\(\\)\\)\")",
-      "Bash(python3 -c \":*)"
+      "Bash(python3 -c \":*)",
+      "Bash(git -C /c/Users/CUG/source/repos/AlgPlayground remote -v)",
+      "Bash(find \"/c/Users/CUG/source/repos/AlgPlayground/docs/cpp/algoritmi/clasa a 9a/helper\" -name \"*.md\" -exec basename {} \\\\;)",
+      "Bash(git -C /c/Users/CUG/source/repos/AlgPlayground add -A)",
+      "Bash(git -C /c/Users/CUG/source/repos/AlgPlayground status)"
     ]
   }
 }

@@ -1,3 +1,6 @@
+# Suma cifrelor
+
+```cpp
 #include <iostream>
 using namespace std;
 int main()
@@ -18,3 +21,4 @@ int main()
     cout << "Suma cifrelor este: " << suma << endl;
     return 0;
 }
+```

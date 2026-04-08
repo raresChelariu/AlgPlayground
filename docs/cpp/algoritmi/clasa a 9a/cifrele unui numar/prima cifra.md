@@ -1,3 +1,6 @@
+# Prima cifra
+
+```cpp
 // prima cifra.cpp
 #include <iostream>
 using namespace std;
@@ -14,3 +17,4 @@ int main()
     cout << "Prima cifra este: " << n << endl;
     return 0;
 }
+```
