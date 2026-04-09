@@ -7,7 +7,7 @@ hero:
   actions:
     - theme: brand
       text: Lectii
-      link: /cpp/algoritmi/clasa-a-9a/lectii/01-expresii
+      link: /cpp/algoritmi/clasa-a-9a/lectii/expresii
     - theme: alt
       text: Pseudocod
       link: /cpp/pseudocod/if
