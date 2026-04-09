@@ -1,26 +1,19 @@
 ---
 layout: home
 hero:
-  name: AlgPlayground
+  name: Code helper
   text: Algoritmi si structuri de date
-  tagline: Lectii, exemple si pseudocod pentru clasa a 9-a
+  tagline: Lectii, exemple si pseudocod pentru incepatori
   actions:
     - theme: brand
       text: Lectii
       link: /cpp/algoritmi/clasa-a-9a/lectii/01-expresii
     - theme: alt
-      text: Helper
-      link: /cpp/algoritmi/clasa-a-9a/helper/expresii
-    - theme: alt
       text: Pseudocod
       link: /cpp/pseudocod/if
 features:
   - title: Lectii
-    details: Lectii pas cu pas - expresii, variabile, citire, fisiere, operatii aritmetice, if
-  - title: Helper
-    details: Referinte rapide pentru concepte - pointeri, recursie, backtracking, sortare si multe altele
-  - title: Algoritmi
-    details: Implementari C++ - cifrele unui numar, citiri, divizibilitate
+    details: Lectii pas cu pas de algoritmica in C++
   - title: Pseudocod
-    details: Structuri de control in pseudocod cu diagrame mermaid
+    details: Structuri de control in pseudocod cu diagrame vizuale
 ---
