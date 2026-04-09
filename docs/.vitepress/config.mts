@@ -16,6 +16,7 @@ export default withMermaid(
           items: [
             { text: 'Expresii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
             { text: 'Intervale matematice', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-pentru-intervale' },
+            { text: 'Expresii cu cifre', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-cu-cifre' },
             { text: 'Primul program', link: '/cpp/algoritmi/clasa-a-9a/lectii/primul-program' },
             { text: 'Variabile', link: '/cpp/algoritmi/clasa-a-9a/lectii/variabile' },
             { text: 'Citire', link: '/cpp/algoritmi/clasa-a-9a/lectii/citire' },
