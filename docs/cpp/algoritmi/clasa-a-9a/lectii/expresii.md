@@ -83,6 +83,23 @@ Inmultirea, impartirea si restul (`*`, `/`, `%`) se efectueaza **inaintea** adun
 
 > **Obs:** Mai intai se calculeaza **partea aritmetica**, apoi se face **comparatia**.
 
+
+Expresia `a % b == 0` inseamna:
+
+- a se imparte exact la b
+- a este multiplul lui b
+- a este divizibil cu b
+- b il divide pe a
+- b este divizorul lui a
+
+Expresia `a % 2 == 0` inseamna:
+- a este divizibil cu 2
+- a este par
+
+Expresia `a % 2 == 1` sau `a % 2 != 0` inseamna:
+- a nu este divizibil cu 2
+- a este impar
+
 ---
 
 ## Expresii logice
