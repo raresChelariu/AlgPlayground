@@ -6,18 +6,18 @@ In lectia anterioara am citit de la tastatura (`cin`) si am afisat pe ecran (`co
 
 - Multe probleme cer sa citesti din `date.in` si sa scrii in `date.out`
 - Nu trebuie sa tastezi datele de fiecare data cand testezi
-- Poti lucra cu date mari fara sa le introduci manual
+- Poti lucra cu date de intrare mari fara sa le introduci manual
 
 ---
 
-## `ifstream` si `ofstream`
+# Diferente pe scurt
 
-Pentru fisiere avem nevoie de biblioteca `<fstream>`:
-
-| Obiect | Rol | Analog |
-|--------|-----|--------|
-| `ifstream` | Citire din fisier (**i**nput **f**ile) | ca `cin`, dar din fisier |
-| `ofstream` | Scriere in fisier (**o**utput **f**ile) | ca `cout`, dar in fisier |
+| CONSOLA | Fișiere | Observații |
+| :--- | :--- | :--- |
+| `#include <iostream>` | `#include <fstream>` | Biblioteci necesare |
+| `using namespace std;` | `using namespace std;` <br> `ifstream fin("fisier.in");`<br>`ofstream fout("fisier.out");` | Intre ghilimele pui numele fisierelor, conform enuntului problemei |
+| `cin >> x;` | `fin >> x;` | În loc de **cin** vom scrie **fin** |
+| `cout << x;` | `fout << x;` | În loc de **cout** vom scrie **fout** |
 
 ---
 
@@ -34,15 +34,15 @@ Programul citeste cele doua numere si scrie suma in `date.out`:
 #include <fstream>
 using namespace std;
 
-int main()
-{
-    ifstream fin("date.in");     // deschid fisierul pentru citire
-    ofstream fout("date.out");   // deschid fisierul pentru scriere
+// intre ghilimele vom pune numele fisierelor
+ifstream fin("date.in"); // date.in e fisierul de intrare
+ofstream fout("date.out"); // date.out e fisierul de iesire
 
-    int a, b;
+int a, b;
+int main()
+{    
     fin >> a >> b;               // citesc din fisier (la fel ca cin >>)
     fout << a + b << endl;       // scriu in fisier (la fel ca cout <<)
-
     return 0;
 }
 ```
@@ -51,8 +51,6 @@ Fisierul `date.out` va contine:
 ```
 8
 ```
-
-> **Obs:** `fin` si `fout` sunt **numele pe care le alegem noi** pentru obiectele de fisier. Putem folosi orice nume: `f`, `in`, `citire`, etc. Conventia `fin`/`fout` e doar cea mai raspandita.
 
 ---
 
@@ -70,7 +68,7 @@ Fisierul `date.out` va contine:
 
 ```cpp
 ifstream fin("date.in");     // deschide date.in pentru citire
-ofstream fout("date.out");   // creeaza (sau suprascrie) date.out pentru scriere
+ofstream fout("date.out");   // creeaza date.out pentru scriere
 ```
 
 ### 3. Citim si scriem
@@ -125,18 +123,18 @@ Daca vrei sa citesti din fisier **si** sa afisezi pe ecran, include ambele bibli
 #include <iostream>
 #include <fstream>
 using namespace std;
-ifstream fin("date.in");
+// folosim fin pentru a citi din fisierul de intrare
+ifstream fin("date.in"); 
+
+int a, b;
+
 int main()
 {
-    int a, b;
     fin >> a >> b;
     cout << "Suma este: " << a + b << endl;   // afisare pe ecran
-
     return 0;
 }
 ```
-
-> **Obs:** Fisierul de intrare (`date.in`) trebuie sa existe deja si sa fie in **acelasi folder** cu programul. Fisierul de iesire (`date.out`) se creeaza automat.
 
 ---
 
@@ -144,31 +142,98 @@ int main()
 
 ### Fisierul de intrare
 
-Fisierul de intrare (ex: `suma.in`) trebuie creat de voi manual, inainte de a rula programul. Iata cum:
+Fisierul de intrare (ex: `suma.in`) trebuie creat de tine manual, inainte de a rula programul. Uite cum:
 
-1. In CodeBlocks, apasati **Ctrl + Shift + N** — se va deschide un fisier nou, gol.
-2. Scrieti datele de intrare in acest fisier (ex: `5 3`).
-3. Salvati fisierul cu **Ctrl + S**. Se va deschide fereastra "Save file".
-4. **Foarte important:** in campul **"Save as type"**, alegeti **"All files (\*.\*)"**. Altfel, CodeBlocks va adauga automat o extensie gresita.
-5. La numele fisierului, scrieti exact ce cere problema la "Date de intrare" (ex: `suma.in`).
-6. Salvati fisierul in **acelasi folder** cu fisierul `.cpp` al programului vostru.
+1. In CodeBlocks, apasa **Ctrl + Shift + N**.
+Va aparea o fereastra cu mesajul:
+> Do you want to add this new file in the active project (has to be saved first) ?
+Apasa **Yes**.
+
+2. Va aparea urmatoarea fereastra :
+
+```
++-------------------------------------------------------+
+| Save file                                          [X]|
++-------------------------------------------------------+
+| [ Documents > preg ]                                  |
+                                                        |
+| +---------------------------------------------------+ |
+| | Name             | Type         | Size            | |
+| |------------------+--------------+-----------------| |
+| | [Folder] bin     | File Folder  |                 | |
+| | [Folder] obj     | File Folder  |                 | |
+| | main.cpp         | CPP File     | 1 KB            | |
+| | main.exe         | Application  | 128 KB          | |
+| | preg.cbp         | Project file | 4 KB            | |
+| | preg.depend      | DEPEND file  | 2 KB            | |
+| | preg.layout      | LAYOUT file  | 1 KB            | |
+| +---------------------------------------------------+ |
+|                                                       |
+| File name:    [ suma.in                            ]  |
+|                                                       |
+| Save as type: [ All files (*.*)                    ]  |
+|                                                       |
+|                                  [ Save ]  [ Cancel ] |
++-------------------------------------------------------+
+```
+
+La **File name:** veti introduce numele fisierului de intrare.
+
+**Foarte important:** in campul **"Save as type"**, alegeti **"All files (\*.\*)"**. 
+
+Altfel, CodeBlocks va adauga automat o extensie gresita.
+
+Apoi in urmatoarea fereastra, apasa mereu **OK**:
+
+```
+_________________________________________________
+| Multiple selection                       [ _][X]|
+|-------------------------------------------------|
+| Select the targets this file should belong to:  |
+|  __________________________                     |
+| | [x] Debug                | [Wildcard select]  |
+| | [x] Release              |                    | 
+| |                          | [Toggle selection] |
+| |                          |                    |  
+| |                          | [Select All]       |
+| |                          |                    |
+| |                          | [Deselect All]     |
+| |                          |                    |
+| |                          |  Selected: 2       |
+| |__________________________|                    |
+|_________________________________________________|
+|                                                 |
+|                          [   OK   ] [ Cancel ]  |
+|_________________________________________________|
+```
+
+3. Scrie datele de intrare in acest fisier (ex: `5 3`).
+4. Salveaza fisierul cu **Ctrl + S**. Se va deschide fereastra **Save file**.
+5. La numele fisierului, scrie exact ce cere problema la **Date de intrare** (ex: `suma.in`).
+6. Salveaza fisierul in **acelasi folder** cu fisierul `.cpp` al programului vostru.
 
 ### Fisierul de iesire
 
-Creati la fel si fisierul de iesire. 
+Creeaza la fel si fisierul de iesire.
+Doar fii atent ca la **File name** sa introduci numele fisierului de iesire (ex: `suma.out`).
 
-Daca ati rulat deja programul, fisierul de iesire a fost deja creat automat - in acest caz veti primi un mesaj de avertizare cu mesajul "`suma.out` already exists. Do you want to replace it ?" - apasati "Yes".
+Daca ai rulat deja programul, fisierul de iesire a fost deja creat automat.
+Cand vei incerca sa-l creezi, vei primi un mesaj de avertizare :
+> `suma.out` already exists. Do you want to replace it ? 
+Apasa **Yes**.
 
 ### Panoul cu fisiere (Project Management)
 
-Pentru a vedea fisierele din proiect, apasati **Shift + F2** — se va deschide panoul "Project Management" in stanga. Acolo veti vedea toate fisierele. Apasati din nou **Shift + F2** pentru a-l ascunde.
+Pentru a vedea fisierele din proiect, apasa **Shift + F2** — se va deschide panoul **Project Management** in stanga. 
+Acolo vei vedea toate fisierele. 
+Apasa din nou **Shift + F2** pentru a-l ascunde.
 
 ### Reincarcarea fisierului de iesire
 
-Dupa ce rulati programul, CodeBlocks va va intreba:
+Dupa ce rulezi programul, CodeBlocks va va intreba:
 
 > *"This file was modified outside the IDE. Do you want to reload it?"*
 
-Apasati mereu **Yes**. Programul vostru a scris rezultatul in fisierul de iesire, iar CodeBlocks trebuie sa reincarce fisierul ca sa vedeti ce contine acum. 
+Apasa mereu **Yes**. Programul tau a scris rezultatul in fisierul de iesire, iar CodeBlocks trebuie sa reincarce fisierul ca sa vezi ce contine acum. 
 
-(Daca apasati "No", veti vedea in continuare continutul vechi.)
+(Daca apesi **No**, vei vedea in continuare continutul vechi.)
