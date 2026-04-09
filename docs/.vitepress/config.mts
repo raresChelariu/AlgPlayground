@@ -14,13 +14,14 @@ export default withMermaid(
         {
           text: 'Lectii',
           items: [
-            { text: '01 - Expresii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
-            { text: '02 - Primul program', link: '/cpp/algoritmi/clasa-a-9a/lectii/primul-program' },
-            { text: '03 - Variabile', link: '/cpp/algoritmi/clasa-a-9a/lectii/variabile' },
-            { text: '04 - Citire', link: '/cpp/algoritmi/clasa-a-9a/lectii/citire' },
-            { text: '05 - Fisiere', link: '/cpp/algoritmi/clasa-a-9a/lectii/fisiere' },
-            { text: '06 - Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
-            { text: '07 - If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
+            { text: 'Expresii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
+            { text: 'Intervale matematice', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-pentru-intervale' },
+            { text: 'Primul program', link: '/cpp/algoritmi/clasa-a-9a/lectii/primul-program' },
+            { text: 'Variabile', link: '/cpp/algoritmi/clasa-a-9a/lectii/variabile' },
+            { text: 'Citire', link: '/cpp/algoritmi/clasa-a-9a/lectii/citire' },
+            { text: 'Fisiere', link: '/cpp/algoritmi/clasa-a-9a/lectii/fisiere' },
+            { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
+            { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
           ],
         },
         {
