@@ -165,4 +165,98 @@ Cand intr-o expresie avem mai multi operatori diferiti, ordinea de evaluare este
 
 ---
 
+## Legile lui DeMorgan
 
+Legile lui DeMorgan ne arata cum sa **negam** o expresie compusa:
+
+```
+!(a && b)  ⇔  !a || !b
+!(a || b)  ⇔  !a && !b
+```
+
+> **Regula:** Cand negam o expresie compusa, **schimbam** `&&` in `||` (si invers) si **negam** fiecare parte.
+
+### Negatia operatorilor relationali
+
+| Expresie | Negatie echivalenta |
+|----------|---------------------|
+| `!(a < b)` | `a >= b` |
+| `!(a > b)` | `a <= b` |
+| `!(a >= b)` | `a < b` |
+| `!(a <= b)` | `a > b` |
+| `!(a == b)` | `a != b` |
+| `!(a != b)` | `a == b` |
+
+### Analogie cu viata reala
+
+Sa zicem ca un elev trebuie sa indeplineasca doua conditii ca sa ia premiul: **sa aiba media >= 9 SI sa aiba maxim 3 absente**.
+
+> conditia pentru premiu:
+
+```cpp
+media >= 9 && absente <= 3
+```
+
+**Intrebare:** Cand **NU** primeste premiul?
+
+Aplicam DeMorgan:
+
+```
+!(media >= 9 && absente <= 3)
+⇔ !(media >= 9) || !(absente <= 3)
+⇔ media < 9 || absente > 3
+```
+
+Deci: **"Este fals ca are media >= 9 SI are maxim 3 absente"** este echivalent cu **"are media < 9 SAU are mai mult de 3 absente"**.
+
+Cu alte cuvinte: nu primeste premiul daca **ori** are media mica, **ori** are mai mult de 3 absente (sau ambele).
+
+### Exemple de evaluare
+
+**Exemplu 1:** `!(3 < 5 && 7 > 2)` cu `a = (3 < 5)`, `b = (7 > 2)`
+
+```
+  !(3 < 5 && 7 > 2)
+= !(1 && 1)
+= !(1)
+= 0
+
+// Echivalent cu DeMorgan:
+  !(3 < 5) || !(7 > 2)
+= (3 >= 5) || (7 <= 2)
+= 0 || 0
+= 0
+```
+
+**Exemplu 2:** `!(x == 0 || x > 10)` cu `x = 5`
+
+```
+  !(5 == 0 || 5 > 10)
+= !(0 || 0)
+= !(0)
+= 1
+
+// Echivalent cu DeMorgan:
+  !(5 == 0) && !(5 > 10)
+= (5 != 0) && (5 <= 10)
+= 1 && 1
+= 1
+```
+
+**Exemplu 3:** `!(a >= 1 && a <= 100)` cu `a = 150`
+
+```
+  !(150 >= 1 && 150 <= 100)
+= !(1 && 0)
+= !(0)
+= 1
+
+// Echivalent cu DeMorgan:
+  (150 < 1) || (150 > 100)
+= 0 || 1
+= 1
+```
+
+> **Obs:** Legile lui DeMorgan sunt utile pentru a **simplifica** conditii complexe si pentru a intelege mai usor ce inseamna negatia unei conditii compuse.
+
+---
