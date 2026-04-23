@@ -30,7 +30,7 @@ struct Elev {
 Elev v[100];  // un singur vector
 ```
 
-> **Obs:** Proprietatile unui struct se numesc **campuri** (eng. *fields*), ca la completarea unui formular.
+> **Obs:** Proprietatile unui struct se numesc **campuri**. Sensul e de **camp** ca la completarea unui formular.
 
 ---
 
@@ -47,7 +47,7 @@ struct numeStruct
 };
 ```
 
-> **Obs:** Atentie la `;` de dupa `}`. Lipsa lui este una dintre cele mai frecvente erori de sintaxa la struct.
+> **Obs:** Atentie la `;` de dupa `}`. Daca lipseste, vom avea eroare de compilare !!!
 
 **Exemplu:**
 
@@ -130,6 +130,15 @@ struct Punct {
 ```
 
 Rezolvare: definim `Punct` **inainte** de `Triunghi`.
+
+```cpp
+struct Punct {
+    int x, y;
+};
+struct Triunghi {
+    Punct v[3];
+};
+```
 
 ---
 
@@ -224,7 +233,7 @@ int main()
 Ion 10 9.50
 ```
 
-**Output:**
+**Afisare:**
 ```
 Nume: Ion
 Clasa: 10
@@ -303,8 +312,17 @@ int n;         // numarul efectiv de elevi
 **Citirea a `n` structuri:**
 
 ```cpp
+struct Elev {
+    char nume[10];
+    int clasa;
+    double medie;
+};
+Elev v[21];
+
+int n, i;
+// ...
 cin >> n;
-for (int i = 0; i < n; i++)
+for (i = 1; i <= n; i++)
 {
     cin >> v[i].nume >> v[i].clasa >> v[i].medie;
 }
@@ -313,7 +331,7 @@ for (int i = 0; i < n; i++)
 **Afisarea vectorului:**
 
 ```cpp
-for (int i = 0; i < n; i++)
+for (i = 1; i <= n; i++)
 {
     cout << v[i].nume << " " << v[i].clasa << " " << v[i].medie << endl;
 }
@@ -350,20 +368,19 @@ struct Elev {
     int clasa;
     float medie;
 };
+int n, i, poz;
+Elev v[100];
 
 int main()
 {
-    int n;
-    Elev v[100];
-
     cin >> n;
-    for (int i = 0; i < n; i++)
+    for (i = 1; i <= n; i++)
     {
         cin >> v[i].nume >> v[i].clasa >> v[i].medie;
     }
 
-    int poz = 0;   // pozitia elevului cu media maxima
-    for (int i = 1; i < n; i++)
+    poz = 0;   // pozitia elevului cu media maxima
+    for (i = 1; i <= n; i++)
     {
         if (v[i].medie > v[poz].medie)
         {
@@ -386,7 +403,7 @@ Andrei 10 8.20
 Ana 10 9.60
 ```
 
-**Output:**
+**Afisare:**
 ```
 Maria
 ```
@@ -408,20 +425,19 @@ struct Elev {
     int clasa;
     float medie;
 };
+int n, i, contor;
+Elev v[100];
 
 int main()
 {
-    int n;
-    Elev v[100];
-
     cin >> n;
-    for (int i = 0; i < n; i++)
+    for (i = 1; i <= n; i++)
     {
         cin >> v[i].nume >> v[i].clasa >> v[i].medie;
     }
 
-    int contor = 0;
-    for (int i = 0; i < n; i++)
+    contor = 0;
+    for (i = 1; i <= n; i++)
     {
         if (v[i].medie >= 9)
         {
@@ -444,7 +460,7 @@ Andrei 10 8.20
 Ana 10 9.60
 ```
 
-**Output:**
+**Afisare:**
 ```
 3
 ```
@@ -465,28 +481,26 @@ struct Elev {
     int clasa;
     float medie;
 };
+int n, i;
+Elev v[100];
+float suma, mediaClasei;
 
 int main()
 {
-    int n;
-    Elev v[100];
-
     cin >> n;
-    for (int i = 0; i < n; i++)
+    for (i = 1; i <= n; i++)
     {
         cin >> v[i].nume >> v[i].clasa >> v[i].medie;
     }
 
-    float suma = 0;
-    for (int i = 0; i < n; i++)
+    suma = 0;
+    for (i = 1; i <= n; i++)
     {
         suma += v[i].medie;
     }
 
-    float mediaClasei = suma / n;
-
+    mediaClasei = suma / n;
     cout << fixed << setprecision(2) << mediaClasei << endl;
-
     return 0;
 }
 ```
@@ -500,7 +514,7 @@ Andrei 10 8.20
 Ana 10 9.60
 ```
 
-**Output:**
+**Afisare:**
 ```
 9.26
 ```
@@ -523,23 +537,22 @@ struct Elev {
     int clasa;
     float medie;
 };
+int n, poz, i, j;
+Elev v[100];
 
 int main()
 {
-    int n;
-    Elev v[100];
-
     cin >> n;
-    for (int i = 0; i < n; i++)
+    for (i = 1; i <= n; i++)
     {
         cin >> v[i].nume >> v[i].clasa >> v[i].medie;
     }
 
     // sortare prin selectie, descrescator dupa medie
-    for (int i = 0; i < n - 1; i++)
+    for (i = 1; i <= n - 1; i++)
     {
-        int poz = i;
-        for (int j = i + 1; j < n; j++)
+        poz = i;
+        for (j = i + 1; j <= n; j++)
         {
             if (v[j].medie > v[poz].medie)
             {
@@ -553,7 +566,7 @@ int main()
     }
 
     // afisare
-    for (int i = 0; i < n; i++)
+    for (i = 1; i <= n; i++)
     {
         cout << v[i].nume << " " << v[i].medie << endl;
     }
@@ -571,7 +584,7 @@ Andrei 10 8.20
 Ana 10 9.60
 ```
 
-**Output:**
+**Afisare:**
 ```
 Maria 9.75
 Ana 9.6
@@ -616,7 +629,7 @@ cin >> e.nume >> e.clasa >> e.medie;
 cout << e.nume << " " << e.clasa << " " << e.medie;
 ```
 
-### 3. Forward reference
+### 3. Mai intai definim tipul, dupa folosim tipul mai jos
 
 Un struct nu poate avea un camp de un tip care **nu este inca definit** la momentul respectiv. Definim intotdeauna tipurile **de la cel mai simplu la cel mai complex**.
 
