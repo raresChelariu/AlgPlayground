@@ -90,6 +90,8 @@ export default withMermaid(
           collapsed: false,
           items: [
             { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
+            { text: 'Caractere', link: '/cpp/algoritmi/clasa-a-10a/caractere' },
+            { text: 'Pointeri', link: '/cpp/algoritmi/clasa-a-10a/pointeri' },
           ],
         },
         {
