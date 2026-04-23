@@ -12,75 +12,94 @@ export default withMermaid(
       ],
       sidebar: [
         {
-          text: 'Lectii',
+          text: 'Clasa a IX-a',
+          collapsed: false,
           items: [
-            { text: 'Expresii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
-            { text: 'Intervale matematice', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-pentru-intervale' },
-            { text: 'Expresii cu cifre', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-cu-cifre' },
-            { text: 'Primul program', link: '/cpp/algoritmi/clasa-a-9a/lectii/primul-program' },
-            { text: 'Variabile', link: '/cpp/algoritmi/clasa-a-9a/lectii/variabile' },
-            { text: 'Citire', link: '/cpp/algoritmi/clasa-a-9a/lectii/citire' },
-            { text: 'Fisiere', link: '/cpp/algoritmi/clasa-a-9a/lectii/fisiere' },
-            { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
-            { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
-            { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
+            {
+              text: 'Lectii',
+              collapsed: false,
+              items: [
+                { text: 'Expresii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
+                { text: 'Intervale matematice', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-pentru-intervale' },
+                { text: 'Expresii cu cifre', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-cu-cifre' },
+                { text: 'Primul program', link: '/cpp/algoritmi/clasa-a-9a/lectii/primul-program' },
+                { text: 'Variabile', link: '/cpp/algoritmi/clasa-a-9a/lectii/variabile' },
+                { text: 'Citire', link: '/cpp/algoritmi/clasa-a-9a/lectii/citire' },
+                { text: 'Fisiere', link: '/cpp/algoritmi/clasa-a-9a/lectii/fisiere' },
+                { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
+                { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
+              ],
+            },
+            {
+              text: 'Algoritmi',
+              collapsed: true,
+              items: [
+                {
+                  text: 'Cifrele unui numar',
+                  collapsed: true,
+                  items: [
+                    { text: 'Oglindit', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/oglindit' },
+                    { text: 'Palindrom', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/palindrom' },
+                    { text: 'Prima cifra', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/prima-cifra' },
+                    { text: 'Suma cifrelor', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/suma-cifrelor' },
+                  ],
+                },
+                {
+                  text: 'Citiri pana la final',
+                  collapsed: true,
+                  items: [
+                    { text: 'Citire n nr ca perechi consecutive', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-n-nr-ca-perechi-consecutive' },
+                    { text: 'Citire pana la aparitia lui zero', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-pana-la-aparitia-lui-zero' },
+                    { text: 'Citire pana la finalul consolei', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-pana-la-finalul-consolei' },
+                    { text: 'Citire pana la finalul fisierului', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-pana-la-finalul-fisierului' },
+                    { text: 'Citire perechi pana la 0 0', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-perechi-pana-la-0-0' },
+                  ],
+                },
+                {
+                  text: 'Divizibilitate',
+                  collapsed: true,
+                  items: [
+                    {
+                      text: 'CMMDC si CMMMC',
+                      collapsed: true,
+                      items: [
+                        { text: 'CMMDC', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/cmmdc-si-cmmmc/cmmdc' },
+                        { text: 'CMMMC', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/cmmdc-si-cmmmc/cmmmc' },
+                      ],
+                    },
+                    {
+                      text: 'Descompunere in factori primi',
+                      collapsed: true,
+                      items: [
+                        { text: 'Varianta 1 - banala', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/descompunere-in-factori-primi/var-1-banala' },
+                        { text: 'Varianta 2 - 2 este singurul prim par', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/descompunere-in-factori-primi/var-2-2-este-singurul-prim-par' },
+                        { text: 'Varianta 3 - testare nr prim', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/descompunere-in-factori-primi/var-3-testare-nr-prim' },
+                      ],
+                    },
+                    {
+                      text: 'Determinarea divizorilor',
+                      collapsed: true,
+                      items: [
+                        { text: 'Metoda banala', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/determinarea-divizorilor/divizori-metoda-banala' },
+                        { text: 'Merg pana la jumatate', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/determinarea-divizorilor/divizori-merg-pana-la-jumatate' },
+                        { text: 'Merg pana la radical', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/determinarea-divizorilor/divizori-merg-pana-la-radical' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          text: 'Algoritmi',
-          collapsed: true,
+          text: 'Clasa a X-a',
+          collapsed: false,
           items: [
             {
-              text: 'Cifrele unui numar',
-              collapsed: true,
+              text: 'Lectii',
+              collapsed: false,
               items: [
-                { text: 'Oglindit', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/oglindit' },
-                { text: 'Palindrom', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/palindrom' },
-                { text: 'Prima cifra', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/prima-cifra' },
-                { text: 'Suma cifrelor', link: '/cpp/algoritmi/clasa-a-9a/cifrele-unui-numar/suma-cifrelor' },
-              ],
-            },
-            {
-              text: 'Citiri pana la final',
-              collapsed: true,
-              items: [
-                { text: 'Citire n nr ca perechi consecutive', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-n-nr-ca-perechi-consecutive' },
-                { text: 'Citire pana la aparitia lui zero', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-pana-la-aparitia-lui-zero' },
-                { text: 'Citire pana la finalul consolei', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-pana-la-finalul-consolei' },
-                { text: 'Citire pana la finalul fisierului', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-pana-la-finalul-fisierului' },
-                { text: 'Citire perechi pana la 0 0', link: '/cpp/algoritmi/clasa-a-9a/citiri-pana-la-final/citire-perechi-pana-la-0-0' },
-              ],
-            },
-            {
-              text: 'Divizibilitate',
-              collapsed: true,
-              items: [
-                {
-                  text: 'CMMDC si CMMMC',
-                  collapsed: true,
-                  items: [
-                    { text: 'CMMDC', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/cmmdc-si-cmmmc/cmmdc' },
-                    { text: 'CMMMC', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/cmmdc-si-cmmmc/cmmmc' },
-                  ],
-                },
-                {
-                  text: 'Descompunere in factori primi',
-                  collapsed: true,
-                  items: [
-                    { text: 'Varianta 1 - banala', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/descompunere-in-factori-primi/var-1-banala' },
-                    { text: 'Varianta 2 - 2 este singurul prim par', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/descompunere-in-factori-primi/var-2-2-este-singurul-prim-par' },
-                    { text: 'Varianta 3 - testare nr prim', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/descompunere-in-factori-primi/var-3-testare-nr-prim' },
-                  ],
-                },
-                {
-                  text: 'Determinarea divizorilor',
-                  collapsed: true,
-                  items: [
-                    { text: 'Metoda banala', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/determinarea-divizorilor/divizori-metoda-banala' },
-                    { text: 'Merg pana la jumatate', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/determinarea-divizorilor/divizori-merg-pana-la-jumatate' },
-                    { text: 'Merg pana la radical', link: '/cpp/algoritmi/clasa-a-9a/divizibilitate/determinarea-divizorilor/divizori-merg-pana-la-radical' },
-                  ],
-                },
+                { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
               ],
             },
           ],
