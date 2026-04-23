@@ -15,21 +15,15 @@ export default withMermaid(
           text: 'Clasa a IX-a',
           collapsed: false,
           items: [
-            {
-              text: 'Lectii',
-              collapsed: false,
-              items: [
-                { text: 'Expresii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
-                { text: 'Intervale matematice', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-pentru-intervale' },
-                { text: 'Expresii cu cifre', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-cu-cifre' },
-                { text: 'Primul program', link: '/cpp/algoritmi/clasa-a-9a/lectii/primul-program' },
-                { text: 'Variabile', link: '/cpp/algoritmi/clasa-a-9a/lectii/variabile' },
-                { text: 'Citire', link: '/cpp/algoritmi/clasa-a-9a/lectii/citire' },
-                { text: 'Fisiere', link: '/cpp/algoritmi/clasa-a-9a/lectii/fisiere' },
-                { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
-                { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
-              ],
-            },
+            { text: 'Expresii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
+            { text: 'Intervale matematice', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-pentru-intervale' },
+            { text: 'Expresii cu cifre', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii-cu-cifre' },
+            { text: 'Primul program', link: '/cpp/algoritmi/clasa-a-9a/lectii/primul-program' },
+            { text: 'Variabile', link: '/cpp/algoritmi/clasa-a-9a/lectii/variabile' },
+            { text: 'Citire', link: '/cpp/algoritmi/clasa-a-9a/lectii/citire' },
+            { text: 'Fisiere', link: '/cpp/algoritmi/clasa-a-9a/lectii/fisiere' },
+            { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
+            { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
             {
               text: 'Algoritmi',
               collapsed: true,
@@ -95,13 +89,7 @@ export default withMermaid(
           text: 'Clasa a X-a',
           collapsed: false,
           items: [
-            {
-              text: 'Lectii',
-              collapsed: false,
-              items: [
-                { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
-              ],
-            },
+            { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
           ],
         },
         {
