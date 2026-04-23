@@ -9,15 +9,17 @@ Fiecare lectie apartine **uneia** din urmatoarele categorii:
 - **Clasa a IX-a** — folder `docs/cpp/algoritmi/clasa-a-9a/`
 - **Clasa a X-a** — folder `docs/cpp/algoritmi/clasa-a-10a/`
 - **Clasa a XII-a** — folder `docs/cpp/algoritmi/clasa-a-12a/`
+- **Pseudocod** - folder `docs/cpp/algoritmi/pseudocod/`
 
 Categoriile trebuie sa fie **vizibile in sidebar-ul VitePress** ([docs/.vitepress/config.mts](docs/.vitepress/config.mts)) ca sectiuni separate de nivel superior (nu o lista plata "Lectii" care amesteca toate clasele).
 
-**Regula pentru Claude:** cand user-ul cere o lectie noua si **nu** specifica clasa (IX, X sau XII), intreaba-l explicit **inainte** sa creezi fisierul — nu ghici pe baza continutului.
+**Regula pentru Claude:** cand user-ul cere o lectie noua si **nu** specifica categoria (IX, X sau XII), intreaba-l explicit **inainte** sa creezi fisierul — nu ghici pe baza continutului.
 
 ## Conventii de cod in exemple
 
 - **Indexare de la 1**: buclele parcurg `v[1..n]` cu `for (i = 1; i <= n; i++)`. Este stilul pbinfo/olimpiada si corespunde formularii enunturilor ("se citesc n numere..."). Exceptie: indexare de la 0 doar daca enuntul o cere explicit (ex. vector de frecventa `f[0..9]` pentru cifre).
 - **Variabile globale deasupra lui `main()`** in exemplele complete (n, i, j, vectorii, contoarele, acumulatorii). Evita stack overflow la vectori mari si corespunde stilului uzual la concursuri/BAC.
+- **Fara variabile locale declarate in for**: variabile locale sunt declarate pe o linie separata. Daca sunt variabile locale pentru functia main, si pot fi declarate global, atunci mai degraba sa fie declarate global.
 - **Siruri de caractere**: `char nume[N]` citite cu `cin >> x`. Nu folosim `std::string`, nu folosim `cin.getline` / `cin.get`. In exemple numele sunt dintr-un singur cuvant (`Ion`, `Maria`), ca sa nu amestecam citirea.
 
 ## Conventii de formatare pentru lectii `.md`
