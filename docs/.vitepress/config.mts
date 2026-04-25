@@ -24,6 +24,7 @@ export default withMermaid(
             { text: 'Fisiere', link: '/cpp/algoritmi/clasa-a-9a/lectii/fisiere' },
             { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
             { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
+            { text: 'Debug', link: '/cpp/algoritmi/clasa-a-9a/lectii/debug' },
             {
               text: 'Algoritmi',
               collapsed: true,
@@ -90,7 +91,22 @@ export default withMermaid(
           collapsed: false,
           items: [
             { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
-            { text: 'Caractere', link: '/cpp/algoritmi/clasa-a-10a/caractere' },
+            {
+              text: 'Siruri de caractere',
+              collapsed: true,
+              items: [
+                { text: 'Siruri de caractere', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/siruri' },
+                { text: 'Caractere', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/caractere' },
+                { text: 'strlen', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/strlen' },
+                { text: 'strcpy', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/strcpy' },
+                { text: 'strcat', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/strcat' },
+                { text: 'strcmp', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/strcmp' },
+                { text: 'strchr', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/strchr' },
+                { text: 'strstr', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/strstr' },
+                { text: 'strtok', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/strtok' },
+                { text: 'Colectie de cuvinte', link: '/cpp/algoritmi/clasa-a-10a/siruri-de-caractere/colectie-de-cuvinte' },
+              ],
+            },
             { text: 'Pointeri', link: '/cpp/algoritmi/clasa-a-10a/pointeri' },
             { text: 'Alocare dinamica', link: '/cpp/algoritmi/clasa-a-10a/alocare-dinamica' },
             { text: 'Liste inlantuite', link: '/cpp/algoritmi/clasa-a-10a/liste-inlantuite' },
