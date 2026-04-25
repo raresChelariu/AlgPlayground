@@ -92,6 +92,8 @@ export default withMermaid(
             { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
             { text: 'Caractere', link: '/cpp/algoritmi/clasa-a-10a/caractere' },
             { text: 'Pointeri', link: '/cpp/algoritmi/clasa-a-10a/pointeri' },
+            { text: 'Alocare dinamica', link: '/cpp/algoritmi/clasa-a-10a/alocare-dinamica' },
+            { text: 'Liste inlantuite', link: '/cpp/algoritmi/clasa-a-10a/liste-inlantuite' },
           ],
         },
         {
