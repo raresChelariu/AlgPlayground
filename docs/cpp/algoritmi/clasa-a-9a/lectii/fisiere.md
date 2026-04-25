@@ -208,9 +208,6 @@ _________________________________________________
 ```
 
 3. Scrie datele de intrare in acest fisier (ex: `5 3`).
-4. Salveaza fisierul cu **Ctrl + S**. Se va deschide fereastra **Save file**.
-5. La numele fisierului, scrie exact ce cere problema la **Date de intrare** (ex: `suma.in`).
-6. Salveaza fisierul in **acelasi folder** cu fisierul `.cpp` al programului vostru.
 
 ### Fisierul de iesire
 
