@@ -13,7 +13,7 @@ char x;
 int main()
 {
     x = '$';
-    cout << x;    // cand afisez un char se afiseaza caracterul, nu codul
+    cout << x;
     return 0;
 }
 ```
@@ -27,7 +27,13 @@ $
 
 ## Codul ASCII al unui caracter
 
-Ca sa aflu codul unui caracter, pun valoarea lui intr-o variabila de tip intreg (`int`, `long long`, etc.).
+Fiecare caracter are un cod intreg unic. Important de stiut:
+
+- Cifrele `'0'`, `'1'`, ..., `'9'` au coduri **consecutive si crescatoare** (in aceasta ordine).
+- Literele mari `'A'`, `'B'`, ..., `'Z'` au coduri **consecutive si crescatoare**.
+- Literele mici `'a'`, `'b'`, ..., `'z'` au coduri **consecutive si crescatoare**.
+
+Ca sa aflu codul unui caracter, pun valoarea lui intr-o variabila de tip intreg.
 
 ```cpp
 #include <iostream>
@@ -38,23 +44,23 @@ int y;
 
 int main()
 {
-    x = '$';
-    y = x;
-    cout << y;    // se afiseaza codul ASCII al caracterului '$'
+    x = 'A';
+    y = x; // am memorat 'A' intr-un int, deci codul lui 'A'
+    cout << y;
     return 0;
 }
 ```
 
 **Afisare:**
 ```
-36
+65
 ```
 
 ---
 
 ## Operatii aritmetice cu caractere
 
-Pot face operatii cu caractere — se lucreaza cu codurile ASCII.
+Deoarece codurile sunt consecutive, pot face operatii cu caractere — se lucreaza cu codurile ASCII.
 
 ```cpp
 #include <iostream>
@@ -68,7 +74,6 @@ int main()
     k = 'H';
     x = k - 'A';
     // 'A' - 'A' este 0, 'B' - 'A' este 1, ..., 'H' - 'A' este 7
-    // H este a 8-a litera din alfabet
     cout << x;
     return 0;
 }
@@ -79,7 +84,7 @@ int main()
 7
 ```
 
-> **Obs:** `cout << '7' + '3';` **nu** afiseaza 10, ci suma codurilor ASCII (55 + 51 = 106).
+> **Obs:** `cout << '7' + '3';` **nu** afiseaza 10, ci suma codurilor ASCII ale celor doua caractere.
 
 ### Functii utile pe caractere
 
@@ -111,6 +116,55 @@ char dinCifraInCaracter(int x)  { return x + '0'; }
 **Afisare:**
 ```
 15
+```
+
+---
+
+## Functii standard pentru caractere
+
+Biblioteca `<cctype>` contine functii gata facute pentru verificarea si conversia caracterelor.
+
+| Functie      | Returneaza                                  |
+|--------------|---------------------------------------------|
+| `isalpha(c)` | `true` daca `c` este litera (mare sau mica) |
+| `isupper(c)` | `true` daca `c` este litera mare            |
+| `islower(c)` | `true` daca `c` este litera mica            |
+| `isdigit(c)` | `true` daca `c` este cifra (`'0'`..`'9'`)   |
+| `isalnum(c)` | `true` daca `c` este litera sau cifra       |
+| `isspace(c)` | `true` daca `c` este caracter alb           |
+| `toupper(c)` | varianta majuscula a lui `c`                |
+| `tolower(c)` | varianta minuscula a lui `c`                |
+
+```cpp
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+char c;
+
+int main()
+{
+    cin >> c;
+    if (isupper(c))
+        cout << "litera mare";
+    else if (islower(c))
+        cout << "litera mica";
+    else if (isdigit(c))
+        cout << "cifra";
+    else
+        cout << "alt caracter";
+    return 0;
+}
+```
+
+**Intrare:**
+```
+G
+```
+
+**Afisare:**
+```
+litera mare
 ```
 
 ---
@@ -200,7 +254,7 @@ char a, b;
 int main()
 {
     cin.get(a);
-    cin.get();      // sare peste '3'
+    cin.get();
     cin.get(b);
     cout << a << b;
     return 0;
@@ -215,4 +269,94 @@ int main()
 **Afisare:**
 ```
 78
+```
+
+---
+
+## Capcane frecvente
+
+### Citire caracter dupa un numar
+
+Dupa `cin >> n`, caracterul `'\n'` (ENTER) ramane neconsumat in buffer. Primul `cin.get(c)` il va citi pe el in loc de caracterul dorit.
+
+**Cod gresit:**
+
+```cpp
+int n;
+char c;
+cin >> n;
+cin.get(c);    // c primeste '\n', nu caracterul dorit!
+```
+
+**Fix:** adaug un `cin.get()` inainte de `cin.get(c)` pentru a consuma `'\n'`-ul ramas.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n;
+char c;
+
+int main()
+{
+    cin >> n;
+    cin.get();
+    cin.get(c);
+    cout << c;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+42
+A
+```
+
+**Afisare:**
+```
+A
+```
+
+---
+
+## Problema rezolvata
+
+**Enunt:** Se citesc `n` caractere. Afisati cate litere mari, cate litere mici si cate cifre se gasesc printre ele.
+
+```cpp
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+int n, i, nrMari, nrMici, nrCifre;
+char c;
+
+int main()
+{
+    cin >> n;
+    for (i = 1; i <= n; i++)
+    {
+        cin >> c;
+        if (isupper(c))
+            nrMari++;
+        else if (islower(c))
+            nrMici++;
+        else if (isdigit(c))
+            nrCifre++;
+    }
+    cout << nrMari << " " << nrMici << " " << nrCifre;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+7
+A b 3 Z q 8 M
+```
+
+**Afisare:**
+```
+3 2 2
 ```
