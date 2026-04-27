@@ -6,6 +6,9 @@ export default withMermaid(
     title: 'Code helper',
     description: 'Algoritmi si structuri de date - C++',
     themeConfig: {
+      search: {
+        provider: 'local',
+      },
       nav: [
         { text: 'Lectii', link: '/cpp/algoritmi/clasa-a-9a/lectii/expresii' },
         { text: 'Pseudocod', link: '/cpp/pseudocod/if' },
