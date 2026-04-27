@@ -272,6 +272,68 @@ int main()
 
 ---
 
+## Cautarea primului numar care satisface o conditie
+
+**Problema:** Gaseste primul numar din intervalul [100, 200] care este **impar** si a carui **suma a cifrelor e divizibila cu 7**.
+
+**Rationament:** "Inainteaza cat timp nu am gasit inca numarul si nu am depasit 200."  
+→ Conditia `while`: `i <= 200 && gasit == 0`
+
+Cand numarul e gasit, setam `gasit = 1` si salvam `i` in `rezultat`. `i++` se executa oricum la finalul fiecarei iteratii. La urmatoarea evaluare a conditiei, `gasit == 0` devine falsa si bucla se opreste.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int i, sumaCif, gasit, rezultat;
+int u, z, s;
+int main()
+{
+    i = 100;
+    gasit = 0;
+    while (i <= 200 && gasit == 0)
+    {
+        u = i % 10;
+        z = (i / 10) % 10;
+        s = i / 100;
+        sumaCif = u + z + s;
+        if (sumaCif % 7 == 0 && i % 2 != 0)
+        {
+            gasit = 1;
+            rezultat = i;
+        }
+        i++;
+    }
+    if (gasit == 0)
+    {
+        cout << "Nu exista" << endl;
+        return 0;
+    }
+    cout << rezultat << endl;
+    return 0;
+}
+```
+
+**Afisare:**
+```
+115
+```
+
+**Evolutia variabilelor (iteratii relevante):**
+
+| Iteratie | i | s | s % 7 == 0 && impar | gasit | rezultat | i dupa |
+|----------|---|---|---------------------|-------|----------|--------|
+| 1 | 100 | 1 | nu | 0 | — | 101 |
+| 2 | 101 | 2 | nu | 0 | — | 102 |
+| ... | ... | ... | ... | ... | ... | ... |
+| 7 | 106 | 7 | s%7=0, dar 106 e par | 0 | — | 107 |
+| ... | ... | ... | ... | ... | ... | ... |
+| 16 | 115 | 7 | **da** | **1** | **115** | 116 |
+
+> **Obs:** La iteratia 16: `s = 1+1+5 = 7`, `7 % 7 == 0` si `115` e impar — conditia e indeplinita. `rezultat = 115`, `gasit = 1`, apoi `i` creste la 116. La urmatoarea verificare a conditiei, `gasit == 0` e falsa si bucla se opreste.
+
+---
+
 ## Capcane frecvente
 
 ### 1. Bucla infinita (en. infinite loop)

@@ -28,6 +28,7 @@ export default withMermaid(
             { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/lectii/operatii-aritmetice' },
             { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/lectii/if' },
             { text: 'While', link: '/cpp/algoritmi/clasa-a-9a/lectii/while' },
+            { text: 'For', link: '/cpp/algoritmi/clasa-a-9a/lectii/for' },
             { text: 'Debug', link: '/cpp/algoritmi/clasa-a-9a/lectii/debug' },
             {
               text: 'Algoritmi',
