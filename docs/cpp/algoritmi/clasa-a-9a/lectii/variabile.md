@@ -138,7 +138,7 @@ int main()
 > **Obs:** Daca lucrezi cu numere mari (peste 2 miliarde), foloseste `long long` in loc de `int`.
 
 ```cpp
-long long x = 3000000000LL;   // LL la sfarsit indica un literal long long
+long long x = 3000000000;
 cout << x << endl;            // 3000000000 (corect!)
 ```
 

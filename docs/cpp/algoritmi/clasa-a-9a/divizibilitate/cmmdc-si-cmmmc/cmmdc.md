@@ -4,10 +4,10 @@
 // cmmdc
 #include <iostream>
 using namespace std;
+int x, y, a, b, r;
 int main()
-{
-    int x, y, a, b;
-    cout << "Introduceti doua numere: ";
+{    
+    // Introduceti doua numere:
     cin >> x >> y;
     // daca avem nevoie de x si y in continuare, le pastram
     // altfel, putem lucra direct cu x si y
@@ -17,9 +17,9 @@ int main()
     // Algoritmul lui Euclid pentru calculul CMMDC
     while (b != 0)
     {
-        int r = a % b; // Calculam restul
-        a = b;         // Actualizam a cu b
-        b = r;         // Actualizam b cu restul
+        r = a % b; // Calculam restul
+        a = b;     // Actualizam a cu b
+        b = r;     // Actualizam b cu restul
     }
 
     cout << "CMMDC este: " << a << endl;
