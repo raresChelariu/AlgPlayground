@@ -2,8 +2,6 @@
 
 O **expresie** este o combinatie de valori si operatori care produce un rezultat.
 
----
-
 ## Expresii aritmetice
 
 Operatorii aritmetici sunt: `+`, `-`, `*`, `/`, `%`
