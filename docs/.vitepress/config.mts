@@ -32,6 +32,7 @@ export default withMermaid(
             { text: 'Break', link: '/cpp/algoritmi/clasa-a-9a/lectii/break' },
             { text: 'Continue', link: '/cpp/algoritmi/clasa-a-9a/lectii/continue' },
             { text: 'Debug', link: '/cpp/algoritmi/clasa-a-9a/lectii/debug' },
+            { text: 'Minime si maxime', link: '/cpp/algoritmi/clasa-a-9a/lectii/minime-si-maxime' },
             {
               text: 'Algoritmi',
               collapsed: true,
