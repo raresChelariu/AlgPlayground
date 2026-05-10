@@ -43,8 +43,7 @@ Dupa `strcat(dest, sursa)`:
 ```cpp
 char* strcat(char* dest, char* sursa)
 {
-    int lg = strlen(dest);
-    int i;
+    int lg = strlen(dest), i;
     for (i = 0; sursa[i] != '\0'; i++)
         dest[lg + i] = sursa[i];
     dest[lg + i] = '\0';

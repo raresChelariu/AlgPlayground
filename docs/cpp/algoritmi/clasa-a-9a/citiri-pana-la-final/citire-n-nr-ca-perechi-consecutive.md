@@ -1,35 +1,39 @@
 # Citire n nr ca perechi consecutive
 
+## Sa se numere cate perechi consecutive se termina in aceiasi ultima cifra
+
+```
+Ex de date de intrare: 
+5
+12 22 34 44 54
+
+Afisare: Numarul de perechi consecutive cu ultima cifra egala este: 3
+
+Se iau in considerare perechile (12, 22), (22, 34), (34, 44), (44, 54)
+Dar cu aceiasi ultima cifra sunt doar (12, 22), (34, 44), (44, 54)
+```
+
 ```cpp
-// se citesc n numere; sa se numere cate perechi consecutive
-// se termina in aceiasi ultima cifra
+// 
 #include <iostream>
 using namespace std;
+int n, contor, a, b, i;
 int main()
 {
-    /*
-    Ex: Introduceti numerele: 12 22 34 44 54
-    Output: Numarul de perechi consecutive cu ultima cifra egala este: 3
-    Se iau in considerare perechile (12, 22), (22, 34), (34, 44), (44, 54)
-    Dar cu aceiasi ultima cifra sunt doar (12, 22), (34, 44), (44, 54)
-     */
-    int n, stanga, contor = 0, dreapta;
+    // la fiecare ne vom juca cu perechea (a, b)   
     cin >> n;
-
-    cout << "Introduceti elementele: ";
-    cin >> stanga; // Citim primul element
-
-    for (int i = 2; i <= n; i++)
+    cin >> a; // Citim primul element
+    for (i = 2; i <= n; i++)
     {
-        cin >> dreapta; // Citim urmatorul element
+        cin >> b; // Citim urmatorul element
 
         // Verificam daca ultimele cifre sunt egale
-        if (stanga % 10 == dreapta % 10)
+        if (a % 10 == b % 10)
         {
             contor++;
         }
 
-        stanga = dreapta;
+        a = b;
         // stanga pentru urmatoarea iteratie devine dreapta
     }
 

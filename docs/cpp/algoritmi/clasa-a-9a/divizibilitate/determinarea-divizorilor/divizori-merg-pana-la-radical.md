@@ -5,9 +5,10 @@
 
 #include <iostream>
 using namespace std;
+int n, d;
 int main()
 {
-    int n, d;
+    
     cout << "Introduceti un numar: ";
     cin >> n;
 

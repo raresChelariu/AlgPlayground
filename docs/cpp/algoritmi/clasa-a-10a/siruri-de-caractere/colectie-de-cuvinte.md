@@ -36,7 +36,7 @@ const int DMAX  = 50;
 
 char M[NRMAX][DMAX];
 char s[DMAX];
-int nrCuv;
+int nrCuv, i;
 
 int main()
 {
@@ -46,7 +46,6 @@ int main()
         strcpy(M[nrCuv], s);
         nrCuv++;
     }
-    int i;
     for (i = 0; i < nrCuv; i++)
         cout << M[i] << '\n';
     return 0;

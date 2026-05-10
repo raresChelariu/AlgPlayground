@@ -8,9 +8,9 @@
 
 #include <iostream>
 using namespace std;
+int n, d, exp;
 int main()
-{
-    int n, d, exp;
+{    
     cout << "Introduceti un numar: ";
     cin >> n;
     // La fel ca "pe foaie"

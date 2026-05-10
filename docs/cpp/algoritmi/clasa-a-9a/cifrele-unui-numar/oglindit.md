@@ -1,13 +1,11 @@
 # Oglindit
 
 ```cpp
-// oglinditul unui numar
 #include <iostream>
 using namespace std;
+int n, ultimaCifra, oglindit;
 int main()
 {
-    int n, ultimaCifra, oglindit;
-    cout << "Introduceti un numar: ";
     cin >> n;
     oglindit = 0; // Initializam oglinditul cu 0
     // Cat timp cat n are cel putin o cifra

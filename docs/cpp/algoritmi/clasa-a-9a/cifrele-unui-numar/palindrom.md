@@ -1,16 +1,14 @@
 # Palindrom
 
 ```cpp
-// palindrom
 #include <iostream>
 using namespace std;
+int n, oglindit, copieN, ultimaCifra;
 int main()
-{
-    int n, oglindit, copieN, ultimaCifra;
-    cout << "Introduceti un numar: ";
+{    
     cin >> n;
-
-    copieN = n;   // Pastram numarul original pentru comparatie
+    // Facem o copie a numarului original pentru comparatie
+    copieN = n;   
     oglindit = 0; // Initializam oglinditul cu 0
     // Cat timp n are cel putin o cifra
     while (n > 0)
@@ -24,8 +22,7 @@ int main()
     }
 
     // Verificam daca numarul este palindrom
-    bool estePalindrom = (copieN == oglindit);
-    if (estePalindrom)
+    if (copieN == oglindit)
     {
         cout << "Numarul este palindrom." << endl;
     }

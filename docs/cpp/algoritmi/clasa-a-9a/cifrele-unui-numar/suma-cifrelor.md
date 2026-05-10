@@ -3,15 +3,15 @@
 ```cpp
 #include <iostream>
 using namespace std;
+int n, suma, ulitimaCifra;
 int main()
 {
-    int n, suma = 0;
     cin >> n;
-
+    suma = 0;
     while (n > 0)
     {
         // Obține ultima cifră
-        int ulitimaCifra = n % 10;
+        ulitimaCifra = n % 10;
         // Aduna ultima cifra la suma
         suma += ulitimaCifra;
         // Elimină ultima cifră

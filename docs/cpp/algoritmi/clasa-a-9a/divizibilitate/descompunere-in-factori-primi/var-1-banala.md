@@ -4,10 +4,9 @@
 // descompunere in factori primi - varianta 1 - banala.cpp
 #include <iostream>
 using namespace std;
+int n, d, exp;
 int main()
 {
-    int n, d, exp;
-    cout << "Introduceti un numar: ";
     cin >> n;
     // La fel ca "pe foaie"
     // Pornim cu d = 2, cel mai mic numar prim
