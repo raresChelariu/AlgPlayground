@@ -29,6 +29,7 @@ export default withMermaid(
                 { text: 'Variabile', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/variabile' },
                 { text: 'Citire', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/citire' },
                 { text: 'Fisiere', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/fisiere' },
+                { text: 'Citirea si afisarea in C', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/citirea-si-afisarea-in-c' },
                 { text: 'Operatii aritmetice', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/operatii-aritmetice' },
                 { text: 'If', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/if' },
                 { text: 'While', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/while' },

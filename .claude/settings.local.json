@@ -26,7 +26,8 @@
       "PowerShell(git fetch:*)",
       "PowerShell(dir:*)",
       "PowerShell(find:*)",
-      "PowerShell(Get-ChildItem:*)"
+      "PowerShell(Get-ChildItem:*)",
+      "PowerShell(npm run docs:build)"
     ]
   }
 }
