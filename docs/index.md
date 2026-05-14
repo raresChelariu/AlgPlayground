@@ -6,8 +6,11 @@ hero:
   tagline: Lectii, exemple si pseudocod pentru incepatori
   actions:
     - theme: brand
-      text: Lectii
-      link: /cpp/algoritmi/clasa-a-9a/lectii/expresii
+      text: Clasa a IX-a
+      link: /cpp/algoritmi/clasa-a-9a/notiuni-de-baza/expresii
+    - theme: brand
+      text: Clasa a IX-a
+      link: /cpp/algoritmi/clasa-a-10a/struct
     - theme: alt
       text: Pseudocod
       link: /cpp/pseudocod/if
