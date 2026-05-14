@@ -69,32 +69,9 @@ export default withMermaid(
                   text: 'Divizibilitate',
                   collapsed: true,
                   items: [
-                    {
-                      text: 'CMMDC si CMMMC',
-                      collapsed: true,
-                      items: [
-                        { text: 'CMMDC', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/cmmdc-si-cmmmc/cmmdc' },
-                        { text: 'CMMMC', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/cmmdc-si-cmmmc/cmmmc' },
-                      ],
-                    },
-                    {
-                      text: 'Descompunere in factori primi',
-                      collapsed: true,
-                      items: [
-                        { text: 'Varianta 1 - banala', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/descompunere-in-factori-primi/var-1-banala' },
-                        { text: 'Varianta 2 - 2 este singurul prim par', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/descompunere-in-factori-primi/var-2-2-este-singurul-prim-par' },
-                        { text: 'Varianta 3 - testare nr prim', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/descompunere-in-factori-primi/var-3-testare-nr-prim' },
-                      ],
-                    },
-                    {
-                      text: 'Determinarea divizorilor',
-                      collapsed: true,
-                      items: [
-                        { text: 'Metoda banala', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/determinarea-divizorilor/divizori-metoda-banala' },
-                        { text: 'Merg pana la jumatate', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/determinarea-divizorilor/divizori-merg-pana-la-jumatate' },
-                        { text: 'Merg pana la radical', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/determinarea-divizorilor/divizori-merg-pana-la-radical' },
-                      ],
-                    },
+                    { text: 'Determinarea divizorilor', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/determinarea-divizorilor' },
+                    { text: 'CMMDC si CMMMC', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/cmmdc-si-cmmmc' },
+                    { text: 'Descompunere in factori primi', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/descompunere-in-factori-primi' },
                   ],
                 },
               ],
