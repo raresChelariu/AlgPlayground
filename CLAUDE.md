@@ -38,6 +38,16 @@ Categoriile trebuie sa fie **vizibile in sidebar-ul VitePress** ([docs/.vitepres
 - [docs/cpp/algoritmi/clasa-a-9a/lectii/expresii.md](docs/cpp/algoritmi/clasa-a-9a/lectii/expresii.md)
 - [docs/cpp/algoritmi/clasa-a-10a/struct.md](docs/cpp/algoritmi/clasa-a-10a/struct.md)
 
+## Verificare build
+
+Dupa orice modificare in `docs/.vitepress/config.mts`, ruleaza obligatoriu:
+
+```
+npm run docs:build
+```
+
+si confirma ca build-ul trece fara erori inainte de a raporta task-ul ca finalizat.
+
 ## Commit-uri
 
 - Prefixe conventionale: `docs(lectie): ...`, `chore(sidebar): ...`, `feat: ...`, `fix: ...`.

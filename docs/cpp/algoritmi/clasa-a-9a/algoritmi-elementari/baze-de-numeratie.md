@@ -126,7 +126,7 @@ Cand `x` ajunge la `0`, bucla se opreste si afisam `rez = 13`.
 
 ### Ideea — analogie cu cifrele unui numar
 
-Din [lectia despre cifre](./expresii-cu-cifre.md) stim deja:
+Din [lectia despre cifre](../notiuni-de-baza/expresii-cu-cifre.md) stim deja:
 - `x % 10` ne da **ultima cifra** in baza 10
 - `x / 10` **taie ultima cifra** si ne lasa restul numarului
 
