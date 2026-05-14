@@ -53,3 +53,7 @@ si confirma ca build-ul trece fara erori inainte de a raporta task-ul ca finaliz
 - Prefixe conventionale: `docs(lectie): ...`, `chore(sidebar): ...`, `feat: ...`, `fix: ...`.
 - Fara trailer `Co-Authored-By`.
 - Un commit per pas logic (ex. rescriere lectie = 1 commit, adaugare in sidebar = alt commit).
+
+## Terminal
+
+Foloseste **PowerShell** by default pentru comenzi de terminal (tool-ul `PowerShell`), nu Bash. Sintaxa PowerShell: `$null` in loc de `/dev/null`, `$env:VAR` in loc de `$VAR`, backtick pentru continuare de linie, `;` (sau `; if ($?) { ... }`) in loc de `&&`. Recurge la Bash doar daca scriptul are nevoie explicita de POSIX.

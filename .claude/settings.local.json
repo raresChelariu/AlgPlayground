@@ -16,7 +16,17 @@
       "Bash(npm run:*)",
       "Bash(grep -v '```')",
       "Bash(grep -v '`<')",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(dir:*)",
+      "Bash(find:*)",
+      "PowerShell(git commit:*)",
+      "PowerShell(git pull:*)",
+      "PowerShell(git fetch:*)",
+      "PowerShell(dir:*)",
+      "PowerShell(find:*)",
+      "PowerShell(Get-ChildItem:*)"
     ]
   }
 }
