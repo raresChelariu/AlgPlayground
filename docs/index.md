@@ -9,7 +9,7 @@ hero:
       text: Clasa a IX-a
       link: /cpp/algoritmi/clasa-a-9a/notiuni-de-baza/expresii
     - theme: brand
-      text: Clasa a IX-a
+      text: Clasa a X-a
       link: /cpp/algoritmi/clasa-a-10a/struct
     - theme: alt
       text: Pseudocod
