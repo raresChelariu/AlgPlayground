@@ -82,6 +82,7 @@ export default withMermaid(
           text: 'Clasa a X-a',
           collapsed: false,
           items: [
+            { text: 'Functii', link: '/cpp/algoritmi/clasa-a-10a/functii' },
             { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
             {
               text: 'Siruri de caractere',
