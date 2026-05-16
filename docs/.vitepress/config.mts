@@ -82,6 +82,7 @@ export default withMermaid(
               collapsed: false,
               items: [
                 { text: 'Vector', link: '/cpp/algoritmi/clasa-a-9a/vectori/vector' },
+                { text: 'Parcurgerea vectorilor', link: '/cpp/algoritmi/clasa-a-9a/vectori/parcurgerea-vectorilor' },
               ],
             },
           ],
