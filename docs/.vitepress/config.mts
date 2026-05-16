@@ -77,6 +77,13 @@ export default withMermaid(
                 },
               ],
             },
+            {
+              text: 'Vectori',
+              collapsed: false,
+              items: [
+                { text: 'Vector', link: '/cpp/algoritmi/clasa-a-9a/vectori/vector' },
+              ],
+            },
           ],
         },
         {
