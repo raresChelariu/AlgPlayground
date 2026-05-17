@@ -1,9 +1,5 @@
 # Stergeri si inserari in vector
 
-Dupa ce am invatat sa parcurgem un vector, invatam doua operatii fundamentale: **inserarea** unui element pe o pozitie data si **stergerea** unui element de pe o pozitie data.
-
----
-
 ## Inserarea unui element
 
 ### Cum functioneaza
@@ -20,7 +16,10 @@ Catalina vrea sa se aseze pe pozitia 2 (intre Florin si George). Toate persoanel
 |----------|---|---|---|---|---|---|---|
 | Persoana | F | C | G | A | B | I | R |
 
-**Ordinea mutarilor conteaza:** incepem de la capatul din dreapta (R) si mergem spre stanga (G). Daca am incepe de la stanga, primul mutat ar suprascrie persoana din dreapta lui inainte de a o fi mutat.
+**Ordinea mutarilor conteaza:**
+- incepem de la ultimul si mergem spre stanga (G). 
+- Daca am incepe de la stanga, primul mutat "s-ar aseza" pe cel din stanga sa 
+- din moment ce folosim atriburi, daca am face `v[4] = v[3];` atunci pe pozitia 4 as memora G(eorge), dar as pierde valoarea `A` (cea de pe scaunul 4).
 
 ### Algoritmul de inserare
 
@@ -80,6 +79,19 @@ int main()
 ```
 
 > **Obs:** dupa inserare, `i++` face ca bucla sa sara peste elementul proaspat inserat. Fara `i++`, bucla ar re-verifica pozitia `i + 1`, care contine `-v[i]` — si daca `v[i]` era multiplu de 7, atunci si `-v[i]` este multiplu de 7, deci s-ar insera din nou la infinit.
+
+#### Ce s-ar intampla fara `i++`?
+
+Sa urmarim exemplul cu sirul `1 7`:
+
+| Iteratie | i | Vector | Ce se intampla |
+|----------|---|--------|----------------|
+| 1 | 1 | `7` | v[1]=7, div. cu 7 → inserez -7 pe poz. 2, vector devine `7 -7`, n=2 |
+| 2 | 2 | `7 -7` | v[2]=-7, -7 % 7 == 0 → inserez 7 pe poz. 3, vector devine `7 -7 7`, n=3 |
+| 3 | 3 | `7 -7 7` | v[3]=7, div. cu 7 → inserez -7 pe poz. 4 ... |
+| ... | ... | ... | **bucla nu se mai termina niciodata!** |
+
+**Concluzie:** `-v[i]` este si el multiplu de 7. Fara `i++`, bucla ajunge la elementul tocmai inserat si tot insereaza, la nesfarsit.
 
 ---
 
@@ -157,3 +169,15 @@ int main()
 ```
 
 > **Obs:** dupa stergere, `i--` face ca bucla sa re-verifice pozitia `i` in iteratia urmatoare (bucla `for` va incrementa `i` la final, revenind la aceeasi pozitie). Este necesar deoarece, dupa stergere, elementul de pe pozitia `i` este cel care era initial pe pozitia `i + 1` — el inca nu a fost verificat.
+
+#### Ce s-ar intampla fara `i--`?
+
+Sa urmarim exemplul cu sirul `3 7 14 3` (doi multipli de 7 consecutivi):
+
+| Iteratie | i | Vector | Ce se intampla |
+|----------|---|--------|----------------|
+| 1 | 1 | `7 14 3` | v[1]=7, div. cu 7 → sterg, vector devine `14 3`, n=2 |
+| 2 | 2 | `14 3` | v[2]=3, 3 % 7 != 0 → nimic |
+| sfarsit | — | `14 3` | **14 nu a fost niciodata verificat!** |
+
+**Concluzie:** dupa stergere, elementul de pe pozitia `i+1` se muta pe pozitia `i`. Daca nu scriem `i--`, bucla trece mai departe si rateaza verificarea acestui element.
