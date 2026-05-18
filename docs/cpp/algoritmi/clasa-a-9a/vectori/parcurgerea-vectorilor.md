@@ -214,8 +214,65 @@ Pas cu pas, valoarea lui `s`:
 | 3           | 12     | 23           |
 | 4           | 5      | 28           |
 | 5           | 1      | 29           |
-
 ---
+
+## Parcurgerea perechilor egal departate
+
+Vreau sa iau in considerare urmatoarele perechi:
+- primul element cu ultimul
+- al 2-lea cu penultimul
+- al 3-lea cu antepenultimul
+- ...
+
+Daca am n elemente, voi avea perechile cu pozitiile:
+- 1 si n
+- 2 si n - 1
+- 3 si n - 2
+- ...
+
+> Pentru un vector cu 8 elemente voi avea perechile cu pozitiile (1, 8), (2, 7), (3, 6), (4, 5)
+
+> Pentru un vector cu 5 elemente (1, 5), (2, 4) - 3 este mijlocul sirului 
+
+```cpp
+#include <iostream>
+using namespace std;
+int n, i, v[101];
+int st, dr;
+
+int main()
+{
+    // citesc n si n elemente
+    cin >> n;
+    for (i = 1; i <= n; i++)
+    {
+        cin >> v[i];
+    }
+
+    for (st = 1, dr = n; st < dr; st++, dr--)
+    {
+        cout << v[st] << " " << v[dr] << endl;
+    }
+    return 0;
+}
+```
+
+**Intrare:**
+
+```
+6
+24 30 19 11 20 7
+```
+
+**Afisare:**
+
+```
+24 7
+30 20
+19 11
+```
+
+--- 
 
 ## Numararea elementelor care respecta o conditie
 
