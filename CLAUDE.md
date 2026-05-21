@@ -20,6 +20,7 @@ Categoriile trebuie sa fie **vizibile in sidebar-ul VitePress** ([docs/.vitepres
 - **Indexare de la 1**: buclele parcurg `v[1..n]` cu `for (i = 1; i <= n; i++)`. Este stilul pbinfo/olimpiada si corespunde formularii enunturilor ("se citesc n numere..."). Exceptie: indexare de la 0 doar daca enuntul o cere explicit (ex. vector de frecventa `f[0..9]` pentru cifre).
 - **Variabile globale deasupra lui `main()`** in exemplele complete (n, i, j, vectorii, contoarele, acumulatorii). Evita stack overflow la vectori mari si corespunde stilului uzual la concursuri/BAC.
 - **Fara variabile locale declarate in for**: variabile locale sunt declarate pe o linie separata. Daca sunt variabile locale pentru functia main, si pot fi declarate global, atunci mai degraba sa fie declarate global.
+- **Stil Allman pentru acolade**: toate buclele `for` si `while`, functiile si blocurile cu mai multe instructiuni au acolada de deschidere pe linie noua. `if`/`else` fara acolade daca corpul e pe o singura linie.
 - **Siruri de caractere**: `char nume[N]` citite cu `cin >> x`. Nu folosim `std::string`, nu folosim `cin.getline` / `cin.get`. In exemple numele sunt dintr-un singur cuvant (`Ion`, `Maria`), ca sa nu amestecam citirea.
 
 ## Conventii de formatare pentru lectii `.md`

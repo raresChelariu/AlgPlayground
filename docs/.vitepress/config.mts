@@ -75,6 +75,7 @@ export default withMermaid(
                     { text: 'Descompunere in factori primi', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/descompunere-in-factori-primi' },
                   ],
                 },
+                { text: 'Verificarea unor proprietati', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/verificarea-unor-proprietati' },
               ],
             },
             {
