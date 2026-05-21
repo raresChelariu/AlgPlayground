@@ -85,6 +85,7 @@ export default withMermaid(
                 { text: 'Vector', link: '/cpp/algoritmi/clasa-a-9a/vectori/vector' },
                 { text: 'Parcurgerea vectorilor', link: '/cpp/algoritmi/clasa-a-9a/vectori/parcurgerea-vectorilor' },
                 { text: 'Stergeri si inserari', link: '/cpp/algoritmi/clasa-a-9a/vectori/stergere-si-inserare' },
+                { text: 'Cautare binara', link: '/cpp/algoritmi/clasa-a-9a/vectori/cautare-binara' },
               ],
             },
           ],

@@ -244,3 +244,279 @@ int main()
 Elementul se afla pe pozitia 8
 ```
 
+---
+
+## Pozitia de inserare
+
+Cand cautarea binara se incheie fara sa gaseasca elementul, `st` indica **pozitia unde elementul ar trebui inserat** pentru ca sirul sa ramana sortat.
+
+In exemplul de mai sus (cautam `x = 40` in vectorul sortat), la final `st = 9`. Intr-adevar, 40 s-ar insera pe pozitia 9, intre 37 si 43.
+
+Putem folosi aceasta informatie in functia de cautare: daca elementul nu este gasit, returnam `-st`. Un rezultat negativ inseamna "nu exista", iar valoarea in modul este pozitia de inserare.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n, x, v[100001];
+int i, poz;
+
+int cautareBinara(int val)
+{
+    int st, dr, mij;
+    st = 1;
+    dr = n;
+    while (st <= dr)
+    {
+        mij = (st + dr) / 2;
+        if (v[mij] == val)
+            return mij;
+        if (v[mij] < val)
+            st = mij + 1;
+        else
+            dr = mij - 1;
+    }
+    return -st;
+}
+
+int main()
+{
+    cin >> n;
+    for (i = 1; i <= n; i++)
+    {
+        cin >> v[i];
+    }
+    cin >> x;
+
+    poz = cautareBinara(x);
+    if (poz > 0)
+        cout << "Gasit pe pozitia " << poz;
+    else
+        cout << "Nu exista; s-ar insera pe pozitia " << -poz;
+
+    return 0;
+}
+```
+
+**Intrare:**
+
+```
+10
+3 12 17 25 29 31 34 37 43 49
+40
+```
+
+**Afisare:**
+
+```
+Nu exista; s-ar insera pe pozitia 9
+```
+
+---
+
+**Intrare:**
+
+```
+10
+3 12 17 25 29 31 34 37 43 49
+37
+```
+
+**Afisare:**
+
+```
+Gasit pe pozitia 8
+```
+
+---
+
+## Lower bound — primul element >= x
+
+Lower bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] >= x`?**
+
+Conditia din `if` este exact intrebarea pe care o punem: `v[mij] >= val`. Asta inseamna ca tratam si cazul `v[mij] == x` ca un raspuns candidat (un element egal cu `x` satisface `>= x`), asa ca il retinem si continuam sa cautam la **stanga** — poate exista o pozitie mai mica cu acelasi raspuns. Cand `v[mij] < x`, sigur nu e candidat, deci mutam `st = mij + 1`.
+
+```cpp
+int lowerBound(int val)
+{
+    int st, dr, mij, rez;
+    st = 1;
+    dr = n;
+    rez = n + 1;
+    while (st <= dr)
+    {
+        mij = (st + dr) / 2;
+        if (v[mij] >= val)
+        {
+            rez = mij;
+            dr = mij - 1;
+        }
+        else
+            st = mij + 1;
+    }
+    return rez;
+}
+```
+
+> **Obs:** `rez` este initializat cu `n + 1` pentru a semnala ca nu exista niciun element `>= val` (toti sunt mai mici decat `val`).
+
+**Exemplu:** fie vectorul cu duplicate `v = [2, 5, 5, 5, 8, 10]`, `n = 6`.
+
+Lower bound pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
+
+| Pas | `st` | `dr` | `mij` | `v[mij]` | `rez` | Actiune |
+|-----|------|------|-------|----------|-------|------------------------------|
+| 1   | 1    | 6    | 3     | 5        | 3     | 5 >= 5 → `rez = 3`, `dr = 2` |
+| 2   | 1    | 2    | 1     | 2        | 3     | 2 < 5 → `st = 2`             |
+| 3   | 2    | 2    | 2     | 5        | 2     | 5 >= 5 → `rez = 2`, `dr = 1` |
+| 4   | 2    | 1    | —     | —        | 2     | `st > dr` → stop             |
+
+Rezultat: `lowerBound(5) = 2`. Prima aparitie a lui 5 este pe pozitia 2.
+
+---
+
+## Upper bound — primul element > x
+
+Upper bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] > x`?**
+
+Conditia din `if` este acum `v[mij] > val` — strict mai mare. Diferenta fata de lower bound apare exact cand `v[mij] == x`: egalitatea **nu** satisface `> x`, deci `mij` nu e candidat si mutam `st = mij + 1` (cautam la dreapta). Abia cand gasim ceva strict mai mare retinem pozitia si cautam mai la stanga.
+
+Codul este identic cu lower bound, cu singura diferenta ca conditia din `if` este `>` in loc de `>=`:
+
+```cpp
+int upperBound(int val)
+{
+    int st, dr, mij, rez;
+    st = 1;
+    dr = n;
+    rez = n + 1;
+    while (st <= dr)
+    {
+        mij = (st + dr) / 2;
+        if (v[mij] > val)
+        {
+            rez = mij;
+            dr = mij - 1;
+        }
+        else
+            st = mij + 1;
+    }
+    return rez;
+}
+```
+
+**Exemplu:** acelasi vector `v = [2, 5, 5, 5, 8, 10]`, `n = 6`.
+
+Upper bound pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
+
+| Pas | `st` | `dr` | `mij` | `v[mij]` | `rez` | Actiune |
+|-----|------|------|-------|----------|-------|---------|
+| 1   | 1    | 6    | 3     | 5        | 7     | 5 <= 5 → `st = 4` |
+| 2   | 4    | 6    | 5     | 8        | 5     | 8 > 5 → `rez = 5`, `dr = 4` |
+| 3   | 4    | 4    | 4     | 5        | 5     | 5 <= 5 → `st = 5` |
+| 4   | 5    | 4    | —     | —        | 5     | `st > dr` → stop |
+
+Rezultat: `upperBound(5) = 5`. Prima pozitie cu element strict mai mare decat 5 este pozitia 5 (v[5] = 8).
+
+---
+
+## Prima si ultima aparitie
+
+Cu lower bound si upper bound putem raspunde la mai multe intrebari despre un sir cu duplicate:
+
+| Intrebare | Formula |
+|-----------|---------|
+| Prima aparitie a lui `x` | `lowerBound(x)`, daca `v[rez] == x` |
+| Ultima aparitie a lui `x` | `upperBound(x) - 1`, daca `v[rez - 1] == x` |
+| Numarul de aparitii ale lui `x` | `upperBound(x) - lowerBound(x)` |
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n, x, v[100001];
+int i, lb, ub;
+
+int lowerBound(int val)
+{
+    int st, dr, mij, rez;
+    st = 1;
+    dr = n;
+    rez = n + 1;
+    while (st <= dr)
+    {
+        mij = (st + dr) / 2;
+        if (v[mij] >= val)
+        {
+            rez = mij;
+            dr = mij - 1;
+        }
+        else
+            st = mij + 1;
+    }
+    return rez;
+}
+
+int upperBound(int val)
+{
+    int st, dr, mij, rez;
+    st = 1;
+    dr = n;
+    rez = n + 1;
+    while (st <= dr)
+    {
+        mij = (st + dr) / 2;
+        if (v[mij] > val)
+        {
+            rez = mij;
+            dr = mij - 1;
+        }
+        else
+            st = mij + 1;
+    }
+    return rez;
+}
+
+int main()
+{
+    cin >> n;
+    for (i = 1; i <= n; i++)
+    {
+        cin >> v[i];
+    }
+    cin >> x;
+
+    lb = lowerBound(x);
+    ub = upperBound(x);
+
+    if (lb <= n && v[lb] == x)
+    {
+        cout << "Prima aparitie: pozitia " << lb << "\n";
+        cout << "Ultima aparitie: pozitia " << ub - 1 << "\n";
+        cout << "Numar de aparitii: " << ub - lb;
+    }
+    else
+        cout << "Elementul nu exista in vector";
+
+    return 0;
+}
+```
+
+**Intrare:**
+
+```
+6
+2 5 5 5 8 10
+5
+```
+
+**Afisare:**
+
+```
+Prima aparitie: pozitia 2
+Ultima aparitie: pozitia 4
+Numar de aparitii: 3
+```
+
+> **Obs:** verificarea `v[lb] == x` este necesara deoarece `lowerBound` returneaza prima pozitie cu `v[i] >= x`, nu neaparat `v[i] == x`. Daca `x` nu exista in vector, `lb` poate fi pozitia unui element mai mare decat `x`.
+
