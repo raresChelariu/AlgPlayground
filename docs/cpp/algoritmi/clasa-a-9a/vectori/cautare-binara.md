@@ -334,7 +334,11 @@ Gasit pe pozitia 8
 
 Lower bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] >= x`?**
 
-Conditia din `if` este exact intrebarea pe care o punem: `v[mij] >= val`. Asta inseamna ca tratam si cazul `v[mij] == x` ca un raspuns candidat (un element egal cu `x` satisface `>= x`), asa ca il retinem si continuam sa cautam la **stanga** — poate exista o pozitie mai mica cu acelasi raspuns. Cand `v[mij] < x`, sigur nu e candidat, deci mutam `st = mij + 1`.
+- `v[mij] == x` → satisface `>= x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
+- `v[mij] > x` → satisface `>= x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
+- `v[mij] < x` → nu satisface `>= x`, nu este candidat: cautam dreapta (`st = mij + 1`)
+
+> **Obs:** in cod, cazurile `==` si `>` sunt grupate de conditia `v[mij] >= val` — ambele duc la aceeasi actiune.
 
 ```cpp
 int lowerBound(int val)
@@ -379,7 +383,11 @@ Rezultat: `lowerBound(5) = 2`. Prima aparitie a lui 5 este pe pozitia 2.
 
 Upper bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] > x`?**
 
-Conditia din `if` este acum `v[mij] > val` — strict mai mare. Diferenta fata de lower bound apare exact cand `v[mij] == x`: egalitatea **nu** satisface `> x`, deci `mij` nu e candidat si mutam `st = mij + 1` (cautam la dreapta). Abia cand gasim ceva strict mai mare retinem pozitia si cautam mai la stanga.
+- `v[mij] == x` → nu satisface `> x`, nu este candidat: cautam dreapta (`st = mij + 1`)
+- `v[mij] > x` → satisface `> x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
+- `v[mij] < x` → nu satisface `> x`, nu este candidat: cautam dreapta (`st = mij + 1`)
+
+> **Obs:** in cod, cazurile `==` si `<` sunt grupate de `else` — ambele duc la `st = mij + 1`.
 
 Codul este identic cu lower bound, cu singura diferenta ca conditia din `if` este `>` in loc de `>=`:
 
@@ -422,57 +430,75 @@ Rezultat: `upperBound(5) = 5`. Prima pozitie cu element strict mai mare decat 5 
 
 ## Prima si ultima aparitie
 
-Cu lower bound si upper bound putem raspunde la mai multe intrebari despre un sir cu duplicate:
+Putem cauta direct prima sau ultima aparitie a lui `x` cu doua functii separate, fiecare cu propria logica la egalitate.
+
+### primAparitie
+
+- `v[mij] == x` → candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o aparitie anterioara
+- `v[mij] < x` → `x` e mai mare, cautam dreapta (`st = mij + 1`)
+- `v[mij] > x` → `x` e mai mic, cautam stanga (`dr = mij - 1`)
+
+### ultimaAparitie
+
+- `v[mij] == x` → candidat: retinem `rez = mij`, cautam dreapta (`st = mij + 1`) — poate exista o aparitie ulterioara
+- `v[mij] < x` → `x` e mai mare, cautam dreapta (`st = mij + 1`)
+- `v[mij] > x` → `x` e mai mic, cautam stanga (`dr = mij - 1`)
+
+Ambele returneaza `-1` daca elementul nu exista in vector.
 
 | Intrebare | Formula |
 |-----------|---------|
-| Prima aparitie a lui `x` | `lowerBound(x)`, daca `v[rez] == x` |
-| Ultima aparitie a lui `x` | `upperBound(x) - 1`, daca `v[rez - 1] == x` |
-| Numarul de aparitii ale lui `x` | `upperBound(x) - lowerBound(x)` |
+| Prima aparitie a lui `x` | `primAparitie(x)` |
+| Ultima aparitie a lui `x` | `ultimaAparitie(x)` |
+| Numarul de aparitii ale lui `x` | `ultimaAparitie(x) - primAparitie(x) + 1` |
 
 ```cpp
 #include <iostream>
 using namespace std;
 
 int n, x, v[100001];
-int i, lb, ub;
+int i, pa, ua;
 
-int lowerBound(int val)
+int primAparitie(int val)
 {
     int st, dr, mij, rez;
     st = 1;
     dr = n;
-    rez = n + 1;
+    rez = -1;
     while (st <= dr)
     {
         mij = (st + dr) / 2;
-        if (v[mij] >= val)
+        if (v[mij] == val)
         {
             rez = mij;
             dr = mij - 1;
         }
-        else
+        else if (v[mij] < val)
             st = mij + 1;
+        else
+            dr = mij - 1;
     }
     return rez;
 }
 
-int upperBound(int val)
+int ultimaAparitie(int val)
 {
     int st, dr, mij, rez;
     st = 1;
     dr = n;
-    rez = n + 1;
+    rez = -1;
     while (st <= dr)
     {
         mij = (st + dr) / 2;
-        if (v[mij] > val)
+        if (v[mij] == val)
         {
             rez = mij;
-            dr = mij - 1;
-        }
-        else
             st = mij + 1;
+        }
+        else if (v[mij] < val)
+            st = mij + 1;
+        else
+            dr = mij - 1;
     }
     return rez;
 }
@@ -486,14 +512,14 @@ int main()
     }
     cin >> x;
 
-    lb = lowerBound(x);
-    ub = upperBound(x);
+    pa = primAparitie(x);
+    ua = ultimaAparitie(x);
 
-    if (lb <= n && v[lb] == x)
+    if (pa != -1)
     {
-        cout << "Prima aparitie: pozitia " << lb << "\n";
-        cout << "Ultima aparitie: pozitia " << ub - 1 << "\n";
-        cout << "Numar de aparitii: " << ub - lb;
+        cout << "Prima aparitie: pozitia " << pa << "\n";
+        cout << "Ultima aparitie: pozitia " << ua << "\n";
+        cout << "Numar de aparitii: " << ua - pa + 1;
     }
     else
         cout << "Elementul nu exista in vector";
@@ -517,6 +543,4 @@ Prima aparitie: pozitia 2
 Ultima aparitie: pozitia 4
 Numar de aparitii: 3
 ```
-
-> **Obs:** verificarea `v[lb] == x` este necesara deoarece `lowerBound` returneaza prima pozitie cu `v[i] >= x`, nu neaparat `v[i] == x`. Daca `x` nu exista in vector, `lb` poate fi pozitia unui element mai mare decat `x`.
 

@@ -6,8 +6,8 @@ Problemele de tip **EXISTA** si **TOATE** verifica daca o proprietate este indep
 |---|---|---|
 | **Propozitie exemplu** | Exista un elev cu media < 5? | Sunt toti elevii majori? (varsta >= 18) |
 | **Ma opresc la** | Primul **EXEMPLU** — primul element care indeplineste conditia | Primul **CONTRAEXEMPLU** — primul element care NU indeplineste conditia |
-| **Conditia buclei** | `cat timp existaCorigent == false` (caut cat timp NU am gasit corigent) | `cat timp totiMajori == true` (caut cat timp NU am gasit minor) |
-| **Presupunerea initiala** | Presupunem ca NU exista: `existaCorigent = false` | Presupunem ca TOTI indeplinesc: `totiMajori = true` |
+| **Conditia buclei** | `existaCorigent == 0` (caut cat timp NU am gasit corigent) | `totiMajori == 1` (caut cat timp NU am gasit minor) |
+| **Presupunerea initiala** | Presupunem ca NU exista: `existaCorigent = 0;` | Presupunem ca TOTI indeplinesc: `totiMajori = 1;` |
 | **Sinonime in enunt** | cel putin 1, macar 1, sirul sa contina... | oricum, oricare, fiecare, toti |
 
 ---
@@ -36,11 +36,11 @@ int main()
         cin >> v[i];
     }
 
-    existaCorigent = false;
+    existaCorigent = 0;
     for (i = 1; i <= n && !existaCorigent; i++)
     {
         if (v[i] < 5)
-            existaCorigent = true;
+            existaCorigent = 1;
     }
 
     if (existaCorigent)
@@ -158,7 +158,7 @@ DA
 
 Se citesc `n` si `n` varste. Sa se afiseze `DA` daca toti elevii sunt majori (varsta >= 18), sau `NU` altfel.
 
-### Varianta 1 — flag bool
+### Varianta 1 — variabila bool
 
 Presupunem initial ca TOTI sunt majori. Parcurgem cat timp nu am gasit un minor:
 
@@ -178,11 +178,11 @@ int main()
         cin >> v[i];
     }
 
-    totiMajori = true;
+    totiMajori = 1;
     for (i = 1; i <= n && totiMajori; i++)
     {
         if (v[i] < 18)
-            totiMajori = false;
+            totiMajori = 0;
     }
 
     if (totiMajori)
