@@ -207,7 +207,8 @@ NU
 
 ### Varianta 2 — break
 
-Iesim la primul CONTRAEXEMPLU (primul minor). Daca `i > n` dupa bucla, inseamna ca nu am gasit niciun minor — toti sunt majori:
+- Iesim la primul CONTRAEXEMPLU (primul minor). 
+- Daca `i > n` dupa `for`, inseamna ca nu am gasit niciun minor — toti sunt majori:
 
 ```cpp
 #include <iostream>
@@ -230,7 +231,7 @@ int main()
             break;
     }
 
-    if (i > n)
+    if (i > n) // nu am iesit prin "break", am parcurs tot sirul fara sa gasim contraexemplu
         cout << "DA";
     else
         cout << "NU";
@@ -251,6 +252,42 @@ NU
 ```
 
 > **Obs:** La EXISTA verificam `i <= n` dupa break (am gasit exemplul). La TOATE verificam `i > n` dupa break (nu am gasit contraexemplul).
+
+> Acelasi lucru puteam sa-l obtinem si cu o variabila de tip bool, la care ii schimbam valoarea cand gaseam contraexemplu (si tot atunci faceam si break)
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n, i, v[1001];
+bool totiMajori;
+
+int main()
+{
+    cin >> n;
+    for (i = 1; i <= n; i++)
+    {
+        cin >> v[i];
+    }
+    totiMajori = 1;
+    for (i = 1; i <= n; i++)
+    {
+        if (v[i] < 18)
+        {
+            totiMajori = 0;
+            break;
+        }
+    }
+
+    if (totiMajori == 1)
+        cout << "DA";
+    else
+        cout << "NU";
+
+    return 0;
+}
+```
+
 
 ### Varianta 3 — return in main
 

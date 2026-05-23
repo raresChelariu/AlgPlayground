@@ -289,6 +289,74 @@ int main()
 
 ---
 
+## Sortarea a 4 variabile
+
+- Vreau cele 4 variabile `a`, `b`, `c`, `d` in ordine crescatoare.
+- Deci in `a` vreau valoarea cea mai mica:
+  - voi compara `a` cu `b`, `c`, respectiv `d`
+  - daca in a am valoarea mai mare voi face interschimbare (swap).
+- Astfel, in `a` voi avea valoarea cea mai mica. 
+- Ramane acum sa setez in `b` valoarea cea mai mica dintre `b`, `c` si `d`.
+- Ca apoi sa setez in `c` valoarea cea mai mica dintre `c` si `d`
+
+```cpp
+#include <iostream>
+#include <algorithm> // pentru functia swap
+using namespace std;
+
+int a, b, c, d, aux;
+
+int main()
+{
+    cin >> a >> b >> c >> d;
+    if (a > b)
+    {
+        aux = a;
+        a = b;
+        b = aux;
+    }
+    if (a > c)
+    {
+        aux = c;
+        c = a;
+        a = aux;
+    }
+    if (a > d)
+    {
+        aux = a;
+        a = d;
+        d = aux;
+    }
+    // interschimbarile le pot face si cu swap() in loc de cele 3 atribuire
+    if (b > c)
+    {
+        swap(b, c);
+    }
+    if (b > d)
+    {
+        swap(b, d);
+    }
+    if (c > d)
+    {
+        swap(c, d);
+    }
+
+    return 0;
+}
+```
+
+**Intrare:**
+```
+7 9 3 5
+```
+
+**Afisare:**
+```
+3 5 7 9
+```
+
+--- 
+
 ## Conceptul de contor
 
 Un **contor** este o variabila care numara cate valori indeplinesc o conditie. Porneste de la `0` si creste cu `1` la fiecare valoare care respecta conditia.
