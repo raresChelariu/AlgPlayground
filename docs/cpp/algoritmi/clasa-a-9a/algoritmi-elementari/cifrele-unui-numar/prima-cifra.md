@@ -5,9 +5,9 @@
 #include <iostream>
 using namespace std;
 int n;
+
 int main()
 {
-    int n;
     cin >> n;
     // Cat timp n are cel putin 2 cifre
     while (n >= 10)
@@ -26,9 +26,9 @@ int main()
 #include <iostream>
 using namespace std;
 int n;
+
 int main()
 {
-    int n;
     cin >> n;
     // Cat timp n are cel putin 2 cifre
     while (n >= 10)

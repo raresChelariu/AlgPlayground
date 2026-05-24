@@ -16,12 +16,11 @@ if (conditie)
 ```cpp
 #include <iostream>
 using namespace std;
+int n;
 
 int main()
 {
-    int n;
     cin >> n;
-
     if (n > 0)
     {
         cout << "Numarul este pozitiv." << endl;
@@ -67,12 +66,11 @@ else
 ```cpp
 #include <iostream>
 using namespace std;
+int n;
 
 int main()
 {
-    int n;
     cin >> n;
-
     if (n % 2 == 0)
     {
         cout << "Par" << endl;
@@ -128,12 +126,11 @@ else
 ```cpp
 #include <iostream>
 using namespace std;
+int nota;
 
 int main()
-{
-    int nota;
+{    
     cin >> nota;
-
     if (nota == 10)
     {
         cout << "Felicitari!" << endl;
@@ -184,12 +181,11 @@ Se citeste un numar. Verificam daca este intre 1 si 100 (inclusiv).
 ```cpp
 #include <iostream>
 using namespace std;
+int n;
 
 int main()
 {
-    int n;
     cin >> n;
-
     if (n >= 1 && n <= 100)
     {
         cout << "Numarul este in intervalul [1, 100]." << endl;
@@ -210,10 +206,10 @@ Un an este bisect daca e **divisibil cu 4 si nu e divisibil cu 100**, sau daca e
 ```cpp
 #include <iostream>
 using namespace std;
+int an;
 
 int main()
 {
-    int an;
     cin >> an;
 
     if ((an % 4 == 0 && an % 100 != 0) || an % 400 == 0)
@@ -236,13 +232,11 @@ int main()
 ```cpp
 #include <iostream>
 using namespace std;
+int a, b, maxim;
 
 int main()
 {
-    int a, b;
     cin >> a >> b;
-
-    int maxim;
     if (a > b)
     {
         maxim = a;
@@ -251,7 +245,6 @@ int main()
     {
         maxim = b;
     }
-
     cout << maxim << endl;
 
     return 0;
@@ -263,13 +256,11 @@ int main()
 ```cpp
 #include <iostream>
 using namespace std;
-
+int a, b, c, maxim;
 int main()
 {
-    int a, b, c;
     cin >> a >> b >> c;
-
-    int maxim = a;
+    maxim = a;
     if (b > maxim)
     {
         maxim = b;
@@ -366,14 +357,11 @@ Un **contor** este o variabila care numara cate valori indeplinesc o conditie. P
 ```cpp
 #include <iostream>
 using namespace std;
+int c1, c2, c3, c4, c5, contor;
 
 int main()
 {
-    int c1, c2, c3, c4, c5;
     cin >> c1 >> c2 >> c3 >> c4 >> c5;
-
-    int contor = 0;
-
     if (c1 % 2 != 0)
     {
         contor++;

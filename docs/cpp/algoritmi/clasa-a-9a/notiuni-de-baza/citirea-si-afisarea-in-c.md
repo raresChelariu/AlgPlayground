@@ -42,6 +42,7 @@ scanf(format, &variabila);
 ```cpp
 #include <cstdio>
 int x;
+
 int main()
 {
     scanf("%d", &x);
@@ -206,13 +207,11 @@ Programul:
 
 ```cpp
 #include <cstdio>
-FILE *fin, *fout;
+FILE *fin = fin = fopen("date.in", "r");
+FILE *fout = fopen("date.out", "w");;
 int a, b;
 int main()
-{
-    fin = fopen("date.in", "r");
-    fout = fopen("date.out", "w");
-
+{      
     fscanf(fin, "%d%d", &a, &b);
     fprintf(fout, "%d\n", a + b);
 

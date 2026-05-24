@@ -15,10 +15,10 @@ In lectia despre expresii am invatat operatorii pe hartie. Acum ii folosim in co
 ```cpp
 #include <iostream>
 using namespace std;
-
+int a, b;
 int main()
 {
-    int a = 17, b = 5;
+    a = 17, b = 5;
 
     cout << a + b << endl;   // 22
     cout << a - b << endl;   // 12
@@ -69,10 +69,11 @@ Daca ai doua variabile `int` si vrei rezultat real, folosesti un **cast** (conve
 ```cpp
 #include <iostream>
 using namespace std;
+int a, b;
 
 int main()
 {
-    int a = 7, b = 2;
+    a = 7, b = 2;
 
     cout << a / b << endl;            // 3     (impartire intreaga)
     cout << (double)a / b << endl;    // 3.5   (cast pe a -> devine double)
@@ -101,10 +102,10 @@ Implicit, `cout` afiseaza numere reale cum vrea el (uneori 1.5, alteori 1.50000)
 #include <iostream>
 #include <iomanip>       // necesara pentru setprecision
 using namespace std;
-
+double x;
 int main()
 {
-    double x = 7.0 / 3;
+    x = 7.0 / 3;
 
     cout << x << endl;                          // 2.33333 (implicit)
     cout << fixed << setprecision(2) << x << endl;  // 2.33
@@ -133,10 +134,10 @@ int main()
 #include <iostream>
 #include <iomanip>
 using namespace std;
+int a, b;
 
 int main()
 {
-    int a, b;
     cin >> a >> b;
     cout << fixed << setprecision(2) << (double)(a + b) / 2 << endl;
     return 0;
@@ -161,10 +162,11 @@ int main()
 ```cpp
 #include <iostream>
 using namespace std;
+int a;
 
 int main()
 {
-    int a = 5;
+    a = 5;
 
     a++;
     cout << a << endl;   // 6
@@ -203,10 +205,10 @@ In loc sa scriem `a = a + 5`, putem scrie mai scurt `a += 5`. Functioneaza cu to
 ```cpp
 #include <iostream>
 using namespace std;
-
+int a;
 int main()
 {
-    int a = 20;
+    a = 20;
 
     a += 5;
     cout << a << endl;   // 25
@@ -244,14 +246,13 @@ int main()
 #include <iostream>
 #include <iomanip>
 using namespace std;
+double lungime, latime, arie, perimetru;
 
 int main()
-{
-    double lungime, latime;
+{    
     cin >> lungime >> latime;
-
-    double arie = lungime * latime;
-    double perimetru = 2 * (lungime + latime);
+    arie = lungime * latime;
+    perimetru = 2 * (lungime + latime);
 
     cout << "Arie: " << fixed << setprecision(2) << arie << endl;
     cout << "Perimetru: " << fixed << setprecision(2) << perimetru << endl;

@@ -10,6 +10,7 @@ Il folosim cu operatorul `>>` pentru a citi o valoare de la tastatura intr-o var
 #include <iostream>
 using namespace std;
 int varsta;
+
 int main()
 {
     
@@ -40,6 +41,7 @@ Ai 16 ani.
 #include <iostream>
 using namespace std;
 int a, b;
+
 int main()
 {    
     cout << "Introduceti doua numere: " << endl;
@@ -83,13 +85,12 @@ Primul: 5, Al doilea: 3
 ```cpp
 #include <iostream>
 using namespace std;
+int n;
+double x;
+char c;
 
 int main()
-{
-    int n;
-    double x;
-    char c;
-
+{    
     cout << "Introdu un intreg, un real si un caracter: ";
     cin >> n >> x >> c;
 
@@ -116,10 +117,10 @@ Caracter: A
 ```cpp
 #include <iostream>
 using namespace std;
+int a, b;
 
 int main()
-{
-    int a, b;
+{    
     cin >> a >> b;
     cout << a + b << endl;
     return 0;

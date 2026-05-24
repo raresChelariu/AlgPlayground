@@ -72,13 +72,13 @@ int main()
 
     st = 1;
     dr = n;
-    gasit = false;
+    gasit = 0;
     while (st <= dr)
     {
         mij = (st + dr) / 2;
         if (v[mij] == x)
         {
-            gasit = true;
+            gasit = 1;
             break;
         }
         if (v[mij] < x)

@@ -4,6 +4,7 @@
 #include <iostream>
 using namespace std;
 int n, suma, ulitimaCifra;
+
 int main()
 {
     cin >> n;

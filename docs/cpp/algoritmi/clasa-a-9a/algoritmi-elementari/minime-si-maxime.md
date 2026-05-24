@@ -191,7 +191,8 @@ Minimul este 2 si apare de 3 ori
 
 ### Pozitia minimului
 
-Pe langa valoarea minimului, retinem si pozitia la care apare (numerotare de la 1).
+- Pe langa valoarea minimului, retinem si pozitia la care apare 
+- in exemplu, numerotarea e de la 1
 
 ```cpp
 #include <iostream>

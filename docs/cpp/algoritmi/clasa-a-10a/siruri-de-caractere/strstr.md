@@ -46,10 +46,16 @@ char* strstr(char* s, char* sub)
     bool gasit;
     for (i = 0; s[i] != '\0'; i++)
     {
-        gasit = true;
+        gasit = 1;
         for (j = 0; sub[j] != '\0'; j++)
-            if (s[i + j] != sub[j]) { gasit = false; break; }
-        if (gasit)
+        {
+            if (s[i + j] != sub[j]) 
+            { 
+                gasit = 0; 
+                break; 
+            }
+        }
+        if (gasit == 1)
             return s + i;
     }
     return NULL;

@@ -11,7 +11,7 @@ Fiecare cutie are un **nume** (eticheta) si un **tip** (ce fel de valoare poate 
 | `long long` | Numere intregi mari | `9000000000` | -9 * 10^18 ... +9 * 10^18 |
 | `double` | Numere cu virgula | `3.14`, `-0.5` | foarte mare, cu ~15 cifre precizie |
 | `char` | Un singur caracter | `'A'`, `'z'`, `'3'` | un caracter ASCII |
-| `bool` | Adevarat / Fals | `true`, `false` | doar `true` (1) sau `false` (0) |
+| `bool` | Adevarat / Fals | `1`, `0` | doar 1 (`adevarat`) sau 0 (`fals`)|
 
 > **Obs:** In C++ folosim **punct** pentru zecimale, nu virgula: `3.14`, nu `3,14`.
 
@@ -28,14 +28,12 @@ Fiecare cutie are un **nume** (eticheta) si un **tip** (ce fel de valoare poate 
 ```cpp
 #include <iostream>
 using namespace std;
+int varsta; // declarare (cutia exista, dar nu stim ce e in ea)
+double inaltime = 1.75; // declarare + initializare in acelasi timp
 
 int main()
 {
-    int varsta;            // declarare (cutia exista, dar nu stim ce e in ea)
     varsta = 16;           // initializare (acum are valoarea 16)
-
-    double inaltime = 1.75; // declarare + initializare in acelasi timp
-
     char initiala = 'M';
     bool esteElev = true;
 
@@ -85,10 +83,10 @@ int x = 5, y = 10;     // doua variabile initializate
 ```cpp
 #include <iostream>
 using namespace std;
-
+int a, b;
 int main()
 {
-    int a = 5, b = 3;
+    a = 5, b = 3;
     cout << "a = " << a << endl;
     cout << "b = " << b << endl;
     cout << "Suma: " << a + b << endl;
@@ -116,10 +114,10 @@ Tipul int memoreaza valori intre aproximativ plus/minus 2,1 miliarde.
 ```cpp
 #include <iostream>
 using namespace std;
-
+int x;
 int main()
 {
-    int x = 2000000000;    // 2 miliarde — aproape de limita lui int
+    x = 2000000000;    // 2 miliarde — aproape de limita lui int
     cout << x << endl;     // 2000000000
 
     x = x + 1000000000;   // depasim limita!
@@ -168,14 +166,14 @@ Folosim o a treia variabila (`aux`) ca depozit temporar:
 ```cpp
 #include <iostream>
 using namespace std;
-
+int a, b, aux;
 int main()
 {
-    int a = 5, b = 3;
+    a = 5, b = 3;
 
     cout << "Inainte: a = " << a << ", b = " << b << endl;
 
-    int aux = a;   // pastram valoarea lui a in aux
+    aux = a;   // pastram valoarea lui a in aux
     a = b;         // acum a primeste valoarea lui b
     b = aux;       // b primeste valoarea veche a lui a (din aux)
 
@@ -200,11 +198,12 @@ Trebuie sa includem `#include <algorithm>` pentru a folosi functia `swap`.
 #include <algorithm> 
 #include <iostream>
 using namespace std;
+int a, b;
 
 int main()
 {
-    int a = 5;
-    int b = 3;
+    a = 5;
+    b = 3;
     swap(a, b);
 
     cout << a << " " << b; // se va afisa "3 5"
