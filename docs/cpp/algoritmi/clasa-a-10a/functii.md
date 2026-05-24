@@ -301,9 +301,11 @@ Compilatorul parcurge fisierul **de sus in jos**. Nu putem folosi ceva inainte s
 ### Variabila folosita inainte de a fi declarata
 
 ```cpp
+#include <iostream>
+using namespace std;
 int b = a;
 int a = 3;
-// la linia 1, compilatorul nu stie cine este "a"
+// la linia 3, compilatorul nu stie cine este "a"
 int main()
 {
     return 0;
@@ -315,7 +317,7 @@ int main()
 > error: 'a' was not declared in this scope
 > ```
 
-### Functie apelata inainte de a fi definita
+### Functie folosita inainte de a fi definita
 
 ```cpp
 #include <iostream>
@@ -386,7 +388,7 @@ int main()
 
 ### Atentie — declarare fara definitie
 
-Daca declaram o functie dar nu o definim, apare o eroare **la link-editare** (nu la compilare):
+Daca declaram o functie dar nu o definim, apare o eroare la compilare:
 
 ```cpp
 #include <iostream>
@@ -404,13 +406,11 @@ int main()
 }
 ```
 
-> **Eroare la link-editare:**
+> **Eroare la compilare:**
 > ```
 > undefined reference to 'patrat(int)'
 > ld returned 1 exit status
 > ```
-
-> **Obs:** Diferenta este importanta. Erorile de **compilare** apar cand sintaxa codului este gresita. Erorile de **link-editare** apar dupa ce compilarea a reusit — link-editorul incearca sa "lipeasca" bucatile programului si nu gaseste codul efectiv al unei functii care a fost doar declarata.
 
 ---
 
