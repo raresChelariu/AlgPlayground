@@ -32,13 +32,15 @@ int a, float x
 
 ---
 
-## Exemplu minim — functie `void`
+## Exemplu — functie `void`
 
 ```cpp
 #include <iostream>
 using namespace std;
 
-void salut()
+// pot face functia de tip void 
+// pentru ca nu folosesc instructiune "return"
+void salut() 
 {
     cout << "Salut!";
 }
@@ -54,7 +56,52 @@ int main()
 Salut!
 ```
 
-> **Obs:** Pentru a apela o functie, scriem `numeFunctie(valori_parametri);`. Daca functia nu are parametri, parantezele raman goale: `salut();`.
+> **Obs:** Pentru a apela o functie, scriem `numeFunctie(valoriParametri);`. Daca functia nu are parametri, parantezele raman goale: `salut();`.
+
+---
+
+## Exemplu — functie definita, dar neapelata (nu a fost folosita)
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void salut() 
+{
+    cout << "Salut!";
+}
+int main()
+{
+    return 0;
+}
+```
+
+**Afisare:**
+```
+```
+
+- Nu se afiseaza NIMIC. 
+- Tot ce face programul meu e doar in functia `main`
+- faptul ca functia `salut()` e definita mai sus, nu inseamna ca e si folosita
+- pentru a o folosi ar fi trebui sa vad in `main()` un apel de forma `salut();`
+
+---
+
+## Exemplu — functie apelata, dar nedefinita
+
+- Toate functiile trebuie definite ca sa poate sa fie apelate
+- daca nu sunt definite mai sus, obtin `EROARE DE COMPILARE`
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    salut(); // error: 'salut' was not declared in this scope
+    return 0;
+}
+```
 
 ---
 
