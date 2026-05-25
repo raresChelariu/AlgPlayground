@@ -22,6 +22,7 @@ Categoriile trebuie sa fie **vizibile in sidebar-ul VitePress** ([docs/.vitepres
 - **Fara variabile locale declarate in for**: variabile locale sunt declarate pe o linie separata. Daca sunt variabile locale pentru functia main, si pot fi declarate global, atunci mai degraba sa fie declarate global.
 - **Stil Allman pentru acolade**: toate buclele `for` si `while`, functiile si blocurile cu mai multe instructiuni au acolada de deschidere pe linie noua. `if`/`else` fara acolade daca corpul e pe o singura linie.
 - **Siruri de caractere**: `char nume[N]` citite cu `cin >> x`. Nu folosim `std::string`, nu folosim `cin.getline` / `cin.get`. In exemple numele sunt dintr-un singur cuvant (`Ion`, `Maria`), ca sa nu amestecam citirea.
+- **Terminologie pentru instructiuni repetitive**: in textul lectiilor nu folosi cuvantul generic "bucla". Spune **`for`-ul** sau **`while`-ul** atunci cand stii despre care din ele e vorba. Cand referirea e generica (valabila pentru orice tip de repetare), foloseste **"instructiunea repetitiva"**.
 
 ## Conventii de formatare pentru lectii `.md`
 

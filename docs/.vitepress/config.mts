@@ -88,6 +88,13 @@ export default withMermaid(
                 { text: 'Cautare binara', link: '/cpp/algoritmi/clasa-a-9a/vectori/cautare-binara' },
               ],
             },
+            {
+              text: 'Matrici',
+              collapsed: false,
+              items: [
+                { text: 'Parcurgere matrici', link: '/cpp/algoritmi/clasa-a-9a/matrici/parcurgere-matrici' },
+              ],
+            },
           ],
         },
         {
