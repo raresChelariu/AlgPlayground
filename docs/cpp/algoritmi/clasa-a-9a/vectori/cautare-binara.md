@@ -331,19 +331,19 @@ Gasit pe pozitia 8
 
 ---
 
-## Lower bound — primul element >= x
+## PrimulDeLaX - primul element >= x
 
-Lower bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] >= x`?**
+PrimulDeLaX raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] >= x`?**
 
 - `v[mij] == x` → satisface `>= x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
 - `v[mij] > x` → satisface `>= x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
 - `v[mij] < x` → nu satisface `>= x`, nu este candidat: cautam dreapta (`st = mij + 1`)
 
 > [!NOTE] Observatie
-> in cod, cazurile `==` si `>` sunt grupate de conditia `v[mij] >= val` — ambele duc la aceeasi actiune.
+> in cod, cazurile `==` si `>` sunt grupate de conditia `v[mij] >= x` — ambele duc la aceeasi actiune.
 
 ```cpp
-int lowerBound(int val)
+int primulDelaX(int x)
 {
     int st, dr, mij, rez;
     st = 1;
@@ -352,7 +352,7 @@ int lowerBound(int val)
     while (st <= dr)
     {
         mij = (st + dr) / 2;
-        if (v[mij] >= val)
+        if (v[mij] >= x)
         {
             rez = mij;
             dr = mij - 1;
@@ -365,11 +365,11 @@ int lowerBound(int val)
 ```
 
 > [!NOTE] Observatie
-> `rez` este initializat cu `n + 1` pentru a semnala ca nu exista niciun element `>= val` (toti sunt mai mici decat `val`).
+> `rez` este initializat cu `n + 1` pentru a semnala ca nu exista niciun element `>= x` (toti sunt mai mici decat `x`).
 
 **Exemplu:** fie vectorul cu duplicate `v = [2, 5, 5, 5, 8, 10]`, `n = 6`.
 
-Lower bound pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
+PrimulDeLaX pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
 
 | Pas | `st` | `dr` | `mij` | `v[mij]` | `rez` | Actiune |
 |-----|------|------|-------|----------|-------|------------------------------|
@@ -378,13 +378,13 @@ Lower bound pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
 | 3   | 2    | 2    | 2     | 5        | 2     | 5 >= 5 → `rez = 2`, `dr = 1` |
 | 4   | 2    | 1    | —     | —        | 2     | `st > dr` → stop             |
 
-Rezultat: `lowerBound(5) = 2`. Prima aparitie a lui 5 este pe pozitia 2.
+Rezultat: `primulDelaX(5) = 2`. Prima aparitie a lui 5 este pe pozitia 2.
 
 ---
 
-## Upper bound — primul element > x
+## PrimulDupaX — primul element > x
 
-Upper bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] > x`?**
+PrimulDupaX raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] > x`?**
 
 - `v[mij] == x` → nu satisface `> x`, nu este candidat: cautam dreapta (`st = mij + 1`)
 - `v[mij] > x` → satisface `> x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
@@ -396,7 +396,7 @@ Upper bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v
 Codul este identic cu lower bound, cu singura diferenta ca conditia din `if` este `>` in loc de `>=`:
 
 ```cpp
-int upperBound(int val)
+int primulDupaX(int val)
 {
     int st, dr, mij, rez;
     st = 1;
@@ -428,7 +428,68 @@ Upper bound pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
 | 3   | 4    | 4    | 4     | 5        | 5     | 5 <= 5 → `st = 5` |
 | 4   | 5    | 4    | —     | —        | 5     | `st > dr` → stop |
 
-Rezultat: `upperBound(5) = 5`. Prima pozitie cu element strict mai mare decat 5 este pozitia 5 (v[5] = 8).
+Rezultat: `primulDupaX(5) = 5`. Prima pozitie cu element strict mai mare decat 5 este pozitia 5 (v[5] = 8).
+
+---
+
+## Cel mai mare element <= x
+
+Raspunde la intrebarea: **care este ultima pozitie `i` pentru care `v[i] <= x`?**
+
+- `v[mij] <= x` → satisface conditia, este candidat: retinem `rez = mij`, cautam dreapta (`st = mij + 1`) — poate exista un element si mai mare care inca satisface `<= x`
+- `v[mij] > x` → nu satisface, cautam stanga (`dr = mij - 1`)
+
+> [!NOTE] Observatie
+> Aceasta pozitie este echivalenta cu `primulDupaX(x) - 1`. Daca rezultatul este `0`, inseamna ca toate elementele sunt strict mai mari decat `x`.
+
+```cpp
+int celMaiMarePanaIn(int val)
+{
+    int st, dr, mij, rez;
+    st = 1;
+    dr = n;
+    rez = 0;
+    while (st <= dr)
+    {
+        mij = (st + dr) / 2;
+        if (v[mij] <= val)
+        {
+            rez = mij;
+            st = mij + 1;
+        }
+        else
+            dr = mij - 1;
+    }
+    return rez;
+}
+```
+
+> [!NOTE] Observatie
+> `rez` este initializat cu `0` pentru a semnala ca nu exista niciun element `<= val`.
+
+**Exemplu:** acelasi vector `v = [2, 5, 5, 5, 8, 10]`, `n = 6`.
+
+Cel mai mare element `<= 5` (`rez` porneste la `0`):
+
+| Pas | `st` | `dr` | `mij` | `v[mij]` | `rez` | Actiune |
+|-----|------|------|-------|----------|-------|---------|
+| 1   | 1    | 6    | 3     | 5        | 3     | 5 <= 5 → `rez = 3`, `st = 4` |
+| 2   | 4    | 6    | 5     | 8        | 3     | 8 > 5 → `dr = 4` |
+| 3   | 4    | 4    | 4     | 5        | 4     | 5 <= 5 → `rez = 4`, `st = 5` |
+| 4   | 5    | 4    | —     | —        | 4     | `st > dr` → stop |
+
+Rezultat: `celMaiMarePanaIn(5) = 4`. Ultima pozitie cu element `<= 5` este pozitia 4 (v[4] = 5).
+
+Cel mai mare element `<= 7`:
+
+| Pas | `st` | `dr` | `mij` | `v[mij]` | `rez` | Actiune |
+|-----|------|------|-------|----------|-------|---------|
+| 1   | 1    | 6    | 3     | 5        | 3     | 5 <= 7 → `rez = 3`, `st = 4` |
+| 2   | 4    | 6    | 5     | 8        | 3     | 8 > 7 → `dr = 4` |
+| 3   | 4    | 4    | 4     | 5        | 4     | 5 <= 7 → `rez = 4`, `st = 5` |
+| 4   | 5    | 4    | —     | —        | 4     | `st > dr` → stop |
+
+Rezultat: `celMaiMarePanaIn(7) = 4`. Cel mai mare element din vector care nu depaseste 7 este `v[4] = 5`.
 
 ---
 
