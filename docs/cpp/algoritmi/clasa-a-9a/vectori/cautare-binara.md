@@ -335,9 +335,14 @@ Gasit pe pozitia 8
 
 PrimulDeLaX raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] >= x`?**
 
-- `v[mij] == x` → satisface `>= x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
-- `v[mij] > x` → satisface `>= x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
-- `v[mij] < x` → nu satisface `>= x`, nu este candidat: cautam dreapta (`st = mij + 1`)
+- `v[mij] == x` (ex: `x = 5`, `v[mij] = 5`) → 5 >= 5, este candidat
+  - retinem `rez = mij`
+  - cautam stanga — poate exista un 5 si mai la stanga
+- `v[mij] > x` (ex: `x = 5`, `v[mij] = 8`) → 8 >= 5, este **candidat** :
+  - retinem `rez = mij`
+  - cautam stanga — poate exista ceva mai mic care tot e >= 5
+- `v[mij] < x` (ex: `x = 5`, `v[mij] = 2`) → 2 < 5, **NU este candidat** :
+  - cautam dreapta
 
 > [!NOTE] Observatie
 > in cod, cazurile `==` si `>` sunt grupate de conditia `v[mij] >= x` — ambele duc la aceeasi actiune.
@@ -386,14 +391,18 @@ Rezultat: `primulDelaX(5) = 2`. Prima aparitie a lui 5 este pe pozitia 2.
 
 PrimulDupaX raspunde la intrebarea: **care este prima pozitie `i` pentru care `v[i] > x`?**
 
-- `v[mij] == x` → nu satisface `> x`, nu este candidat: cautam dreapta (`st = mij + 1`)
-- `v[mij] > x` → satisface `> x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
-- `v[mij] < x` → nu satisface `> x`, nu este candidat: cautam dreapta (`st = mij + 1`)
+- `v[mij] == x` (ex: `x = 5`, `v[mij] = 5`) → 5 nu e > 5, **NU este candidat** :
+  - cautam dreapta
+- `v[mij] > x` (ex: `x = 5`, `v[mij] = 8`) → 8 > 5, **este candidat** : 
+  - retinem `rez = mij`
+  - cautam stanga - poate exista ceva mai mic care tot e > 5
+- `v[mij] < x` (ex: `x = 5`, `v[mij] = 2`) → 2 nu e > 5, **nu este candidat**
+  - cautam dreapta
 
 > [!NOTE] Observatie
 > in cod, cazurile `==` si `<` sunt grupate de `else` — ambele duc la `st = mij + 1`.
 
-Codul este identic cu lower bound, cu singura diferenta ca conditia din `if` este `>` in loc de `>=`:
+Codul este identic cu `primulDeLaX`, cu singura diferenta ca conditia din `if` este `>` in loc de `>=`:
 
 ```cpp
 int primulDupaX(int val)
@@ -419,7 +428,7 @@ int primulDupaX(int val)
 
 **Exemplu:** acelasi vector `v = [2, 5, 5, 5, 8, 10]`, `n = 6`.
 
-Upper bound pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
+PrimulDupaX pentru `x = 5` (`rez` porneste la `n + 1 = 7`):
 
 | Pas | `st` | `dr` | `mij` | `v[mij]` | `rez` | Actiune |
 |-----|------|------|-------|----------|-------|---------|
@@ -432,12 +441,18 @@ Rezultat: `primulDupaX(5) = 5`. Prima pozitie cu element strict mai mare decat 5
 
 ---
 
-## Cel mai mare element <= x
+## CelMaiMarePanaIn — ultimul element <= x
 
 Raspunde la intrebarea: **care este ultima pozitie `i` pentru care `v[i] <= x`?**
 
-- `v[mij] <= x` → satisface conditia, este candidat: retinem `rez = mij`, cautam dreapta (`st = mij + 1`) — poate exista un element si mai mare care inca satisface `<= x`
-- `v[mij] > x` → nu satisface, cautam stanga (`dr = mij - 1`)
+- `v[mij] == x` (ex: `x = 5`, `v[mij] = 5`) → 5 <= 5, **este candidat** : 
+  - retinem `rez = mij`
+  - cautam dreapta - poate exista un 5 si mai la dreapta
+- `v[mij] < x` (ex: `x = 5`, `v[mij] = 2`) → 2 <= 5, **este candidat**: 
+  - retinem `rez = mij`
+  - cautam dreapta - poate exista ceva mai mare care tot e <= 5
+- `v[mij] > x` (ex: `x = 5`, `v[mij] = 8`) → 8 > 5, **NU este candidat**
+  - cautam stanga
 
 > [!NOTE] Observatie
 > Aceasta pozitie este echivalenta cu `primulDupaX(x) - 1`. Daca rezultatul este `0`, inseamna ca toate elementele sunt strict mai mari decat `x`.
@@ -499,15 +514,23 @@ Putem cauta direct prima sau ultima aparitie a lui `x` cu doua functii separate,
 
 ### primAparitie
 
-- `v[mij] == x` → candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o aparitie anterioara
-- `v[mij] < x` → `x` e mai mare, cautam dreapta (`st = mij + 1`)
-- `v[mij] > x` → `x` e mai mic, cautam stanga (`dr = mij - 1`)
+- `v[mij] == x` → candidat: 
+  - retinem `rez = mij`
+  - cautam stanga (`dr = mij - 1`) — poate exista o aparitie anterioara
+- `v[mij] < x` → `x` e mai mare:
+  - cautam dreapta (`st = mij + 1`)
+- `v[mij] > x` → `x` e mai mic
+  - cautam stanga (`dr = mij - 1`)
 
 ### ultimaAparitie
 
-- `v[mij] == x` → candidat: retinem `rez = mij`, cautam dreapta (`st = mij + 1`) — poate exista o aparitie ulterioara
-- `v[mij] < x` → `x` e mai mare, cautam dreapta (`st = mij + 1`)
-- `v[mij] > x` → `x` e mai mic, cautam stanga (`dr = mij - 1`)
+- `v[mij] == x` → candidat: 
+  - retinem `rez = mij`
+  - cautam dreapta (`st = mij + 1`) - poate exista o aparitie ulterioara
+- `v[mij] < x` → `x` e mai mare:
+  - cautam dreapta (`st = mij + 1`)
+- `v[mij] > x` → `x` e mai mic:
+  - cautam stanga (`dr = mij - 1`)
 
 Ambele returneaza `-1` daca elementul nu exista in vector.
 
