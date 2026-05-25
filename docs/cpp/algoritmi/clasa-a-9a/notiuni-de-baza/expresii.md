@@ -14,7 +14,8 @@ Operatorii aritmetici sunt: `+`, `-`, `*`, `/`, `%`
 | `/` | Catul impartirii | `7 / 2` | `3` |
 | `%` | Restul impartirii | `7 % 2` | `1` |
 
-> **Obs:** `-` poate fi si **semn** (minus), nu doar scadere. De exemplu, `-10` inseamna "minus 10" (numar negativ).
+> [!NOTE] Observatie
+> `-` poate fi si **semn** (minus), nu doar scadere. De exemplu, `-10` inseamna "minus 10" (numar negativ).
 
 **Exemplu:** `-10 * 4`
 
@@ -69,7 +70,8 @@ Inmultirea, impartirea si restul (`*`, `/`, `%`) se efectueaza **inaintea** adun
 | `==` | Egal cu | `4 == 4` | `1` |
 | `!=` | Diferit de (nu e egal) | `4 != 4` | `0` |
 
-> **Obs:** Pentru a testa daca doua numere sunt egale folosim `==` (`este egal cu`), si NU un singur egal `=` (spre deosebire de matematica).
+> [!WARNING] Atentie
+> Pentru a testa daca doua numere sunt egale folosim `==` (`este egal cu`), si NU un singur egal `=` (spre deosebire de matematica).
 
 ### Exemple de evaluare
 
@@ -79,7 +81,8 @@ Inmultirea, impartirea si restul (`*`, `/`, `%`) se efectueaza **inaintea** adun
 7 % 2 != 0       →  1 != 0  →  1 (adevarat)
 ```
 
-> **Obs:** Mai intai se calculeaza **partea aritmetica**, apoi se face **comparatia**.
+> [!NOTE] Observatie
+> Mai intai se calculeaza **partea aritmetica**, apoi se face **comparatia**.
 
 
 Expresia `a % b == 0` inseamna:
@@ -174,9 +177,11 @@ Cand intr-o expresie avem mai multi operatori diferiti, ordinea de evaluare este
 | | 7 | `&&` (SI) |
 | | 8 | `\|\|` (SAU) |
 
-> **Obs:** Retine cele 3 grupe in ordine: **aritmetica** → **comparatii** → **logica**. In caz de dubiu, pune **paranteze**.
+> [!TIP] Sfat
+> Retine cele 3 grupe in ordine: **aritmetica** → **comparatii** → **logica**. In caz de dubiu, pune **paranteze**.
 
-> **Obs:** In cadrul logicii: `!` se aplica primul, apoi `&&`, apoi `||`. Deci `a || b && c` se evalueaza ca `a || (b && c)`.
+> [!NOTE] Observatie
+> In cadrul logicii: `!` se aplica primul, apoi `&&`, apoi `||`. Deci `a || b && c` se evalueaza ca `a || (b && c)`.
 
 ---
 
@@ -272,6 +277,7 @@ Cu alte cuvinte: nu primeste premiul daca **ori** are media mica, **ori** are ma
 = 1
 ```
 
-> **Obs:** Legile lui DeMorgan sunt utile pentru a **simplifica** conditii complexe si pentru a intelege mai usor ce inseamna negatia unei conditii compuse.
+> [!TIP] Sfat
+> Legile lui DeMorgan sunt utile pentru a **simplifica** conditii complexe si pentru a intelege mai usor ce inseamna negatia unei conditii compuse.
 
 ---

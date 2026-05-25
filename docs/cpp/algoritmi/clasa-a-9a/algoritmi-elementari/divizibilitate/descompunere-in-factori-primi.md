@@ -22,6 +22,7 @@ unde `p1 < p2 < ... < pk` sunt numere prime, iar `e1, e2, ..., ek` sunt exponent
 
 **Demonstratie:** fie `d` cel mai mic divizor al lui `n` cu `d > 1`. Presupunem ca `d` ar fi compus, adica `d = a * b` cu `a, b > 1`. Cum `d` divide pe `n` (deci `n = d * x`), rezulta ca si `a` divide pe `n` (caci `n = a * b * x`). In plus, `a < d`. Asadar `a` este un divizor al lui `n`, mai mare decat `1` si **strict mai mic** decat `d` — contradictie cu faptul ca `d` era cel mai mic. Deci `d` este prim.
 
+> [!NOTE] Observatie
 > **Consecinta:** daca tot impartim `n` pe rand la cel mai mic divizor `> 1`, divizorii pe care ii gasim sunt **mereu primi**. Asta este exact ideea descompunerii in factori primi.
 
 ---
@@ -68,9 +69,11 @@ int main()
 5 1
 ```
 
-> **Obs:** Cand ajungem la un `d` care nu divide pe `n`, `exp` ramane `0` si nu afisam nimic. Trecem la urmatorul `d`.
+> [!NOTE] Observatie
+> Cand ajungem la un `d` care nu divide pe `n`, `exp` ramane `0` si nu afisam nimic. Trecem la urmatorul `d`.
 
-> **Obs:** Stim ca `d` parcurs astfel va lua **doar valori prime** care apar in descompunere — pentru ca `d = 4` ar trebui sa imparta pe `n`, dar pana atunci am scos deja toti factorii de `2` din `n`, deci `n % 4 != 0`. Acelasi rationament functioneaza pentru `6, 8, 9, ...`.
+> [!NOTE] Observatie
+> Stim ca `d` parcurs astfel va lua **doar valori prime** care apar in descompunere — pentru ca `d = 4` ar trebui sa imparta pe `n`, dar pana atunci am scos deja toti factorii de `2` din `n`, deci `n % 4 != 0`. Acelasi rationament functioneaza pentru `6, 8, 9, ...`.
 
 ---
 
@@ -129,7 +132,8 @@ int main()
 5 1
 ```
 
-> **Obs:** Sarim aproximativ jumatate din pasi. Pentru `n` mare, optimizarea conteaza.
+> [!TIP] Sfat
+> Sarim aproximativ jumatate din pasi. Pentru `n` mare, optimizarea conteaza.
 
 ---
 
@@ -193,9 +197,11 @@ int main()
 1000000007 1
 ```
 
-> **Obs:** `1000000007` este un numar prim. Fara optimizare, am fi cautat divizori pana la `1 000 000 007` — peste un miliard de pasi. Cu optimizarea, ne oprim cand `d` ajunge in jur de `31 623` (radicalul lui `10^9`).
+> [!NOTE] Observatie
+> `1000000007` este un numar prim. Fara optimizare, am fi cautat divizori pana la `1 000 000 007` — peste un miliard de pasi. Cu optimizarea, ne oprim cand `d` ajunge in jur de `31 623` (radicalul lui `10^9`).
 
-> **Obs:** Trucul `d = n` face ca urmatoarea iteratie sa imparta `n` la el insusi exact o data, sa il aduca la `1`, sa afiseze `n 1` si sa iasa din bucla (caci `n != 1` devine fals).
+> [!NOTE] Observatie
+> Trucul `d = n` face ca urmatoarea iteratie sa imparta `n` la el insusi exact o data, sa il aduca la `1`, sa afiseze `n 1` si sa iasa din bucla (caci `n != 1` devine fals).
 
 ---
 
@@ -276,6 +282,8 @@ int main()
 Numarul de divizori: 30
 ```
 
-> **Obs:** Cand un factor prim nu apare in descompunere, `exp = 0` si `nrDiv *= 0 + 1 = 1` — nu modifica produsul. Putem astfel inmulti **fara if** dupa fiecare iteratie.
+> [!TIP] Sfat
+> Cand un factor prim nu apare in descompunere, `exp = 0` si `nrDiv *= 0 + 1 = 1` — nu modifica produsul. Putem astfel inmulti **fara if** dupa fiecare iteratie.
 
-> **Obs:** Atentie la cazul `n = 1` — bucla nu intra niciodata, `nrDiv` ramane `1`. Corect: `1` are intr-adevar un singur divizor (pe el insusi).
+> [!WARNING] Atentie
+> Atentie la cazul `n = 1` — bucla nu intra niciodata, `nrDiv` ramane `1`. Corect: `1` are intr-adevar un singur divizor (pe el insusi).

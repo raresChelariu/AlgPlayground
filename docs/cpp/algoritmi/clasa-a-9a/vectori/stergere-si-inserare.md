@@ -78,7 +78,8 @@ int main()
 7 -7 3 14 -14 5 21 -21
 ```
 
-> **Obs:** dupa inserare, `i++` face ca bucla sa sara peste elementul proaspat inserat. Fara `i++`, bucla ar re-verifica pozitia `i + 1`, care contine `-v[i]` — si daca `v[i]` era multiplu de 7, atunci si `-v[i]` este multiplu de 7, deci s-ar insera din nou la infinit.
+> [!WARNING] Atentie
+> dupa inserare, `i++` face ca bucla sa sara peste elementul proaspat inserat. Fara `i++`, bucla ar re-verifica pozitia `i + 1`, care contine `-v[i]` — si daca `v[i]` era multiplu de 7, atunci si `-v[i]` este multiplu de 7, deci s-ar insera din nou la infinit.
 
 #### Ce s-ar intampla fara `i++`?
 
@@ -168,7 +169,8 @@ int main()
 3 5 2 6
 ```
 
-> **Obs:** dupa stergere, `i--` face ca bucla sa re-verifice pozitia `i` in iteratia urmatoare (bucla `for` va incrementa `i` la final, revenind la aceeasi pozitie). Este necesar deoarece, dupa stergere, elementul de pe pozitia `i` este cel care era initial pe pozitia `i + 1` — el inca nu a fost verificat.
+> [!WARNING] Atentie
+> dupa stergere, `i--` face ca bucla sa re-verifice pozitia `i` in iteratia urmatoare (bucla `for` va incrementa `i` la final, revenind la aceeasi pozitie). Este necesar deoarece, dupa stergere, elementul de pe pozitia `i` este cel care era initial pe pozitia `i + 1` — el inca nu a fost verificat.
 
 #### Ce s-ar intampla fara `i--`?
 

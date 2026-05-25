@@ -120,4 +120,5 @@ mere
 pere
 ```
 
-> **Obs:** `M[i] = M[j]` **nu** copiaza continutul — copiaza adresa (ceea ce nu are sens pentru tablouri). Foloseste intotdeauna `strcpy` pentru a copia siruri.
+> [!WARNING] Atentie
+> `M[i] = M[j]` **nu** copiaza continutul — copiaza adresa (ceea ce nu are sens pentru tablouri). Foloseste intotdeauna `strcpy` pentru a copia siruri.

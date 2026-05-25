@@ -36,7 +36,8 @@ Sirul `s` dupa toate apelurile (separatorii devin `'\0'`):
 |-------|----|----|----|----|---|---|----|---|---|---|----|----|----|----|----|----|----|----|----|-----|
 | s     | ,  | .  | ,  | a  | n | a | \0 | a | r | e | \0 | .  | .  | ,  | m  | e  | r  | e  | \0 | ,   |
 
-> **Obs:** `strtok` **modifica sirul original**. Daca ai nevoie de el dupa parcurgere, fa o copie cu `strcpy` inainte.
+> [!WARNING] Atentie
+> `strtok` **modifica sirul original**. Daca ai nevoie de el dupa parcurgere, fa o copie cu `strcpy` inainte.
 
 ---
 

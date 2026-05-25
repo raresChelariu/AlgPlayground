@@ -88,9 +88,11 @@ int main()
 3.5
 ```
 
-> **Obs:** `(double)a` nu modifica variabila `a` — ea ramane `int`. Cast-ul creeaza o valoare temporara de tip `double` doar pentru acea operatie.
+> [!NOTE] Observatie
+> `(double)a` nu modifica variabila `a` — ea ramane `int`. Cast-ul creeaza o valoare temporara de tip `double` doar pentru acea operatie.
 
-> **Obs:** Este suficient sa faci cast pe **un singur** operand. Daca unul e `double`, impartirea devine reala.
+> [!TIP] Sfat
+> Este suficient sa faci cast pe **un singur** operand. Daca unul e `double`, impartirea devine reala.
 
 ---
 
@@ -124,9 +126,11 @@ int main()
 2
 ```
 
-> **Obs:** `fixed` spune ca vrem format cu punct zecimal (nu notatie stiintifica). `setprecision(n)` seteaza numarul de zecimale la `n`.
+> [!NOTE] Observatie
+> `fixed` spune ca vrem format cu punct zecimal (nu notatie stiintifica). `setprecision(n)` seteaza numarul de zecimale la `n`.
 
-> **Obs:** Dupa ce scrii `fixed << setprecision(2)`, **toate** afisarile urmatoare cu `cout` vor folosi 2 zecimale, pana cand schimbi din nou.
+> [!WARNING] Atentie
+> Dupa ce scrii `fixed << setprecision(2)`, **toate** afisarile urmatoare cu `cout` vor folosi 2 zecimale, pana cand schimbi din nou.
 
 ### Exemplu practic: media a doua numere
 

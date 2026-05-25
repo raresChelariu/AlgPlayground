@@ -2,7 +2,8 @@
 
 O **functie** (sau "subprogram") este o bucata de cod cu nume, pe care o putem **apela** de oriunde din program. Functiile ne permit sa scriem o operatie o singura data si sa o reutilizam, sa impartim un program lung in bucati mai mici si sa ascundem detaliile unei operatii in spatele unui nume sugestiv.
 
-> **Obs:** "Functie" si "subprogram" sunt sinonime. La fel, "parametru" si "argument".
+> [!NOTE] Observatie
+> "Functie" si "subprogram" sunt sinonime. La fel, "parametru" si "argument".
 
 ---
 
@@ -56,7 +57,8 @@ int main()
 Salut!
 ```
 
-> **Obs:** Pentru a apela o functie, scriem `numeFunctie(valoriParametri);`. Daca functia nu are parametri, parantezele raman goale: `salut();`.
+> [!TIP] Sfat
+> Pentru a apela o functie, scriem `numeFunctie(valoriParametri);`. Daca functia nu are parametri, parantezele raman goale: `salut();`.
 
 ---
 
@@ -183,7 +185,8 @@ Hey!
 Pa9
 ```
 
-> **Obs:** "Wow" nu apare niciodata pentru ca `return` opreste executia functiei imediat. Compilatorul ne avertizeaza ca exista cod care nu se poate executa (`unreachable code`).
+> [!IMPORTANT] Important
+> "Wow" nu apare niciodata pentru ca `return` opreste executia functiei imediat. Compilatorul ne avertizeaza ca exista cod care nu se poate executa (`unreachable code`).
 
 ---
 
@@ -287,7 +290,7 @@ int main()
 }
 ```
 
-> **Eroare la compilare:**
+> [!WARNING] Eroare la compilare
 > ```
 > error: 'y' was not declared in this scope
 > ```
@@ -312,7 +315,7 @@ int main()
 }
 ```
 
-> **Eroare la compilare:**
+> [!WARNING] Eroare la compilare
 > ```
 > error: 'a' was not declared in this scope
 > ```
@@ -340,7 +343,7 @@ int main()
 }
 ```
 
-> **Eroare la compilare:**
+> [!WARNING] Eroare la compilare
 > ```
 > error: 'patrat' was not declared in this scope
 > ```
@@ -406,7 +409,7 @@ int main()
 }
 ```
 
-> **Eroare la compilare:**
+> [!WARNING] Eroare la compilare
 > ```
 > undefined reference to 'patrat(int)'
 > ld returned 1 exit status
@@ -448,7 +451,8 @@ int patrat(int x)
 }
 ```
 
-> **Obs:** Acest sablon este foarte util cand avem multe functii care se apeleaza intre ele. Declaram toate antetele la inceput, apoi le definim oricum vrem.
+> [!TIP] Sfat
+> Acest sablon este foarte util cand avem multe functii care se apeleaza intre ele. Declaram toate antetele la inceput, apoi le definim oricum vrem.
 
 ---
 
@@ -500,7 +504,7 @@ int main()
 }
 ```
 
-> **Eroare la compilare:**
+> [!WARNING] Eroare la compilare
 > ```
 > error: declaration of 'int n' shadows a parameter
 > ```
@@ -549,7 +553,8 @@ Cand se apeleaza o functie, pe stiva se memoreaza:
 4. Se continua executia din locul memorat la pasul 1.
 5. Apelul se sterge de pe stiva (impreuna cu parametrii si variabilele locale).
 
-> **Obs:** La pornirea programului, pe stiva exista **doar** apelul lui `main`. Apelul din **varful stivei** este intotdeauna apelul in care ne aflam cu executia.
+> [!NOTE] Observatie
+> La pornirea programului, pe stiva exista **doar** apelul lui `main`. Apelul din **varful stivei** este intotdeauna apelul in care ne aflam cu executia.
 
 Asta explica de ce variabilele locale "traiesc" doar pana la finalul apelului — la pasul 5, ele se sterg de pe stiva odata cu apelul.
 

@@ -13,7 +13,8 @@ In matematica, intervalele descriu multimi de numere. In C++, putem scrie aceste
 | x ∈ (3, +∞) | `x > 3` |
 | x ∈ [3, +∞) | `x >= 3` |
 
-> **Obs:** Paranteza rotunda `(` inseamna **fara** capatul respectiv (strict), iar paranteza patrata `[` inseamna **cu** capatul respectiv (inclusiv).
+> [!NOTE] Observatie
+> Paranteza rotunda `(` inseamna **fara** capatul respectiv (strict), iar paranteza patrata `[` inseamna **cu** capatul respectiv (inclusiv).
 
 ---
 
@@ -73,7 +74,8 @@ Zonele **nu se suprapun** — `x` poate fi pe verde **SAU** pe rosu.
 x ∈ (2, 5] ∪ [7, 13)  ⇔  x > 2 && x <= 5 || x >= 7 && x < 13
 ```
 
-> **Obs:** Datorita prioritatii operatorilor, `&&` se evalueaza inaintea `||`, deci parantezele sunt **optionale**. Expresia de mai sus se evalueaza ca `(x > 2 && x <= 5) || (x >= 7 && x < 13)`.
+> [!NOTE] Observatie
+> Datorita prioritatii operatorilor, `&&` se evalueaza inaintea `||`, deci parantezele sunt **optionale**. Expresia de mai sus se evalueaza ca `(x > 2 && x <= 5) || (x >= 7 && x < 13)`.
 
 ---
 

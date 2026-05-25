@@ -42,7 +42,8 @@ Numarul este pozitiv.
 
 ```
 
-> **Obs:** Daca conditia e falsa, blocul din `if` se **sare** — nu se afiseaza nimic.
+> [!NOTE] Observatie
+> Daca conditia e falsa, blocul din `if` se **sare** — nu se afiseaza nimic.
 
 ---
 
@@ -166,7 +167,8 @@ Promovat.
 Nepromovat.
 ```
 
-> **Obs:** Conditiile se verifica **de sus in jos**. La primul `if`/`else if` care e adevarat, se executa blocul si se sare peste restul. De aceea `nota >= 5` nu trebuie sa verifice si `nota != 10` — daca am ajuns acolo, inseamna ca nota nu e 10.
+> [!TIP] Sfat
+> Conditiile se verifica **de sus in jos**. La primul `if`/`else if` care e adevarat, se executa blocul si se sare peste restul. De aceea `nota >= 5` nu trebuie sa verifice si `nota != 10` — daca am ajuns acolo, inseamna ca nota nu e 10.
 
 ---
 
@@ -276,7 +278,8 @@ int main()
 }
 ```
 
-> **Obs:** Pornim cu `maxim = a` si apoi verificam pe rand daca `b` sau `c` sunt mai mari. Aceasta tehnica functioneaza pentru oricati candidati.
+> [!TIP] Sfat
+> Pornim cu `maxim = a` si apoi verificam pe rand daca `b` sau `c` sunt mai mari. Aceasta tehnica functioneaza pentru oricati candidati.
 
 ---
 
@@ -397,7 +400,8 @@ int main()
 
 Explicatie: din cifrele `1, 4, 7, 2, 9`, cele impare sunt `1, 7, 9` — deci 3.
 
-> **Obs:** Observi ca se repeta acelasi tipar de 5 ori. Cand vom invata **instructiunile repetitive** (for/while), vom putea scrie acest cod mult mai scurt. Pana atunci, contorul functioneaza si asa.
+> [!NOTE] Observatie
+> Observi ca se repeta acelasi tipar de 5 ori. Cand vom invata **instructiunile repetitive** (for/while), vom putea scrie acest cod mult mai scurt. Pana atunci, contorul functioneaza si asa.
 
 ---
 
@@ -413,7 +417,8 @@ if (n = 5)
 if (n == 5)
 ```
 
-> **Obs:** `=` este **atribuire** (pune valoarea). `==` este **comparatie** (verifica egalitatea). Confuzia intre ele este cea mai comuna greseala.
+> [!WARNING] Atentie
+> `=` este **atribuire** (pune valoarea). `==` este **comparatie** (verifica egalitatea). Confuzia intre ele este cea mai comuna greseala.
 
 ### 2. Acolade lipsa
 
@@ -435,4 +440,5 @@ if (n > 0)
 }
 ```
 
-> **Obs:** Pune **intotdeauna** acolade, chiar daca ai o singura instructiune in bloc. Eviti erori greu de depistat.
+> [!WARNING] Atentie
+> Pune **intotdeauna** acolade, chiar daca ai o singura instructiune in bloc. Eviti erori greu de depistat.

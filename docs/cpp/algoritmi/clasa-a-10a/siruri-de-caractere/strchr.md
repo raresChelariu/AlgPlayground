@@ -37,7 +37,8 @@ char* p1 = strchr(s, 'e');         // prima aparitie: s + 2
 char* p2 = strchr(p1 + 1, 'e');    // a doua aparitie: s + 4
 ```
 
-> **Obs:** Avanseaza cu `+ 1` de la adresa gasita pentru a cauta urmatoarea aparitie.
+> [!TIP] Sfat
+> Avanseaza cu `+ 1` de la adresa gasita pentru a cauta urmatoarea aparitie.
 
 ---
 

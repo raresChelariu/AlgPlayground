@@ -108,7 +108,8 @@ int main()
 > Aceasta termina executia programului.
 - `return 0;`
 
-> **Obs:** Fiecare instructiune se termina cu `;` (punct si virgula). Daca uiti `;`, compilatorul va da eroare.
+> [!IMPORTANT] Important
+> Fiecare instructiune se termina cu `;` (punct si virgula). Daca uiti `;`, compilatorul va da eroare.
 
 ---
 
@@ -152,7 +153,8 @@ int main()
 Am 16 ani
 ```
 
-> **Obs:** Textul se pune intre ghilimele duble `"..."`. Numerele se scriu direct, fara ghilimele.
+> [!NOTE] Observatie
+> Textul se pune intre ghilimele duble `"..."`. Numerele se scriu direct, fara ghilimele.
 
 ---
 

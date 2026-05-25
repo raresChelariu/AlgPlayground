@@ -7,7 +7,8 @@ int strcmp(char* a, char* b);
 
 `strcmp` vine de la *str*ing + *comp*are. **Efect:** compara lexicografic doua siruri. Returneaza un numar negativ daca `a < b`, `0` daca `a == b`, pozitiv daca `a > b`.
 
-> **Obs:** Nu compara siruri cu `==`, `<` sau `>` direct — acestea compara **adresele**, nu continutul.
+> [!WARNING] Atentie
+> Nu compara siruri cu `==`, `<` sau `>` direct — acestea compara **adresele**, nu continutul.
 
 ---
 

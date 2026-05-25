@@ -6,13 +6,16 @@ O **baza de numeratie** `b` este un mod de a scrie numerele folosind exact `b` s
 
 In viata de zi cu zi folosim **baza 10** — avem 10 simboluri (cifrele de la 0 la 9).
 
-> **Obs:** Baza minima este 2 (cu simbolurile `0` si `1`). Nu exista baza cu mai putin de 2 simboluri.
+> [!NOTE] Observatie
+> Baza minima este 2 (cu simbolurile `0` si `1`). Nu exista baza cu mai putin de 2 simboluri.
 
 > **Ex:** Baza 8 foloseste simbolurile 0, 1, 2, ..., 7.
 
-> **Obs:** Pentru `b > 10`, pentru cifrele de la 10 in sus se folosesc litere: `A = 10, B = 11, C = 12, ...`. De exemplu, in baza 16 simbolurile sunt `0, 1, ..., 9, A, B, C, D, E, F`. In aceasta lectie ne limitam la `b <= 10` ca sa lucram doar cu cifre.
+> [!NOTE] Observatie
+> Pentru `b > 10`, pentru cifrele de la 10 in sus se folosesc litere: `A = 10, B = 11, C = 12, ...`. De exemplu, in baza 16 simbolurile sunt `0, 1, ..., 9, A, B, C, D, E, F`. In aceasta lectie ne limitam la `b <= 10` ca sa lucram doar cu cifre.
 
-> **Obs:** O cifra "mai din stanga" are semnificatie mai mare. In `3489`, cifra miilor (3) conteaza mai mult decat cifra unitatilor (9).
+> [!NOTE] Observatie
+> O cifra "mai din stanga" are semnificatie mai mare. In `3489`, cifra miilor (3) conteaza mai mult decat cifra unitatilor (9).
 
 ---
 
@@ -46,7 +49,8 @@ Suma: `9 + 80 + 400 + 3000 = 3489`. Nimic surprinzator — asa interpretam numer
 
 Suma: `1 + 0 + 4 + 8 = 13`. Deci `1101` in baza 2 reprezinta numarul `13` din baza 10.
 
-> **Obs:** Notatia `1101(2)` se citeste "1101 in baza 2". `13(10)` inseamna "13 in baza 10".
+> [!NOTE] Observatie
+> Notatia `1101(2)` se citeste "1101 in baza 2". `13(10)` inseamna "13 in baza 10".
 
 ---
 
@@ -118,7 +122,8 @@ Valorile variabilelor dupa fiecare iteratie a buclei, pentru `x = 1101, b = 2`:
 
 Cand `x` ajunge la `0`, bucla se opreste si afisam `rez = 13`.
 
-> **Obs:** Algoritmul presupune ca toate cifrele lui `x` (cum a fost citit ca numar zecimal) sunt cifre valide in baza `b`. Asta functioneaza pentru `b <= 10`.
+> [!IMPORTANT] Important
+> Algoritmul presupune ca toate cifrele lui `x` (cum a fost citit ca numar zecimal) sunt cifre valide in baza `b`. Asta functioneaza pentru `b <= 10`.
 
 ---
 
@@ -202,7 +207,8 @@ Pentru `x = 13, b = 2`:
 | 3        | 1     | 101  | 1000     | 1  |
 | 4        | 1     | 1101 | 10000    | 0  |
 
-> **Obs:** Inmultirea `cifra * putere10` "muta" cifra in pozitia corecta din numarul final. Prima cifra extrasa (`1`) ajunge pe pozitia unitatilor, a doua (`0`) pe pozitia zecilor, si asa mai departe.
+> [!NOTE] Observatie
+> Inmultirea `cifra * putere10` "muta" cifra in pozitia corecta din numarul final. Prima cifra extrasa (`1`) ajunge pe pozitia unitatilor, a doua (`0`) pe pozitia zecilor, si asa mai departe.
 
 ---
 
@@ -296,7 +302,8 @@ Inainte de bucla principala:
 
 In bucla principala (vezi tabelul de la trasarea manuala — sunt exact aceleasi valori).
 
-> **Obs:** Diferenta intre cele doua metode:
+> [!NOTE] Observatie
+> Diferenta intre cele doua metode:
 > - **Metoda 1** produce cifrele de la dreapta la stanga si le combina cu `putere10` care creste (`1, 10, 100, ...`).
 > - **Metoda 2** produce cifrele de la stanga la dreapta si le combina cu `rez * 10 + cif` (acelasi truc pe care il folosim pentru "oglindirea" unui numar).
 
@@ -375,4 +382,5 @@ int main()
 23
 ```
 
-> **Obs:** Folosim o variabila separata `zecimal` ca sa pastram rezultatul intermediar. Asa nu ne incurcam: `x` se "consuma" in primul `while`, iar `zecimal` se "consuma" in al doilea.
+> [!TIP] Sfat
+> Folosim o variabila separata `zecimal` ca sa pastram rezultatul intermediar. Asa nu ne incurcam: `x` se "consuma" in primul `while`, iar `zecimal` se "consuma" in al doilea.

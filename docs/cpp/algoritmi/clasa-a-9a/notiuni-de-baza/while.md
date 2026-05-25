@@ -25,7 +25,8 @@ flowchart LR
 
 iteratie = 1 singura executie a instructiunilor dintre `{` si `}`
 
-> **Obs:** La fiecare iteratie, conditia se evalueaza din nou. De indata ce devine falsa, executia continua dupa `}`.
+> [!NOTE] Observatie
+> La fiecare iteratie, conditia se evalueaza din nou. De indata ce devine falsa, executia continua dupa `}`.
 
 
 
@@ -122,7 +123,8 @@ int main()
 1 2 3 4 5
 ```
 
-> **Obs:** `i++` este esential — fara el, `i` ramane `1` si while-ul nu se opreste niciodata.
+> [!WARNING] Atentie
+> `i++` este esential — fara el, `i` ramane `1` si while-ul nu se opreste niciodata.
 
 ---
 
@@ -268,7 +270,8 @@ int main()
 | 7 | 13 | 21 | adevarat | 13 | 21 | 34 |
 | — | 21 | 34 | **fals** | — | — | — |
 
-> **Obs:** Variabila temporara `t` e necesara deoarece la pasul `a = b` pierdem valoarea veche a lui `a`, care e necesara pentru `b = a + b`. `t` o salveaza inainte sa fie suprascris.
+> [!NOTE] Observatie
+> Variabila temporara `t` e necesara deoarece la pasul `a = b` pierdem valoarea veche a lui `a`, care e necesara pentru `b = a + b`. `t` o salveaza inainte sa fie suprascris.
 
 ---
 
@@ -330,7 +333,8 @@ int main()
 | ... | ... | ... | ... | ... | ... | ... |
 | 16 | 115 | 7 | **da** | **1** | **115** | 116 |
 
-> **Obs:** La iteratia 16: `s = 1+1+5 = 7`, `7 % 7 == 0` si `115` e impar — conditia e indeplinita. `rezultat = 115`, `gasit = 1`, apoi `i` creste la 116. La urmatoarea verificare a conditiei, `gasit == 0` e falsa si bucla se opreste.
+> [!NOTE] Observatie
+> La iteratia 16: `s = 1+1+5 = 7`, `7 % 7 == 0` si `115` e impar — conditia e indeplinita. `rezultat = 115`, `gasit = 1`, apoi `i` creste la 116. La urmatoarea verificare a conditiei, `gasit == 0` e falsa si bucla se opreste.
 
 ---
 

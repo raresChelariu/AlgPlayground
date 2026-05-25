@@ -44,7 +44,8 @@ int main()
 9
 ```
 
-> **Obs:** Pornim bucla de la `i = 2` deoarece primul element l-am citit deja inainte de bucla.
+> [!NOTE] Observatie
+> Pornim bucla de la `i = 2` deoarece primul element l-am citit deja inainte de bucla.
 
 ---
 
@@ -128,7 +129,8 @@ int main()
 1
 ```
 
-> **Obs:** La prima iteratie, `x` este `3`. Deoarece `3 < 10000`, conditia este adevarata si `minim` devine `3`. La fel si pentru maxim: la prima iteratie, `3 > -1`, deci `maxim` devine `3`. Primul element devine automat minim/maxim.
+> [!NOTE] Observatie
+> La prima iteratie, `x` este `3`. Deoarece `3 < 10000`, conditia este adevarata si `minim` devine `3`. La fel si pentru maxim: la prima iteratie, `3 > -1`, deci `maxim` devine `3`. Primul element devine automat minim/maxim.
 
 ---
 
@@ -185,7 +187,8 @@ int main()
 Minimul este 2 si apare de 3 ori
 ```
 
-> **Obs:** Contorul se reseteaza la `1` (nu la `0`) cand gasim un nou minim, deoarece noul minim apare cel putin o data — chiar acum.
+> [!NOTE] Observatie
+> Contorul se reseteaza la `1` (nu la `0`) cand gasim un nou minim, deoarece noul minim apare cel putin o data — chiar acum.
 
 ---
 
@@ -232,7 +235,8 @@ int main()
 
 Explicatie: minimul este `1` si se afla pe pozitia `3` in sir.
 
-> **Obs:** Daca minimul apare de mai multe ori, `pozMin` retine pozitia **primei** aparitii, deoarece conditia `x < minim` nu se indeplineste pentru valori egale.
+> [!NOTE] Observatie
+> Daca minimul apare de mai multe ori, `pozMin` retine pozitia **primei** aparitii, deoarece conditia `x < minim` nu se indeplineste pentru valori egale.
 
 ---
 
@@ -285,7 +289,8 @@ int main()
 
 Explicatie: produsele sunt `6, 5, 16, 14`. Cel mai mare este `16`, obtinut din perechea `4 4`.
 
-> **Obs:** Afisam perechea `(perA, perB)`, nu produsul `maxProd`. Produsul il folosim doar intern, ca sa comparam perechile intre ele.
+> [!NOTE] Observatie
+> Afisam perechea `(perA, perB)`, nu produsul `maxProd`. Produsul il folosim doar intern, ca sa comparam perechile intre ele.
 
 ---
 
@@ -349,4 +354,5 @@ Traseul algoritmului pas cu pas:
 | 5 | 4 | 9    | 7    | 4 nu bate pe nimeni |
 | 6 | 6 | 9    | 7    | 6 nu bate pe nimeni |
 
-> **Obs:** Daca exista doua numere egale cu maximul (ex: `5 5 3`), ambele locuri vor fi `5` — corect, deoarece la al doilea `5`, conditia `x > loc2` (adica `5 > 3`) este adevarata.
+> [!NOTE] Observatie
+> Daca exista doua numere egale cu maximul (ex: `5 5 3`), ambele locuri vor fi `5` — corect, deoarece la al doilea `5`, conditia `x > loc2` (adica `5 > 3`) este adevarata.

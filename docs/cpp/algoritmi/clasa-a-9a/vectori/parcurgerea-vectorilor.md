@@ -23,7 +23,8 @@ int v[101];
 // pozitia v[0] ramane nefolosita
 ```
 
-> **Obs:** indexarea de la `1` este conventia pe care o vom folosi de aici inainte in toate lectiile despre vectori. Este recomandata pentru ca face codul mai usor de citit si de potrivit cu enuntul problemei.
+> [!TIP] Sfat
+> indexarea de la `1` este conventia pe care o vom folosi de aici inainte in toate lectiile despre vectori. Este recomandata pentru ca face codul mai usor de citit si de potrivit cu enuntul problemei.
 
 ---
 
@@ -60,7 +61,8 @@ Dupa executia buclei, vectorul are:
 | ------------- | ------ | ------ | ------ | ------ | ------ |
 | Valoarea      | 8      | 3      | 12     | 5      | 1      |
 
-> **Obs:** dimensiunea declarata a vectorului (`v[101]`) trebuie sa fie strict mai mare decat `n`. Daca enuntul spune ca `n` poate ajunge pana la `100`, declaram cu `101` pentru a avea loc si pentru `v[n]`.
+> [!IMPORTANT] Important
+> dimensiunea declarata a vectorului (`v[101]`) trebuie sa fie strict mai mare decat `n`. Daca enuntul spune ca `n` poate ajunge pana la `100`, declaram cu `101` pentru a avea loc si pentru `v[n]`.
 
 ---
 
@@ -318,7 +320,8 @@ int main()
 2
 ```
 
-> **Obs:** elementele pare din vector sunt `8` si `12`, deci `nr = 2`.
+> [!NOTE] Observatie
+> elementele pare din vector sunt `8` si `12`, deci `nr = 2`.
 
 ---
 
@@ -376,7 +379,8 @@ int main()
 Primul element par este 8 pe pozitia 1
 ```
 
-> **Obs:** fara `break`, bucla ar continua sa parcurga vectorul pana la final si `poz` ar fi suprascris de fiecare data. La final am obtine **ultimul** element par, nu primul.
+> [!WARNING] Atentie
+> fara `break`, bucla ar continua sa parcurga vectorul pana la final si `poz` ar fi suprascris de fiecare data. La final am obtine **ultimul** element par, nu primul.
 
 ---
 

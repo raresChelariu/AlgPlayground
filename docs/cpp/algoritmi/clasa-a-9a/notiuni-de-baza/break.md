@@ -33,7 +33,8 @@ flowchart LR
 - executia continua cu prima instructiune de **dupa** `}`-ul buclei
 - functioneaza la fel si in `while`
 
-> **Obs:** `break` iese **doar** din bucla in care se afla direct — nu din toate buclele imbricate.
+> [!IMPORTANT] Important
+> `break` iese **doar** din bucla in care se afla direct — nu din toate buclele imbricate.
 
 ---
 
@@ -140,7 +141,8 @@ int main()
 | 2 | 3 | 8 | 5 | nu | prev = 8, continua |
 | 3 | 4 | 4 | 8 | **da** | `lung = 3`, **break** |
 
-> **Obs:** Initializam `lung = n` inainte de bucla. Daca sirul e strict crescator in intregime, `break` nu se executa niciodata si `lung` ramane `n` — raspunsul corect.
+> [!NOTE] Observatie
+> Initializam `lung = n` inainte de bucla. Daca sirul e strict crescator in intregime, `break` nu se executa niciodata si `lung` ramane `n` — raspunsul corect.
 
 ---
 

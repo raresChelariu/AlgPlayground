@@ -173,7 +173,8 @@ int main()
 | 3 | 12 | 2 | 1 | nu | cnt++ → 2 |
 | 4 | 1 | 1 | 0 | **da** | **continue** |
 
-> **Obs:** `n /= 10` se afla **inainte** de `continue`. Astfel, chiar daca sarim `cnt++`, `n` se micsoreaza la fiecare iteratie si bucla se termina. Daca `n /= 10` ar fi fost dupa `continue`, bucla ar fi infinita pentru cifrele impare.
+> [!WARNING] Atentie
+> `n /= 10` se afla **inainte** de `continue`. Astfel, chiar daca sarim `cnt++`, `n` se micsoreaza la fiecare iteratie si bucla se termina. Daca `n /= 10` ar fi fost dupa `continue`, bucla ar fi infinita pentru cifrele impare.
 
 ---
 

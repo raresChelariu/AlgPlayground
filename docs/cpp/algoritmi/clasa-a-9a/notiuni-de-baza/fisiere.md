@@ -62,7 +62,8 @@ Fisierul `date.out` va contine:
 #include <fstream>
 ```
 
-> **Obs:** Nu mai avem nevoie de `#include <iostream>` daca nu folosim `cin`/`cout`. Dar le putem include pe amandoua daca vrem sa afisam si pe ecran si in fisier.
+> [!TIP] Sfat
+> Nu mai avem nevoie de `#include <iostream>` daca nu folosim `cin`/`cout`. Dar le putem include pe amandoua daca vrem sa afisam si pe ecran si in fisier.
 
 ### 2. Deschidem fisierele
 

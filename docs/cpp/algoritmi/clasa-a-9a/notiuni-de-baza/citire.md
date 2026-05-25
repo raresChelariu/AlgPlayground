@@ -27,9 +27,11 @@ Cati ani ai? 16
 Ai 16 ani.
 ```
 
-> **Obs:** Cand programul ajunge la `cin >> varsta;`, se **opreste** si asteapta ca utilizatorul sa tasteze o valoare si sa apese Enter.
+> [!NOTE] Observatie
+> Cand programul ajunge la `cin >> varsta;`, se **opreste** si asteapta ca utilizatorul sa tasteze o valoare si sa apese Enter.
 
-> **Obs:** Variabila trebuie sa fie deja **declarata** inainte de `cin`. Tipul variabilei determina ce fel de valoare se asteapta (numar intreg, numar cu virgula etc.).
+> [!IMPORTANT] Important
+> Variabila trebuie sa fie deja **declarata** inainte de `cin`. Tipul variabilei determina ce fel de valoare se asteapta (numar intreg, numar cu virgula etc.).
 
 ---
 
@@ -133,4 +135,5 @@ int main()
 13
 ```
 
-> **Obs:** In multe probleme de pe pbinfo.ro nu se cere afisarea unui mesaj inainte de citire — se citeste direct si se afiseaza direct rezultatul. De aceea exemplul de mai sus nu are `cout` inainte de `cin`.
+> [!TIP] Sfat
+> In multe probleme de pe pbinfo.ro nu se cere afisarea unui mesaj inainte de citire — se citeste direct si se afiseaza direct rezultatul. De aceea exemplul de mai sus nu are `cout` inainte de `cin`.

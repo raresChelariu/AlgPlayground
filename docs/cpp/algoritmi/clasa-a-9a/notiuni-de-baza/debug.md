@@ -14,9 +14,11 @@ Pune cursorul pe linia de unde vrei sa incepi debug-ul, apoi apasa **F4**.
 
 Programul porneste si se executa tot codul pana la acea linie (exclusiv).
 
-> **Obs:** Pe ecran apare o **sageata galbena** care indica linia ce urmeaza sa fie executata.
+> [!NOTE] Observatie
+> Pe ecran apare o **sageata galbena** care indica linia ce urmeaza sa fie executata.
 
-> **Obs:** Daca sageata nu apare, inseamna ca executia nu a ajuns la acea linie. Cauze posibile:
+> [!NOTE] Observatie
+> Daca sageata nu apare, inseamna ca executia nu a ajuns la acea linie. Cauze posibile:
 > - Exista o operatie blocanta (ex: `cin` asteapta date de la tastatura si nu poate continua)
 > - O structura repetitiva care nu se termina (bucla infinita)
 
@@ -28,7 +30,8 @@ Apasa **F7** pentru a executa linia curenta si a avansa la urmatoarea.
 
 Apasa **Shift+F8** pentru a opri debugger-ul.
 
-> **Obs:** Poti opri debugger-ul si inchizand fereastra programului.
+> [!TIP] Sfat
+> Poti opri debugger-ul si inchizand fereastra programului.
 
 ---
 
@@ -65,7 +68,8 @@ int main()
 2. Deschide **Watches** si adauga variabilele `a`, `b`, `suma` — vei vedea ca au valori nedefinite (gunoi din memorie).
 3. Apasa **F7** — linia cu `cin` incepe sa se execute; programul asteapta sa introduci doua numere.
 
-> **Obs:** In acest moment **sageata galbena dispare**. Asta nu inseamna ca ceva a mers gresit — programul este blocat la `cin`, asteptand sa tastezi valorile si sa apesi Enter. Sageata reapare imediat ce ai introdus datele.
+> [!NOTE] Observatie
+> In acest moment **sageata galbena dispare**. Asta nu inseamna ca ceva a mers gresit — programul este blocat la `cin`, asteptand sa tastezi valorile si sa apesi Enter. Sageata reapare imediat ce ai introdus datele.
 
 4. Tasteaza `3 7` si apasa **Enter** — sageata galbena reapare pe linia urmatoare (`suma = a + b;`). In Watches:
 
@@ -174,7 +178,8 @@ Stiva de apeluri:
 | 1 (curent) | calculeaza  |
 | 2 | main        |
 
-> **Obs:** `calculeaza` a fost adaugata **deasupra** lui `main` in stiva. Executia se afla acum in `calculeaza`.
+> [!NOTE] Observatie
+> `calculeaza` a fost adaugata **deasupra** lui `main` in stiva. Executia se afla acum in `calculeaza`.
 
 ---
 

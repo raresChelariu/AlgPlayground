@@ -84,7 +84,8 @@ int main()
 7
 ```
 
-> **Obs:** `cout << '7' + '3';` **nu** afiseaza 10, ci suma codurilor ASCII ale celor doua caractere.
+> [!NOTE] Observatie
+> `cout << '7' + '3';` **nu** afiseaza 10, ci suma codurilor ASCII ale celor doua caractere.
 
 ### Functii utile pe caractere
 
@@ -233,7 +234,8 @@ int main()
 z     abc
 ```
 
-> **Obs:** `c1` primeste `'z'` si `c2` primeste SPACE.
+> [!NOTE] Observatie
+> `c1` primeste `'z'` si `c2` primeste SPACE.
 
 ---
 

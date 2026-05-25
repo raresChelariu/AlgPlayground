@@ -21,7 +21,8 @@ Reprezentare in memorie:
 |-------|---|---|---|----|
 | s     | m | a | r | \0 |
 
-> **Obs:** Un sir de `n` caractere are nevoie de `n + 1` locatii (una in plus pentru `'\0'`).
+> [!IMPORTANT] Important
+> Un sir de `n` caractere are nevoie de `n + 1` locatii (una in plus pentru `'\0'`).
 
 ---
 

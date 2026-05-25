@@ -9,7 +9,8 @@
   - adica o zona de memorie `fara goluri`
   - toate elementele sunt `unul dupa altul` in memorie
 
-> **Obs:** pentru a folosi un vector, mai intai trebuie sa-l declaram.
+> [!IMPORTANT] Important
+> pentru a folosi un vector, mai intai trebuie sa-l declaram.
 
 ---
 
@@ -30,7 +31,8 @@ int a[20];
 // si are 20 de elemente de tip int
 ```
 
-> **Obs:** odata ce am declarat un vector, nu ii putem modifica dimensiunea (numarul de elemente). El va avea acelasi numar de elemente in memorie pana la finalul programului.
+> [!IMPORTANT] Important
+> odata ce am declarat un vector, nu ii putem modifica dimensiunea (numarul de elemente). El va avea acelasi numar de elemente in memorie pana la finalul programului.
 
 Exemplu:
 
@@ -149,7 +151,8 @@ La executia liniei `cin >> v[0] >> v[1] >> ... >> v[6]`, citim valorile in ordin
 | 6      | `v[5]`  | 9              | 8      | 3      | 12     | 5      | 1      | 9      | 0      |
 | 7      | `v[6]`  | 4              | 8      | 3      | 12     | 5      | 1      | 9      | 4      |
 
-> **Obs:** un vector declarat global are toate elementele initializate cu `0`. De aceea, inainte de citire, toate pozitiile din `v` au valoarea `0`, iar pe masura ce citim, valorile `0` sunt inlocuite cu cele introduse de la tastatura.
+> [!NOTE] Observatie
+> un vector declarat global are toate elementele initializate cu `0`. De aceea, inainte de citire, toate pozitiile din `v` au valoarea `0`, iar pe masura ce citim, valorile `0` sunt inlocuite cu cele introduse de la tastatura.
 
 ### Cum lucreaza bucla de minim
 

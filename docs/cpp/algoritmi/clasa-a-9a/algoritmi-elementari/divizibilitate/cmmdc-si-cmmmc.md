@@ -4,7 +4,8 @@
 
 > **Notatie matematica:** `(a, b)` inseamna CMMDC-ul lui `a` si `b`, iar `[a, b]` inseamna CMMMC-ul lor.
 
-> **Obs:** Daca `(a, b) = 1`, spunem ca `a` si `b` sunt **prime intre ele** (coprime). O fractie `a / b` este **ireductibila** daca `a` si `b` sunt coprime.
+> [!NOTE] Observatie
+> Daca `(a, b) = 1`, spunem ca `a` si `b` sunt **prime intre ele** (coprime). O fractie `a / b` este **ireductibila** daca `a` si `b` sunt coprime.
 
 ---
 
@@ -54,7 +55,8 @@ int main()
 CMMDC = 12
 ```
 
-> **Obs:** Pentru `x = y = 1 000 000 000`, algoritmul poate face 1 miliard de pasi. Mult prea lent.
+> [!WARNING] Atentie
+> Pentru `x = y = 1 000 000 000`, algoritmul poate face 1 miliard de pasi. Mult prea lent.
 
 ---
 
@@ -106,9 +108,11 @@ int main()
 CMMDC = 12
 ```
 
-> **Obs:** Algoritmul lui Euclid este extrem de rapid — pentru numere de pana la `10^18` face cateva zeci de pasi.
+> [!TIP] Sfat
+> Algoritmul lui Euclid este extrem de rapid — pentru numere de pana la `10^18` face cateva zeci de pasi.
 
-> **Obs:** Daca avem nevoie de valorile initiale ale lui `a` si `b` dupa apel, le salvam in alte variabile inainte de bucla (pentru ca bucla le modifica).
+> [!TIP] Sfat
+> Daca avem nevoie de valorile initiale ale lui `a` si `b` dupa apel, le salvam in alte variabile inainte de bucla (pentru ca bucla le modifica).
 
 ---
 
@@ -165,9 +169,11 @@ int main()
 CMMMC = 12
 ```
 
-> **Obs:** Folosim `long long` pentru ca produsul `x * y` poate depasi limita lui `int` chiar daca `x` si `y` separat sunt mici. Ex. `x = y = 100 000` => `x * y = 10^10`, deja peste `2 * 10^9`.
+> [!WARNING] Atentie
+> Folosim `long long` pentru ca produsul `x * y` poate depasi limita lui `int` chiar daca `x` si `y` separat sunt mici. Ex. `x = y = 100 000` => `x * y = 10^10`, deja peste `2 * 10^9`.
 
-> **Obs:** Pastram `x` si `y` originali in `x` si `y` si lucram cu copii `a` si `b` in bucla, pentru ca apoi avem nevoie de produsul `x * y` la calculul CMMMC.
+> [!TIP] Sfat
+> Pastram `x` si `y` originali in `x` si `y` si lucram cu copii `a` si `b` in bucla, pentru ca apoi avem nevoie de produsul `x * y` la calculul CMMMC.
 
 ---
 
@@ -223,6 +229,8 @@ int main()
 CMMDC = 6
 ```
 
-> **Obs:** Pentru CMMMC pentru `n` numere procedam la fel — doar ca dupa fiecare CMMDC partial calculam `rez = (rez * x) / cmmdc(rez, x)`.
+> [!NOTE] Observatie
+> Pentru CMMMC pentru `n` numere procedam la fel — doar ca dupa fiecare CMMDC partial calculam `rez = (rez * x) / cmmdc(rez, x)`.
 
-> **Obs:** Daca un singur element este `0`, CMMDC-ul devine celalalt element (pentru ca `(0, k) = k`). Pe de alta parte, CMMMC-ul devine `0`, deci atentie la inputuri care contin zerouri.
+> [!WARNING] Atentie
+> Daca un singur element este `0`, CMMDC-ul devine celalalt element (pentru ca `(0, k) = k`). Pe de alta parte, CMMMC-ul devine `0`, deci atentie la inputuri care contin zerouri.

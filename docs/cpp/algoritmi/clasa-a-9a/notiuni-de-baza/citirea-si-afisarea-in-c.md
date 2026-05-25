@@ -35,7 +35,8 @@ Forma generala:
 scanf(format, &variabila);
 ```
 
-> **Obs:** Inainte de numele variabilei punem `&` (adresa variabilei). Este o regula a lui `scanf` — fara `&`, programul nu va citi corect.
+> [!IMPORTANT] Important
+> Inainte de numele variabilei punem `&` (adresa variabilei). Este o regula a lui `scanf` — fara `&`, programul nu va citi corect.
 
 ### Citirea unui numar intreg
 
@@ -123,7 +124,8 @@ Hello world!
 
 Echivalentul in C++ ar fi `cout << "Hello world!";`.
 
-> **Obs:** `\n` inseamna **rand nou** (echivalent cu `endl` din C++).
+> [!NOTE] Observatie
+> `\n` inseamna **rand nou** (echivalent cu `endl` din C++).
 
 ---
 
@@ -238,4 +240,5 @@ Fisierul `date.out` va contine:
 | Citire din fisier      | `fscanf(fin, "%d", &x);`           | `fin >> x;`                      |
 | Scriere in fisier      | `fprintf(fout, "%d", x);`          | `fout << x;`                     |
 
-> **Obs:** In acest manual vom folosi predominant stilul C++ (`cin`, `cout`, `fin`, `fout`). Stilul C este insa util de cunoscut pentru ca apare frecvent in coduri mai vechi sau in surse de pe internet.
+> [!NOTE] Observatie
+> In acest manual vom folosi predominant stilul C++ (`cin`, `cout`, `fin`, `fout`). Stilul C este insa util de cunoscut pentru ca apare frecvent in coduri mai vechi sau in surse de pe internet.

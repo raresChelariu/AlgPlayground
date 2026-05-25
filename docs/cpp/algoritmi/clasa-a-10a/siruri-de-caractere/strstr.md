@@ -33,7 +33,8 @@ char* p2 = strstr(p1 + strlen("le"), "le");
 // sau prescurtat: p1 + 2  (lungimea lui "le" este 2)
 ```
 
-> **Obs:** Avanseaza cu `+ strlen(sub)` de la adresa gasita pentru a nu gasi aceeasi aparitie.
+> [!TIP] Sfat
+> Avanseaza cu `+ strlen(sub)` de la adresa gasita pentru a nu gasi aceeasi aparitie.
 
 ---
 

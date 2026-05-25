@@ -4,7 +4,8 @@
 
 Un **pointer** este o variabila in care memoram o adresa de memorie.
 
-> **Obs:** Fiecare variabila are in memorie o adresa. Obtinerea adresei unei variabile se numeste **referentiere**. Obtinerea valorii de la o adresa se numeste **dereferentiere**.
+> [!NOTE] Observatie
+> Fiecare variabila are in memorie o adresa. Obtinerea adresei unei variabile se numeste **referentiere**. Obtinerea valorii de la o adresa se numeste **dereferentiere**.
 
 Pe scurt:
 - `&` — iau adresa (referentiere)
@@ -23,7 +24,8 @@ int x;
 cout << &x; // afiseaza (de exemplu) 0x2712bff93c
 ```
 
-> **Obs:** Adresele sunt numere scrise in baza 16 (hexazecimal), de aceea incep cu `0x`. De exemplu, `0x10` este numarul 16. Fiecare byte din memorie are o pozitie unica; adresa este numarul acelei pozitii.
+> [!NOTE] Observatie
+> Adresele sunt numere scrise in baza 16 (hexazecimal), de aceea incep cu `0x`. De exemplu, `0x10` este numarul 16. Fiecare byte din memorie are o pozitie unica; adresa este numarul acelei pozitii.
 
 ---
 
@@ -41,7 +43,8 @@ tip * numePointer;
 
 Daca declaram, de exemplu, `int* p`, spunem ca `p` este un **int pointer** (sau **pointer la int**). Tipul lui `p` este `int*`.
 
-> **Obs:** Pt `int *a, b, c;` se declara `a` ca int pointer, `b` si `c` ca int-uri obisnuite. Daca vrem ca toti trei sa fie int pointer scriem `int *a, *b, *c;`.
+> [!WARNING] Atentie
+> Pt `int *a, b, c;` se declara `a` ca int pointer, `b` si `c` ca int-uri obisnuite. Daca vrem ca toti trei sa fie int pointer scriem `int *a, *b, *c;`.
 
 Un pointer poate memora **doar adrese ale unor variabile de acelasi tip**:
 
@@ -74,7 +77,8 @@ cout << *p; // afiseaza 5
 cout << x;  // afiseaza 10
 ```
 
-> **Obs:** `*p` si `x` refera aceeasi zona de memorie. Orice scriere prin `*p` schimba `x` si invers.
+> [!NOTE] Observatie
+> `*p` si `x` refera aceeasi zona de memorie. Orice scriere prin `*p` schimba `x` si invers.
 
 ---
 
@@ -93,7 +97,8 @@ Sunt permise doar adunarea si scaderea cu un numar intreg:
 - `pointer / numar`
 - `pointer % numar`
 
-> **Obs:** `pointer + 1` nu adauga 1 la adresa numerica, ci avanseaza cu `sizeof(tip)` bytes — exact cat ocupa un element de acel tip in memorie.
+> [!IMPORTANT] Important
+> `pointer + 1` nu adauga 1 la adresa numerica, ci avanseaza cu `sizeof(tip)` bytes — exact cat ocupa un element de acel tip in memorie.
 
 ---
 
@@ -114,7 +119,8 @@ Relatia dintre indexare si pointeri:
 v[i] == *(v + i) == *(i + v) == i[v]  // toate sunt echivalente
 ```
 
-> **Obs:** `i[v]` este corect sintactic, dar nu il folosim — este confuz de citit.
+> [!NOTE] Observatie
+> `i[v]` este corect sintactic, dar nu il folosim — este confuz de citit.
 
 ---
 
@@ -131,7 +137,8 @@ p = NULL;
 p = nullptr;
 ```
 
-> **Obs:** `NULL` si `nullptr` sunt aliasuri pentru `0`. La liceu, cel mai des folosim `NULL` sau `0`.
+> [!NOTE] Observatie
+> `NULL` si `nullptr` sunt aliasuri pentru `0`. La liceu, cel mai des folosim `NULL` sau `0`.
 
 ---
 
@@ -175,7 +182,8 @@ int main()
 7 3
 ```
 
-> **Obs:** Functia primeste **adresele** lui `a` si `b`, nu copii ale valorilor. Prin `*x` si `*y` modificam direct variabilele originale din `main`.
+> [!NOTE] Observatie
+> Functia primeste **adresele** lui `a` si `b`, nu copii ale valorilor. Prin `*x` si `*y` modificam direct variabilele originale din `main`.
 
 ### Problema 2: Suma elementelor unui tablou prin pointeri
 
@@ -221,7 +229,8 @@ int main()
 150
 ```
 
-> **Obs:** `p = v + 1` seteaza pointerul pe primul element (indexare de la 1). La fiecare pas `p++` avanseaza pointerul cu `sizeof(int)` bytes, adica exact la urmatorul element din tablou. Conditia `p <= v + n` opreste parcurgerea dupa ultimul element.
+> [!NOTE] Observatie
+> `p = v + 1` seteaza pointerul pe primul element (indexare de la 1). La fiecare pas `p++` avanseaza pointerul cu `sizeof(int)` bytes, adica exact la urmatorul element din tablou. Conditia `p <= v + n` opreste parcurgerea dupa ultimul element.
 
 ### Problema 3: Min si max prin pointeri
 
@@ -272,7 +281,8 @@ int main()
 1 7
 ```
 
-> **Obs:** O functie poate returna cu `return` doar **o singura** valoare. Daca avem nevoie de mai multe rezultate (aici: `mn` si `mx`), le trimitem prin pointeri — functia scrie direct in zona de memorie a apelantului.
+> [!NOTE] Observatie
+> O functie poate returna cu `return` doar **o singura** valoare. Daca avem nevoie de mai multe rezultate (aici: `mn` si `mx`), le trimitem prin pointeri — functia scrie direct in zona de memorie a apelantului.
 
 ### Problema 4: Inversarea unui tablou cu 2 pointeri
 
@@ -324,7 +334,8 @@ int main()
 50 40 30 20 10
 ```
 
-> **Obs:** Comparatia `st < dr` functioneaza cu pointeri la fel ca la numere — compara adresele. Cand `st >= dr`, cei doi s-au intalnit la mijloc si inversarea este gata.
+> [!NOTE] Observatie
+> Comparatia `st < dr` functioneaza cu pointeri la fel ca la numere — compara adresele. Cand `st >= dr`, cei doi s-au intalnit la mijloc si inversarea este gata.
 
 ### Problema 5: Cautare liniara care returneaza pointer
 
@@ -387,8 +398,11 @@ int main()
 3
 ```
 
-> **Obs:** Daca scadem doi pointeri care pointeaza in acelasi tablou, obtinem **numarul de elemente dintre ei**. Aici `p - v` ne da indicele pozitiei lui `x` (1 pentru primul element, fiindca in tablou indexam de la 1). 
+> [!NOTE] Observatie
+> Daca scadem doi pointeri care pointeaza in acelasi tablou, obtinem **numarul de elemente dintre ei**. Aici `p - v` ne da indicele pozitiei lui `x` (1 pentru primul element, fiindca in tablou indexam de la 1). 
 
-> **Obs**: Calculatorul niciodata nu va folosi byte-ul de la adresa `0` (adresa `NULL`).
+> [!NOTE] Observatie
+> Calculatorul niciodata nu va folosi byte-ul de la adresa `0` (adresa `NULL`).
 
-> **Obs**: `NULL` este folosit de programatori pentru a indica lipsa, absenta. 
+> [!NOTE] Observatie
+> `NULL` este folosit de programatori pentru a indica lipsa, absenta. 

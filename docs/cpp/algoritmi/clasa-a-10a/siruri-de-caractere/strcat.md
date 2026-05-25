@@ -83,4 +83,5 @@ Ana Ionescu
 Ana Ionescu
 ```
 
-> **Obs:** `dest` trebuie sa aiba spatiu suficient pentru ambele siruri impreuna. `strcat` nu verifica dimensiunea — daca `dest` este prea mic, comportamentul este nedefinit.
+> [!WARNING] Atentie
+> `dest` trebuie sa aiba spatiu suficient pentru ambele siruri impreuna. `strcat` nu verifica dimensiunea — daca `dest` este prea mic, comportamentul este nedefinit.

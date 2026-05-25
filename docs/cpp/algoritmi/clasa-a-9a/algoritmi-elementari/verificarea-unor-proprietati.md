@@ -251,7 +251,8 @@ int main()
 NU
 ```
 
-> **Obs:** La EXISTA verificam `i <= n` dupa break (am gasit exemplul). La TOATE verificam `i > n` dupa break (nu am gasit contraexemplul).
+> [!NOTE] Observatie
+> La EXISTA verificam `i <= n` dupa break (am gasit exemplul). La TOATE verificam `i > n` dupa break (nu am gasit contraexemplul).
 
 > Acelasi lucru puteam sa-l obtinem si cu o variabila de tip bool, la care ii schimbam valoarea cand gaseam contraexemplu (si tot atunci faceam si break)
 

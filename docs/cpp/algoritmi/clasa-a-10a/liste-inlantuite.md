@@ -34,7 +34,8 @@ flowchart LR
     C --> N(["NULL"])
 ```
 
-> **Obs:** Fiecare nod este alocat pe heap cu `new`. Un struct poate contine ca si camp un pointer catre el insusi (`Nod *leg`).
+> [!NOTE] Observatie
+> Fiecare nod este alocat pe heap cu `new`. Un struct poate contine ca si camp un pointer catre el insusi (`Nod *leg`).
 
 ---
 
@@ -88,7 +89,8 @@ flowchart LR
     U(["ultim"]) --> D
 ```
 
-> **Obs:** Adaugarea la sfarsit cu ajutorul lui `ultim` se face in timp constant — nu depinde de lungimea listei.
+> [!NOTE] Observatie
+> Adaugarea la sfarsit cu ajutorul lui `ultim` se face in timp constant — nu depinde de lungimea listei.
 
 ---
 
@@ -118,7 +120,8 @@ flowchart LR
     B --> N(["NULL"])
 ```
 
-> **Obs:** Adaugarea la inceput este mai simpla dar inverseaza ordinea fata de ordinea citirii. Daca citim `1, 2, 3` si adaugam la inceput, lista va fi `3 → 2 → 1`.
+> [!NOTE] Observatie
+> Adaugarea la inceput este mai simpla dar inverseaza ordinea fata de ordinea citirii. Daca citim `1, 2, 3` si adaugam la inceput, lista va fi `3 → 2 → 1`.
 
 ---
 
@@ -192,7 +195,8 @@ flowchart LR
     C --> N(["NULL"])
 ```
 
-> **Obs:** Daca `ant == NULL`, nodul de sters este primul din lista si actualizam `prim`. Altfel, "sarim" peste nod conectand `ant` direct la urmatorul.
+> [!NOTE] Observatie
+> Daca `ant == NULL`, nodul de sters este primul din lista si actualizam `prim`. Altfel, "sarim" peste nod conectand `ant` direct la urmatorul.
 
 ---
 
@@ -262,7 +266,8 @@ int main()
 10 20 30 40 50
 ```
 
-> **Obs:** `prim` pointeaza catre primul nod, `ultim` catre ultimul. Dupa adaugarea unui nod la sfarsit, `ultim` avanseaza la noul nod.
+> [!NOTE] Observatie
+> `prim` pointeaza catre primul nod, `ultim` catre ultimul. Dupa adaugarea unui nod la sfarsit, `ultim` avanseaza la noul nod.
 
 ### Problema 2: Suma elementelor listei
 
@@ -442,6 +447,8 @@ int main()
 4
 ```
 
-> **Obs:** Parcurgem lista o data pentru a numara nodurile. Apoi parcurgem inca o data: prima jumatate o memoram in tabloul `a`, iar cand ajungem la jumatatea a doua, comparam element cu element. Pointerul `p` ramane pe primul nod din jumatatea a doua dupa primul `for`.
+> [!NOTE] Observatie
+> Parcurgem lista o data pentru a numara nodurile. Apoi parcurgem inca o data: prima jumatate o memoram in tabloul `a`, iar cand ajungem la jumatatea a doua, comparam element cu element. Pointerul `p` ramane pe primul nod din jumatatea a doua dupa primul `for`.
 
-> **Obs:** Pe pbinfo, functia se trimite fara `main` si fara codul de construire a listei — grader-ul furnizeaza lista gata construita prin pointerul `prim`. Atentie: in enuntul de pe pbinfo, parametrul poate fi numit `head` — la trimitere redenumeste-l conform cerintei.
+> [!TIP] Sfat
+> Pe pbinfo, functia se trimite fara `main` si fara codul de construire a listei — grader-ul furnizeaza lista gata construita prin pointerul `prim`. Atentie: in enuntul de pe pbinfo, parametrul poate fi numit `head` — la trimitere redenumeste-l conform cerintei.

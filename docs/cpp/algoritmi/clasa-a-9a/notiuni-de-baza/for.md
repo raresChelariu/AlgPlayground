@@ -85,7 +85,8 @@ for (i = b; i >= a; i--)
 }
 ```
 
-> **Obs:** Conditia se inverseaza (`>=` in loc de `<=`) si PasFinal devine `i--`.
+> [!TIP] Sfat
+> Conditia se inverseaza (`>=` in loc de `<=`) si PasFinal devine `i--`.
 
 ### Pas diferit de 1
 
@@ -252,7 +253,8 @@ int main()
 3 6 9 12 15 18
 ```
 
-> **Obs:** PasInitial e `i = 3` (primul multiplu de 3), PasFinal e `i += 3` (sarim direct la urmatorul multiplu).
+> [!NOTE] Observatie
+> PasInitial e `i = 3` (primul multiplu de 3), PasFinal e `i += 3` (sarim direct la urmatorul multiplu).
 
 ---
 
@@ -341,4 +343,5 @@ int main()
 | 3 | 3 | 4 | adevarat | 3 4 |
 | — | 4 | 3 | **fals** | — |
 
-> **Obs:** La fiecare iteratie, `st++` si `dr--` se executa simultan (ambele fac parte din PasFinal). Bucla se opreste cand `st >= dr`, adica cand cele doua capete s-au intalnit sau s-au trecut.
+> [!NOTE] Observatie
+> La fiecare iteratie, `st++` si `dr--` se executa simultan (ambele fac parte din PasFinal). Bucla se opreste cand `st >= dr`, adica cand cele doua capete s-au intalnit sau s-au trecut.

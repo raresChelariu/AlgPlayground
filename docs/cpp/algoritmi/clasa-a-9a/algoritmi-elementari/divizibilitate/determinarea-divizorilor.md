@@ -6,7 +6,8 @@ Vrem sa afisam **toti divizorii** unui numar natural `n`. Pornim de la varianta 
 
 Un numar `d` este **divizor** al lui `n` daca `n % d == 0`, adica `n` se imparte exact la `d` (rest 0).
 
-> **Obs:** Toti divizorii lui `n` se afla in intervalul `[1, n]`. Numerele `1` si `n` se numesc **divizori improprii**. Restul (din intervalul `[2, n-1]`) se numesc **divizori proprii**.
+> [!NOTE] Observatie
+> Toti divizorii lui `n` se afla in intervalul `[1, n]`. Numerele `1` si `n` se numesc **divizori improprii**. Restul (din intervalul `[2, n-1]`) se numesc **divizori proprii**.
 
 ---
 
@@ -45,13 +46,15 @@ int main()
 Divizorii lui 12 sunt: 1 2 3 4 6 12
 ```
 
-> **Obs:** Pentru `n = 1 000 000 000`, algoritmul face 1 miliard de pasi — prea mult. Cautam o varianta mai rapida.
+> [!WARNING] Atentie
+> Pentru `n = 1 000 000 000`, algoritmul face 1 miliard de pasi — prea mult. Cautam o varianta mai rapida.
 
 ---
 
 ## Varianta 2 — merg pana la jumatate
 
-**Observatie:** nu exista divizor propriu al lui `n` mai mare decat `n/2`.
+> [!NOTE] Observatie
+> nu exista divizor propriu al lui `n` mai mare decat `n/2`.
 
 **Demonstratie:** presupunem ca exista un divizor propriu `d > n/2`. Atunci exista `x` natural cu `x * d = n`, deci `x = n / d`. Din `d > n/2` rezulta `x < 2`, adica `x = 1`. Dar `x = 1` inseamna `d = n`, ceea ce contrazice faptul ca `d` e divizor **propriu**. Contradictie.
 
@@ -92,9 +95,11 @@ int main()
 Divizorii lui 12 sunt: 1 2 3 4 6 12
 ```
 
-> **Obs:** Calculam `jumatate = n / 2` **o singura data**, inainte de bucla. Daca am fi scris `i <= n / 2` direct in conditia lui `for`, calculul s-ar fi facut la **fiecare** iteratie — inutil.
+> [!TIP] Sfat
+> Calculam `jumatate = n / 2` **o singura data**, inainte de bucla. Daca am fi scris `i <= n / 2` direct in conditia lui `for`, calculul s-ar fi facut la **fiecare** iteratie — inutil.
 
-> **Obs:** Pentru `n = 1 000 000 000`, algoritmul face 500 milioane de pasi — inca prea mult.
+> [!WARNING] Atentie
+> Pentru `n = 1 000 000 000`, algoritmul face 500 milioane de pasi — inca prea mult.
 
 ---
 
@@ -118,9 +123,11 @@ Divizorii lui 12 sunt: 1 2 3 4 6 12
 
 Observam ca **dupa** ce ajungem la `d = 6`, perechile incep sa se **repete** (in oglinda). Deci e suficient sa parcurgem pana cand `d <= n / d`.
 
-> **Obs:** `d <= n / d` este echivalent cu `d * d <= n`, adica `d <= sqrt(n)`. Folosim `d * d` ca sa evitam calculul cu radicali si erorile de tip `double`.
+> [!NOTE] Observatie
+> `d <= n / d` este echivalent cu `d * d <= n`, adica `d <= sqrt(n)`. Folosim `d * d` ca sa evitam calculul cu radicali si erorile de tip `double`.
 
-> **Obs:** Daca `n` este **patrat perfect** (ex. `36 = 6 * 6`), exista un `d` pentru care `d == n / d`. La aceasta pereche obtinem un **singur** divizor nou, nu doi.
+> [!NOTE] Observatie
+> Daca `n` este **patrat perfect** (ex. `36 = 6 * 6`), exista un `d` pentru care `d == n / d`. La aceasta pereche obtinem un **singur** divizor nou, nu doi.
 
 ### Programul
 
@@ -159,9 +166,11 @@ int main()
 Divizorii lui 36 sunt: 1 36 2 18 3 12 4 9 6
 ```
 
-> **Obs:** Divizorii nu sunt afisati in ordine crescatoare, ci pe perechi `(d, n/d)`. Daca problema cere ordine crescatoare, foloseste alta varianta sau pastreaza divizorii intr-un vector si sorteaza-i la final.
+> [!NOTE] Observatie
+> Divizorii nu sunt afisati in ordine crescatoare, ci pe perechi `(d, n/d)`. Daca problema cere ordine crescatoare, foloseste alta varianta sau pastreaza divizorii intr-un vector si sorteaza-i la final.
 
-> **Obs:** Cazul patrat perfect e tratat de `if (d * d == n)` dupa bucla — afisam o singura data `d`, nu si `n / d` (care ar fi acelasi numar).
+> [!NOTE] Observatie
+> Cazul patrat perfect e tratat de `if (d * d == n)` dupa bucla — afisam o singura data `d`, nu si `n / d` (care ar fi acelasi numar).
 
 ---
 
@@ -175,4 +184,5 @@ Pentru `n = 1 000 000 000`:
 | Pana la jumatate      | 500 000 000        |
 | Pana la radical       | ~31 000            |
 
-> **Obs:** Diferenta dintre varianta cu radical si celelalte doua este uriasa — de la **secunde/minute** la **instant**. Cand `n` este mare, mereu folosim varianta cu `d * d <= n`.
+> [!TIP] Sfat
+> Diferenta dintre varianta cu radical si celelalte doua este uriasa — de la **secunde/minute** la **instant**. Cand `n` este mare, mereu folosim varianta cu `d * d <= n`.

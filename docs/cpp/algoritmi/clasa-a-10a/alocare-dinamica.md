@@ -50,7 +50,8 @@ v[1] = 10;               // acces ca la orice tablou
 v[2] = 20;
 ```
 
-> **Obs:** Dupa `int* v = new int[n]`, `v` se comporta exact ca un tablou obisnuit — putem folosi `v[i]`, `v + i`, `*(v + i)` etc. Diferenta fata de `int v[100]` este ca `n` poate fi citit de la tastatura, nu trebuie sa fie constanta.
+> [!NOTE] Observatie
+> Dupa `int* v = new int[n]`, `v` se comporta exact ca un tablou obisnuit — putem folosi `v[i]`, `v + i`, `*(v + i)` etc. Diferenta fata de `int v[100]` este ca `n` poate fi citit de la tastatura, nu trebuie sa fie constanta.
 
 ---
 
@@ -63,7 +64,8 @@ delete p;      // pentru o singura variabila
 delete[] v;    // pentru tablou alocat cu new tip[n]
 ```
 
-> **Obs:** La problemele de concurs (pbinfo, BAC), memoria se elibereaza oricum la incheierea programului de catre sistemul de operare. De aceea, in solutiile de concurs, `delete` este deseori omis.
+> [!TIP] Sfat
+> La problemele de concurs (pbinfo, BAC), memoria se elibereaza oricum la incheierea programului de catre sistemul de operare. De aceea, in solutiile de concurs, `delete` este deseori omis.
 
 ---
 
@@ -97,7 +99,8 @@ p->y = 4;
 cout << p->x << " " << p->y;   // 3 4
 ```
 
-> **Obs:** `p->camp` este exact echivalent cu `(*p).camp`. Vom folosi intens operatorul `->` in lectia despre liste inlantuite, unde fiecare nod al listei este alocat dinamic cu `new`.
+> [!NOTE] Observatie
+> `p->camp` este exact echivalent cu `(*p).camp`. Vom folosi intens operatorul `->` in lectia despre liste inlantuite, unde fiecare nod al listei este alocat dinamic cu `new`.
 
 ---
 
@@ -148,7 +151,8 @@ int main()
 150
 ```
 
-> **Obs:** `new int[n + 1]` aloca `n + 1` elemente ca sa putem indexa de la 1 (pozitia `0` ramane neutilizata). Spre deosebire de `int v[100]`, `n` este citit de la tastatura si poate fi orice valoare.
+> [!NOTE] Observatie
+> `new int[n + 1]` aloca `n + 1` elemente ca sa putem indexa de la 1 (pozitia `0` ramane neutilizata). Spre deosebire de `int v[100]`, `n` este citit de la tastatura si poate fi orice valoare.
 
 ### Problema 2: Struct alocat dinamic cu operatorul `->`
 
@@ -185,4 +189,5 @@ Ion 10 9.50
 Ion 10 9.5
 ```
 
-> **Obs:** `e->nume` este echivalent cu `(*e).nume`. Folosim `->` de fiecare data cand `e` este un pointer la struct si vrem sa accesam un camp al sau.
+> [!NOTE] Observatie
+> `e->nume` este echivalent cu `(*e).nume`. Folosim `->` de fiecare data cand `e` este un pointer la struct si vrem sa accesam un camp al sau.

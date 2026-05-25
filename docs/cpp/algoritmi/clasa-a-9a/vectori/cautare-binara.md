@@ -9,7 +9,8 @@
   - sa spunem ca la urmatoare deschidere la mijloc gasesc cuvantul `stilou`
   - inseamna ca trebuie sa ma uit in partea stanga a partii de dictionar ce o tin in mana, deci voi pune mana dreapta la mijloc 
 
-> **Obs:** cautarea binara functioneaza **doar** pe vectori sortati. Daca vectorul nu este sortat, trebuie sa folosim cautarea secventiala sau sa sortam mai intai vectorul.
+> [!IMPORTANT] Important
+> cautarea binara functioneaza **doar** pe vectori sortati. Daca vectorul nu este sortat, trebuie sa folosim cautarea secventiala sau sa sortam mai intai vectorul.
 
 ---
 
@@ -338,7 +339,8 @@ Lower bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v
 - `v[mij] > x` → satisface `>= x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
 - `v[mij] < x` → nu satisface `>= x`, nu este candidat: cautam dreapta (`st = mij + 1`)
 
-> **Obs:** in cod, cazurile `==` si `>` sunt grupate de conditia `v[mij] >= val` — ambele duc la aceeasi actiune.
+> [!NOTE] Observatie
+> in cod, cazurile `==` si `>` sunt grupate de conditia `v[mij] >= val` — ambele duc la aceeasi actiune.
 
 ```cpp
 int lowerBound(int val)
@@ -362,7 +364,8 @@ int lowerBound(int val)
 }
 ```
 
-> **Obs:** `rez` este initializat cu `n + 1` pentru a semnala ca nu exista niciun element `>= val` (toti sunt mai mici decat `val`).
+> [!NOTE] Observatie
+> `rez` este initializat cu `n + 1` pentru a semnala ca nu exista niciun element `>= val` (toti sunt mai mici decat `val`).
 
 **Exemplu:** fie vectorul cu duplicate `v = [2, 5, 5, 5, 8, 10]`, `n = 6`.
 
@@ -387,7 +390,8 @@ Upper bound raspunde la intrebarea: **care este prima pozitie `i` pentru care `v
 - `v[mij] > x` → satisface `> x`, este candidat: retinem `rez = mij`, cautam stanga (`dr = mij - 1`) — poate exista o pozitie mai mica cu acelasi raspuns
 - `v[mij] < x` → nu satisface `> x`, nu este candidat: cautam dreapta (`st = mij + 1`)
 
-> **Obs:** in cod, cazurile `==` si `<` sunt grupate de `else` — ambele duc la `st = mij + 1`.
+> [!NOTE] Observatie
+> in cod, cazurile `==` si `<` sunt grupate de `else` — ambele duc la `st = mij + 1`.
 
 Codul este identic cu lower bound, cu singura diferenta ca conditia din `if` este `>` in loc de `>=`:
 

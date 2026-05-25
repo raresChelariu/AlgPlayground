@@ -30,7 +30,8 @@ struct Elev {
 Elev v[100];  // un singur vector
 ```
 
-> **Obs:** Proprietatile unui struct se numesc **campuri**. Sensul e de **camp** ca la completarea unui formular.
+> [!NOTE] Observatie
+> Proprietatile unui struct se numesc **campuri**. Sensul e de **camp** ca la completarea unui formular.
 
 ---
 
@@ -47,7 +48,8 @@ struct numeStruct
 };
 ```
 
-> **Obs:** Atentie la `;` de dupa `}`. Daca lipseste, vom avea eroare de compilare !!!
+> [!WARNING] Atentie
+> Atentie la `;` de dupa `}`. Daca lipseste, vom avea eroare de compilare !!!
 
 **Exemplu:**
 
@@ -58,7 +60,8 @@ struct Elev {
 };
 ```
 
-> **Obs:** Tipurile de date predefinite ale limbajului (`int`, `float`, `double`, `long long`, `bool`, `char` etc.) se numesc **tipuri primitive**. Un `struct` este un tip **definit de noi**.
+> [!NOTE] Observatie
+> Tipurile de date predefinite ale limbajului (`int`, `float`, `double`, `long long`, `bool`, `char` etc.) se numesc **tipuri primitive**. Un `struct` este un tip **definit de noi**.
 
 ---
 
@@ -116,7 +119,8 @@ Ionel.b.an = 2008;     // acces in lant: Ionel -> b -> an
 cout << Ionel.note[0]; // prima nota a lui Ionel
 ```
 
-> **Obs:** Pot avea un camp de tip `Buletin` in struct-ul `Elev` **doar daca** struct-ul `Buletin` a fost definit inaintea (mai sus de) struct-ului `Elev`.
+> [!IMPORTANT] Important
+> Pot avea un camp de tip `Buletin` in struct-ul `Elev` **doar daca** struct-ul `Buletin` a fost definit inaintea (mai sus de) struct-ului `Elev`.
 
 **Contra-exemplu (nu compileaza):**
 
@@ -161,7 +165,8 @@ struct Punct {
 Punct p = {3, 4};         // x = 3, y = 4
 ```
 
-> **Obs:** Ordinea valorilor din `{ }` trebuie sa corespunda **exact** ordinii campurilor din definitia struct-ului.
+> [!IMPORTANT] Important
+> Ordinea valorilor din `{ }` trebuie sa corespunda **exact** ordinii campurilor din definitia struct-ului.
 
 ---
 
@@ -240,7 +245,8 @@ Clasa: 10
 Medie: 9.5
 ```
 
-> **Obs:** Pentru `char nume[40]`, `cin >> e.nume` citeste **un singur cuvant** (pana la primul spatiu). In aceasta lectie vom folosi mereu nume dintr-un singur cuvant (ex. `Ion`, `Maria`), ca sa nu amestecam citirea.
+> [!NOTE] Observatie
+> Pentru `char nume[40]`, `cin >> e.nume` citeste **un singur cuvant** (pana la primul spatiu). In aceasta lectie vom folosi mereu nume dintr-un singur cuvant (ex. `Ion`, `Maria`), ca sa nu amestecam citirea.
 
 ---
 
@@ -268,7 +274,8 @@ Ionel.ziNastere    = Maria.ziNastere;
 Ionel.medieGenerala = Maria.medieGenerala;
 ```
 
-> **Obs:** Atribuirea functioneaza **doar** intre variabile de **acelasi tip** struct. `Elev a; Buletin b; a = b;` este eroare.
+> [!IMPORTANT] Important
+> Atribuirea functioneaza **doar** intre variabile de **acelasi tip** struct. `Elev a; Buletin b; a = b;` este eroare.
 
 ---
 
@@ -294,7 +301,8 @@ Efectul: se face swap camp cu camp (la fel ca la atribuire).
 swap(Ionel, Maria);   // functioneaza la fel ca pentru variabile primitive
 ```
 
-> **Obs:** Functia `swap` din biblioteca standard functioneaza si pentru structuri (de acelasi tip), nu doar pentru `int` sau `double`.
+> [!TIP] Sfat
+> Functia `swap` din biblioteca standard functioneaza si pentru structuri (de acelasi tip), nu doar pentru `int` sau `double`.
 
 ---
 
@@ -337,7 +345,8 @@ for (i = 1; i <= n; i++)
 }
 ```
 
-> **Obs:** `v[i]` este un intreg struct `Elev`, iar `v[i].medie` este campul `medie` al elevului de pe pozitia `i`.
+> [!NOTE] Observatie
+> `v[i]` este un intreg struct `Elev`, iar `v[i].medie` este campul `medie` al elevului de pe pozitia `i`.
 
 ---
 
@@ -408,7 +417,8 @@ Ana 10 9.60
 Maria
 ```
 
-> **Obs:** Retinem **pozitia** (indicele `poz`), nu doar media maxima. Asa putem afisa si numele, si clasa, si orice alt camp al elevului castigator.
+> [!TIP] Sfat
+> Retinem **pozitia** (indicele `poz`), nu doar media maxima. Asa putem afisa si numele, si clasa, si orice alt camp al elevului castigator.
 
 ### Problema 2: Cati elevi au media >= 9
 
@@ -519,7 +529,8 @@ Ana 10 9.60
 9.26
 ```
 
-> **Obs:** `fixed` si `setprecision(2)` din `<iomanip>` ne dau exact 2 zecimale la afisare.
+> [!TIP] Sfat
+> `fixed` si `setprecision(2)` din `<iomanip>` ne dau exact 2 zecimale la afisare.
 
 ### Problema 4: Sortare descrescatoare dupa medie
 
@@ -592,7 +603,8 @@ Ion 9.5
 Andrei 8.2
 ```
 
-> **Obs:** `swap(v[i], v[poz])` mutand intregi structuri muta **toate** campurile (nume, clasa, medie) deodata — exact asta ne dorim. Daca am avea vectori paraleli (`nume[]`, `clasa[]`, `medie[]`), ar trebui sa facem 3 swap-uri separate si usor de gresit.
+> [!NOTE] Observatie
+> `swap(v[i], v[poz])` mutand intregi structuri muta **toate** campurile (nume, clasa, medie) deodata — exact asta ne dorim. Daca am avea vectori paraleli (`nume[]`, `clasa[]`, `medie[]`), ar trebui sa facem 3 swap-uri separate si usor de gresit.
 
 ---
 

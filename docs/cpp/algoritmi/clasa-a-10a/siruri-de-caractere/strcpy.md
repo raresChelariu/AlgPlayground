@@ -7,7 +7,8 @@ char* strcpy(char* dest, char* sursa);
 
 `strcpy` vine de la *str*ing + *c*o*py*. **Efect:** copiaza toate caracterele din `sursa` in `dest`, inclusiv `'\0'` de la final. Returneaza `dest`.
 
-> **Obs:** `strcpy(a, b)` este echivalentul atribuirii `a = b` pentru siruri — copiaza valorile, nu adresa.
+> [!NOTE] Observatie
+> `strcpy(a, b)` este echivalentul atribuirii `a = b` pentru siruri — copiaza valorile, nu adresa.
 
 ---
 
@@ -26,7 +27,8 @@ Dupa `strcpy(dest, sursa)`:
 |-------|---|---|---|---|----|
 | dest  | m | a | r | e | \0 |
 
-> **Obs:** `dest` trebuie sa aiba spatiu suficient pentru a incapea tot sirul `sursa`.
+> [!IMPORTANT] Important
+> `dest` trebuie sa aiba spatiu suficient pentru a incapea tot sirul `sursa`.
 
 ---
 

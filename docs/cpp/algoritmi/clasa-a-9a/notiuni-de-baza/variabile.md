@@ -13,9 +13,11 @@ Fiecare cutie are un **nume** (eticheta) si un **tip** (ce fel de valoare poate 
 | `char` | Un singur caracter | `'A'`, `'z'`, `'3'` | un caracter ASCII |
 | `bool` | Adevarat / Fals | `1`, `0` | doar 1 (`adevarat`) sau 0 (`fals`)|
 
-> **Obs:** In C++ folosim **punct** pentru zecimale, nu virgula: `3.14`, nu `3,14`.
+> [!IMPORTANT] Important
+> In C++ folosim **punct** pentru zecimale, nu virgula: `3.14`, nu `3,14`.
 
-> **Obs:** `char` se pune intre apostrof simplu `'A'`, pe cand textul se pune intre ghilimele duble `"Ana"`.
+> [!IMPORTANT] Important
+> `char` se pune intre apostrof simplu `'A'`, pe cand textul se pune intre ghilimele duble `"Ana"`.
 
 ---
 
@@ -54,7 +56,8 @@ M
 1
 ```
 
-> **Obs:** O variabila declarata, dar neinitializata, contine o valoare **imprevizibila** (gunoi din memorie). Intotdeauna initializeaza variabilele inainte de a le folosi.
+> [!WARNING] Atentie
+> O variabila declarata, dar neinitializata, contine o valoare **imprevizibila** (gunoi din memorie). Intotdeauna initializeaza variabilele inainte de a le folosi.
 
 ### Declararea mai multor variabile de acelasi tip
 
@@ -133,7 +136,8 @@ int main()
 -1294967296
 ```
 
-> **Obs:** Daca lucrezi cu numere mari (peste 2 miliarde), foloseste `long long` in loc de `int`.
+> [!TIP] Sfat
+> Daca lucrezi cu numere mari (peste 2 miliarde), foloseste `long long` in loc de `int`.
 
 ```cpp
 long long x = 3000000000;
@@ -189,7 +193,8 @@ Inainte: a = 5, b = 3
 Dupa:    a = 3, b = 5
 ```
 
-> **Obs:** Retine tiparul: `aux = a; a = b; b = aux;` — il vei folosi des.
+> [!TIP] Sfat
+> Retine tiparul: `aux = a; a = b; b = aux;` — il vei folosi des.
 
 Pentru a face interschimbarea a 2 variabile, putem folosi si functia `swap(a, b)`.
 Trebuie sa includem `#include <algorithm>` pentru a folosi functia `swap`.

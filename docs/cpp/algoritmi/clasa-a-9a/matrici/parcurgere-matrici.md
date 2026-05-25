@@ -20,7 +20,8 @@ Exemplu:
 int a[10][25];
 ```
 
-> **Obs:** Liniile si coloanele sunt numerotate de la 0. 
+> [!NOTE] Observatie
+> Liniile si coloanele sunt numerotate de la 0. 
 
 Efect:
 
@@ -117,7 +118,8 @@ Dupa executia `for`-urilor, matricea are:
 | **linia 2** | 5         | 6         | 7         | 8         |
 | **linia 3** | 9         | 10        | 11        | 12        |
 
-> **Obs:** ordinea in care citim este: `a[1][1]`, `a[1][2]`, ..., `a[1][m]`, apoi trecem la linia urmatoare `a[2][1]`, `a[2][2]`, ..., `a[2][m]`, si tot asa pana la `a[n][m]`. Aceasta este parcurgerea **linie cu linie**.
+> [!NOTE] Observatie
+> ordinea in care citim este: `a[1][1]`, `a[1][2]`, ..., `a[1][m]`, apoi trecem la linia urmatoare `a[2][1]`, `a[2][2]`, ..., `a[2][m]`, si tot asa pana la `a[n][m]`. Aceasta este parcurgerea **linie cu linie**.
 
 ---
 
@@ -169,7 +171,8 @@ int main()
 9 10 11 12 
 ```
 
-> **Obs:** `cout << endl;` este pus **in afara** `for`-ului interior, dar **in interiorul** `for`-ului exterior. Asa, dupa ce am afisat toate elementele unei linii, trecem pe randul urmator.
+> [!IMPORTANT] Important
+> `cout << endl;` este pus **in afara** `for`-ului interior, dar **in interiorul** `for`-ului exterior. Asa, dupa ce am afisat toate elementele unei linii, trecem pe randul urmator.
 
 ---
 
@@ -220,7 +223,8 @@ int main()
 78
 ```
 
-> **Obs:** suma este `1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 = 78`.
+> [!NOTE] Observatie
+> suma este `1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 = 78`.
 
 ---
 
@@ -280,9 +284,11 @@ int main()
 11880
 ```
 
-> **Obs:** pentru linia 1, produsul este `1 * 2 * 3 * 4 = 24`. Pentru linia 2, `5 * 6 * 7 * 8 = 1680`. Pentru linia 3, `9 * 10 * 11 * 12 = 11880`.
+> [!NOTE] Observatie
+> pentru linia 1, produsul este `1 * 2 * 3 * 4 = 24`. Pentru linia 2, `5 * 6 * 7 * 8 = 1680`. Pentru linia 3, `9 * 10 * 11 * 12 = 11880`.
 
-> **Obs:** este foarte important ca `p = 1` sa fie **in interiorul** `for`-ului pe `i`, dar **in afara** `for`-ului pe `j`. Altfel produsul ar continua de pe linia anterioara.
+> [!IMPORTANT] Important
+> este foarte important ca `p = 1` sa fie **in interiorul** `for`-ului pe `i`, dar **in afara** `for`-ului pe `j`. Altfel produsul ar continua de pe linia anterioara.
 
 ---
 
@@ -340,9 +346,11 @@ int main()
 15 18 21 24 
 ```
 
-> **Obs:** pentru coloana 1, suma este `1 + 5 + 9 = 15`. Pentru coloana 2, `2 + 6 + 10 = 18`. Pentru coloana 3, `3 + 7 + 11 = 21`. Pentru coloana 4, `4 + 8 + 12 = 24`.
+> [!NOTE] Observatie
+> pentru coloana 1, suma este `1 + 5 + 9 = 15`. Pentru coloana 2, `2 + 6 + 10 = 18`. Pentru coloana 3, `3 + 7 + 11 = 21`. Pentru coloana 4, `4 + 8 + 12 = 24`.
 
-> **Obs:** observa ca `for`-urile sunt **inversate** fata de parcurgerea obisnuita: `for`-ul pe `j` (coloane) este exterior, iar `for`-ul pe `i` (linii) este interior. Asta pentru ca pentru o coloana fixata, vrem sa parcurgem toate liniile.
+> [!NOTE] Observatie
+> observa ca `for`-urile sunt **inversate** fata de parcurgerea obisnuita: `for`-ul pe `j` (coloane) este exterior, iar `for`-ul pe `i` (linii) este interior. Asta pentru ca pentru o coloana fixata, vrem sa parcurgem toate liniile.
 
 ---
 
@@ -419,10 +427,12 @@ int main()
 1 2 3 4 5 10 15 20 19 18 17 16 11 6 
 ```
 
-> **Obs:** observa cum am pornit din coltul din stanga-sus (`1`) si am mers in sensul acelor de ceasornic, terminand la elementul de deasupra punctului de plecare (`6`):
+> [!NOTE] Observatie
+> observa cum am pornit din coltul din stanga-sus (`1`) si am mers in sensul acelor de ceasornic, terminand la elementul de deasupra punctului de plecare (`6`):
 > - **prima linie**: `1 2 3 4 5`
 > - **ultima coloana** (de sus in jos, fara `5` care era pe prima linie): `10 15 20`
 > - **ultima linie** (de la dreapta la stanga, fara `20` care era pe ultima coloana): `19 18 17 16`
 > - **prima coloana** (de jos in sus, fara `16` care era pe ultima linie si fara `1` care era pe prima linie): `11 6`
 
-> **Obs:** indicii de start `2` (la al doilea `for`) si `n - 1`, `2` (la ultimele doua) sunt alesi tocmai pentru a **evita coltul** care a fost deja afisat de `for`-ul anterior. Fara aceste ajustari, colturile ar fi afisate de doua ori.
+> [!WARNING] Atentie
+> indicii de start `2` (la al doilea `for`) si `n - 1`, `2` (la ultimele doua) sunt alesi tocmai pentru a **evita coltul** care a fost deja afisat de `for`-ul anterior. Fara aceste ajustari, colturile ar fi afisate de doua ori.
