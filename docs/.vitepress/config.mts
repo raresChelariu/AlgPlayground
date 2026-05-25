@@ -121,9 +121,6 @@ export default withMermaid(
           text: 'Pseudocod',
           collapsed: true,
           items: [
-            { text: 'If', link: '/cpp/pseudocod/if' },
-            { text: 'For', link: '/cpp/pseudocod/for' },
-            { text: 'While', link: '/cpp/pseudocod/while' },
             { text: 'Cat timp', link: '/cpp/pseudocod/cat-timp' },
             { text: 'Pentru', link: '/cpp/pseudocod/pentru' },
             { text: 'Repeta pana cand', link: '/cpp/pseudocod/repeta-pana-cand' },
