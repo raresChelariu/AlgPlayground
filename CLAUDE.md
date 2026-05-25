@@ -30,7 +30,12 @@ Categoriile trebuie sa fie **vizibile in sidebar-ul VitePress** ([docs/.vitepres
 - **Fara diacritice** in text (`a`, `i`, `s`, `t` in loc de `ă`, `î`, `ș`, `ț`).
 - Heading principal `#`, sectiuni `##`, subsectiuni `###`.
 - Separatoare `---` intre sectiunile mari.
-- Observatii in blockquote: `> **Obs:** ...`.
+- Observatii ca GitHub-flavored alerts cu titluri in romana:
+  - `> [!NOTE] Observatie` — info neutra, terminologie, explicatii factuale (implicit)
+  - `> [!TIP] Sfat` — best practices, tehnici utile, tipare de memorat
+  - `> [!WARNING] Atentie` — greseli comune, comportament periculos, gotcha-uri de sintaxa
+  - `> [!IMPORTANT] Important` — reguli critice, precondtii obligatorii ale algoritmului
+  - Titluri custom sunt permise (ex. `> [!WARNING] Eroare la compilare`) cand contextul o cere.
 - Exemple complete = program runnable cu `#include`, `main()`, `return 0;`, urmate de blocuri **Intrare:** si **Afisare:** cu date concrete.
 - Nu propunem exercitii fara rezolvare — orice problema enuntata primeste solutie completa in aceeasi sectiune.
 
