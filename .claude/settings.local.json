@@ -34,7 +34,8 @@
       "PowerShell(Select-Object:*)",
       "PowerShell(git add *)",
       "PowerShell(git push)",
-      "PowerShell(git commit -m *)"
+      "PowerShell(git commit -m *)",
+      "WebFetch(domain:vitepress.dev)"
     ]
   }
 }

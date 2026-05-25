@@ -8,6 +8,29 @@ export default withMermaid(
     themeConfig: {
       search: {
         provider: 'local',
+        options: {
+          translations: {
+            button: {
+              buttonText: 'Cauta',
+              buttonAriaLabel: 'Cauta',
+            },
+            modal: {
+              displayDetails: 'Detalii',
+              resetButtonTitle: 'Reset',
+              backButtonTitle: 'Inchide',
+              noResultsText: 'Niciun rezultat pentru',
+              footer: {
+                selectText: 'pentru a selecta',
+                selectKeyAriaLabel: 'enter',
+                navigateText: 'pentru a naviga',
+                navigateUpKeyAriaLabel: 'sus',
+                navigateDownKeyAriaLabel: 'jos',
+                closeText: 'pentru a inchide',
+                closeKeyAriaLabel: 'escape',
+              },
+            },
+          },
+        },
       },
       nav: [
         { text: 'Lectii', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/expresii' },
