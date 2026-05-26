@@ -117,6 +117,7 @@ export default withMermaid(
               items: [
                 { text: 'Parcurgere matrici', link: '/cpp/algoritmi/clasa-a-9a/matrici/parcurgere-matrici' },
                 { text: 'Chenarul matricei', link: '/cpp/algoritmi/clasa-a-9a/matrici/chenarul-matricei' },
+                { text: 'Vecini in matrice', link: '/cpp/algoritmi/clasa-a-9a/matrici/vecini-in-matrice' },
               ],
             },
           ],
