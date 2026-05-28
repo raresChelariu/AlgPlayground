@@ -11,12 +11,15 @@ Celulele de pe **chenarul** matricei au mai putini vecini valizi — pentru ele,
 
 ## Vectori de deplasare — ideea
 
-Daca am scrie de mana cele 4 (sau 8) accesari ale vecinilor, am avea un cod lung si plin de greseli. Solutia: retinem **deplasarile** intr-o pereche de vectori — `dl[]` pentru deplasarea pe **linie** (delta linie) si `dc[]` pentru deplasarea pe **coloana** (delta coloana) — si parcurgem vecinii cu un singur `for`.
+- Daca am scrie de mana cele 4 (sau 8) accesari ale vecinilor, am avea un cod lung si plin de greseli.
+- Solutia: retinem **deplasarile** intr-o pereche de vectori 
+  - `dLin[]` pentru deplasarea pe **linie** (delta linie)
+  - `dCol[]` pentru deplasarea pe **coloana** (delta coloana) — si parcurgem vecinii cu un singur `for`.
 
 > [!IMPORTANT] Conventia de semn
 > liniile cresc **in jos**, coloanele cresc **la dreapta**. Asadar:
-> - `dl = -1` inseamna **o linie mai sus**, `dl = +1` o linie mai jos
-> - `dc = -1` inseamna **o coloana la stanga**, `dc = +1` o coloana la dreapta
+> - `dLin = -1` inseamna **o linie mai sus**, `dLin = +1` o linie mai jos
+> - `dCol = -1` inseamna **o coloana la stanga**, `dCol = +1` o coloana la dreapta
 
 ---
 
@@ -33,23 +36,23 @@ In jurul celulei `a[i][j]` (notata `(0, 0)` ca offset), cei 4 vecini au urmatoar
 Vectorii de deplasare:
 
 ```cpp
-int dl[4] = {-1, 1, 0, 0};
-int dc[4] = {0, 0, -1, 1};
+int dLin[5] = {0, -1, 1, 0, 0};
+int dCol[5] = {0, 0, 0, -1, 1};
 ```
 
 Pentru a accesa cei 4 vecini ai lui `a[i][j]`:
 
 ```cpp
-for (k = 0; k < 4; k++)
+for (k = 1; k <= 4; k++)
 {
-    il = i + dl[k];
-    ic = j + dc[k];
+    il = i + dLin[k];
+    ic = j + dCol[k];
     // a[il][ic] este vecinul curent
 }
 ```
 
 > [!NOTE] Observatie
-> indexarea vectorilor `dl` si `dc` este de la `0`, nu de la `1`. Este o exceptie de la conventia uzuala: vectorii au exact 4 (sau 8) elemente fixe si folosim un index `k` care nu reprezinta o pozitie din enuntul problemei, ci un simplu numar al directiei.
+> indexam vectorii `dLin` si `dCol` de la `1`, ca de obicei. Ii declaram cu un element in plus (`dLin[5]`, respectiv `dLin[9]`), iar pozitia `0` ramane nefolosita (o umplem cu `0`). Indicele `k` nu reprezinta o pozitie din enuntul problemei, ci un simplu numar al directiei (`1..4` sau `1..8`).
 
 ---
 
@@ -66,23 +69,23 @@ Daca includem si cele 4 diagonale, toate cele 8 casute din jurul centrului sunt 
 Vectorii:
 
 ```cpp
-int dl[8] = {-1, -1, -1,  0, 0,  1, 1, 1};
-int dc[8] = {-1,  0,  1, -1, 1, -1, 0, 1};
+int dLin[9] = {0, -1, -1, -1,  0, 0,  1, 1, 1};
+int dCol[9] = {0, -1,  0,  1, -1, 1, -1, 0, 1};
 ```
 
 Iar parcurgerea devine:
 
 ```cpp
-for (k = 0; k < 8; k++)
+for (k = 1; k <= 8; k++)
 {
-    il = i + dl[k];
-    ic = j + dc[k];
+    il = i + dLin[k];
+    ic = j + dCol[k];
     // a[il][ic] este vecinul curent
 }
 ```
 
 > [!TIP] Sfat
-> ordinea elementelor in `dl` si `dc` **nu conteaza** atata timp cat indicele `k` se refera la **aceeasi directie** in ambii vectori. Adica `(dl[k], dc[k])` formeaza o pereche valida de offsets pentru directia `k`.
+> ordinea elementelor in `dLin` si `dCol` **nu conteaza** atata timp cat indicele `k` se refera la **aceeasi directie** in ambii vectori. Adica `(dLin[k], dCol[k])` formeaza o pereche valida de offsets pentru directia `k`.
 
 ---
 
@@ -102,8 +105,8 @@ Pentru fiecare celula `a[i][j]`, afisam cati dintre cei **4 vecini valizi** sunt
 #include <iostream>
 using namespace std;
 int a[103][103], n, m, i, j, k, il, ic, cnt;
-int dl[4] = {-1, 1, 0, 0};
-int dc[4] = {0, 0, -1, 1};
+int dLin[5] = {0, -1, 1, 0, 0};
+int dCol[5] = {0, 0, 0, -1, 1};
 
 int main()
 {
@@ -120,10 +123,10 @@ int main()
         for (j = 1; j <= m; j++)
         {
             cnt = 0;
-            for (k = 0; k < 4; k++)
+            for (k = 1; k <= 4; k++)
             {
-                il = i + dl[k];
-                ic = j + dc[k];
+                il = i + dLin[k];
+                ic = j + dCol[k];
                 if (il >= 1 && il <= n && ic >= 1 && ic <= m)
                 {
                     if (a[il][ic] > a[i][j])
@@ -192,9 +195,9 @@ Conventia folosita aici:
 #include <iostream>
 using namespace std;
 int a[103][103], n, m, i, j, k, il, ic;
-int dl[4] = {-1, 1, 0, 0};
-int dc[4] = {0, 0, -1, 1};
-bool toti_distincti;
+int dLin[5] = {0, -1, 1, 0, 0};
+int dCol[5] = {0, 0, 0, -1, 1};
+bool totiDistincti;
 
 int main()
 {
@@ -223,27 +226,27 @@ int main()
     {
         for (j = 1; j <= m; j++)
         {
-            toti_distincti = 1;
+            totiDistincti = 1;
             // verificam: niciun vecin nu este egal cu a[i][j]
-            for (k = 0; k < 4; k++)
+            for (k = 1; k <= 4; k++)
             {
-                il = i + dl[k];
-                ic = j + dc[k];
+                il = i + dLin[k];
+                ic = j + dCol[k];
                 if (a[il][ic] == a[i][j])
                 {
-                    toti_distincti = 0;
+                    totiDistincti = 0;
                 }
             }
             // verificam: vecinii sunt distincti doi cate doi
             // (comparam fiecare pereche de vecini)
-            if (a[i - 1][j] == a[i + 1][j]) toti_distincti = 0;
-            if (a[i - 1][j] == a[i][j - 1]) toti_distincti = 0;
-            if (a[i - 1][j] == a[i][j + 1]) toti_distincti = 0;
-            if (a[i + 1][j] == a[i][j - 1]) toti_distincti = 0;
-            if (a[i + 1][j] == a[i][j + 1]) toti_distincti = 0;
-            if (a[i][j - 1] == a[i][j + 1]) toti_distincti = 0;
+            if (a[i - 1][j] == a[i + 1][j]) totiDistincti = 0;
+            if (a[i - 1][j] == a[i][j - 1]) totiDistincti = 0;
+            if (a[i - 1][j] == a[i][j + 1]) totiDistincti = 0;
+            if (a[i + 1][j] == a[i][j - 1]) totiDistincti = 0;
+            if (a[i + 1][j] == a[i][j + 1]) totiDistincti = 0;
+            if (a[i][j - 1] == a[i][j + 1]) totiDistincti = 0;
 
-            cout << toti_distincti << " ";
+            cout << totiDistincti << " ";
         }
         cout << endl;
     }
@@ -293,8 +296,8 @@ Cele 8 deplasari ale calului fata de pozitia sa curenta `(0, 0)`:
 Vectorii de deplasare:
 
 ```cpp
-int dl[8] = {-2, -2, -1, -1,  1, 1,  2,  2};
-int dc[8] = {-1,  1, -2,  2, -2, 2, -1,  1};
+int dLin[9] = {0, -2, -2, -1, -1,  1, 1,  2,  2};
+int dCol[9] = {0, -1,  1, -2,  2, -2, 2, -1,  1};
 ```
 
 ### Program complet
@@ -305,16 +308,16 @@ Tabla de sah are `8` linii si `8` coloane (indexate de la `1`). Citim pozitia ca
 #include <iostream>
 using namespace std;
 int lc, cc, k, il, ic;
-int dl[8] = {-2, -2, -1, -1,  1, 1,  2,  2};
-int dc[8] = {-1,  1, -2,  2, -2, 2, -1,  1};
+int dLin[9] = {0, -2, -2, -1, -1,  1, 1,  2,  2};
+int dCol[9] = {0, -1,  1, -2,  2, -2, 2, -1,  1};
 
 int main()
 {
     cin >> lc >> cc;
-    for (k = 0; k < 8; k++)
+    for (k = 1; k <= 8; k++)
     {
-        il = lc + dl[k];
-        ic = cc + dc[k];
+        il = lc + dLin[k];
+        ic = cc + dCol[k];
         if (il >= 1 && il <= 8 && ic >= 1 && ic <= 8)
         {
             cout << il << " " << ic << endl;
@@ -366,9 +369,9 @@ int main()
 
 ## Recap
 
-- **Vectori de deplasare** `dl[]` si `dc[]`: stocheaza ofset-urile pe linie si coloana pentru fiecare directie a unui vecin / a unei mutari.
-- **4 vecini** (sus, jos, stanga, dreapta) → vectori de lungime `4`.
-- **8 vecini** (cu diagonale) → vectori de lungime `8`.
+- **Vectori de deplasare** `dLin[]` si `dCol[]`: stocheaza ofset-urile pe linie si coloana pentru fiecare directie a unui vecin / a unei mutari. Ii indexam de la `1`, cu pozitia `0` nefolosita.
+- **4 vecini** (sus, jos, stanga, dreapta) → directii in `dLin[1..4]` si `dCol[1..4]`.
+- **8 vecini** (cu diagonale) → directii in `dLin[1..8]` si `dCol[1..8]`.
 - **Salturi mai exotice** (cal, alte piese de sah) → vectori cu deplasari specifice (ex. `(+/-1, +/-2)` si `(+/-2, +/-1)` pentru cal).
 - Pentru a evita iesirea din matrice avem doua tehnici:
   - **`if` de verificare**: `il >= 1 && il <= n && ic >= 1 && ic <= m`
