@@ -101,7 +101,8 @@ int main()
 
 ## Chenare imbricate
 
-Chenarul descris mai sus este chenarul **exterior** al matricei. Dar daca "intram" cu o pozitie mai aproape de centru, gasim **un alt chenar**, mai mic, in interiorul lui. Si apoi inca unul, si tot asa, pana ajungem in centru.
+- Chenarul de mai sus este chenarul **exterior** al matricei. 
+- Dar daca "intram" cu o pozitie mai aproape de centru, gasim **un alt chenar**, mai  mic, in interiorul lui.
 
 Notam:
 
@@ -231,7 +232,7 @@ Trebuie sa avem grija la **chenarele degenerate** (cand `n-k+1 == k` sau `m-k+1 
 ```cpp
 #include <iostream>
 using namespace std;
-int a[101][101], n, m, i, j, k, nrChenare;
+int a[101][101], n, m, i, j, k, nrChenare, ultimaLin, ultimaCol;
 
 int main()
 {
@@ -249,28 +250,30 @@ int main()
         nrChenare = (m + 1) / 2;
     for (k = 1; k <= nrChenare; k++)
     {
-        // 1. linia de sus a chenarului k: a[k][k..m-k+1]
-        for (j = k; j <= m - k + 1; j++)
+        ultimaLin = n - k + 1;
+        ultimaCol = m - k + 1;
+        // 1. linia de sus a chenarului k: a[k][k..ultimaCol]
+        for (j = k; j <= ultimaCol; j++)
         {
             cout << a[k][j] << " ";
         }
-        // 2. coloana din dreapta: a[k+1..n-k+1][m-k+1]
-        for (i = k + 1; i <= n - k + 1; i++)
+        // 2. coloana din dreapta: a[k+1..ultimaLin][ultimaCol]
+        for (i = k + 1; i <= ultimaLin; i++)
         {
-            cout << a[i][m - k + 1] << " ";
+            cout << a[i][ultimaCol] << " ";
         }
-        // 3. linia de jos (doar daca difera de linia de sus): a[n-k+1][m-k..k]
-        if (n - k + 1 > k)
+        // 3. linia de jos (doar daca difera de linia de sus): a[ultimaLin][ultimaCol-1..k]
+        if (ultimaLin > k)
         {
-            for (j = m - k; j >= k; j--)
+            for (j = ultimaCol - 1; j >= k; j--)
             {
-                cout << a[n - k + 1][j] << " ";
+                cout << a[ultimaLin][j] << " ";
             }
         }
-        // 4. coloana din stanga (doar daca difera de coloana din dreapta): a[n-k..k+1][k]
-        if (m - k + 1 > k)
+        // 4. coloana din stanga (doar daca difera de coloana din dreapta): a[ultimaLin-1..k+1][k]
+        if (ultimaCol > k)
         {
-            for (i = n - k; i >= k + 1; i--)
+            for (i = ultimaLin - 1; i >= k + 1; i--)
             {
                 cout << a[i][k] << " ";
             }
@@ -303,4 +306,26 @@ int main()
 > colturile chenarului `k` sunt: `(k, k)` — stanga-sus, `(k, m-k+1)` — dreapta-sus, `(n-k+1, m-k+1)` — dreapta-jos, `(n-k+1, k)` — stanga-jos. Toate cele 4 `for`-uri lucreaza intre acesti indici.
 
 > [!WARNING] Atentie
-> cele doua `if`-uri (`n - k + 1 > k` si `m - k + 1 > k`) sunt **esentiale** pentru cazul chenarelor degenerate. Daca le omiti, pentru o matrice cu dimensiune impara (ex. `5 x 5`), chenarul din mijloc va fi afisat de mai multe ori sau in ordine gresita.
+> cele doua `if`-uri (`ultimaLin > k` si `ultimaCol > k`) sunt **esentiale** pentru cazul chenarelor degenerate. Daca le omiti, pentru o matrice cu dimensiune impara (ex. `5 x 5`), chenarul din mijloc va fi afisat de mai multe ori sau in ordine gresita.
+
+Acelasi cod functioneaza si pentru o matrice **patratica**. Pentru `n = m = 5`, `min(n, m) = 5` este impar, deci sunt `(5 + 1) / 2 = 3` chenare, iar chenarul `3` este degenerat (un singur element, `a[3][3]`):
+
+**Intrare:**
+
+```
+5 5
+1 2 3 4 5
+6 7 8 9 10
+11 12 13 14 15
+16 17 18 19 20
+21 22 23 24 25
+```
+
+**Afisare:**
+
+```
+1 2 3 4 5 10 15 20 25 24 23 22 21 16 11 6 7 8 9 14 19 18 17 12 13 
+```
+
+> [!NOTE] Observatie
+> spirala parcurge chenarul `1` (`1 2 3 4 5 10 15 20 25 24 23 22 21 16 11 6`), apoi chenarul `2` (`7 8 9 14 19 18 17 12`) si in final chenarul `3`, degenerat (`13`). Pentru chenarul `3` avem `k = 3`, `ultimaLin = ultimaCol = 3`: ambele `if`-uri sunt false, asa ca elementul din mijloc se afiseaza o singura data de primul `for`.
