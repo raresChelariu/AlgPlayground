@@ -99,6 +99,7 @@ export default withMermaid(
                   ],
                 },
                 { text: 'Verificarea unor proprietati', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/verificarea-unor-proprietati' },
+                { text: 'Secvente', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/secvente' },
               ],
             },
             {
