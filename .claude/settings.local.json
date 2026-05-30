@@ -35,7 +35,8 @@
       "PowerShell(git add *)",
       "PowerShell(git push)",
       "PowerShell(git commit -m *)",
-      "WebFetch(domain:vitepress.dev)"
+      "WebFetch(domain:vitepress.dev)",
+      "PowerShell(npm run docs:build 2>&1)"
     ]
   }
 }
