@@ -339,18 +339,27 @@ PrimulDeLaX raspunde la intrebarea: **care este prima pozitie `i` pentru care `v
 - retinem `rez = mij`
 - cautam stanga — poate exista un 5 si mai la stanga
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="3" :candidate="true" keep="left" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | **5** | 5 | 8 | 10 |
+| `mij`    |   |   | ↑ |   |   |    |
 
 **`v[mij] > x`** (ex: `x = 5`, `v[mij] = 8`) → 8 >= 5, este **candidat**:
 - retinem `rez = mij`
 - cautam stanga — poate exista ceva mai mic care tot e >= 5
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="5" :candidate="true" keep="left" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | 5 | 5 | **8** | 10 |
+| `mij`    |   |   |   |   | ↑ |    |
 
 **`v[mij] < x`** (ex: `x = 5`, `v[mij] = 2`) → 2 < 5, **NU este candidat**:
 - cautam dreapta
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="1" :candidate="false" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | **2** | 5 | 5 | 5 | 8 | 10 |
+| `mij`    | ↑ |   |   |   |   |    |
 
 > [!NOTE] Observatie
 > in cod, cazurile `==` si `>` sunt grupate de conditia `v[mij] >= x` — ambele duc la aceeasi actiune.
@@ -402,18 +411,27 @@ PrimulDupaX raspunde la intrebarea: **care este prima pozitie `i` pentru care `v
 **`v[mij] == x`** (ex: `x = 5`, `v[mij] = 5`) → 5 nu e > 5, **NU este candidat**:
 - cautam dreapta
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="3" :candidate="false" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | **5** | 5 | 8 | 10 |
+| `mij`    |   |   | ↑ |   |   |    |
 
 **`v[mij] > x`** (ex: `x = 5`, `v[mij] = 8`) → 8 > 5, **este candidat**:
 - retinem `rez = mij`
 - cautam stanga - poate exista ceva mai mic care tot e > 5
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="5" :candidate="true" keep="left" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | 5 | 5 | **8** | 10 |
+| `mij`    |   |   |   |   | ↑ |    |
 
 **`v[mij] < x`** (ex: `x = 5`, `v[mij] = 2`) → 2 nu e > 5, **nu este candidat**:
 - cautam dreapta
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="1" :candidate="false" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | **2** | 5 | 5 | 5 | 8 | 10 |
+| `mij`    | ↑ |   |   |   |   |    |
 
 > [!NOTE] Observatie
 > in cod, cazurile `==` si `<` sunt grupate de `else` — ambele duc la `st = mij + 1`.
@@ -465,18 +483,27 @@ Raspunde la intrebarea: **care este ultima pozitie `i` pentru care `v[i] <= x`?*
 - retinem `rez = mij`
 - cautam dreapta - poate exista un 5 si mai la dreapta
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="3" :candidate="true" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | **5** | 5 | 8 | 10 |
+| `mij`    |   |   | ↑ |   |   |    |
 
 **`v[mij] < x`** (ex: `x = 5`, `v[mij] = 2`) → 2 <= 5, **este candidat**:
 - retinem `rez = mij`
 - cautam dreapta - poate exista ceva mai mare care tot e <= 5
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="1" :candidate="true" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | **2** | 5 | 5 | 5 | 8 | 10 |
+| `mij`    | ↑ |   |   |   |   |    |
 
 **`v[mij] > x`** (ex: `x = 5`, `v[mij] = 8`) → 8 > 5, **NU este candidat**:
 - cautam stanga
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="5" :candidate="false" keep="left" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | 5 | 5 | **8** | 10 |
+| `mij`    |   |   |   |   | ↑ |    |
 
 > [!NOTE] Observatie
 > Aceasta pozitie este echivalenta cu `primulDupaX(x) - 1`. Daca rezultatul este `0`, inseamna ca toate elementele sunt strict mai mari decat `x`.
@@ -542,17 +569,26 @@ Putem cauta direct prima sau ultima aparitie a lui `x` cu doua functii separate,
 - retinem `rez = mij`
 - cautam stanga (`dr = mij - 1`) — poate exista o aparitie anterioara
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="3" :candidate="true" keep="left" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | **5** | 5 | 8 | 10 |
+| `mij`    |   |   | ↑ |   |   |    |
 
 **`v[mij] < x`** → `x` e mai mare:
 - cautam dreapta (`st = mij + 1`)
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="1" :candidate="false" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | **2** | 5 | 5 | 5 | 8 | 10 |
+| `mij`    | ↑ |   |   |   |   |    |
 
 **`v[mij] > x`** → `x` e mai mic:
 - cautam stanga (`dr = mij - 1`)
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="5" :candidate="false" keep="left" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | 5 | 5 | **8** | 10 |
+| `mij`    |   |   |   |   | ↑ |    |
 
 ### ultimaAparitie
 
@@ -560,17 +596,26 @@ Putem cauta direct prima sau ultima aparitie a lui `x` cu doua functii separate,
 - retinem `rez = mij`
 - cautam dreapta (`st = mij + 1`) - poate exista o aparitie ulterioara
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="3" :candidate="true" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | **5** | 5 | 8 | 10 |
+| `mij`    |   |   | ↑ |   |   |    |
 
 **`v[mij] < x`** → `x` e mai mare:
 - cautam dreapta (`st = mij + 1`)
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="1" :candidate="false" keep="right" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | **2** | 5 | 5 | 5 | 8 | 10 |
+| `mij`    | ↑ |   |   |   |   |    |
 
 **`v[mij] > x`** → `x` e mai mic:
 - cautam stanga (`dr = mij - 1`)
 
-<BinSearchPlot :values="[2,5,5,5,8,10]" :x="5" :mij="5" :candidate="false" keep="left" />
+| Pozitia  | 1 | 2 | 3 | 4 | 5 | 6  |
+|----------|---|---|---|---|---|----|
+| Valoarea | 2 | 5 | 5 | 5 | **8** | 10 |
+| `mij`    |   |   |   |   | ↑ |    |
 
 Ambele returneaza `-1` daca elementul nu exista in vector.
 
