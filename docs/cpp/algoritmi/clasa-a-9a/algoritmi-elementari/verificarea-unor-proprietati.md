@@ -65,7 +65,8 @@ DA
 
 ### Varianta 2 — break
 
-Iesim din bucla la primul corigent gasit. Dupa bucla, daca `i <= n`, inseamna ca am iesit prin `break` (am gasit exemplul):
+- Iesim din bucla la primul corigent gasit. 
+- Dupa bucla, daca `i <= n`, inseamna ca am iesit prin `break` (am gasit exemplul):
 
 ```cpp
 #include <iostream>
@@ -106,6 +107,44 @@ int main()
 **Afisare:**
 ```
 DA
+```
+
+--- 
+
+> [!NOTE] Observatie
+> Acelasi lucru puteam sa-l obtinem si cu o variabila de tip bool, la care ii schimbam valoarea cand gaseam EXEMPLU si tot atunci faceam si break
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n, i;
+float v[1001];
+
+int main()
+{
+    cin >> n;
+    for (i = 1; i <= n; i++)
+    {
+        cin >> v[i];
+    }
+    existaCorigent = 0;
+    for (i = 1; i <= n; i++)
+    {
+        if (v[i] < 5)
+        {
+            existaCorigent = 1;
+            break;
+        }
+    }
+
+    if (existaCorigent)
+        cout << "DA";
+    else
+        cout << "NU";
+
+    return 0;
+}
 ```
 
 ### Varianta 3 — return in main
