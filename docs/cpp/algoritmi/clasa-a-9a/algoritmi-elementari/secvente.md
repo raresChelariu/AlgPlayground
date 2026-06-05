@@ -123,11 +123,13 @@ Dupa `for`: `lg = 4 > lgMax = 2`, deci `lgMax = 4`.
 
 ## Exemplu 2 — cea mai lunga secventa strict crescatoare
 
-Proprietatea P este acum "elementul curent este mai mare decat cel dinainte". Avem nevoie de o variabila in plus — `prev` — care retine elementul precedent.
-
-Citim primul element inainte de `for` si il folosim ca punct de pornire: `lg = 1`, `lgMax = 1`, `prev = x`.
-
-Atunci cand intampinam un contraexemplu (elementul curent nu e mai mare decat precedentul), **contraexemplul insusi incepe o noua secventa**. De aceea resetam `lg = 1` in loc de `lg = 0`.
+- Proprietatea P este acum "elementul curent este mai mare decat cel dinainte". 
+- Avem nevoie de o variabila in plus — `prec` — care retine elementul precedent.
+  - Citim primul element inainte de `for` 
+  - si il folosim ca punct de pornire: `lg = 1`, `lgMax = 1`, `prec = x`.
+- Atunci cand intampinam un contraexemplu (elementul curent nu e mai mare decat precedentul):
+  - **contraexemplul insusi incepe o noua secventa**
+  - de aceea resetam `lg = 1` in loc de `lg = 0`.
 
 ```cpp
 #include <iostream>
