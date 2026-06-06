@@ -584,9 +584,12 @@ void f()
 }
 ```
 
-### 2. Apel inainte de declarare
+### 2. Apel corect dar pentru o functie nedeclarata sau nedefinita (inca)
 
 ```cpp
+#include <iostream>
+using namespace std;
+
 int main()
 {
     cout << patrat(3);   // EROARE - patrat nu e cunoscuta inca
@@ -600,17 +603,73 @@ int patrat(int x)
 
 **Solutie:** declaram functia inainte de `main`, sau folosim sabloanele cu toate declararile sus.
 
+**Corect:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int patrat(int x); // am declarat, deci o pot apela si definitia o pot scrie oriunde mai jos
+int main()
+{
+    cout << patrat(3);
+    return 0;
+}
+int patrat(int x)
+{
+    return x * x;
+}
+```
+
+**Afisare:**
+
+> 9
+
+
 ### 3. Declarata, dar nedefinita
 
-Daca scriem `int patrat(int x);` si apoi nu definim niciodata corpul functiei, primim eroare de **link-editare** (`undefined reference`). Compilarea trece, dar programul nu se poate construi.
+Daca scriem `int patrat(int x);` si apoi nu definim niciodata corpul functiei, primim eroare de **compilare** (`undefined reference`).
+
+```cpp
+#include <iostream>
+using namespace std;
+int patrat(int x);
+
+int main()
+{
+    cout << patrat(7);
+    return 0;
+}
+```
+
+> [!WARNING] Eroare la compilare
+> ```
+> error: undefined reference to `patrat(int)'
+> ```
 
 ### 4. Locala cu acelasi nume ca un parametru
 
 ```cpp
+#include <iostream>
+using namespace std;
+
 void f(int n)
 {
     int n;   // EROARE - shadows a parameter
 }
+
+int main()
+{
+    return 0;
+}
+
 ```
 
-Nu putem avea o locala cu acelasi nume ca un parametru — sunt declarate in acelasi "spatiu". Daca chiar vrem o locala separata, ii dam alt nume.
+> [!WARNING] Eroare la compilare
+> ```
+> error: error: declaration of 'int n' shadows a parameter
+> ```
+
+- Nu putem avea o locala cu acelasi nume ca un parametru 
+- Sunt declarate in acelasi "univers"
+- Daca chiar vrem o locala separata, ii dam alt nume.
