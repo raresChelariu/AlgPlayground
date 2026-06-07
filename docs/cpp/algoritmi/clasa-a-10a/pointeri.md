@@ -70,7 +70,8 @@ k = &x; // EROARE: nu pot atribui unui long long* un int*
 
 ```cpp
 int x = 5;
-int *p = &x;
+int *p;
+p = &x;
 cout << *p; // afiseaza 5
 
 *p = 10;    // modifica valoarea lui x prin pointer
