@@ -191,8 +191,23 @@ Exemple de caractere albe:
 ### Metoda 1 — operatorul `>>`
 
 ```cpp
-char c;
-cin >> c;
+#include <iostream>
+#include <fstream>
+using namespace std;
+ifstream fin("f.in");
+char c1, c2, c3, c4;
+
+int main()
+{
+    cin >> c1 >> c2 >> c3 >> c4;
+    cout << "Caracterele sunt: " << endl;
+    cout << "c1: " << c1 << "" << endl;
+    cout << "c2: " << c2 << "" << endl;
+    cout << "c3: " << c3 << "" << endl;
+    cout << "c4: " << c4 << "" << endl;
+    return 0;
+}
+
 ```
 
 **Efect:** se sare peste toate caracterele albe si se memoreaza in `c` primul caracter **negru** (care nu e alb).
@@ -202,7 +217,14 @@ cin >> c;
        xyz     abc
 ```
 
-In variabila `c` se citeste `'x'`.
+**Afisare**
+```
+Caracterele sunt:
+c1: x
+c2: y
+c3: z
+c4: a
+```
 
 ---
 
@@ -219,23 +241,39 @@ cin.get(c);
 #include <iostream>
 using namespace std;
 
-char c1, c2;
+char c1, c2, c3, c4;
 
 int main()
 {
     cin.get(c1);
     cin.get(c2);
+    cin.get(c3);
+    cin.get(c4);
+    cout << "Caracterele sunt: " << endl;
+    cout << "c1: " << c1 << "" << endl;
+    cout << "c2: " << c2 << "" << endl;
+    cout << "c3: " << c3 << "" << endl;
+    cout << "c4: " << c4 << "" << endl;
     return 0;
 }
 ```
 
 **Intrare:**
 ```
-z     abc
+z  abc
+```
+
+**Afisare**:
+```
+Caracterele sunt:
+c1: z
+c2:
+c3: a
+c4: b
 ```
 
 > [!NOTE] Observatie
-> `c1` primeste `'z'` si `c2` primeste SPACE.
+> `c1` primeste `'z'` si `c2` primeste SPACE. `c3` primeste SPACE si `c4` primeste `a`.
 
 ---
 

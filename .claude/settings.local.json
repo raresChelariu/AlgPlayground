@@ -36,7 +36,13 @@
       "PowerShell(git push)",
       "PowerShell(git commit -m *)",
       "WebFetch(domain:vitepress.dev)",
-      "PowerShell(npm run docs:build 2>&1)"
+      "PowerShell(npm run docs:build 2>&1)",
+      "PowerShell(Get-Disk | Select-Object Number, FriendlyName, @{N='SizeGB';E={[math]::Round\\($_.Size/1GB,1\\)}}, PartitionStyle, OperationalStatus, BusType | Format-Table -AutoSize)",
+      "PowerShell(Get-Volume | Select-Object DriveLetter, FileSystemLabel, FileSystem, DriveType, @{N='SizeGB';E={[math]::Round\\($_.Size/1GB,1\\)}}, HealthStatus | Format-Table -AutoSize)",
+      "PowerShell(Get-Partition -DiskNumber 1 | Select-Object PartitionNumber, DriveLetter, @{N='SizeGB';E={[math]::Round\\($_.Size/1GB,1\\)}}, Type, IsActive | Format-Table -AutoSize)",
+      "PowerShell(Set-Partition -DiskNumber 1 -PartitionNumber 1 -NewDriveLetter G; if \\($?\\) { Get-Volume -DriveLetter G | Select-Object DriveLetter, FileSystemLabel, FileSystem, @{N='SizeGB';E={[math]::Round\\($_.Size/1GB,1\\)}}, @{N='FreeGB';E={[math]::Round\\($_.SizeRemaining/1GB,1\\)}}, HealthStatus | Format-Table -AutoSize })",
+      "PowerShell(Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile','-Command','Set-Partition -DiskNumber 1 -PartitionNumber 1 -NewDriveLetter G')",
+      "PowerShell(Get-Volume -DriveLetter G -ErrorAction SilentlyContinue | Select-Object DriveLetter, FileSystemLabel, FileSystem, @{N='SizeGB';E={[math]::Round\\($_.Size/1GB,1\\)}}, @{N='FreeGB';E={[math]::Round\\($_.SizeRemaining/1GB,1\\)}}, HealthStatus | Format-Table -AutoSize)"
     ]
   }
 }
