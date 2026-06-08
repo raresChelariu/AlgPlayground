@@ -7,13 +7,13 @@ hero:
   actions:
     - theme: brand
       text: Clasa a IX-a
-      link: /cpp/algoritmi/clasa-a-9a/notiuni-de-baza/expresii
+      link: /cpp/algoritmi/clasa-a-9a/
     - theme: brand
       text: Clasa a X-a
-      link: /cpp/algoritmi/clasa-a-10a/struct
+      link: /cpp/algoritmi/clasa-a-10a/
     - theme: alt
       text: Pseudocod
-      link: /cpp/pseudocod/if
+      link: /cpp/pseudocod/
 features:
   - title: Lectii
     details: Lectii pas cu pas de algoritmica in C++
