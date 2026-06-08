@@ -88,13 +88,14 @@ const cards = computed<Card[]>(() => {
 }
 
 .class-index__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  align-items: start;
+  column-width: 280px;
+  column-gap: 20px;
 }
 
 .ci-card {
+  break-inside: avoid;
+  width: 100%;
+  margin-bottom: 20px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background-color: var(--vp-c-bg-soft);
