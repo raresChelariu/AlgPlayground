@@ -110,6 +110,7 @@ export const categories: Category[] = [
     landing: '/cpp/algoritmi/clasa-a-10a/',
     items: [
       { text: 'Functii', link: '/cpp/algoritmi/clasa-a-10a/functii' },
+      { text: 'Functii cu tablouri', link: '/cpp/algoritmi/clasa-a-10a/functii-tablouri' },
       { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
       {
         text: 'Siruri de caractere',
