@@ -7,13 +7,16 @@ const props = defineProps<{ categoryId: string }>()
 
 const category = computed(() => categories.find((c) => c.id === props.categoryId))
 
-interface Card {
-  text: string
-  // lectiile directe ale cardului
-  links: TreeItem[]
-  // sub-sectiuni imbricate (ex. "Cifrele unui numar"), cu lectiile lor
-  groups: { text: string; links: TreeItem[] }[]
-}
+// Un card e fie o sectiune (titlu + lectii/subgrupuri), fie o lectie singura
+// (intregul card e un link catre acea lectie).
+type Card =
+  | {
+      kind: 'section'
+      text: string
+      links: TreeItem[]
+      groups: { text: string; links: TreeItem[] }[]
+    }
+  | { kind: 'lesson'; text: string; link: string }
 
 // Imparte un nod cu copii in: lectii directe (au link) si sub-grupuri (au items).
 function splitChildren(items: TreeItem[]) {
@@ -28,21 +31,16 @@ const cards = computed<Card[]>(() => {
   const cat = category.value
   if (!cat) return []
 
-  const result: Card[] = []
-
-  // Lectiile "libere" de nivel 1 (fara sub-sectiune) -> un singur card initial.
-  const looseLessons = cat.items.filter((it) => it.link)
-  if (looseLessons.length) {
-    result.push({ text: 'Lectii', links: looseLessons, groups: [] })
-  }
-
-  // Fiecare sectiune de nivel 1 -> un card.
-  for (const section of cat.items.filter((it) => it.items?.length)) {
-    const { links, groups } = splitChildren(section.items!)
-    result.push({ text: section.text, links, groups })
-  }
-
-  return result
+  // Pastreaza ordinea din structure.ts. Fiecare item de nivel 1 -> propriul card:
+  // sectiunile devin carduri cu lista de lectii, iar lectiile libere devin
+  // carduri-link dedicate (chiar daca nu apartin unui subfolder).
+  return cat.items.map((item): Card => {
+    if (item.items?.length) {
+      const { links, groups } = splitChildren(item.items)
+      return { kind: 'section', text: item.text, links, groups }
+    }
+    return { kind: 'lesson', text: item.text, link: item.link! }
+  })
 })
 </script>
 
@@ -51,24 +49,36 @@ const cards = computed<Card[]>(() => {
     <h1 class="class-index__title">{{ category.text }}</h1>
 
     <div class="class-index__grid">
-      <section v-for="card in cards" :key="card.text" class="ci-card">
-        <h2 class="ci-card__title">{{ card.text }}</h2>
+      <template v-for="card in cards" :key="card.text">
+        <!-- Lectie singura: intregul card e un link -->
+        <a
+          v-if="card.kind === 'lesson'"
+          class="ci-card ci-card--link"
+          :href="withBase(card.link)"
+        >
+          <h2 class="ci-card__title">{{ card.text }}</h2>
+        </a>
 
-        <ul v-if="card.links.length" class="ci-card__links">
-          <li v-for="lesson in card.links" :key="lesson.link">
-            <a :href="withBase(lesson.link!)">{{ lesson.text }}</a>
-          </li>
-        </ul>
+        <!-- Sectiune: titlu + lista de lectii (si eventuale subgrupuri) -->
+        <section v-else class="ci-card">
+          <h2 class="ci-card__title">{{ card.text }}</h2>
 
-        <div v-for="group in card.groups" :key="group.text" class="ci-group">
-          <h3 class="ci-group__title">{{ group.text }}</h3>
-          <ul class="ci-card__links">
-            <li v-for="lesson in group.links" :key="lesson.link">
+          <ul v-if="card.links.length" class="ci-card__links">
+            <li v-for="lesson in card.links" :key="lesson.link">
               <a :href="withBase(lesson.link!)">{{ lesson.text }}</a>
             </li>
           </ul>
-        </div>
-      </section>
+
+          <div v-for="group in card.groups" :key="group.text" class="ci-group">
+            <h3 class="ci-group__title">{{ group.text }}</h3>
+            <ul class="ci-card__links">
+              <li v-for="lesson in group.links" :key="lesson.link">
+                <a :href="withBase(lesson.link!)">{{ lesson.text }}</a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </template>
     </div>
   </div>
 </template>
@@ -108,6 +118,16 @@ const cards = computed<Card[]>(() => {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* Card-link (lectie singura): intregul card e clickabil */
+.ci-card--link {
+  display: block;
+  text-decoration: none;
+}
+
+.ci-card--link:hover .ci-card__title {
+  color: var(--vp-c-brand-1);
+}
+
 .ci-card__title {
   font-size: 1.15rem;
   font-weight: 600;
@@ -115,6 +135,12 @@ const cards = computed<Card[]>(() => {
   padding: 0;
   border: none;
   color: var(--vp-c-text-1);
+  transition: color 0.2s;
+}
+
+/* In card-link titlul nu mai are margine inferioara (nu urmeaza nimic sub el) */
+.ci-card--link .ci-card__title {
+  margin: 0;
 }
 
 .ci-card__links {
