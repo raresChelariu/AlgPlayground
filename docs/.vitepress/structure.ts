@@ -137,6 +137,13 @@ export const categories: Category[] = [
       { text: 'Pointeri', link: '/cpp/algoritmi/clasa-a-10a/pointeri' },
       { text: 'Alocare dinamica', link: '/cpp/algoritmi/clasa-a-10a/alocare-dinamica' },
       { text: 'Liste inlantuite', link: '/cpp/algoritmi/clasa-a-10a/liste-inlantuite' },
+      {
+        text: 'Structuri de date',
+        collapsed: false,
+        items: [
+          { text: 'Stiva', link: '/cpp/algoritmi/clasa-a-10a/stiva' },
+        ],
+      },
     ],
   },
   {
