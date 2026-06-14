@@ -33,6 +33,7 @@
       "Skill(update-config:*)",
       "PowerShell(Select-Object:*)",
       "PowerShell(git add *)",
+      "PowerShell(git add:*)",
       "PowerShell(git push)",
       "PowerShell(git commit -m *)",
       "WebFetch(domain:vitepress.dev)",
