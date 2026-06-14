@@ -79,12 +79,16 @@ int main()
         else
         {
             if (lg > lgMax)
+            {
                 lgMax = lg;
+            }
             lg = 0;
         }
     }
     if (lg > lgMax)
+    {
         lgMax = lg;
+    }
     cout << lgMax;
     return 0;
 }
@@ -160,7 +164,7 @@ int main()
             }
             lg = 1;
         }
-        b = a;
+        a = b;
     }
     if (lg > lgMax)
     {
