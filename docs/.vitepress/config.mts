@@ -35,7 +35,7 @@ export default withMermaid(
       },
       nav: [
         { text: 'Lectii', link: '/cpp/algoritmi/clasa-a-9a/notiuni-de-baza/expresii' },
-        { text: 'Pseudocod', link: '/cpp/pseudocod/if' },
+        { text: 'Pseudocod', link: '/cpp/pseudocod/elemente-de-baza' },
       ],
       sidebar: categories.map((c) => ({
         text: c.text,

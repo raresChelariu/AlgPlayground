@@ -151,9 +151,24 @@ export const categories: Category[] = [
     text: 'Pseudocod',
     landing: '/cpp/pseudocod/',
     items: [
-      { text: 'Cat timp', link: '/cpp/pseudocod/cat-timp' },
-      { text: 'Pentru', link: '/cpp/pseudocod/pentru' },
-      { text: 'Repeta pana cand', link: '/cpp/pseudocod/repeta-pana-cand' },
+      { text: 'Elemente de baza', link: '/cpp/pseudocod/elemente-de-baza' },
+      {
+        text: 'Decizii',
+        collapsed: false,
+        items: [
+          { text: 'Daca', link: '/cpp/pseudocod/daca' },
+        ],
+      },
+      {
+        text: 'Structuri repetitive',
+        collapsed: false,
+        items: [
+          { text: 'Cat timp', link: '/cpp/pseudocod/cat-timp' },
+          { text: 'Pentru', link: '/cpp/pseudocod/pentru' },
+          { text: 'Repeta pana cand', link: '/cpp/pseudocod/repeta-pana-cand' },
+          { text: 'Executa cat timp', link: '/cpp/pseudocod/executa-cat-timp' },
+        ],
+      },
       {
         text: 'Conversii',
         collapsed: true,
