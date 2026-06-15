@@ -1,147 +1,51 @@
-# Conversia din `repeta ... pana cand` în `cat timp`
+# Conversia din `repeta ... pana cand` in `cat timp`
 
-## De unde pornim?
+## Regula
 
-Ca și la conversia inversă, nu avem inițializări sau incrementări de gestionat. Cele două diferențe rămân aceleași:
-
-| | `repeta ... pana cand` | `cat timp` |
-|---|---|---|
-| Testul are loc | **la final** | **la început** |
-| Continuă când condiția e | **falsă** | **adevărată** |
-| Corpul se execută minim | **1 oară** | **0 ori** |
-
----
-
-Luăm ca punct de plecare:
+Doua schimbari: **inversezi conditia** (`cat timp NOT <conditie>`) si **copiezi corpul o data inainte** de
+bucla, fiindca `repeta` garanteaza o prima executie, iar `cat timp` testeaza de la inceput.
 
 ```
-┌ repeta
-│    <instructiuni>
-└ pana cand <conditie>
+// repeta:                       // cat timp echivalent:
+┌ repeta                         <instructiuni>             ← prima executie garantata
+│    <instructiuni>             ┌ cat timp NOT C executa    ← opusul conditiei de oprire
+└ pana cand C                   │    <instructiuni>
+                                └■
 ```
 
 ---
 
-## Pasul 1 — Sensul condiției (se inversează!)
+## Exemplu
 
-Același raționament ca la conversia `cat timp → repeta`, dar în direcție inversă.
-
-`repeta` se oprește când condiția devine **adevărată** — `cat timp` se oprește când devine **falsă**. Deci inversăm:
+**Problema:** Numarul cifrelor unui numar natural.
 
 ```
-pana cand <conditie>    →    cat timp NOT <conditie>
-```
-
-De exemplu:
-
-```
-pana cand n = 0      →    cat timp n ≠ 0
-pana cand i > n      →    cat timp i ≤ n
-pana cand x ≤ 0      →    cat timp x > 0
-```
-
-```
-// repeta:
-┌ repeta
-│    <instructiuni>
-└ pana cand <conditie>
-
-// cat timp cu conditia inversata:
-┌ cat timp NOT <conditie> executa
-│    <instructiuni>
-└■
+// Cu repeta:                    // Cu cat timp:
+citeste n                        citeste n
+cnt ← 0                          cnt ← 0
+┌ repeta                         cnt ← cnt + 1
+│    cnt ← cnt + 1               n ← [n/10]
+│    n ← [n/10]                 ┌ cat timp n ≠ 0 executa
+└ pana cand n = 0               │    cnt ← cnt + 1
+scrie cnt                       │    n ← [n/10]
+                                └■
+                                scrie cnt
 ```
 
 ---
 
-## Pasul 2 — Prima iterație (obligatorie la `repeta`)
+## De ce functioneaza
 
-La `repeta`, corpul se execută **cel puțin o dată** înainte de primul test. La `cat timp`, dacă condiția e falsă de la început, corpul nu se execută deloc.
+- **Conditia se inverseaza**: `repeta` se opreste cand conditia e adevarata, `cat timp` continua cat e adevarata.
+  Deci `pana cand n = 0` devine `cat timp n ≠ 0`.
+- **Corpul apare de doua ori** — o data inainte de bucla si o data inauntru. Asta pentru ca `repeta` executa
+  corpul macar o data inainte de orice test, iar `cat timp` nu. Prima copie acopera acea executie garantata.
 
-Deci pentru a păstra comportamentul original, trebuie să **executăm instrucțiunile o dată înainte** de a intra în `cat timp`:
+> [!WARNING] Dublarea instructiunilor
+> Spre deosebire de celelalte conversii, aici corpul se **dubleaza**. Daca este complex, codul devine greu de
+> intretinut — exact motivul pentru care `repeta` (si `do...while`) exista ca instructiune separata.
 
-```
-<instructiuni>                        ← prima executie, inainte de test
-┌ cat timp NOT <conditie> executa
-│    <instructiuni>                   ← executiile urmatoare
-└■
-```
-
----
-
-## Rezultatul final
-
-```
-// repeta:
-┌ repeta
-│    <instructiuni>
-└ pana cand <conditie>
-
-// cat timp echivalent:
-<instructiuni>                         ← Pasul 2: prima iteratie garantata
-┌ cat timp NOT <conditie> executa      ← Pasul 1: opusul conditiei de oprire
-│    <instructiuni>
-└■
-```
-
----
-
-## Observație importantă: instrucțiunile se dublează
-
-Spre deosebire de toate conversiile anterioare, aici **instrucțiunile apar de două ori** — o dată înainte de buclă și o dată în interiorul ei. Aceasta este o consecință directă a faptului că `repeta` garantează o primă execuție, iar `cat timp` nu.
-
-Dacă corpul buclei e complex, această dublare face codul mai greu de întreținut — un motiv real pentru care `do...while` (și `repeta`) există ca instrucțiune separată.
-
----
-
-## Când poți simplifica?
-
-Dacă ești **sigur** că la momentul intrării în buclă condiția `pana cand` este întotdeauna falsă (adică bucla s-ar executa oricum cel puțin o dată chiar și cu `cat timp`), atunci prima execuție din afara buclei este redundantă și poți scrie direct:
-
-```
-┌ cat timp NOT <conditie> executa
-│    <instructiuni>
-└■
-```
-
-Dar aceasta nu mai este o echivalență generală — funcționează doar în acel context specific.
-
----
-
-## Exemplu complet
-
-**Problema:** Numărul cifrelor unui număr natural.
-
-```
-// Cu repeta:
-citeste n
-cnt ← 0
-┌ repeta
-│    cnt ← cnt + 1
-│    n ← [n/10]
-└ pana cand n = 0
-scrie cnt
-```
-
-Știm că orice număr natural are cel puțin o cifră, deci corpul se va executa mereu cel puțin o dată. Dar pentru o echivalență completă:
-
-```
-// Cu cat timp (echivalent complet):
-citeste n
-cnt ← 0
-cnt ← cnt + 1                    ← Pasul 2: prima iteratie garantata
-n ← [n/10]
-┌ cat timp n ≠ 0 executa         ← Pasul 1: opusul lui n = 0
-│    cnt ← cnt + 1
-│    n ← [n/10]
-└■
-scrie cnt
-```
-
----
-
-## Regula generală
-
-1. **Inversează condiția** — `pana cand <conditie>` devine `cat timp NOT <conditie>`
-2. **Copiază instrucțiunile o dată înainte** de buclă — pentru a garanta prima execuție
-3. **Renunță la dublare** doar dacă ești sigur că prima iterație ar fi oricum garantată
+> [!TIP] Cand poti renunta la copia din afara
+> Daca esti sigur ca bucla s-ar executa oricum cel putin o data (ex. orice numar natural are macar o cifra),
+> prima copie e redundanta si poti scrie direct doar `cat timp NOT C`. Nu mai e o echivalenta generala, doar
+> una valabila in acel context.

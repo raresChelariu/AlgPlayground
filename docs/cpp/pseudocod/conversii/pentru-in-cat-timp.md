@@ -1,168 +1,60 @@
-# Conversia din `pentru` în `cat timp`
+# Conversia din `pentru` in `cat timp`
 
-## De unde pornim?
+## Regula
 
-Instrucțiunea `pentru` face automat **3 lucruri** în spatele scenei, pe care `cat timp` nu le face. Ca să obținem un comportament identic, trebuie să le facem **noi manual**. Să le identificăm pe rând.
-
----
-
-Luăm ca punct de plecare această instrucțiune `pentru`:
+`pentru` face automat **3 lucruri** pe care la `cat timp` trebuie sa le facem manual:
+**initializarea**, **conditia** si **incrementarea**.
 
 ```
-┌ pentru i ← 1, n executa
-│    <instructiuni>
-└■
-```
-
-Și urmărim exact ce se întâmplă la fiecare pas al execuției ei:
-
-```
-i ← 1                  → înainte de orice, variabila primește valoarea initiala
-cat timp i ≤ n         → se verifica daca mai putem executa instructiunile
-    <instructiuni>     → se executa corpul buclei
-    i ← i + 1          → la final, variabila este incrementata automat
-```
-
-Aceștia sunt cei **3 pași ascunși** ai instrucțiunii `pentru`. Acum îi facem expliciți.
-
----
-
-## Pasul 1 — Inițializarea
-
-`pentru` inițializează singur variabila (`i ← 1`) ca parte din sintaxa sa. `cat timp` nu știe nimic despre nicio variabilă, deci trebuie s-o inițializăm **noi, înainte** de buclă.
-
-```
-// pentru face asta automat:
-┌ pentru i ← 1, n executa
-│    ...
-└■
-
-// cat timp nu stie de unde sa inceapa, ii spunem noi:
-i ← 1
-┌ cat timp ... executa
-│    ...
-└■
+// pentru:                       // cat timp echivalent:
+┌ pentru i ← a, b executa        i ← a                      ← 1. initializam noi
+│    <instructiuni>              ┌ cat timp i ≤ b executa    ← 2. conditia scrisa explicit
+└■                              │    <instructiuni>
+                                │    i ← i + 1              ← 3. incrementam noi, la final
+                                └■
 ```
 
 ---
 
-## Pasul 2 — Condiția de continuare
-
-`pentru i ← 1, n` înseamnă: *„repetă atâta timp cât `i` nu a depășit `n`"*, adică `i ≤ n`. Această condiție există implicit în `pentru`, dar `cat timp` are nevoie de ea **explicit**.
-
-```
-// pentru verifica implicit i ≤ n la fiecare pas:
-┌ pentru i ← 1, n executa
-│    ...
-└■
-
-// la cat timp o scriem noi explicit:
-i ← 1
-┌ cat timp i ≤ n executa
-│    ...
-└■
-```
-
----
-
-## Pasul 3 — Incrementarea
-
-După fiecare execuție a corpului, `pentru` incrementează automat variabila cu pasul (`i ← i + 1`). `cat timp` nu face nimic cu variabila, deci trebuie s-o incrementăm **noi, la sfârșitul corpului** buclei.
-
-De ce la **sfârșit**? Pentru că `pentru` execută întâi instrucțiunile și abia **după** incrementează — trebuie să păstrăm această ordine.
-
-```
-// pentru incrementeaza automat dupa fiecare iteratie:
-┌ pentru i ← 1, n executa
-│    <instructiuni>
-└■                        ← aici i creste singur
-
-// la cat timp o facem noi, la finalul corpului:
-i ← 1
-┌ cat timp i ≤ n executa
-│    <instructiuni>
-│    i ← i + 1            ← trebuie sa fie ultimul lucru din corp
-└■
-```
-
----
-
-## Rezultatul final
-
-Punând cei 3 pași împreună:
-
-```
-// pentru:
-┌ pentru i ← 1, n executa
-│    <instructiuni>
-└■
-
-// cat timp echivalent:
-i ← 1                      ← Pasul 1: initializam noi
-┌ cat timp i ≤ n executa   ← Pasul 2: conditia scrisa explicit
-│    <instructiuni>
-│    i ← i + 1             ← Pasul 3: incrementam noi, la final
-└■
-```
-
----
-
-## Ce se schimbă când pasul este negativ?
-
-Dacă pasul este `-1`, aceeași logică se aplică, dar în sens invers. Să urmărim ce face `pentru` în acest caz:
-
-```
-┌ pentru i ← n, 1, -1 executa
-│    <instructiuni>
-└■
-```
-
-`i` pornește de la `n` și **scade** la fiecare pas. Bucla continuă cât timp `i` nu a coborât **sub** `1`, adică cât timp `i ≥ 1`. Aplicând aceeași regulă în 3 pași:
-
-- **Pasul 1** — inițializăm: `i ← n`
-- **Pasul 2** — condiția se inversează: `i ≥ 1` (nu mai e `≤`, ci `≥` — pentru că mergem în jos)
-- **Pasul 3** — decrementăm: `i ← i - 1` (nu mai e `+ 1`, ci `- 1`)
-
-```
-i ← n
-┌ cat timp i ≥ 1 executa
-│    <instructiuni>
-│    i ← i - 1
-└■
-```
-
----
-
-## Regula generală
-
-Acum că știm de ce, regula devine ușor de reținut:
-
-1. **Inițializează** variabila înainte de buclă — `pentru` o făcea automat
-2. **Scrie condiția explicit** în `cat timp` — `pentru` o avea implicită
-3. **Incrementează / decrementează manual** la sfârșitul corpului — `pentru` o făcea automat
-
----
-
-## Exemplu complet
+## Exemplu
 
 **Problema:** Suma primelor `n` numere naturale.
 
 ```
-// Cu pentru:
-citeste n
-S ← 0
-┌ pentru i ← 1, n executa
-│    S ← S + i
-└■
-scrie S
-
-// Cu cat timp (aplicand cei 3 pasi):
-citeste n
-S ← 0
-i ← 1                      ← Pasul 1
-┌ cat timp i ≤ n executa   ← Pasul 2
-│    S ← S + i
-│    i ← i + 1             ← Pasul 3
-└■
-scrie S
+// Cu pentru:                    // Cu cat timp:
+citeste n                        citeste n
+S ← 0                            S ← 0
+┌ pentru i ← 1, n executa        i ← 1
+│    S ← S + i                   ┌ cat timp i ≤ n executa
+└■                              │    S ← S + i
+scrie S                         │    i ← i + 1
+                                └■
+                                scrie S
 ```
+
+---
+
+## De ce functioneaza
+
+`pentru i ← a, b` desfacut pas cu pas inseamna exact:
+
+```
+i ← a                  → initializare, o singura data
+cat timp i ≤ b         → test la inceput
+    <instructiuni>     → corpul buclei
+    i ← i + 1          → incrementare, dupa corp
+```
+
+- **Initializarea** se face **inainte** de bucla — `cat timp` nu stie de unde sa porneasca.
+- **Incrementarea** se pune **ultima in corp**, pentru ca `pentru` mai intai executa instructiunile si abia apoi creste `i`.
+
+> [!NOTE] Pas negativ
+> La un `pentru` descrescator (`pentru i ← n, 1, -1`), aplici aceeasi idee in sens invers:
+> initializezi `i ← n`, conditia devine `i ≥ 1`, iar in corp scrii `i ← i - 1`.
+> ```
+> i ← n
+> ┌ cat timp i ≥ 1 executa
+> │    <instructiuni>
+> │    i ← i - 1
+> └■
+> ```
