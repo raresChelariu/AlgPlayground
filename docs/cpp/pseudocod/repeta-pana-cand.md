@@ -18,12 +18,12 @@ C --> |Adevarat| RP(((Restul programului ...)))
 
 **Mod de executie:**
 
-1. Se execută `Instructiune`
-2. Se evaluează `Conditia`
-3. Dacă este **falsă**, se revine la pasul 1
-4. Dacă este **adevărată**, se trece la următoarea instrucțiune
+1. Se executa `Instructiune`
+2. Se evalueaza `Conditia`
+3. Daca este **falsa**, se revine la pasul 1
+4. Daca este **adevarata**, se trece la urmatoarea instructiune
 
-**Important:** Instrucțiunile se execută **cel puțin o dată**, indiferent de valoarea condiției — testarea conditiei are loc **la final**.
+**Important:** Instructiunile se executa **cel putin o data**, indiferent de valoarea conditiei — testarea conditiei are loc **la final**.
 
 ---
 
@@ -33,22 +33,23 @@ C --> |Adevarat| RP(((Restul programului ...)))
 s ← 0
 ┌ repeta
 │    s ← s + n % 10
+│    n ← [n/10]
 └ pana cand n = 0
 ```
 
 ---
 
-**Echivalența cu `do...while` din C/C++**
+**Echivalenta cu `do...while` din C/C++**
 
-Instrucțiunea `repeta ... pana cand` este echivalentă cu `do...while` din C/C++, cu o singură diferență importantă: **sensul condiției este inversat**.
+Instructiunea `repeta ... pana cand` este echivalenta cu `do...while` din C/C++, cu o singura diferenta importanta: **sensul conditiei este inversat**.
 
 | Pseudocod | C/C++ |
 |---|---|
-| Se repetă **până când** condiția e **adevărată** | Se repetă **cât timp** condiția e **adevărată** |
+| Se repeta **pana cand** conditia e **adevarata** | Se repeta **cat timp** conditia e **adevarata** |
 
-Prin urmare, condiția din `pana cand` corespunde **negației** condiției din `do...while`:
+Prin urmare, conditia din `pana cand` corespunde **negatiei** conditiei din `do...while`:
 
-```c
+```cpp
 // C/C++
 do {
     Instructiune;
@@ -62,7 +63,11 @@ do {
 └ pana cand <conditie>
 ```
 
-**Exemplu concret** – Numărul cifrelor unui număr natural:
+> [!TIP] Varianta cu acelasi sens
+> Daca vrei o bucla cu test la final dar **fara** inversarea conditiei, exista
+> [`executa ... cat timp`](/cpp/pseudocod/executa-cat-timp), care corespunde direct lui `do...while`.
+
+**Exemplu concret** – Numarul cifrelor unui numar natural:
 
 ```
 // Pseudocod
@@ -75,7 +80,7 @@ cnt ← 0
 scrie cnt
 ```
 
-```c
+```cpp
 // C/C++ echivalent
 cin >> n;
 int cnt = 0;

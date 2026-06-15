@@ -7,7 +7,7 @@
 └■
 ```
 
-## Exemplu 
+## Exemplu
 
 ### Suma numerelor naturale impare mai mici sau egale cu n:
 
@@ -36,21 +36,27 @@ PF --> C
 
 ## Observatii
 
-### Dacă `pas` **nu este menționat**, se consideră implicit valoarea `1`, deci variabila crește cu 1 la fiecare iterație (for crescător).
+### Pasul implicit
 
-### **Exemplu cand pasul este omis**
+Daca `pas` **nu este mentionat**, se considera implicit valoarea `1`, deci variabila creste cu 1 la
+fiecare iteratie (for crescator).
 
-### Se calculeaza produsul numerelor de la 5 la 10
+**Exemplu** – Produsul numerelor de la 5 la 10:
+
 ```
 P ← 1
 ┌ pentru i ← 5, 10 executa
-│    P ← P * i 
+│    P ← P * i
 └■
 ```
 
-### Dacă `pas` este **negativ** (de exemplu `-1`), variabila **scade** la fiecare iterație, rezultând un **for descrescător**. În acest caz, condiția de continuare devine `variabila ≥ expresie finala`, iar bucla se termină când variabila coboară sub valoarea finală.
+### Pasul negativ
 
-### **Exemplu pas negativ** – Afișarea numerelor de la `9` la `4`:
+Daca `pas` este **negativ** (de exemplu `-1`), variabila **scade** la fiecare iteratie, rezultand un
+**for descrescator**. In acest caz, conditia de continuare devine `variabila ≥ expresie finala`, iar bucla
+se termina cand variabila coboara sub valoarea finala.
+
+**Exemplu** – Afisarea numerelor de la `9` la `4`:
 
 > Programul va afisa 9 8 7 6 5 4
 

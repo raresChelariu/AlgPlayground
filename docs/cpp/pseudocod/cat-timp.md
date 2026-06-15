@@ -18,15 +18,15 @@ Instr --> C
 
 **Mod de executie:**
 
-1. Se evaluează `<conditie>`
-2. Dacă este **adevărată**, se execută `Instructiune` și se revine la pasul 1
-3. Dacă este **falsă**, se trece la următoarea instrucțiune
+1. Se evalueaza `<conditie>`
+2. Daca este **adevarata**, se executa `Instructiune` si se revine la pasul 1
+3. Daca este **falsa**, se trece la urmatoarea instructiune
 
-**Important:** Dacă condiția este de la început **falsă**, instrucțiunile **NU se vor executa** — testul are loc **la început**.
+**Important:** Daca conditia este de la inceput **falsa**, instructiunile **NU se vor executa** — testul are loc **la inceput**.
 
 ---
 
-**Exemplu** – Suma cifrelor unui număr natural:
+**Exemplu** – Suma cifrelor unui numar natural:
 
 ```
 citeste n
@@ -40,15 +40,15 @@ scrie S
 
 ---
 
-**Echivalența cu `while` din C/C++**
+**Echivalenta cu `while` din C/C++**
 
-Instrucțiunea `cat timp ... executa` este echivalentă directă cu `while` din C/C++ — **condiția are același sens** în ambele variante, fără nicio inversare.
+Instructiunea `cat timp ... executa` este echivalenta directa cu `while` din C/C++ — **conditia are acelasi sens** in ambele variante, fara nicio inversare.
 
 | Pseudocod | C/C++ |
 |---|---|
-| Se repetă **cât timp** condiția e **adevărată** | Se repetă **cât timp** condiția e **adevărată** |
+| Se repeta **cat timp** conditia e **adevarata** | Se repeta **cat timp** conditia e **adevarata** |
 
-```c
+```cpp
 // C/C++
 while (conditie) {
     InstructiuneCatTimp;
@@ -62,7 +62,7 @@ while (conditie) {
 └■
 ```
 
-**Exemplu concret** – Suma cifrelor unui număr natural:
+**Exemplu concret** – Suma cifrelor unui numar natural:
 
 ```
 // Pseudocod
@@ -75,7 +75,7 @@ S ← 0
 scrie S
 ```
 
-```c
+```cpp
 // C/C++ echivalent
 cin >> n;
 int S = 0;
