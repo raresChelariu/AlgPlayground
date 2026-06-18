@@ -34,12 +34,28 @@ Dupa `strcpy(dest, sursa)`:
 
 ## Cu offset
 
-`strcpy` poate fi apelat cu adrese de mijloc:
+`strcpy` poate fi apelat pentru adrese ce NU sunt **neaparat** inceputul sirului:
 
 ```cpp
 strcpy(s + 3, t + 2);
 // s[3]=t[2]; s[4]=t[3]; s[5]=t[4]; ... pana la '\0'
 ```
+
+Initial:
+
+| index | 0 | 1 | 2 | 3 | 4  | 5  | 6  | 7  | 8  |  
+|-------|---|---|---|---|----|----|----|----|----|
+| s     | a | b | e | c | e  | d  | a  | r  | \0 |
+| t     | p | i | **s** | **o** | **i**  | **\0** |    |    |    |
+
+
+Final:
+
+| index | 0 | 1 | 2 | 3 | 4  | 5  | 6  | 7  | 8  |  
+|-------|---|---|---|---|----|----|----|----|----|
+| s     | a | b | e | **s** | **o** | **i**  | **\0** | r  | \0 |
+| t     | p | i | **s** | **o** | **i**  | **\0** |    |    |    |
+
 
 ---
 
