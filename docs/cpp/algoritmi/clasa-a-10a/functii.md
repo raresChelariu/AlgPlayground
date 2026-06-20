@@ -1,15 +1,18 @@
 # Functii
 
-O **functie** (sau "subprogram") este o bucata de cod cu nume, pe care o putem **apela** de oriunde din program. Functiile ne permit sa scriem o operatie o singura data si sa o reutilizam, sa impartim un program lung in bucati mai mici si sa ascundem detaliile unei operatii in spatele unui nume sugestiv.
+- O **functie** (sau "subprogram") este un grup de instructiuni ce are un nume
+- Functiile ne permit:
+  - sa impartim un program lung in bucati mai mici
+  - sa scriem o secventa de instructiuni ce are un anume scop (ex: sa calculam oglinditul) si sa o reutilizam
 
 > [!NOTE] Observatie
 > "Functie" si "subprogram" sunt sinonime. La fel, "parametru" si "argument".
 
 ---
 
-## Sintaxa
+## Definitia unei functii - Sintaxa
 
-O functie are doua parti: **antetul** (semnatura) si **corpul** (codul efectiv).
+Definitia unei functii are doua parti: **antetul** (semnatura) si **corpul** (codul efectiv).
 
 ```cpp
 tipReturnat numeFunctie(listaParametrilor)
@@ -18,9 +21,39 @@ tipReturnat numeFunctie(listaParametrilor)
 }
 ```
 
-- `tipReturnat` — tipul valorii pe care o intoarce functia (`int`, `float`, `double`, `bool`, ...). Daca functia nu intoarce nimic, scriem `void`.
+- `tipReturnat` 
+  - tipul valorii pe care o intoarce functia (`int`, `float`, `double`, `bool`, ...)
+  - Daca functia nu intoarce nimic, scriem `void`.
 - `numeFunctie` — numele prin care apelam functia.
-- `listaParametrilor` — `tipParam1 numeParam1, tipParam2 numeParam2, ...` (poate fi si goala).
+- `listaParametrilor` 
+
+Un exemplu este chiar functia `int main`:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    return 0;
+}
+```
+
+Ce observam in exemplul de mai sus:
+- functia se numeste `main`
+- tipul de returnat este `int`
+- adica este tipul valorii folosite la instructiunea `return`
+- dupa cuvantul `main` urmeaza parantezele rotunde goale
+  - deci vom spune ca lista parametrilor este goala
+  - adica functia nu are parametri
+
+### Lista parametrilor 
+
+Sintaxa:
+
+```cpp
+tipParam1 numeParam1, tipParam2 numeParam2, ... , tipParamK numeParamK
+```
 
 **Exemplu de lista de parametri:**
 
@@ -29,6 +62,89 @@ int a, float x
 // 2 parametri:
 //   primul - se numeste a, este de tip int
 //   al 2 lea - se numeste x, este de tip float
+```
+
+> [!NOTE] Observatie
+> Lista parametrilor poate fi si goala.
+
+
+> [!WARNING] Atentie!
+> Trebuie scris tipul de date al parametrului pentru FIECARE parametru
+
+Exemplu gresit de lista de parametri:
+
+```cpp
+int a, b, c
+```
+
+Exemplu corect:
+```cpp
+int a, int b, int c
+```
+
+## Exemplu — Functie ce calculeaza triplul unui numar
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// aici am definit functia "triplu"
+
+int triplu(int x) 
+{
+    return 3 * x;
+}
+int main()
+{
+    // dar nu am folosit-o
+    return 0;
+}
+```
+
+**Afisare:**
+```
+```
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// aici am definit functia "triplu"
+int triplu(int x) 
+{
+    return 3 * x;
+}
+int main()
+{
+    // si aici m-am folosit de ea
+    // adica am apelat functia "triplu" cu valoarea 7 pentru parametrul "x"
+    cout << triplu(7);
+    return 0;
+}
+```
+
+**Afisare:**
+```
+21
+```
+
+## Apelul unei functii
+
+- en: **function call**
+- o definitie de functie este ca o reteta, de ex: de cozonac
+  - una e sa scriem reteta pe foaie si e altceva sa facem cozonacul
+- ca sa folosim o functie trebuie sa o apelam
+
+### Sintaxa apel:
+
+```cpp
+numeFunctie(valPtParam1, valPtParam2, ... , valPtParamK);
+```
+
+### Sintaxa apel pentru functie fara parametri:
+
+```cpp
+numeFunctie();
 ```
 
 ---
@@ -135,6 +251,14 @@ int main()
 ```
 
 **Afisare:** (nimic)
+
+> [!WARNING] Atentie 
+> ```
+> Nu confunda returnarea cu afisarea!
+> Returnarea inseamna a da inapoi un rezultat celui ce a apelat functia.
+> Afisarea se intampla doar cand folosesc instructiunea `cout` !
+> ```
+
 
 ### Exemplul 2: folosirea valorii returnate
 
