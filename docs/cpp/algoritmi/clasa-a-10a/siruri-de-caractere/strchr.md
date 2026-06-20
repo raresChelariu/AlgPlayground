@@ -146,3 +146,38 @@ e
 ```
 Este vocala
 ```
+
+### Toate aparitiile unui caracater intr-un cuvant
+
+```cpp
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+char cuv[100], c;
+char* p;
+
+int main()
+{
+    cin >> cuv >> c;
+    p = strchr(cuv, c);
+    while (p != NULL)
+    {
+        cout << p - cuv << " ";
+        p = strchr(p + 1, cuv);
+    }
+
+    return 0;
+}
+```
+
+**Intrare:**
+```
+abecedarele
+e
+```
+
+**Afisare:**
+```
+2 4 8 10
+```
