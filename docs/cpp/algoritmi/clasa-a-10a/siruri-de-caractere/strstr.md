@@ -5,7 +5,9 @@
 char* strstr(char* s, char* sub);
 ```
 
-`strstr` vine de la *str*ing + sub*str*ing. **Efect:** cauta **prima aparitie** a subsirului `sub` in sirul `s`. Returneaza adresa de inceput a primei aparitii, sau `NULL` daca `sub` nu se gaseste.
+- `strstr` vine de la *str*ing + sub*str*ing. 
+- **Efect:** cauta **prima aparitie** a subsirului `sub` in sirul `s`. 
+- Returneaza adresa de inceput a primei aparitii, sau `NULL` daca `sub` nu se gaseste.
 
 ---
 
