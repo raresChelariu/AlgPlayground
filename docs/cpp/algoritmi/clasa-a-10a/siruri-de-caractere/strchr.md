@@ -5,7 +5,9 @@
 char* strchr(char* s, char c);
 ```
 
-`strchr` vine de la *str*ing + *ch*a*r*acter. **Efect:** cauta **prima aparitie** a caracterului `c` in sirul `s`. Returneaza adresa unde a gasit caracterul, sau `NULL` daca nu exista.
+- `strchr` vine de la *str*ing + *ch*a*r*acter. 
+- **Efect:** cauta **prima aparitie** a caracterului `c` in sirul `s`. 
+- Returneaza adresa unde a gasit caracterul, sau `NULL` daca nu exista.
 
 ---
 

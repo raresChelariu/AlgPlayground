@@ -5,7 +5,9 @@
 char* strcat(char* dest, char* sursa);
 ```
 
-`strcat` vine de la *str*ing + *cat*enare. **Efect:** lipeste `sursa` la sfarsitul lui `dest`. Returneaza `dest`.
+- `strcat` vine de la *str*ing + con*cat*enare. 
+- **Efect:** lipeste `sursa` la sfarsitul lui `dest`. 
+- Returneaza `dest`.
 
 Intern, `strcat` gaseste mai intai sfarsitul lui `dest` (prima pozitie cu `'\0'`), apoi copiaza `sursa` incepand de acolo:
 
@@ -84,4 +86,4 @@ Ana Ionescu
 ```
 
 > [!WARNING] Atentie
-> `dest` trebuie sa aiba spatiu suficient pentru ambele siruri impreuna. `strcat` nu verifica dimensiunea — daca `dest` este prea mic, comportamentul este nedefinit.
+> `dest` trebuie sa aiba spatiu suficient pentru ambele siruri impreuna. `strcat` nu verifica dimensiunea — daca `dest` este prea mic, comportamentul este nedefinit, pentru ca "iesim din vector".
