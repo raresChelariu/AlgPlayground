@@ -75,15 +75,21 @@ using namespace std;
 
 char s[100];
 char* p;
+int pozitie;
 
 int main()
 {
     cin >> s;
     p = strchr(s, 'a');
+    pozitie = p - s;
     if (p != NULL)
-        cout << "Prima 'a' la pozitia: " << p - s;
+    {
+        cout << "Primul 'a' la pozitia: " << pozitie;
+    }
     else
+    {
         cout << "Caracterul nu exista";
+    }    
     return 0;
 }
 ```
@@ -95,5 +101,48 @@ abecedar
 
 **Afisare:**
 ```
-Prima 'a' la pozitia: 0
+Primul 'a' la pozitia: 0
+```
+
+
+## Cum verific ca un caracter este vocala ?
+
+
+> [!NOTE] Observatie
+> Un caracter este vocala cand este `a`, `e`, `i`, `o` sau `u`.
+
+```cpp
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+char vocale[] = "aeiouAEIOU";
+char c;
+bool esteVocala;
+
+int main()
+{
+    cin >> c;
+    esteVocala = strchr(vocale, c) != NULL;
+    if (esteVocala)
+    {
+        cout << "Este vocala";
+    }
+    else
+    {
+        cout << "Nu este vocala";
+    }
+
+    return 0;
+}
+```
+
+**Intrare:**
+```
+e
+```
+
+**Afisare:**
+```
+Este vocala
 ```
