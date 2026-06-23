@@ -31,6 +31,11 @@ char* strtok(char* s, char* sep);
 
 Sirul initial: `,.,ana are,..,mere.,`
 
+| index | 0  | 1  | 2  | 3 | 4 | 5 | 6  | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18  | 19 | 20 |
+|-------|----|----|----|----|---|---|----|---|---|---|----|----|----|----|----|----|----|----|----|-----|-----|
+| s     | ,  | .  | ,  | a  | n | a |   | a | r | e | , | .  | .  | ,  | m  | e  | r  | e  | . | ,   | \0 |
+
+
 | apel | parametru | token returnat | adresa returnata |
 |------|-----------|---------------|-----------------|
 | 1 | `s`    | `"ana"`  | `s + 3`  |
@@ -40,9 +45,9 @@ Sirul initial: `,.,ana are,..,mere.,`
 
 Sirul `s` dupa toate apelurile (separatorii devin `'\0'`):
 
-| index | 0  | 1  | 2  | 3 | 4 | 5 | 6  | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18  | 19 |
-|-------|----|----|----|----|---|---|----|---|---|---|----|----|----|----|----|----|----|----|----|-----|
-| s     | ,  | .  | ,  | a  | n | a | \0 | a | r | e | \0 | .  | .  | ,  | m  | e  | r  | e  | \0 | ,   |
+| index | 0  | 1  | 2  | 3 | 4 | 5 | 6  | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18  | 19 | 20 |
+|-------|----|----|----|----|---|---|----|---|---|---|----|----|----|----|----|----|----|----|----|-----|-----|
+| s     | ,  | .  | ,  | a  | n | a | \0 | a | r | e | \0 | .  | .  | ,  | m  | e  | r  | e  | \0 | ,   | \0 |
 
 > [!WARNING] Atentie
 > `strtok` **modifica sirul original**. Daca ai nevoie de el dupa parcurgere, fa o copie cu `strcpy` inainte.
@@ -66,7 +71,9 @@ Echivalent cu `for`:
 ```cpp
 char* p;
 for (p = strtok(s, sep); p != NULL; p = strtok(NULL, sep))
+{
     cout << p << '\n';
+}
 ```
 
 ---
@@ -85,7 +92,9 @@ char* p;
 int main()
 {
     for (p = strtok(s, sep); p != NULL; p = strtok(NULL, sep))
+    {
         cout << p << '\n';
+    }
     return 0;
 }
 ```
@@ -109,7 +118,8 @@ char* mytok(char* s, char* sep)
     static char* urmatorul = NULL;
     char* token;
     int i, j;
-    if (s == NULL)
+    bool continuiLaUrmatorul = s == NULL;
+    if (continuiLaUrmatorul)
     {
         s = urmatorul;
         if (urmatorul == NULL)
@@ -117,10 +127,12 @@ char* mytok(char* s, char* sep)
             return NULL;
         }
     }
+    bool esteSeparator;
     token = NULL;
     for (i = 0; s[i] != '\0'; i++)
     {
-        if (strchr(sep, s[i]) == NULL)
+        esteSeparator = strchr(sep, s[i]) != NULL;
+        if (!esteSeparator)
         {
             token = s + i;
             break;
@@ -128,17 +140,25 @@ char* mytok(char* s, char* sep)
     }
     if (token == NULL)
     {
+        // am ajuns la finalul sirului
+        // si nu am apucat sa ii dau lui token o adresa a unui non-separator
+        // deci NU am inceput de token
         return NULL;
     }
     for (j = i + 1; s[j] != '\0'; j++)
     {
-        if (strchr(sep, s[j]) != NULL)
+        esteSeparator = strchr(sep, s[j]) != NULL;
+        if (esteSeparator)
         {
-            urmatorul = s + j + 1;
             s[j] = '\0';
+            urmatorul = s + j + 1;
             return token;
         }
     }
+    // pana la finalul sirului (unde am \0 )
+    // NU s-a mai gasit vreun separator
+    // deci acest token este sufix pentru sirul meu
+    // si la urmatorul strtok(), SIGUR NU va mai fi vreun token
     urmatorul = NULL;
     return token;
 }
