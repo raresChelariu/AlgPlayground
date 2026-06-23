@@ -5,13 +5,21 @@
 char* strtok(char* s, char* sep);
 ```
 
-`strtok` vine de la *str*ing + *tok*en (bucata). **Efect:** extrage pe rand **token-urile** (bucatile de text) dintr-un sir, ignorand separatorii. Un separator este orice caracter care apare in sirul `sep`.
+- `strtok` vine de la *str*ing + *tok*en (bucata). 
+- **Scop:** extrage pe rand **token-urile** (bucatile de text) dintr-un sir, ignorand separatorii. 
+- Un separator este orice caracter care apare in sirul `sep`.
 
 ---
 
 ## Cum functioneaza
 
-`strtok` modifica sirul original, punand `'\0'` in locul separatorilor, si tine intern o **adresa curenta** (variabila ascunsa statica).
+- Vom numi caracter-cuvant orice caracter ce NU este separator
+- `strtok` mereu cauta prima adresa unde ar gasi un caracter-cuvant
+- aceea va fi adresa pe care o returnam
+- dupa ce a gasit acea adresa
+  - cauta prima adresa unde am separator
+  - acolo va pune caracterul `\0` - e sfarsitul de cuvant
+- si tine intern o **adresa curenta** (variabila "ascunsa").
 
 - **Primul apel:** `strtok(s, sep)` — se da sirul.
 - **Apelurile urmatoare:** `strtok(NULL, sep)` — `NULL` inseamna "continua de unde ai ramas".
@@ -105,24 +113,32 @@ char* mytok(char* s, char* sep)
     {
         s = urmatorul;
         if (urmatorul == NULL)
+        {
             return NULL;
+        }
     }
     token = NULL;
     for (i = 0; s[i] != '\0'; i++)
+    {
         if (strchr(sep, s[i]) == NULL)
         {
             token = s + i;
             break;
         }
+    }
     if (token == NULL)
+    {
         return NULL;
+    }
     for (j = i + 1; s[j] != '\0'; j++)
+    {
         if (strchr(sep, s[j]) != NULL)
         {
             urmatorul = s + j + 1;
             s[j] = '\0';
             return token;
         }
+    }
     urmatorul = NULL;
     return token;
 }
