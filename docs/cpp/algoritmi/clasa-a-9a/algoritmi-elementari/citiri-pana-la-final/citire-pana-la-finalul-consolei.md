@@ -1,7 +1,6 @@
 # Citire pana la finalul consolei
 
 ```cpp
-// citire pana la finalul consolei
 #include <iostream>
 using namespace std;
 int n, suma;
@@ -19,3 +18,10 @@ int main()
     return 0;
 }
 ```
+
+> [!NOTE] Observatie
+> Daca doar dam numere in consola, vom observa ca programul nu mai afiseaza, 
+> pentru ca va revenin la conditia while-ului sa mai citeasca inca o valoare.
+> Pentru a incheia citirile vom apasa CTRL + Z (va aparea pe ecran ^Z)
+> si vom apasa ENTER. 
+> CTRL + Z este marcajul pentru incheierea citirilor la consola.
