@@ -60,7 +60,7 @@ CMMDC = 12
 
 ---
 
-## CMMDC — algoritmul lui Euclid
+## CMMDC — algoritmul lui Euclid prin impartiri repetate
 
 **Ideea:** la fiecare pas inlocuim perechea `(a, b)` cu `(b, a % b)`. Procesul se opreste cand `b` devine `0`; in acel moment `a` este CMMDC-ul.
 
@@ -115,6 +115,71 @@ CMMDC = 12
 > Daca avem nevoie de valorile initiale ale lui `a` si `b` dupa apel, le salvam in alte variabile inainte de bucla (pentru ca bucla le modifica).
 
 ---
+
+## CMMDC — algoritmul lui Euclid prin scaderi repetate
+
+**Ideea:** la fiecare pas inlocuim perechea `(a, b)` cu `(a, a - b)` (unde `a > b`). Procesul se opreste cand `a == b`; in acel moment `a` si `b` sunt CMMDC-ul.
+
+### Trasare pentru `a = 24`, `b = 36`
+
+> [!NOTE] Observatie
+> Mereu din numarul mai mare voi scadea numarul mai mic
+
+| Pas | `a` | `b` | 
+|-----|-----|-----|
+| 0   | 24  | 36  |
+| 1   | 24  | 12  |
+| 2   | 12  | 12  |
+
+CMMDC = 12.
+
+### Programul
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int a, b, r;
+
+int main()
+{
+    cin >> a >> b;
+    while (a != b)
+    {
+        if (a > b)
+        {
+            a = a - b;
+        }
+        else
+        {
+            b = b - a;
+        }
+    }
+    cout << "CMMDC = " << a;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+24 36
+```
+**Afisare:**
+```
+CMMDC = 12
+```
+
+> [!Warning] Atentie
+> Aceasta varianta e mult mai inceata decat varianta cu impartiri repetate.
+
+> [!TIP] Sfat
+> Varianta aceasta o intalnim in variante de BAC cu pseudocod. E importanta pentru a rezolva usor punctul b.
+
+> [!TIP] Sfat
+> Daca avem nevoie de valorile initiale ale lui `a` si `b` dupa apel, le salvam in alte variabile inainte de bucla (pentru ca bucla le modifica).
+
+
+--- 
 
 ## CMMMC pornind de la CMMDC
 

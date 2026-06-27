@@ -156,13 +156,26 @@ struct Elev {
     float medie;
 };
 
-Elev e = {2008, 9.50f};   // anNastere = 2008, medie = 9.50
+Elev e = {2008, 9.5};   // anNastere = 2008, medie = 9.5
+
+/* 
+ECHIVALENT CU:
+Elev e;
+e.anNastere = 2008;
+e.medie = 9.5
+*/
 
 struct Punct {
     int x, y;
 };
 
 Punct p = {3, 4};         // x = 3, y = 4
+/* 
+ECHIVALENT CU:
+Punct p;
+p.x = 3;
+p.y = 4;
+*/
 ```
 
 > [!IMPORTANT] Important
@@ -317,7 +330,7 @@ Elev v[100];   // vector de maxim 100 de elevi
 int n;         // numarul efectiv de elevi
 ```
 
-**Citirea a `n` structuri:**
+**Citirea a `n` structuri si afisarea lor:**
 
 ```cpp
 struct Elev {
@@ -328,25 +341,39 @@ struct Elev {
 Elev v[21];
 
 int n, i;
-// ...
+// Citirea
 cin >> n;
 for (i = 1; i <= n; i++)
 {
     cin >> v[i].nume >> v[i].clasa >> v[i].medie;
 }
-```
-
-**Afisarea vectorului:**
-
-```cpp
+// Afisare pe fiecare linie a mediei, numelui si clasa
 for (i = 1; i <= n; i++)
 {
-    cout << v[i].nume << " " << v[i].clasa << " " << v[i].medie << endl;
+    cout << v[i].medie << " " << v[i].nume << " " << v[i].clasa << endl;
 }
 ```
 
+**Intrare:**
+```
+4
+Ionel 9 4
+Maria 10 7
+Florin 9 3
+Andra 12 2
+```
+
+**Afisare:**
+```
+4
+4 Ionel 9
+7 Maria 10
+3 Florin 9
+2 Andra 12
+```
+
 > [!NOTE] Observatie
-> `v[i]` este un intreg struct `Elev`, iar `v[i].medie` este campul `medie` al elevului de pe pozitia `i`.
+> `v[i]` este un struct `Elev`, iar `v[i].medie` este campul `medie` al elevului de pe pozitia `i`.
 
 ---
 
@@ -388,16 +415,16 @@ int main()
         cin >> v[i].nume >> v[i].clasa >> v[i].medie;
     }
 
-    poz = 0;   // pozitia elevului cu media maxima
+    pozElevCuMedieMax = 0;   // pozitia elevului cu media maxima
     for (i = 1; i <= n; i++)
     {
-        if (v[i].medie > v[poz].medie)
+        if (v[i].medie > v[pozElevCuMedieMax].medie)
         {
-            poz = i;
+            pozElevCuMedieMax = i;
         }
     }
 
-    cout << v[poz].nume << endl;
+    cout << v[pozElevCuMedieMax].nume << endl;
 
     return 0;
 }
@@ -559,20 +586,15 @@ int main()
         cin >> v[i].nume >> v[i].clasa >> v[i].medie;
     }
 
-    // sortare prin selectie, descrescator dupa medie
+    // sortare descrescator dupa medie
     for (i = 1; i <= n - 1; i++)
     {
-        poz = i;
         for (j = i + 1; j <= n; j++)
         {
-            if (v[j].medie > v[poz].medie)
+            if (v[i].medie < v[j].medie)
             {
-                poz = j;
+                swap(v[i], v[j]);
             }
-        }
-        if (poz != i)
-        {
-            swap(v[i], v[poz]);   // swap intre 2 structuri de tip Elev
         }
     }
 
