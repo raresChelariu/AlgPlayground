@@ -76,7 +76,7 @@ struct Elev {
 };
 
 Elev Ionel;   // Ionel este o variabila de tip Elev
-Elev Maria;
+Elev clasa9B[25]; // am declarat vectorul clasa9B cu 25 de elemente Elev
 ```
 
 ---
@@ -88,18 +88,18 @@ Pentru a accesa un camp al unei variabile de tip struct folosim **operatorul pun
 **Sintaxa:** `numeVariabila.numeCamp`
 
 ```cpp
-Ionel.anNastere = 2008;           // scriem in camp
-Ionel.medieScolara = 9.50f;
+Ionel.anNastere = 2008;           // dam o valoare campului
+Ionel.medieScolara = 9.5;
 
-cout << Ionel.anNastere;          // citim din camp
+cout << Ionel.anNastere;          // afisam din camp
 cin >> Ionel.inaltime;            // citim de la tastatura in camp
 ```
 
 ---
 
-## Struct imbricat (un struct ca si camp)
+## Struct imbricat (un camp de tip struct)
 
-Un camp al unui struct poate fi el insusi de tip struct.
+Un camp al unui struct poate fi primitiv sau poate fi el insusi de tip struct.
 
 ```cpp
 struct Buletin {
