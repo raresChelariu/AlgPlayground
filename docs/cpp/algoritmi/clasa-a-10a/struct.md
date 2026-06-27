@@ -379,7 +379,14 @@ Andra 12 2
 
 ## Operatorul sageata `->`
 
-Cand avem un **pointer** la un struct, am vrea sa accesam campurile struct-ului indicat. Pasul natural ar fi sa **dereferentiem** pointerul (cu `*`) ca sa ajungem la struct, iar apoi sa folosim operatorul punct `.` pentru camp.
+Sintaxa: 
+```cpp
+pointerLaStruct -> numeCamp
+```
+
+- Cand avem un **pointer** la un struct, am vrea sa accesam campurile struct-ului de la acea adresa. 
+- Putem sa **dereferentiem** pointerul (cu `*`) ca sa ajungem la zona de memorie a structului 
+- iar apoi sa folosim operatorul punct `.` pentru camp.
 
 ```cpp
 struct Elev {
@@ -388,7 +395,7 @@ struct Elev {
 };
 
 Elev e;
-Elev *p = &e;     // p este un pointer catre e
+Elev *p = &e;     // p este un pointer ce contine adresa lui e
 
 (*p).medie = 9.5; // dereferentiem p, apoi accesam campul medie
 ```
@@ -409,12 +416,22 @@ cout << p->clasa; // echivalent cu (*p).clasa
 
 Operatorul punct `.` are **prioritate mai mare** decat operatorul de dereferentiere `*`. Asta inseamna ca, fara paranteze, expresia `*p.medie` ar fi interpretata ca `*(p.medie)`:
 
+
 ```cpp
-*p.medie     // inseamna *(p.medie) — GRESIT
 (*p).medie   // inseamna: dereferentiaza p, apoi ia campul medie — CORECT
 ```
 
-Compilatorul ar incerca intai sa ia campul `medie` din `p` (dar `p` e un pointer, nu un struct, deci eroare), abia apoi sa dereferentieze. De aceea, ca sa fortam **intai** dereferentierea, avem nevoie de paranteze: `(*p).medie`.
+```cpp
+*p.medie     // inseamna *(p.medie)
+// pointerii (indiferent de felul lor) NU au campuri
+// doar variabilele de tipul unui struct au campuri !!
+// error: request for member 'medie' in 'p', which is of pointer type 'Elev*' (maybe you meant to use '->' ?)
+```
+
+- Compilatorul ar incerca:
+  - intai sa ia campul `medie` din `p` (dar `p` e un pointer, nu un struct, deci eroare de compilare), 
+  - abia apoi sa dereferentieze. 
+- De aceea, ca sa fortam **intai** dereferentierea, avem nevoie de paranteze: `(*p).medie`.
 
 > [!TIP] Sfat
 > Foloseste `->` ori de cate ori ai un pointer la struct. Scrii `p->medie` in loc de `(*p).medie`: e mai scurt, mai clar si scapi de paranteze.
