@@ -377,6 +377,50 @@ Andra 12 2
 
 ---
 
+## Operatorul sageata `->`
+
+Cand avem un **pointer** la un struct, am vrea sa accesam campurile struct-ului indicat. Pasul natural ar fi sa **dereferentiem** pointerul (cu `*`) ca sa ajungem la struct, iar apoi sa folosim operatorul punct `.` pentru camp.
+
+```cpp
+struct Elev {
+    int clasa;
+    float medie;
+};
+
+Elev e;
+Elev *p = &e;     // p este un pointer catre e
+
+(*p).medie = 9.5; // dereferentiem p, apoi accesam campul medie
+```
+
+Pentru ca aceasta scriere este greoaie, C++ ofera **operatorul sageata** `->`, care face exact acelasi lucru: dereferentiaza pointerul **si** acceseaza campul, intr-un singur pas.
+
+**Sintaxa:** `pointer->numeCamp`
+
+```cpp
+p->medie = 9.5;   // echivalent cu (*p).medie = 9.5
+cout << p->clasa; // echivalent cu (*p).clasa
+```
+
+> [!NOTE] Observatie
+> `p->numeCamp` este, prin definitie, **echivalent** cu `(*p).numeCamp`: mai intai dereferentiezi pointerul `p` (ajungi la struct-ul indicat), apoi iei campul `numeCamp`.
+
+### De ce sunt necesare parantezele la `(*p).medie`?
+
+Operatorul punct `.` are **prioritate mai mare** decat operatorul de dereferentiere `*`. Asta inseamna ca, fara paranteze, expresia `*p.medie` ar fi interpretata ca `*(p.medie)`:
+
+```cpp
+*p.medie     // inseamna *(p.medie) — GRESIT
+(*p).medie   // inseamna: dereferentiaza p, apoi ia campul medie — CORECT
+```
+
+Compilatorul ar incerca intai sa ia campul `medie` din `p` (dar `p` e un pointer, nu un struct, deci eroare), abia apoi sa dereferentieze. De aceea, ca sa fortam **intai** dereferentierea, avem nevoie de paranteze: `(*p).medie`.
+
+> [!TIP] Sfat
+> Foloseste `->` ori de cate ori ai un pointer la struct. Scrii `p->medie` in loc de `(*p).medie`: e mai scurt, mai clar si scapi de paranteze.
+
+---
+
 ## Probleme rezolvate
 
 In toate problemele urmatoare, lucram cu acelasi tip de date:
