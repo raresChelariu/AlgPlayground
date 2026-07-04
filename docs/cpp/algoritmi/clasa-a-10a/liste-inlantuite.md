@@ -42,9 +42,9 @@ flowchart LR
 ## Creare nod nou
 
 ```cpp
-Nod* nod_nou = new Nod;
-nod_nou->info = valoare;
-nod_nou->leg = NULL;
+Nod* nodNou = new Nod;
+nodNou->info = valoare;
+nodNou->leg = NULL;
 ```
 
 ---
@@ -56,13 +56,13 @@ Mentinem un pointer `ultim` catre ultimul nod pentru a adauga eficient fara sa p
 ```cpp
 if (prim == NULL)       // lista goala
 {
-    prim = nod_nou;
-    ultim = nod_nou;
+    prim = nodNou;
+    ultim = nodNou;
 }
 else                    // lista are cel putin un nod
 {
-    ultim->leg = nod_nou;
-    ultim = nod_nou;
+    ultim->leg = nodNou;
+    ultim = nodNou;
 }
 ```
 
@@ -77,7 +77,7 @@ flowchart LR
     U(["ultim"]) --> C
 ```
 
-**Dupa** (`ultim->leg = nod_nou`, apoi `ultim = nod_nou`):
+**Dupa** (`ultim->leg = nodNou`, apoi `ultim = nodNou`):
 
 ```mermaid
 flowchart LR
@@ -97,8 +97,8 @@ flowchart LR
 ## Adaugare la inceput
 
 ```cpp
-nod_nou->leg = prim;
-prim = nod_nou;
+nodNou->leg = prim;
+prim = nodNou;
 ```
 
 **Inainte** (adaugam nodul cu valoarea `99`):
@@ -110,7 +110,7 @@ flowchart LR
     B --> N(["NULL"])
 ```
 
-**Dupa** (`nod_nou->leg = prim`, apoi `prim = nod_nou`):
+**Dupa** (`nodNou->leg = prim`, apoi `prim = nodNou`):
 
 ```mermaid
 flowchart LR
@@ -229,18 +229,18 @@ int main()
     for (i = 1; i <= n; i++)
     {
         cin >> x;
-        Nod* nod_nou = new Nod;
-        nod_nou->info = x;
-        nod_nou->leg = NULL;
+        Nod* nodNou = new Nod;
+        nodNou->info = x;
+        nodNou->leg = NULL;
         if (prim == NULL)
         {
-            prim = nod_nou;
-            ultim = nod_nou;
+            prim = nodNou;
+            ultim = nodNou;
         }
         else
         {
-            ultim->leg = nod_nou;
-            ultim = nod_nou;
+            ultim->leg = nodNou;
+            ultim = nodNou;
         }
     }
 
@@ -297,18 +297,18 @@ int main()
     for (i = 1; i <= n; i++)
     {
         cin >> x;
-        Nod* nod_nou = new Nod;
-        nod_nou->info = x;
-        nod_nou->leg = NULL;
+        Nod* nodNou = new Nod;
+        nodNou->info = x;
+        nodNou->leg = NULL;
         if (prim == NULL)
         {
-            prim = nod_nou;
-            ultim = nod_nou;
+            prim = nodNou;
+            ultim = nodNou;
         }
         else
         {
-            ultim->leg = nod_nou;
-            ultim = nod_nou;
+            ultim->leg = nodNou;
+            ultim = nodNou;
         }
     }
 
@@ -416,18 +416,18 @@ int main()
     for (i = 1; i <= n; i++)
     {
         cin >> x;
-        Nod* nod_nou = new Nod;
-        nod_nou->info = x;
-        nod_nou->leg = NULL;
+        Nod* nodNou = new Nod;
+        nodNou->info = x;
+        nodNou->leg = NULL;
         if (prim == NULL)
         {
-            prim = nod_nou;
-            ultim = nod_nou;
+            prim = nodNou;
+            ultim = nodNou;
         }
         else
         {
-            ultim->leg = nod_nou;
-            ultim = nod_nou;
+            ultim->leg = nodNou;
+            ultim = nodNou;
         }
     }
 
