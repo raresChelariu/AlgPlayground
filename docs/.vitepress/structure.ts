@@ -52,10 +52,11 @@ export const categories: Category[] = [
             text: 'Cifrele unui numar',
             collapsed: true,
             items: [
+              { text: 'Suma cifrelor', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/cifrele-unui-numar/suma-cifrelor' },
+              { text: 'Prima cifra', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/cifrele-unui-numar/prima-cifra' },
               { text: 'Oglindit', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/cifrele-unui-numar/oglindit' },
               { text: 'Palindrom', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/cifrele-unui-numar/palindrom' },
-              { text: 'Prima cifra', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/cifrele-unui-numar/prima-cifra' },
-              { text: 'Suma cifrelor', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/cifrele-unui-numar/suma-cifrelor' },
+              { text: 'Lipire la stanga', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/cifrele-unui-numar/lipire-la-stanga' },
             ],
           },
           {
