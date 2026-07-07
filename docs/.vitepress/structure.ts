@@ -46,8 +46,8 @@ export const categories: Category[] = [
         text: 'Algoritmi elementari',
         collapsed: false,
         items: [
-          { text: 'Minime si maxime', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/notiuni-de-baza/minime-si-maxime' },
-          { text: 'Baze de numeratie', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/notiuni-de-baza/baze-de-numeratie' },
+          { text: 'Minime si maxime', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/minime-si-maxime' },
+          { text: 'Baze de numeratie', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/baze-de-numeratie' },
           {
             text: 'Cifrele unui numar',
             collapsed: true,
