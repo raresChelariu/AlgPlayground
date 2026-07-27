@@ -75,6 +75,7 @@ export const categories: Category[] = [
             collapsed: true,
             items: [
               { text: 'Determinarea divizorilor', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/determinarea-divizorilor' },
+              { text: 'Primalitate', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/primalitate' },
               { text: 'CMMDC si CMMMC', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/cmmdc-si-cmmmc' },
               { text: 'Descompunere in factori primi', link: '/cpp/algoritmi/clasa-a-9a/algoritmi-elementari/divizibilitate/descompunere-in-factori-primi' },
             ],
