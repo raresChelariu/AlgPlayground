@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "PowerShell(git:*)",
+      "PowerShell(npm:*)",
+      "PowerShell(npx:*)",
+      "PowerShell(node:*)",
+      "PowerShell(Get-ChildItem:*)",
+      "PowerShell(Get-Content:*)",
+      "PowerShell(Get-Item:*)",
+      "PowerShell(Test-Path:*)",
+      "PowerShell(Select-Object:*)",
+      "PowerShell(Measure-Object:*)",
+      "PowerShell(cd:*)",
+      "PowerShell(dir:*)",
+      "Bash(git:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "WebSearch",
+      "WebFetch(domain:www.pbinfo.ro)",
+      "WebFetch(domain:pbinfo.ro)",
+      "WebFetch(domain:vitepress.dev)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Skill(update-config:*)"
+    ],
+    "deny": [
+      "PowerShell(Remove-Item:*)",
+      "PowerShell(rm:*)",
+      "PowerShell(del:*)",
+      "PowerShell(Format-Volume:*)",
+      "PowerShell(Set-Partition:*)",
+      "PowerShell(Start-Process:*)",
+      "Bash(rm:*)",
+      "PowerShell(git push --force:*)",
+      "PowerShell(git reset --hard:*)",
+      "PowerShell(git clean:*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ],
+    "defaultMode": "acceptEdits"
+  }
+}
