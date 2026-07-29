@@ -144,6 +144,7 @@ export const categories: Category[] = [
         collapsed: false,
         items: [
           { text: 'Stiva', link: '/cpp/algoritmi/clasa-a-10a/stiva' },
+          { text: 'Coada', link: '/cpp/algoritmi/clasa-a-10a/coada' },
         ],
       },
     ],
