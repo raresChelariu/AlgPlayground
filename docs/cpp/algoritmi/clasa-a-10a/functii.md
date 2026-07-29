@@ -670,12 +670,13 @@ Cand se apeleaza o functie, pe stiva se memoreaza:
 - variabilele locale ale acelui apel.
 
 **Pasii unui apel:**
+**Ce se intampla cand se apeleaza o functie ?**
 
-1. Se memoreaza locul de unde se apeleaza functia.
-2. Se pun pe stiva valorile parametrilor (intr-un apel nou).
+1. Se memoreaza locul in cod de unde se apeleaza functia.
+2. Se copiaza pe stiva valorile parametrilor (intr-un apel nou).
 3. Se executa functia pana la terminarea ei.
 4. Se continua executia din locul memorat la pasul 1.
-5. Apelul se sterge de pe stiva (impreuna cu parametrii si variabilele locale).
+5. Apelul se sterge de pe stiva (impreuna cu tot ce contine - parametrii si variabilele locale).
 
 > [!NOTE] Observatie
 > La pornirea programului, pe stiva exista **doar** apelul lui `main`. Apelul din **varful stivei** este intotdeauna apelul in care ne aflam cu executia.
