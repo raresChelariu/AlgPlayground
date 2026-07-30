@@ -145,6 +145,7 @@ export const categories: Category[] = [
         items: [
           { text: 'Stiva', link: '/cpp/algoritmi/clasa-a-10a/stiva' },
           { text: 'Coada', link: '/cpp/algoritmi/clasa-a-10a/coada' },
+          { text: 'Algoritmul lui Lee', link: '/cpp/algoritmi/clasa-a-10a/lee' },
         ],
       },
     ],
