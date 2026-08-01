@@ -438,11 +438,37 @@ int main()
 > [!NOTE] Observatie
 > Pe stiva memoram **indici**, nu valori, pentru a putea citi `v[st[varf]]`. Desi avem o stiva si un `while` interior, fiecare element intra si iese din stiva cel mult o data, deci algoritmul parcurge sirul, in total, in timp liniar.
 
-### Cel mai mare dreptunghi dintr-o histograma
+### Cel mai mare dreptunghi din bare alaturate
 
-**Enunt:** O histograma este formata din `n` bare alaturate, de latime `1` si inaltimi `h[1], h[2], ..., h[n]`. Sa se afle aria celui mai mare dreptunghi care incape complet sub conturul histogramei.
+**Enunt:** Se dau `n` bare lipite una de alta, toate de latime `1` si de inaltimi `h[1], h[2], ..., h[n]` — ca scandurile unui gard. Sa se afle aria celui mai mare dreptunghi care incape complet sub conturul lor.
+
+**Ce inseamna "incape sub contur":** un dreptunghi acopera un grup de bare **alaturate**, iar inaltimea lui nu poate depasi **cea mai mica** inaltime din grup (altfel ar iesi in afara barei celei mai joase). Deci:
+
+**aria = (cate bare acopera) x (cea mai mica inaltime dintre ele)**
+
+Pe exemplul `2 1 5 6 2 3`:
+
+- doar bara `4`: aria `6 x 1 = 6`;
+- barele `3` si `4` (inaltimi `5` si `6`): cea mai mica este `5`, deci aria `5 x 2 = 10`;
+- barele `3, 4, 5` (inaltimi `5, 6, 2`): cea mai mica este `2`, deci aria `2 x 3 = 6`.
+
+Cel mai mare dreptunghi este cel de arie `10`. Am putea incerca **toate** grupurile de bare alaturate, dar sunt prea multe pentru un `n` mare — de aceea folosim stiva.
 
 **Idee:** Pentru fiecare bara vrem sa stim cat de mult se poate "intinde" la stanga si la dreapta un dreptunghi de inaltimea ei — adica pana unde barele sunt cel putin la fel de inalte. Folosim o stiva monotona de **indici**, cu inaltimi crescatoare de la baza spre varf. Cand intalnim o bara mai joasa decat varful, inseamna ca dreptunghiul cu inaltimea varfului nu se mai poate extinde la dreapta: scoatem varful si calculam aria lui. Adaugam la final o bara fictiva de inaltime `0`, care goleste stiva si forteaza calculul pentru toate barele ramase.
+
+Urmareste pas cu pas pe un exemplu mic. Barele albastre sunt cele aflate pe stiva, cea galbena este bara curenta, iar chenarul rosu arata dreptunghiul calculat in momentul in care o bara este scoasa:
+
+<DreptunghiVisual
+  inaltimi="1 3 2"
+  titlu="Exemplu mic: cel mai bun dreptunghi are inaltimea 2 si acopera barele 2 si 3"
+/>
+
+Acelasi algoritm pe exemplul din program:
+
+<DreptunghiVisual
+  inaltimi="2 1 5 6 2 3"
+  titlu="Bara fictiva de inaltime 0 (punctata, la final) goleste stiva si forteaza ultimele calcule"
+/>
 
 ```cpp
 #include <iostream>
@@ -497,7 +523,7 @@ int main()
 ```
 
 > [!NOTE] Observatie
-> Dreptunghiul maxim are aria `10` si se obtine din barele de inaltimi `5` si `6` (inaltime `5`, latime `2`). Cand scoatem o bara, latimea dreptunghiului ei se intinde de la bara aflata acum in varf (exclusiv) pana la bara curenta `i` (exclusiv): de aceea `latime = i - st[varf] - 1`. Daca stiva s-a golit, dreptunghiul se intinde de la inceputul histogramei, deci `latime = i - 1`.
+> Dreptunghiul maxim are aria `10` si se obtine din barele de inaltimi `5` si `6` (inaltime `5`, latime `2`). Cand scoatem o bara, latimea dreptunghiului ei se intinde de la bara aflata acum in varf (exclusiv) pana la bara curenta `i` (exclusiv): de aceea `latime = i - st[varf] - 1`. Daca stiva s-a golit, inseamna ca nicio bara din stanga nu este mai joasa, deci dreptunghiul se intinde de la prima bara: `latime = i - 1`.
 
 > [!TIP] Sfat
 > Bara fictiva `h[n + 1] = 0` este un truc des folosit: fiind mai joasa decat orice bara reala, declanseaza scoaterea si calculul ariei pentru toate barele care ar fi ramas pe stiva.
