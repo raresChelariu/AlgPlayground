@@ -151,6 +151,14 @@ export const categories: Category[] = [
     ],
   },
   {
+    id: 'unelte',
+    text: 'Unelte',
+    landing: '/cpp/unelte/',
+    items: [
+      { text: 'Debugger', link: '/cpp/unelte/debugger' },
+    ],
+  },
+  {
     id: 'pseudocod',
     text: 'Pseudocod',
     landing: '/cpp/pseudocod/',
