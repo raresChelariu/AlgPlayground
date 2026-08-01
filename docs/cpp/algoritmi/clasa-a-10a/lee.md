@@ -79,7 +79,7 @@ Celulele de zid raman `0`, iar branza din `(5, 1)` primeste `13`. Se vede si cum
 
 ## Vezi unda cum inainteaza
 
-Apasa **Ruleaza** ca sa vezi unda in miscare, sau **Inainte** ca sa avansezi manual. Vizualizatorul merge **celula cu celula**: intai scoate o pozitie din coada (chenar rosu), apoi verifica pe rand cate una dintre cele 4 directii — sageata din coltul celulei arata directia testata chiar acum:
+Apasa **Ruleaza** ca sa vezi unda in miscare, sau **Inainte** ca sa avansezi manual. Vizualizatorul merge **celula cu celula**: intai scoate o pozitie din coada (chenar rosu), apoi verifica pe rand cate una dintre cele 4 directii — pastila rosie asezata pe muchia celulei curente arata catre vecinul testat chiar acum:
 
 - chenar **verde** — vecinul este in labirint, nu este zid si nu este marcat, deci primeste un numar si intra la sfarsitul cozii;
 - chenar **punctat rosu** — vecinul a picat unul dintre teste (este zid sau este deja marcat);
@@ -120,27 +120,72 @@ struct Pozitie
 {
     int lin, col;
 };
-
-Pozitie c[10005];
-int primul, ultimul;
 ```
 
-Sunt exact operatiile de coada din lectia precedenta, doar ca elementele nu mai sunt numere intregi, ci pozitii:
+### Coada, cu operatiile inauntru
+
+La [coada](/cpp/algoritmi/clasa-a-10a/coada) am scris operatiile ca functii **separate**, care primeau coada ca parametru: `push(&c, x)`, `pop(&c)`. In C++ putem face ceva mai bun: sa punem functiile **chiar in interiorul struct-ului**. Ele lucreaza atunci direct pe campurile `v`, `primul` si `ultimul`, fara sa mai primeasca coada ca parametru.
 
 ```cpp
-// push: adaugam pozitia (il, ic) la sfarsitul cozii
-ultimul++;
-c[ultimul].lin = il;
-c[ultimul].col = ic;
+struct Coada
+{
+    Pozitie v[10005];
+    int primul = 1, ultimul = 0;
 
-// front + pop: luam pozitia din fata si o scoatem
-i = c[primul].lin;
-j = c[primul].col;
-primul++;
+    void push(Pozitie p)
+    {
+        ultimul++;
+        v[ultimul] = p;
+    }
+
+    Pozitie pop()
+    {
+        Pozitie rezultat;
+        rezultat = v[primul];
+        primul++;
+        return rezultat;
+    }
+
+    Pozitie first()
+    {
+        return v[primul];
+    }
+
+    bool areElemente()
+    {
+        return primul <= ultimul;
+    }
+};
 ```
+
+Apelul se face cu operatorul `.`, ca la orice camp al unui struct:
+
+```cpp
+Coada c;
+Pozitie p;
+
+p.lin = 3;
+p.col = 5;
+c.push(p);          // (3, 5) intra la sfarsitul cozii
+
+p = c.first();      // citim prima pozitie, fara sa o scoatem
+p = c.pop();        // o citim si o scoatem: p.lin = 3, p.col = 5
+
+if (c.areElemente() == false)
+    cout << "Coada este vida";
+```
+
+> [!TIP] Sfat
+> Compara `c.push(p)` cu `push(&c, p)` din lectia precedenta. Nu mai trebuie sa trimitem coada ca parametru: functia stie deja pe ce coada lucreaza, pentru ca este apelata **prin** ea. Daca ai doua cozi, `c1.push(p)` si `c2.push(p)` lucreaza fiecare pe datele ei.
+
+> [!NOTE] Observatie
+> `int primul = 1, ultimul = 0;` da **valorile de pornire** ale campurilor: orice coada nou declarata este vida, fara sa mai apelam o functie de initializare. Conditia `primul > ultimul` inseamna, ca si inainte, coada vida — de aceea `areElemente()` verifica exact opusul, `primul <= ultimul`.
 
 > [!NOTE] Observatie
 > `10005` este dimensiunea cozii, nu a labirintului. In coada intra **fiecare celula libera exact o data**, deci pentru un labirint de `100 x 100` avem nevoie de cel mult `10000` de pozitii.
+
+> [!WARNING] Atentie
+> In algoritmul lui Lee nu avem nevoie de `first()`: `pop()` intoarce chiar pozitia scoasa, deci o singura instructiune ne da si valoarea, si avansarea cozii. Il pastram totusi in struct, pentru ca face parte din setul obisnuit de operatii al unei cozi.
 
 ---
 
@@ -166,23 +211,22 @@ d[ls][cs] = 1;
 Punem soricelul in coada si il marcam:
 
 ```cpp
-primul = 1;
-ultimul = 1;
-c[1].lin = ls;
-c[1].col = cs;
+p.lin = ls;
+p.col = cs;
+c.push(p);
 d[ls][cs] = 1;
 ```
 
 ### 2. Prelucrarea cozii
 
-Cat timp coada nu este vida, scoatem celula din fata si ii cautam vecinii:
+Cat timp coada mai are elemente, scoatem celula din fata si ii cautam vecinii:
 
 ```cpp
-while (primul <= ultimul)
+while (c.areElemente())
 {
-    i = c[primul].lin;
-    j = c[primul].col;
-    primul++;
+    p = c.pop();
+    i = p.lin;
+    j = p.col;
 
     // ... verificam cei 4 vecini ai lui (i, j)
 }
@@ -206,9 +250,9 @@ for (k = 1; k <= 4; k++)
         if (a[il][ic] == 0 && d[il][ic] == 0)
         {
             d[il][ic] = d[i][j] + 1;
-            ultimul++;
-            c[ultimul].lin = il;
-            c[ultimul].col = ic;
+            vecin.lin = il;
+            vecin.col = ic;
+            c.push(vecin);
         }
     }
 }
@@ -230,10 +274,40 @@ struct Pozitie
     int lin, col;
 };
 
+struct Coada
+{
+    Pozitie v[10005];
+    int primul = 1, ultimul = 0;
+
+    void push(Pozitie p)
+    {
+        ultimul++;
+        v[ultimul] = p;
+    }
+
+    Pozitie pop()
+    {
+        Pozitie rezultat;
+        rezultat = v[primul];
+        primul++;
+        return rezultat;
+    }
+
+    Pozitie first()
+    {
+        return v[primul];
+    }
+
+    bool areElemente()
+    {
+        return primul <= ultimul;
+    }
+};
+
 int a[103][103];       // 0 = celula libera, 1 = zid
 int d[103][103];       // distanta de la soricel; 0 = celula nemarcata
-Pozitie c[10005];      // coada de pozitii
-int primul, ultimul;
+Coada c;
+Pozitie p, vecin;
 int n, m, i, j, k, il, ic;
 int ls, cs, lb, cb;    // pozitia soricelului si pozitia branzei
 int dLin[5] = {0, -1, 1, 0, 0};
@@ -252,17 +326,16 @@ int main()
     cin >> ls >> cs;
     cin >> lb >> cb;
 
-    primul = 1;
-    ultimul = 1;
-    c[1].lin = ls;
-    c[1].col = cs;
+    p.lin = ls;
+    p.col = cs;
+    c.push(p);
     d[ls][cs] = 1;
 
-    while (primul <= ultimul)
+    while (c.areElemente())
     {
-        i = c[primul].lin;
-        j = c[primul].col;
-        primul++;
+        p = c.pop();
+        i = p.lin;
+        j = p.col;
 
         for (k = 1; k <= 4; k++)
         {
@@ -273,9 +346,9 @@ int main()
                 if (a[il][ic] == 0 && d[il][ic] == 0)
                 {
                     d[il][ic] = d[i][j] + 1;
-                    ultimul++;
-                    c[ultimul].lin = il;
-                    c[ultimul].col = ic;
+                    vecin.lin = il;
+                    vecin.col = ic;
+                    c.push(vecin);
                 }
             }
         }
@@ -396,12 +469,42 @@ struct Pozitie
     int lin, col;
 };
 
+struct Coada
+{
+    Pozitie v[10005];
+    int primul = 1, ultimul = 0;
+
+    void push(Pozitie p)
+    {
+        ultimul++;
+        v[ultimul] = p;
+    }
+
+    Pozitie pop()
+    {
+        Pozitie rezultat;
+        rezultat = v[primul];
+        primul++;
+        return rezultat;
+    }
+
+    Pozitie first()
+    {
+        return v[primul];
+    }
+
+    bool areElemente()
+    {
+        return primul <= ultimul;
+    }
+};
+
 int a[103][103];
 int d[103][103];
-Pozitie c[10005];      // coada de pozitii
+Coada c;
 Pozitie drum[10005];   // celulele drumului minim
-int primul, ultimul;
-int n, m, i, j, k, p, il, ic, urmLin, urmCol;
+Pozitie p, vecin;
+int n, m, i, j, k, pas, il, ic, urmLin, urmCol;
 int ls, cs, lb, cb;
 int dLin[5] = {0, -1, 1, 0, 0};
 int dCol[5] = {0, 0, 0, -1, 1};
@@ -419,17 +522,16 @@ int main()
     cin >> ls >> cs;
     cin >> lb >> cb;
 
-    primul = 1;
-    ultimul = 1;
-    c[1].lin = ls;
-    c[1].col = cs;
+    p.lin = ls;
+    p.col = cs;
+    c.push(p);
     d[ls][cs] = 1;
 
-    while (primul <= ultimul)
+    while (c.areElemente())
     {
-        i = c[primul].lin;
-        j = c[primul].col;
-        primul++;
+        p = c.pop();
+        i = p.lin;
+        j = p.col;
 
         for (k = 1; k <= 4; k++)
         {
@@ -440,9 +542,9 @@ int main()
                 if (a[il][ic] == 0 && d[il][ic] == 0)
                 {
                     d[il][ic] = d[i][j] + 1;
-                    ultimul++;
-                    c[ultimul].lin = il;
-                    c[ultimul].col = ic;
+                    vecin.lin = il;
+                    vecin.col = ic;
+                    c.push(vecin);
                 }
             }
         }
@@ -482,9 +584,9 @@ int main()
     }
 
     cout << d[lb][cb] - 1 << endl;
-    for (p = 1; p <= d[lb][cb]; p++)
+    for (pas = 1; pas <= d[lb][cb]; pas++)
     {
-        cout << drum[p].lin << " " << drum[p].col << endl;
+        cout << drum[pas].lin << " " << drum[pas].col << endl;
     }
     return 0;
 }
