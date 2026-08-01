@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 
 // Vizualizator pas cu pas pentru algoritmul lui Lee.
 // Harta se da ca un singur string, cu liniile separate prin "|":
@@ -12,14 +12,16 @@ interface Pozitie {
   col: number
 }
 
-type Faza = 'init' | 'pop' | 'gata' | 'drum' | 'mers'
+type Faza = 'init' | 'pop' | 'vecin' | 'gata' | 'drum' | 'mers'
 
 interface Cadru {
   d: number[][] // distantele marcate pana la acest pas (0 = nemarcata)
   coada: Pozitie[] // toate pozitiile intrate vreodata in coada
   primul: number // indicele primului element nescos inca (1-based)
-  curent: Pozitie | null // celula scoasa din coada la acest pas
-  vecini: Pozitie[] // vecinii marcati la acest pas
+  curent: Pozitie | null // celula scoasa din coada
+  directie: number // directia verificata acum (1..4), 0 daca nu se verifica niciuna
+  vecinNou: Pozitie | null // vecinul marcat la acest pas
+  vecinRespins: Pozitie | null // vecinul verificat, dar care nu a trecut testele
   drum: Pozitie[] // celulele drumului minim descoperite pana acum
   soricel: Pozitie // unde este desenat soricelul
   mesaj: string
@@ -28,6 +30,8 @@ interface Cadru {
 
 const dLin = [0, -1, 1, 0, 0]
 const dCol = [0, 0, 0, -1, 1]
+const numeDirectie = ['', 'sus', 'jos', 'stanga', 'dreapta']
+const sageataDirectie = ['', '↑', '↓', '←', '→']
 
 // Harta descompusa in matricea de ziduri + pozitiile soricelului si branzei.
 const labirint = computed(() => {
@@ -68,13 +72,6 @@ function scrie(p: Pozitie): string {
   return `(${p.lin}, ${p.col})`
 }
 
-// Insiruire in romana: "(1, 2)", "(1, 2) si (3, 4)", "(1, 2), (3, 4) si (5, 6)"
-function insiruie(lista: string[]): string {
-  if (lista.length === 0) return ''
-  if (lista.length === 1) return lista[0]
-  return lista.slice(0, -1).join(', ') + ' si ' + lista[lista.length - 1]
-}
-
 // Simularea completa: toate cadrele sunt calculate o singura data, deci
 // butonul "Inapoi" inseamna doar pasCurent--.
 const cadre = computed<Cadru[]>(() => {
@@ -85,114 +82,135 @@ const cadre = computed<Cadru[]>(() => {
   const coada: Pozitie[] = [start]
   d[start.lin][start.col] = 1
 
-  lista.push({
+  // Sablon de cadru, ca sa nu repetam campurile neutre la fiecare push.
+  const cadruNou = (peste: Partial<Cadru>, primul: number): Cadru => ({
     d: copiaza(d),
     coada: coada.slice(),
-    primul: 1,
+    primul,
     curent: null,
-    vecini: [],
+    directie: 0,
+    vecinNou: null,
+    vecinRespins: null,
     drum: [],
     soricel: start,
-    mesaj:
-      `Pornim de la soricel, ${scrie(start)}. Il marcam cu 1 (nu cu 0, pentru ca 0 inseamna ` +
-      `"celula nemarcata") si il punem in coada.`,
-    faza: 'init',
+    mesaj: '',
+    faza: 'pop',
+    ...peste,
   })
 
-  // Parcurgerea in latime: un cadru pentru fiecare element scos din coada.
+  lista.push(
+    cadruNou(
+      {
+        mesaj:
+          `Pornim de la soricel, ${scrie(start)}. Il marcam cu 1 (nu cu 0, pentru ca 0 inseamna ` +
+          `"celula nemarcata") si il punem in coada.`,
+        faza: 'init',
+      },
+      1
+    )
+  )
+
+  // Parcurgerea in latime, celula cu celula: un cadru cand scoatem o celula din
+  // coada si inca un cadru pentru fiecare dintre cele 4 directii verificate.
   let primul = 0
   while (primul < coada.length)
   {
     const curent = coada[primul]
     primul++
 
-    const noi: Pozitie[] = []
-    const zid: string[] = []
-    const marcate: string[] = []
+    lista.push(
+      cadruNou(
+        {
+          curent,
+          mesaj:
+            `Scoatem ${scrie(curent)} din coada, cu d = ${d[curent.lin][curent.col]}. ` +
+            `Ii verificam pe rand cei 4 vecini, in ordinea din dLin si dCol.`,
+          faza: 'pop',
+        },
+        primul + 1
+      )
+    )
 
     for (let k = 1; k <= 4; k++)
     {
       const il = curent.lin + dLin[k]
       const ic = curent.col + dCol[k]
-      if (il < 1 || il > n || ic < 1 || ic > m) continue
+      const vecin: Pozitie = { lin: il, col: ic }
+      const cap = `Directia ${k} (${numeDirectie[k]}): `
 
-      if (a[il][ic] === 1)
+      let mesaj: string
+      let acceptat = false
+      let inLabirint = true
+
+      if (il < 1 || il > n || ic < 1 || ic > m)
       {
-        zid.push(scrie({ lin: il, col: ic }))
+        inLabirint = false
+        mesaj = cap + 'am iesi din labirint. Trecem la directia urmatoare.'
+      }
+      else if (a[il][ic] === 1)
+      {
+        mesaj = cap + `${scrie(vecin)} este zid. Trecem la directia urmatoare.`
       }
       else if (d[il][ic] !== 0)
       {
-        marcate.push(scrie({ lin: il, col: ic }))
+        mesaj = cap + `${scrie(vecin)} este deja marcat cu ${d[il][ic]}. Trecem la directia urmatoare.`
       }
       else
       {
         d[il][ic] = d[curent.lin][curent.col] + 1
-        coada.push({ lin: il, col: ic })
-        noi.push({ lin: il, col: ic })
+        coada.push(vecin)
+        acceptat = true
+        mesaj =
+          cap +
+          `${scrie(vecin)} este in labirint, nu este zid si nu este marcat. Primeste ` +
+          `${d[il][ic]} si intra la sfarsitul cozii.`
       }
-    }
 
-    let mesaj = `Scoatem ${scrie(curent)} din coada. `
-    if (noi.length > 0)
-    {
-      mesaj +=
-        `Vecinii ${insiruie(noi.map(scrie))} sunt liberi si nemarcati: primesc ` +
-        `${d[curent.lin][curent.col] + 1} si intra la sfarsitul cozii. `
+      lista.push(
+        cadruNou(
+          {
+            curent,
+            directie: k,
+            vecinNou: acceptat ? vecin : null,
+            vecinRespins: !acceptat && inLabirint ? vecin : null,
+            mesaj,
+            faza: 'vecin',
+          },
+          primul + 1
+        )
+      )
     }
-    else
-    {
-      mesaj += 'Niciun vecin nou de marcat. '
-    }
-    if (zid.length > 0) mesaj += `${insiruie(zid)} ${zid.length === 1 ? 'este zid' : 'sunt ziduri'}. `
-    if (marcate.length > 0)
-      mesaj += `${insiruie(marcate)} ${marcate.length === 1 ? 'este deja marcat' : 'sunt deja marcate'}.`
-
-    lista.push({
-      d: copiaza(d),
-      coada: coada.slice(),
-      primul: primul + 1,
-      curent,
-      vecini: noi,
-      drum: [],
-      soricel: start,
-      mesaj: mesaj.trim(),
-      faza: 'pop',
-    })
   }
 
   const distanta = d[branza.lin][branza.col]
 
   if (distanta === 0)
   {
-    lista.push({
-      d: copiaza(d),
-      coada: coada.slice(),
-      primul: coada.length + 1,
-      curent: null,
-      vecini: [],
-      drum: [],
-      soricel: start,
-      mesaj:
-        `Coada s-a golit, dar branza ${scrie(branza)} a ramas nemarcata: d = 0. ` +
-        `Zidurile o inchid complet, deci nu exista drum. Programul afiseaza -1.`,
-      faza: 'gata',
-    })
+    lista.push(
+      cadruNou(
+        {
+          mesaj:
+            `Coada s-a golit, dar branza ${scrie(branza)} a ramas nemarcata: d = 0. ` +
+            `Zidurile o inchid complet, deci nu exista drum. Programul afiseaza -1.`,
+          faza: 'gata',
+        },
+        coada.length + 1
+      )
+    )
     return lista
   }
 
-  lista.push({
-    d: copiaza(d),
-    coada: coada.slice(),
-    primul: coada.length + 1,
-    curent: null,
-    vecini: [],
-    drum: [],
-    soricel: start,
-    mesaj:
-      `Coada s-a golit, unda a acoperit tot ce se putea atinge. Branza ${scrie(branza)} are ` +
-      `d = ${distanta}, deci drumul minim are ${distanta - 1} pasi. Urmeaza reconstituirea drumului.`,
-    faza: 'gata',
-  })
+  lista.push(
+    cadruNou(
+      {
+        mesaj:
+          `Coada s-a golit, unda a acoperit tot ce se putea atinge. Branza ${scrie(branza)} are ` +
+          `d = ${distanta}, deci drumul minim are ${distanta - 1} pasi. Urmeaza reconstituirea drumului.`,
+        faza: 'gata',
+      },
+      coada.length + 1
+    )
+  )
 
   // Reconstituirea drumului: de la branza inapoi, spre un vecin cu d mai mic cu 1.
   const drum: Pozitie[] = []
@@ -216,20 +234,20 @@ const cadre = computed<Cadru[]>(() => {
       }
     }
 
-    lista.push({
-      d: copiaza(d),
-      coada: coada.slice(),
-      primul: coada.length + 1,
-      curent: { lin: i, col: j },
-      vecini: [],
-      drum: drum.slice(),
-      soricel: start,
-      mesaj:
-        `Reconstituim drumul: suntem in ${scrie({ lin: i, col: j })}, cu d = ${d[i][j]}. ` +
-        `Ne intoarcem catre vecinul ${scrie({ lin: urmLin, col: urmCol })}, care are ` +
-        `d = ${d[i][j] - 1}.`,
-      faza: 'drum',
-    })
+    lista.push(
+      cadruNou(
+        {
+          curent: { lin: i, col: j },
+          drum: drum.slice(),
+          mesaj:
+            `Reconstituim drumul: suntem in ${scrie({ lin: i, col: j })}, cu d = ${d[i][j]}. ` +
+            `Ne intoarcem catre vecinul ${scrie({ lin: urmLin, col: urmCol })}, care are ` +
+            `d = ${d[i][j] - 1}.`,
+          faza: 'drum',
+        },
+        coada.length + 1
+      )
+    )
 
     i = urmLin
     j = urmCol
@@ -260,58 +278,91 @@ const cadre = computed<Cadru[]>(() => {
       mesaj = `Pasul ${idx} din ${distanta - 1}: soricelul ajunge in ${scrie(aici)}.`
     }
 
-    lista.push({
-      d: copiaza(d),
-      coada: coada.slice(),
-      primul: coada.length + 1,
-      curent: null,
-      vecini: [],
-      drum: drumOrdonat,
-      soricel: aici,
-      mesaj,
-      faza: 'mers',
-    })
+    lista.push(
+      cadruNou({ drum: drumOrdonat, soricel: aici, mesaj, faza: 'mers' }, coada.length + 1)
+    )
   }
 
   return lista
 })
 
 const pas = ref(0)
-
-// Daca harta se schimba (alta instanta reutilizata), o luam de la capat.
-watch(cadre, () => {
-  pas.value = 0
-})
+const ruleaza = ref(false)
+const viteza = ref(400)
 
 const cadru = computed(() => cadre.value[Math.min(pas.value, cadre.value.length - 1)])
 const ultimulPas = computed(() => cadre.value.length - 1)
 
+// Autoplay: un singur cronometru, pornit doar la apasarea butonului (deci
+// niciodata in timpul randarii pe server).
+let cronometru: ReturnType<typeof setInterval> | null = null
+
+function opresteCronometru() {
+  if (cronometru !== null)
+  {
+    clearInterval(cronometru)
+    cronometru = null
+  }
+}
+
+watch([ruleaza, viteza], () => {
+  opresteCronometru()
+  if (!ruleaza.value) return
+
+  cronometru = setInterval(() => {
+    if (pas.value >= ultimulPas.value)
+    {
+      ruleaza.value = false
+      return
+    }
+    pas.value++
+  }, viteza.value)
+})
+
+onUnmounted(opresteCronometru)
+
+function comutaRulare() {
+  if (ruleaza.value)
+  {
+    ruleaza.value = false
+    return
+  }
+  // De la capat, daca simularea s-a terminat deja
+  if (pas.value >= ultimulPas.value) pas.value = 0
+  ruleaza.value = true
+}
+
 function inainte() {
+  ruleaza.value = false
   if (pas.value < ultimulPas.value) pas.value++
 }
 
 function inapoi() {
+  ruleaza.value = false
   if (pas.value > 0) pas.value--
 }
 
 function reset() {
+  ruleaza.value = false
   pas.value = 0
 }
 
-// Cheie de cautare rapida pentru celulele "speciale" ale cadrului curent.
+// Daca harta se schimba (alta instanta reutilizata), o luam de la capat.
+watch(cadre, () => {
+  ruleaza.value = false
+  pas.value = 0
+})
+
 function areCelula(lista: Pozitie[], i: number, j: number): boolean {
   return lista.some((p) => p.lin === i && p.col === j)
 }
 
-const inCoada = computed(() => {
-  const c = cadru.value
-  return c.coada.slice(c.primul - 1)
-})
+function esteAici(p: Pozitie | null, i: number, j: number): boolean {
+  return p !== null && p.lin === i && p.col === j
+}
 
-const scoase = computed(() => {
-  const c = cadru.value
-  return c.coada.slice(0, c.primul - 1)
-})
+const inCoada = computed(() => cadru.value.coada.slice(cadru.value.primul - 1))
+const scoase = computed(() => cadru.value.coada.slice(0, cadru.value.primul - 1))
 
 interface Celula {
   lin: number
@@ -320,6 +371,7 @@ interface Celula {
   d: number
   esteCurenta: boolean
   esteVecinNou: boolean
+  esteVecinRespins: boolean
   esteInCoada: boolean
   estePeDrum: boolean
   areSoricel: boolean
@@ -340,8 +392,9 @@ const celule = computed<Celula[]>(() => {
         col: j,
         zid: a[i][j] === 1,
         d: c.d[i][j],
-        esteCurenta: c.curent !== null && c.curent.lin === i && c.curent.col === j,
-        esteVecinNou: areCelula(c.vecini, i, j),
+        esteCurenta: esteAici(c.curent, i, j),
+        esteVecinNou: esteAici(c.vecinNou, i, j),
+        esteVecinRespins: esteAici(c.vecinRespins, i, j),
         esteInCoada: areCelula(inCoada.value, i, j),
         estePeDrum: areCelula(c.drum, i, j),
         areSoricel: c.soricel.lin === i && c.soricel.col === j,
@@ -378,6 +431,7 @@ function culoareUnda(d: number): string {
           'lee-celula--zid': celula.zid,
           'lee-celula--curenta': celula.esteCurenta,
           'lee-celula--noua': celula.esteVecinNou,
+          'lee-celula--respins': celula.esteVecinRespins,
           'lee-celula--coada': celula.esteInCoada,
           'lee-celula--drum': celula.estePeDrum,
         }"
@@ -386,6 +440,9 @@ function culoareUnda(d: number): string {
         <span v-if="celula.d > 0 && !celula.zid" class="lee-celula__d">{{ celula.d }}</span>
         <span v-if="celula.areBranza" class="lee-celula__emoji">🧀</span>
         <span v-if="celula.areSoricel" class="lee-celula__emoji">🐭</span>
+        <span v-if="celula.esteCurenta && cadru.directie > 0" class="lee-celula__sageata">
+          {{ sageataDirectie[cadru.directie] }}
+        </span>
       </div>
     </div>
 
@@ -410,6 +467,14 @@ function culoareUnda(d: number): string {
     <p class="lee__mesaj">{{ cadru.mesaj }}</p>
 
     <div class="lee__controale">
+      <button class="lee-buton lee-buton--play" @click="comutaRulare">
+        {{ ruleaza ? '❚❚ Pauza' : '▶ Ruleaza' }}
+      </button>
+      <select v-model.number="viteza" class="lee-select" aria-label="Viteza de rulare">
+        <option :value="800">Lent</option>
+        <option :value="400">Normal</option>
+        <option :value="150">Rapid</option>
+      </select>
       <button class="lee-buton" :disabled="pas === 0" @click="reset">Reset</button>
       <button class="lee-buton" :disabled="pas === 0" @click="inapoi">&lt; Inapoi</button>
       <button class="lee-buton" :disabled="pas === ultimulPas" @click="inainte">Inainte &gt;</button>
@@ -464,14 +529,20 @@ function culoareUnda(d: number): string {
   box-shadow: inset 0 0 0 1px #55555f;
 }
 
-/* Celula scoasa din coada la acest pas */
+/* Celula scoasa din coada */
 .lee-celula--curenta {
   border-color: var(--vp-c-danger-1);
 }
 
-/* Vecinii marcati chiar acum */
+/* Vecinul marcat chiar acum */
 .lee-celula--noua {
   border-color: var(--vp-c-success-1);
+}
+
+/* Vecinul verificat acum, dar respins (zid sau deja marcat) */
+.lee-celula--respins {
+  border-style: dotted;
+  border-color: var(--vp-c-danger-1);
 }
 
 /* Celule care asteapta in coada */
@@ -505,6 +576,18 @@ function culoareUnda(d: number): string {
 /* Cand soricelul si branza sunt in aceeasi celula, soricelul sta putin peste */
 .lee-celula__emoji + .lee-celula__emoji {
   transform: translate(4px, 4px);
+}
+
+/* Directia verificata acum, desenata in coltul celulei curente */
+.lee-celula__sageata {
+  position: absolute;
+  top: -1px;
+  right: 2px;
+  font-size: 0.85rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--vp-c-danger-1);
+  pointer-events: none;
 }
 
 .lee__coada {
@@ -571,7 +654,8 @@ function culoareUnda(d: number): string {
   margin-top: 10px;
 }
 
-.lee-buton {
+.lee-buton,
+.lee-select {
   border: 1px solid var(--vp-c-divider);
   border-radius: 7px;
   background-color: var(--vp-c-bg);
@@ -582,7 +666,8 @@ function culoareUnda(d: number): string {
   transition: border-color 0.2s, color 0.2s;
 }
 
-.lee-buton:hover:not(:disabled) {
+.lee-buton:hover:not(:disabled),
+.lee-select:hover {
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
 }
@@ -590,6 +675,17 @@ function culoareUnda(d: number): string {
 .lee-buton:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.lee-buton--play {
+  min-width: 108px;
+  font-weight: 600;
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.lee-select {
+  padding: 5px 8px;
 }
 
 .lee__contor {

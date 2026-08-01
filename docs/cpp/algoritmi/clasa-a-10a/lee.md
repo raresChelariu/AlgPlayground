@@ -79,7 +79,11 @@ Celulele de zid raman `0`, iar branza din `(5, 1)` primeste `13`. Se vede si cum
 
 ## Vezi unda cum inainteaza
 
-Apasa **Inainte** pas cu pas: la fiecare pas se scoate o celula din coada, i se verifica cei 4 vecini, iar cei liberi si nemarcati primesc un numar si intra la sfarsitul cozii.
+Apasa **Ruleaza** ca sa vezi unda in miscare, sau **Inainte** ca sa avansezi manual. Vizualizatorul merge **celula cu celula**: intai scoate o pozitie din coada (chenar rosu), apoi verifica pe rand cate una dintre cele 4 directii — sageata din coltul celulei arata directia testata chiar acum:
+
+- chenar **verde** — vecinul este in labirint, nu este zid si nu este marcat, deci primeste un numar si intra la sfarsitul cozii;
+- chenar **punctat rosu** — vecinul a picat unul dintre teste (este zid sau este deja marcat);
+- niciun chenar nou — directia ar duce in afara labirintului.
 
 <LeeVisual
   harta="S....|.###.|....B"
