@@ -31,7 +31,8 @@ interface Cadru {
 const dLin = [0, -1, 1, 0, 0]
 const dCol = [0, 0, 0, -1, 1]
 const numeDirectie = ['', 'sus', 'jos', 'stanga', 'dreapta']
-const sageataDirectie = ['', '↑', '↓', '←', '→']
+// Triunghiuri pline, nu sageti subtiri: se citesc mult mai bine la 20px
+const sageataDirectie = ['', '▲', '▼', '◀', '▶']
 
 // Harta descompusa in matricea de ziduri + pozitiile soricelului si branzei.
 const labirint = computed(() => {
@@ -440,9 +441,12 @@ function culoareUnda(d: number): string {
         <span v-if="celula.d > 0 && !celula.zid" class="lee-celula__d">{{ celula.d }}</span>
         <span v-if="celula.areBranza" class="lee-celula__emoji">🧀</span>
         <span v-if="celula.areSoricel" class="lee-celula__emoji">🐭</span>
-        <span v-if="celula.esteCurenta && cadru.directie > 0" class="lee-celula__sageata">
-          {{ sageataDirectie[cadru.directie] }}
-        </span>
+        <span
+          v-if="celula.esteCurenta && cadru.directie > 0"
+          class="lee-celula__sageata"
+          :class="`lee-celula__sageata--${cadru.directie}`"
+          >{{ sageataDirectie[cadru.directie] }}</span
+        >
       </div>
     </div>
 
@@ -505,7 +509,9 @@ function culoareUnda(d: number): string {
   gap: 3px;
   justify-content: start;
   overflow-x: auto;
-  padding-bottom: 4px;
+  /* padding, nu margin: pastila directiei iese in afara celulei si ar fi taiata
+     de overflow-x pe randul de sus si pe coloana din stanga */
+  padding: 14px 14px 16px;
 }
 
 .lee-celula {
@@ -578,16 +584,49 @@ function culoareUnda(d: number): string {
   transform: translate(4px, 4px);
 }
 
-/* Directia verificata acum, desenata in coltul celulei curente */
+/* Directia verificata acum: pastila rosie asezata pe muchia dinspre vecinul
+   testat, deci arata si CARE directie, si INCOTRO. Culorile sunt fixe, ca sa se
+   citeasca peste orice nuanta a undei si in ambele teme. */
 .lee-celula__sageata {
   position: absolute;
-  top: -1px;
-  right: 2px;
-  font-size: 0.85rem;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #d93025;
+  color: #fff;
+  border: 2px solid var(--vp-c-bg-soft);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
   line-height: 1;
-  font-weight: 700;
-  color: var(--vp-c-danger-1);
   pointer-events: none;
+}
+
+.lee-celula__sageata--1 {
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lee-celula__sageata--2 {
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.lee-celula__sageata--3 {
+  left: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lee-celula__sageata--4 {
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .lee__coada {
@@ -702,6 +741,12 @@ function culoareUnda(d: number): string {
 
   .lee-celula__emoji {
     font-size: 1.1rem;
+  }
+
+  .lee-celula__sageata {
+    width: 17px;
+    height: 17px;
+    font-size: 0.55rem;
   }
 }
 </style>
