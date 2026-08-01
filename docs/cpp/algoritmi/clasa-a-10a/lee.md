@@ -17,26 +17,27 @@ Labirintul este o matrice cu `n` linii si `m` coloane:
 
 Soricelul se afla pe pozitia `(ls, cs)`, iar branza pe pozitia `(lb, cb)`. Dintr-o celula se poate trece doar in cei **4 vecini** ai ei, daca acestia sunt in interiorul matricei si nu sunt ziduri.
 
-Labirintul cu care vom lucra in toata lectia are `n = 4` linii si `m = 4` coloane:
+Labirintul cu care vom lucra in toata lectia are `n = 5` linii si `m = 6` coloane:
 
 ```
-. . . .
-. . . .
-# # # .
-B . . .
+S . . . . .
+# # # # . .
+. . . . . .
+. # # # # .
+B . . . . .
 ```
 
-Soricelul este in `(1, 1)`, branza in `(4, 1)`, iar linia `3` este aproape complet blocata: doar `(3, 4)` este libera.
+Soricelul este in `(1, 1)`, iar branza in `(5, 1)`. Cele doua ziduri lasa cate un singur culoar de trecere: linia `2` poate fi traversata doar prin coloanele `5` si `6`, iar linia `4` doar prin coloanele `1` si `6`.
 
 ---
 
 ## De ce nu merge "mergi mereu spre branza"
 
-Prima idee care vine in minte este sa mergem, la fiecare pas, in directia care ne apropie de branza. Branza este cu 3 linii mai jos, pe aceeasi coloana, deci am incerca sa coboram de trei ori.
+Prima idee care vine in minte este sa mergem, la fiecare pas, in directia care ne apropie de branza. Branza este cu 4 linii mai jos, pe aceeasi coloana, deci am incerca sa coboram de patru ori.
 
-Nu se poate: dupa doi pasi in jos ajungem in `(3, 1)`... care este zid. Metoda se blocheaza, desi drumul exista.
+Nu se poate: chiar primul pas in jos ne-ar duce in `(2, 1)`... care este zid. Metoda se blocheaza imediat, desi drumul exista.
 
-Raspunsul corect este `9` pasi: soricelul trebuie sa mearga **mai intai in directia opusa**, pana in coloana `4`, sa coboare pe acolo si abia apoi sa revina spre stanga.
+Raspunsul corect este `12` pasi: soricelul trebuie sa mearga **mai intai in directia opusa**, spre dreapta pana in coloana `5`, sa coboare pe acolo doua linii si abia apoi sa se intoarca spre stanga.
 
 > [!IMPORTANT] Important
 > Nicio regula care se uita doar la celula curenta nu poate rezolva problema. Zidul de care te lovesti la pasul 2 poate depinde de o alegere facuta la pasul 1. Singura solutie este sa **exploram sistematic** tot labirintul.
@@ -62,13 +63,14 @@ Folosim o a doua matrice, `d`, in care retinem aceste numere:
 Pentru labirintul nostru, matricea `d` completa arata asa:
 
 ```
- 1  2  3  4
- 2  3  4  5
- 0  0  0  6
-10  9  8  7
+ 1  2  3  4  5  6
+ 0  0  0  0  6  7
+11 10  9  8  7  8
+12  0  0  0  0  9
+13 14 13 12 11 10
 ```
 
-Celulele de zid raman `0`, iar branza din `(4, 1)` primeste `10`.
+Celulele de zid raman `0`, iar branza din `(5, 1)` primeste `13`. Se vede si cum unda **serpuieste**: coboara prin coloanele `5` si `6`, se intinde spre stanga pe linia `3`, apoi coboara pe coloana `1` si revine spre dreapta pe linia `5`.
 
 > [!IMPORTANT] De ce este esentiala coada
 > Ca sa marchezi corect inelul `3`, trebuie sa fi terminat **tot** inelul `2`. Asadar celulele trebuie prelucrate **exact in ordinea in care unda le-a atins** — primele atinse, primele prelucrate. Aceasta este regula FIFO, deci structura de care avem nevoie este [coada](/cpp/algoritmi/clasa-a-10a/coada).
@@ -149,7 +151,7 @@ d[ls][cs] = 1;
 > [!WARNING] Atentie
 > In matricea `d`, valoarea `0` este deja folosita cu sensul "celula nemarcata". Daca am pune `d[ls][cs] = 0`, soricelul ar arata ca o celula prin care unda nu a trecut, iar algoritmul l-ar marca din nou mai tarziu.
 >
-> Consecinta: `d[i][j]` numara **celulele** drumului, nu pasii. Un drum de `10` celule are `9` pasi, deci raspunsul final este `d[lb][cb] - 1`.
+> Consecinta: `d[i][j]` numara **celulele** drumului, nu pasii. Un drum de `13` celule are `12` pasi, deci raspunsul final este `d[lb][cb] - 1`.
 
 ---
 
@@ -295,27 +297,32 @@ int main()
 **Intrare:**
 
 ```
-4 4
-0 0 0 0
-0 0 0 0
-1 1 1 0
-0 0 0 0
+5 6
+0 0 0 0 0 0
+1 1 1 1 0 0
+0 0 0 0 0 0
+0 1 1 1 1 0
+0 0 0 0 0 0
 1 1
-4 1
+5 1
 ```
 
 **Afisare:**
 
 ```
-1 2 3 4 
-2 3 4 5 
-0 0 0 6 
-10 9 8 7 
-9
+1 2 3 4 5 6 
+0 0 0 0 6 7 
+11 10 9 8 7 8 
+12 0 0 0 0 9 
+13 14 13 12 11 10 
+12
 ```
 
 > [!NOTE] Observatie
-> Branza din `(4, 1)` are `d = 10`, deci drumul minim are `10 - 1 = 9` pasi — desi in linie dreapta ar fi fost la doar `3` pasi. Zidul de pe linia `3` obliga soricelul sa faca tot ocolul prin coloana `4`.
+> Branza din `(5, 1)` are `d = 13`, deci drumul minim are `13 - 1 = 12` pasi — desi in linie dreapta ar fi fost la doar `4` pasi. Cele doua ziduri obliga soricelul sa se abata de doua ori, prin cele doua culoare inguste.
+
+> [!TIP] Sfat
+> Cea mai mare valoare din matrice nu este neaparat cea a destinatiei. Aici maximul este `14`, in `(5, 2)` — celula cea mai "greu de atins" din tot labirintul, desi este chiar langa branza.
 
 ---
 
@@ -324,8 +331,8 @@ int main()
 Ruleaza vizualizatorul de mai jos pana la capat: dupa ce coada se goleste si toate distantele sunt completate, algoritmul reconstituie drumul, iar soricelul il parcurge pana la branza.
 
 <LeeVisual
-  harta="S...|....|###.|B..."
-  titlu="Labirintul din program: 3 pasi in linie dreapta, 9 pasi in realitate"
+  harta="S.....|####..|......|.####.|B....."
+  titlu="Labirintul din program: 4 pasi in linie dreapta, 12 pasi in realitate"
 />
 
 ---
@@ -482,29 +489,33 @@ int main()
 **Intrare:**
 
 ```
-4 4
-0 0 0 0
-0 0 0 0
-1 1 1 0
-0 0 0 0
+5 6
+0 0 0 0 0 0
+1 1 1 1 0 0
+0 0 0 0 0 0
+0 1 1 1 1 0
+0 0 0 0 0 0
 1 1
-4 1
+5 1
 ```
 
 **Afisare:**
 
 ```
-9
+12
 1 1
-2 1
-2 2
-2 3
-2 4
+1 2
+1 3
+1 4
+1 5
+2 5
+3 5
 3 4
-4 4
-4 3
-4 2
+3 3
+3 2
+3 1
 4 1
+5 1
 ```
 
 **Intrare:**
@@ -532,7 +543,7 @@ int main()
 ```
 
 > [!NOTE] Observatie
-> Prima celula afisata este intotdeauna soricelul, iar ultima este branza. Numarul de linii afisate este cu `1` mai mare decat numarul de pasi, pentru ca `9` pasi inseamna `10` celule vizitate.
+> Prima celula afisata este intotdeauna soricelul, iar ultima este branza. Numarul de linii afisate este cu `1` mai mare decat numarul de pasi, pentru ca `12` pasi inseamna `13` celule vizitate.
 
 ---
 
