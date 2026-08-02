@@ -19,11 +19,17 @@ import { fileURLToPath } from 'node:url'
 
 const radacina = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 
-const [caleSursa, intrare = '', numeIesire] = process.argv.slice(2)
+// Argumentul cu datele de intrare este optional. PowerShell elimina complet un
+// argument "" din linia de comanda, deci nu ne putem baza pe pozitii fixe:
+// cu doua argumente inseamna program fara citiri.
+const argumente = process.argv.slice(2)
+const caleSursa = argumente[0]
+const intrare = argumente.length >= 3 ? argumente[1] : ''
+const numeIesire = argumente.length >= 3 ? argumente[2] : argumente[1]
 
 if (!caleSursa || !numeIesire)
 {
-  console.error('Folosire: node scripts/genereaza-trace.mjs <fisier.cpp> "<intrare>" <nume-iesire>')
+  console.error('Folosire: node scripts/genereaza-trace.mjs <fisier.cpp> ["<intrare>"] <nume-iesire>')
   process.exit(1)
 }
 

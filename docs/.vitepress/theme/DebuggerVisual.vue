@@ -7,7 +7,13 @@ import { withBase } from 'vitepress'
 // deci nu se compileaza si nu se ruleaza nimic in browser.
 //
 // Utilizare:  <DebuggerVisual trace="lista-dublata" titlu="..." />
-const props = defineProps<{ trace: string; titlu?: string }>()
+//
+// heap="false" ascunde zona de heap. Se foloseste in lectiile in care "new" nu
+// a fost inca predat: acolo panoul ar afisa doar mesajul ca heap-ul e gol, ceea
+// ce distrage de la stiva de apeluri.
+const props = withDefaults(defineProps<{ trace: string; titlu?: string; heap?: boolean }>(), {
+  heap: true,
+})
 
 interface Variabila {
   nume: string
@@ -304,10 +310,10 @@ watch(pas, async () => {
         </div>
       </div>
 
-      <div class="dbg__eticheta dbg__eticheta--heap">
+      <div v-if="heap" class="dbg__eticheta dbg__eticheta--heap">
         Heap <span class="dbg__nota">(memoria alocata cu <code>new</code>)</span>
       </div>
-      <div class="dbg__heap">
+      <div v-if="heap" class="dbg__heap">
         <p v-if="noduri.length === 0 && tablouri.length === 0" class="dbg__heap-gol">
           Heap-ul este gol - nu s-a alocat inca nimic cu <code>new</code>.
         </p>
