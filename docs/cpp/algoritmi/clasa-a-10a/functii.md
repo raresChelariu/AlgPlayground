@@ -658,6 +658,51 @@ int main()
 3
 ```
 
+#### Sunt zone de memorie diferite
+
+Faptul ca au acelasi nume nu inseamna ca sunt acelasi lucru. Ca sa se vada limpede, in exemplul urmator parametrul `n` este **modificat** in interiorul functiei:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n;
+
+void f(int n)
+{
+    n = 100;
+    cout << "in f, n = " << n << endl;
+}
+int main()
+{
+    n = 7;
+    f(n);
+    cout << "in main, n = " << n << endl;
+    return 0;
+}
+```
+
+**Afisare:**
+```
+in f, n = 100
+in main, n = 7
+```
+
+<DebuggerVisual trace="acelasi-nume" :heap="false" titlu="doi n diferiti: parametrul si globala" />
+
+La **pasul 4** se vad amandoi in acelasi timp:
+
+- in cadrul lui `f`, parametrul `n` are valoarea `100`,
+- la variabile globale, `n` are tot valoarea `7`.
+
+Atribuirea `n = 100` din interiorul lui `f` a scris in **parametru**, pentru ca acela este `n`-ul "cel mai apropiat". Globala nici nu a fost atinsa.
+
+> [!IMPORTANT] Important
+> In interiorul unei functii, un nume se cauta **dinspre interior spre exterior**: intai printre parametri si localele functiei, si abia daca nu se gaseste acolo, printre variabilele globale.
+
+> [!TIP] Sfat
+> Cel mai simplu e sa eviti situatia: da-le nume diferite. Un parametru care se numeste la fel ca o globala face codul greu de citit, chiar daca se compileaza fara nicio eroare.
+
 ---
 
 ## Stiva de apeluri (call stack)
@@ -682,6 +727,119 @@ Cand se apeleaza o functie, pe stiva se memoreaza:
 > La pornirea programului, pe stiva exista **doar** apelul lui `main`. Apelul din **varful stivei** este intotdeauna apelul in care ne aflam cu executia.
 
 Asta explica de ce variabilele locale "traiesc" doar pana la finalul apelului — la pasul 5, ele se sterg de pe stiva odata cu apelul.
+
+### Sa vedem stiva crescand
+
+In exemplul urmator, `main` apeleaza `cub`, iar `cub` apeleaza `patrat`. Ruleaza pas cu pas si urmareste panoul din dreapta.
+
+<DebuggerVisual trace="stiva-apeluri" :heap="false" titlu="main apeleaza cub, cub apeleaza patrat" />
+
+Ce se vede:
+
+- **Pasul 0** — pe stiva exista doar `main`.
+- **Pasul 1** — se apeleaza `cub`. Apare un cadru nou **deasupra** lui `main`, iar sageata sare la prima linie din corpul lui `cub`.
+- **Pasul 3** — se apeleaza `patrat`. Acum sunt **trei** cadre pe stiva: `main`, `cub`, `patrat`. Cel din varf este `patrat`, deci acolo suntem cu executia.
+- **Pasul 5** — sageata ajunge pe acolada `}` a lui `patrat`: apelul s-a terminat.
+- **Pasul 6** — cadrul lui `patrat` a disparut de pe stiva, iar executia continua in `cub`, exact de unde plecase. In varf este din nou `cub`.
+- **Pasul 8** — a disparut si cadrul lui `cub`. Am ramas doar cu `main`, iar `rez` are valoarea `8`.
+
+> [!IMPORTANT] Important
+> Apelul din **varful stivei** este intotdeauna cel in care ne aflam. Cand se termina, ne intoarcem in apelul de **sub** el — nu la inceputul programului, ci fix in locul de unde s-a facut apelul.
+
+> [!NOTE] Observatie
+> Uita-te la parametrul `x` in momentul apelului (pasul 1 si pasul 3): pentru o clipa are valoarea `?`. Cadrul se creeaza primul, iar copierea valorii parametrului se face imediat dupa. Asta este pasul 2 din lista de mai sus.
+
+### Un exemplu mai complicat
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int patrat(int x)
+{
+    cout << "Ciao" << endl;
+    return x * x;
+}
+int cub(int x)
+{
+    cout << "Salut" << endl;
+    int y = patrat(x);
+    return x * y;
+}
+int main()
+{
+    cout << patrat(3) * cub(patrat(2));
+    return 0;
+}
+```
+
+> [!WARNING] Atentie
+> Aici sunt trei apeluri pe aceeasi linie. **Ordinea in care se executa ele nu este garantata de limbaj** pentru operatorul `*` — compilatorul are voie sa evalueze intai partea dreapta. Cu `g++` se evalueaza de obicei de la dreapta la stanga, deci pe ecran apare intai `Salut`, nu `Ciao`.
+>
+> Cand vrei sa fii sigur de ordine, foloseste variabile separate:
+>
+> ```cpp
+> int p = patrat(3);
+> int c = cub(patrat(2));
+> cout << p * c;
+> ```
+
+---
+
+## Parametrii sunt copii
+
+La pasul 2 al unui apel scrie ca **se copiaza** valorile parametrilor. Cuvantul "copiaza" este esential: functia nu primeste variabila noastra, ci o **copie** a valorii ei, intr-o zona de memorie noua.
+
+Deci, daca functia modifica parametrul, **variabila din apel ramane neschimbata**.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int a;
+
+void dubleaza(int x)
+{
+    x = x * 2;
+    cout << "in dubleaza, x = " << x << endl;
+}
+int main()
+{
+    a = 5;
+    dubleaza(a);
+    cout << "in main, a = " << a << endl;
+    return 0;
+}
+```
+
+**Afisare:**
+```
+in dubleaza, x = 10
+in main, a = 5
+```
+
+<DebuggerVisual trace="parametri-copie" :heap="false" titlu="x se dubleaza, dar a ramane 5" />
+
+Opreste-te la **pasul 4** si compara cele doua panouri:
+
+- in cadrul lui `dubleaza`, parametrul `x` are valoarea `10`,
+- in acelasi timp, la variabile globale, `a` are inca valoarea `5`.
+
+Sunt **doua zone de memorie diferite**. `dubleaza(a)` a copiat valoarea `5` in `x`, iar de atunci incolo `x` isi traieste viata lui.
+
+> [!TIP] Sfat
+> Retine formularea: apelul `dubleaza(a)` trimite **valoarea** lui `a`, nu pe `a` insusi. Functia nu are cum sa ajunga la variabila `a` prin parametrul `x`.
+
+> [!WARNING] Atentie
+> Este o greseala frecventa sa scrii o functie care "modifica" o variabila si sa te astepti ca schimbarea sa se vada in `main`. Nu se vede. Daca vrei ca functia sa dea inapoi un rezultat, foloseste `return`:
+>
+> ```cpp
+> int dubleaza(int x)
+> {
+>     return x * 2;
+> }
+> // in main:  a = dubleaza(a);
+> ```
 
 ---
 
