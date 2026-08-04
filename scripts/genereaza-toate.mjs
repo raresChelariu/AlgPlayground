@@ -110,6 +110,18 @@ for (const nume of exemple) {
     const trace = JSON.parse(brut)
     trace.amprenta = acum
 
+    // Un cadru de apel identic cu cel de sub el inseamna ca stiva nu s-a format
+    // inca si a fost raportata gresit. S-a intamplat o data, la primul apel din
+    // main, si a trecut nevazut pentru ca verificam doar liniile si evenimentele.
+    const cadruDublat = trace.pasi.findIndex((p) => {
+      const s = p.stiva ?? []
+      if (s.length < 2) return false
+      const [jos, sus] = [s[s.length - 2], s[s.length - 1]]
+      return jos.functie === sus.functie && jos.linie === sus.linie
+    })
+    if (cadruDublat !== -1)
+      throw new Error(`pasul ${cadruDublat} are cadrul din varf identic cu cel de dedesubt`)
+
     writeFileSync(caleTrace, JSON.stringify(trace), 'utf8')
 
     const kb = (Buffer.byteLength(JSON.stringify(trace)) / 1024).toFixed(1)
