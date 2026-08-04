@@ -737,17 +737,17 @@ In exemplul urmator, `main` apeleaza `cub`, iar `cub` apeleaza `patrat`. Ruleaza
 Ce se vede:
 
 - **Pasul 0** — pe stiva exista doar `main`.
-- **Pasul 1** — se apeleaza `cub`. Apare un cadru nou **deasupra** lui `main`, iar sageata sare la prima linie din corpul lui `cub`.
-- **Pasul 3** — se apeleaza `patrat`. Acum sunt **trei** cadre pe stiva: `main`, `cub`, `patrat`. Cel din varf este `patrat`, deci acolo suntem cu executia.
-- **Pasul 5** — sageata ajunge pe acolada `}` a lui `patrat`: apelul s-a terminat.
-- **Pasul 6** — cadrul lui `patrat` a disparut de pe stiva, iar executia continua in `cub`, exact de unde plecase. In varf este din nou `cub`.
-- **Pasul 8** — a disparut si cadrul lui `cub`. Am ramas doar cu `main`, iar `rez` are valoarea `8`.
+- **Pasul 2** — se apeleaza `cub`. Apare un cadru nou **deasupra** lui `main`, iar sageata sare in corpul lui `cub`.
+- **Pasul 4** — se apeleaza `patrat`. Acum sunt **trei** cadre pe stiva: `main`, `cub`, `patrat`. Cel din varf este `patrat`, deci acolo suntem cu executia.
+- **Pasul 6** — sageata ajunge pe acolada `}` a lui `patrat`: apelul s-a terminat.
+- **Pasul 7** — cadrul lui `patrat` a disparut de pe stiva, iar executia continua in `cub`, exact de unde plecase. In varf este din nou `cub`.
+- **Pasul 9** — a disparut si cadrul lui `cub`. Am ramas doar cu `main`, iar `rez` are valoarea `8`.
 
 > [!IMPORTANT] Important
 > Apelul din **varful stivei** este intotdeauna cel in care ne aflam. Cand se termina, ne intoarcem in apelul de **sub** el — nu la inceputul programului, ci fix in locul de unde s-a facut apelul.
 
 > [!NOTE] Observatie
-> Uita-te la parametrul `x` in momentul apelului (pasul 1 si pasul 3): pentru o clipa are valoarea `?`. Cadrul se creeaza primul, iar copierea valorii parametrului se face imediat dupa. Asta este pasul 2 din lista de mai sus.
+> Uita-te la parametrul `x` in momentul apelului (pasul 2 si pasul 4): pentru o clipa are valoarea `?`. Cadrul se creeaza primul, iar copierea valorii parametrului se face imediat dupa. Asta este pasul 2 din lista de mai sus.
 
 ### Un exemplu mai complicat
 

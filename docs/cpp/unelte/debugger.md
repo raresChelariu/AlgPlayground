@@ -212,14 +212,18 @@ Ce se intampla daca lista este **goala** (`n = 0`)?
 
 ## Cum s-a generat vizualizarea
 
-Trace-ul de executie a fost inregistrat o singura data, cu un debugger real, si salvat ca fisier static in `docs/public/traces/`:
+Programul a fost rulat sub **Valgrind**, un instrument care urmareste executia instructiune cu instructiune si poate spune, in orice moment, ce se afla in fiecare zona de memorie. La fiecare linie s-a salvat o "fotografie" a starii: stiva, variabilele, heap-ul. Fotografiile astea, puse cap la cap, sunt trace-ul pe care il vezi mai sus.
+
+Inregistrarea se face **o singura data**, automat, si se pastreaza ca fisier in `docs/public/traces/`. De aceea pagina se incarca instant si poti sari inainte si inapoi oricat vrei.
+
+Pentru un exemplu nou:
+
+1. se scrie sursa in `scripts/exemple/nume-exemplu.cpp`;
+2. datele de intrare se pun alaturi, in `scripts/exemple/nume-exemplu.in` (fisier gol daca programul nu citeste nimic);
+3. se adauga in pagina:
 
 ```
-node scripts/genereaza-trace.mjs scripts/exemple/lista-dublata.cpp "6 1 2 3 1 2 3" lista-dublata
+<DebuggerVisual trace="nume-exemplu" titlu="..." />
 ```
 
-Pentru un exemplu nou se scrie fisierul `.cpp`, se ruleaza comanda de mai sus si se adauga in pagina:
-
-```
-<DebuggerVisual trace="numele-fisierului" titlu="..." />
-```
+Trace-ul se genereaza singur la urmatorul push, si doar pentru exemplele care s-au schimbat.
