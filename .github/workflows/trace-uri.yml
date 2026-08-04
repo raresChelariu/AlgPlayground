@@ -1,0 +1,66 @@
+# Regenereaza trace-urile de executie si le comite inapoi in repo.
+#
+# De ce commit inapoi, si nu generare la build: Cloudflare Pages construieste
+# site-ul pe infrastructura lui, unde nu exista Docker. Aici avem Docker, deci
+# generam aici si lasam in repo rezultatul. Push-ul declanseaza apoi build-ul
+# Cloudflare ca de obicei.
+#
+# Nu se creeaza bucla: workflow-ul asculta modificari in scripts/exemple/, iar
+# el scrie in docs/public/traces/.
+
+name: trace-uri
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'scripts/exemple/**'
+      - 'scripts/genereaza-toate.mjs'
+      - '.github/workflows/trace-uri.yml'
+  workflow_dispatch:
+    inputs:
+      forteaza:
+        description: 'Regenereaza tot, chiar daca nu s-a schimbat nimic (dupa un update de runner)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trace-uri
+  cancel-in-progress: false
+
+jobs:
+  genereaza:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Trage imaginea runner-ului
+        run: docker pull ghcr.io/rareschelariu/cpptracerunner:latest
+
+      - name: Genereaza trace-urile
+        run: |
+          if [ "${{ inputs.forteaza }}" = "true" ]; then
+            node scripts/genereaza-toate.mjs --forteaza
+          else
+            node scripts/genereaza-toate.mjs
+          fi
+
+      - name: Comite ce s-a schimbat
+        run: |
+          if git diff --quiet -- docs/public/traces/; then
+            echo "Niciun trace modificat."
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/public/traces/
+          git commit -m 'chore(traces): regenerare automata'
+          git push
+          echo "Trace-uri actualizate - Cloudflare Pages va reconstrui site-ul."
