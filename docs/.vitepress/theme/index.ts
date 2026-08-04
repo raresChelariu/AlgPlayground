@@ -1,5 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
+import './custom.css'
 import ClassIndex from './ClassIndex.vue'
 import LeeVisual from './LeeVisual.vue'
 import DreptunghiVisual from './DreptunghiVisual.vue'
