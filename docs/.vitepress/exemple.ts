@@ -55,6 +55,7 @@ export function areHeap(nume: string): boolean {
 // din lectii. Le repetam aici pentru paginile Playground.
 export const titluri: Record<string, string> = {
   'acelasi-nume': 'doi n diferiti: parametrul si globala',
+  factorial: 'factorial(4) — patru apeluri ale aceleiasi functii pe stiva',
   'lista-dublata': '1 2 3 1 2 3 — cele doua jumatati sunt identice',
   'parametri-copie': 'x se dubleaza, dar a ramane 5',
   'stiva-apeluri': 'main apeleaza cub, cub apeleaza patrat',
