@@ -113,11 +113,21 @@ for (const nume of exemple) {
     // Un cadru de apel identic cu cel de sub el inseamna ca stiva nu s-a format
     // inca si a fost raportata gresit. S-a intamplat o data, la primul apel din
     // main, si a trecut nevazut pentru ca verificam doar liniile si evenimentele.
+    //
+    // Ne uitam si la variabilele locale, nu doar la functie si linie: la recursie
+    // cele doua cadre din varf SUNT aceeasi functie oprita pe aceeasi linie. In
+    // factorial, apelantul asteapta pe "return n * factorial(n - 1);" exact cand
+    // apelatul ajunge pe aceeasi linie, deci vechea verificare respingea trace-uri
+    // corecte. Ce deosebeste cele doua cadre sunt parametrii - la o recursie care
+    // se termina ei se schimba mereu - pe cand cadrul raportat gresit era copie
+    // exacta, cu locale cu tot.
     const cadruDublat = trace.pasi.findIndex((p) => {
       const s = p.stiva ?? []
       if (s.length < 2) return false
       const [jos, sus] = [s[s.length - 2], s[s.length - 1]]
-      return jos.functie === sus.functie && jos.linie === sus.linie
+      return jos.functie === sus.functie
+        && jos.linie === sus.linie
+        && JSON.stringify(jos.locale) === JSON.stringify(sus.locale)
     })
     if (cadruDublat !== -1)
       throw new Error(`pasul ${cadruDublat} are cadrul din varf identic cu cel de dedesubt`)
