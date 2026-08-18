@@ -117,6 +117,7 @@ export const categories: Category[] = [
         items: [
           { text: 'Functii', link: '/cpp/algoritmi/clasa-a-10a/functii' },
           { text: 'Functii cu tablouri', link: '/cpp/algoritmi/clasa-a-10a/functii-tablouri' },
+          { text: 'Recursie', link: '/cpp/algoritmi/clasa-a-10a/recursie' },
         ],
       },
       { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
