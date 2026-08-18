@@ -215,13 +215,29 @@ int main()
 
 **Intrare:**
 ```
-5
+4
 ```
 
 **Afisare:**
 ```
-120
+24
 ```
+
+### Sa vedem stiva crescand si scazand
+
+Ruleaza programul pas cu pas si urmareste panoul stivei din dreapta. Este acelasi program de mai sus, cu `4` la intrare.
+
+<DebuggerVisual trace="factorial" :heap="false" titlu="factorial(4) — patru apeluri ale aceleiasi functii pe stiva" />
+
+Ce se vede:
+
+- La inceput exista doar `main`. Apoi apare primul cadru de `factorial`, cu `n` egal cu `4`.
+- Fiecare cadru nou apare **deasupra** celui dinainte si are propriul `n`: `4`, `3`, `2`, `1`. Toate cele patru variabile `n` exista in acelasi timp, fiecare in cadrul ei.
+- La `n` egal cu `1` se intra pe ramura cazului de baza si recursia **nu mai coboara** — de aici stiva incepe sa scada.
+- Cadrele dispar in ordine inversa fata de cea in care au aparut, iar fiecare intoarce rezultatul in cadrul de **sub** el: `1`, apoi `2`, apoi `6`, apoi `24`.
+
+> [!IMPORTANT] Important
+> Cele patru cadre sunt ale **aceleiasi** functii, dar sunt apeluri diferite, cu valori diferite pentru `n`. Exact asta face recursia posibila: un apel nu "strica" parametrii altui apel.
 
 > [!WARNING] Atentie
 > `int` tine numere pana la aproximativ 2 miliarde, deci `factorial` da rezultate corecte doar pana la `12!` (`479001600`). Deja `13!` depaseste `int` si se obtine un rezultat gresit. Pentru valori mai mari se foloseste `long long` (pana la `20!`).
