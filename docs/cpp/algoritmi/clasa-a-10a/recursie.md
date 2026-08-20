@@ -715,6 +715,270 @@ error: return-statement with a value, in function returning 'void'
 
 ---
 
+## Arborele de executie — cum aflam ce afiseaza o functie recursiva
+
+La BAC apare foarte des cerinta "ce se afiseaza in urma apelului ...". Daca incerci sa urmaresti apelurile in minte, te incurci dupa doua-trei niveluri. Exista insa o metoda sigura, care se face pe hartie si nu cere nimic memorat: **desenam arborele de executie**.
+
+### Exercitiul
+
+Subprogramul `F` este definit mai jos ([exercitiul #492 de pe pbinfo](https://www.pbinfo.ro/?pagina=itemi-evaluare&id=492), Bacalaureat 2015):
+
+```cpp
+void F(long a, int b)
+{
+    if (a * b != 0)
+        if (a % 2 == 0)
+        {
+            cout << a % 10;
+            F(a / 10, b - 1);
+        }
+        else
+        {
+            F(a / 10, b + 1);
+            cout << a % 10;
+        }
+}
+```
+
+Ce se afiseaza in urma apelului urmator?
+
+```cpp
+F(154678, 3);
+```
+
+> [!NOTE] Observatie
+> `else` se leaga intotdeauna de **cel mai apropiat** `if` de dinaintea lui — aici de `if (a % 2 == 0)`, nu de `if (a * b != 0)`. Deci, cand `a * b` este `0`, nu se executa **nimic**: acesta este cazul de baza.
+
+### Regulile desenului
+
+- **Radacina** arborelui este chiar **apelul initial**.
+- **Fiii unui nod** sunt instructiunile care se executa efectiv in acel apel, **in ordinea din cod**, de la stanga la dreapta.
+- Un fiu care este **apel de functie** se desface mai departe, dupa aceleasi reguli.
+- Un fiu care este **`cout`** este frunza — nu mai are ce desface.
+- Un apel care intra pe cazul de baza este frunza: **nu are niciun fiu**.
+
+La fiecare nod avem de raspuns la doua intrebari: *intru in functie?* (`a * b != 0`) si, daca da, *pe ce ramura?* (`a % 2 == 0` sau nu). A doua intrebare decide **ordinea** fiilor.
+
+### Pasul 1 — radacina si fiii ei
+
+`F(154678, 3)`: `a * b` este `464034`, deci intram. `a` este **par**, deci ramura `if`: intai `cout << a % 10`, adica `8`, apoi apelul `F(a / 10, b - 1)`, adica `F(15467, 2)`.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    style c8 fill:#4CAF50,color:#fff
+    style n2 fill:#4CAF50,color:#fff
+```
+
+### Pasul 2 — desfacem `F(15467, 2)`
+
+`a * b` este `30934`, deci intram. `a` este **impar**, deci ramura `else`: intai apelul `F(a / 10, b + 1)`, adica `F(1546, 3)`, si abia dupa `cout << a % 10`, adica `7`.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    n2 --> n3["F(1546, 3)"]
+    n2 --> c7["cout << 7"]
+    style n3 fill:#4CAF50,color:#fff
+    style c7 fill:#4CAF50,color:#fff
+```
+
+> [!WARNING] Atentie
+> Aici este locul unde se greseste cel mai des. `cout << 7` este scris in cod **dupa** apelul recursiv, deci in arbore este fiul **din dreapta** — se va executa dupa tot ce se afla in subarborele lui `F(1546, 3)`.
+
+### Pasul 3 — desfacem `F(1546, 3)`
+
+`a * b` este `4638`, deci intram. `a` este **par**: intai `cout << 6`, apoi `F(154, 2)`.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    n2 --> n3["F(1546, 3)"]
+    n2 --> c7["cout << 7"]
+    n3 --> c6["cout << 6"]
+    n3 --> n4["F(154, 2)"]
+    style c6 fill:#4CAF50,color:#fff
+    style n4 fill:#4CAF50,color:#fff
+```
+
+### Pasul 4 — desfacem `F(154, 2)`
+
+`a * b` este `308`, deci intram. `a` este **par**: intai `cout << 4`, apoi `F(15, 1)`.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    n2 --> n3["F(1546, 3)"]
+    n2 --> c7["cout << 7"]
+    n3 --> c6["cout << 6"]
+    n3 --> n4["F(154, 2)"]
+    n4 --> c4["cout << 4"]
+    n4 --> n5["F(15, 1)"]
+    style c4 fill:#4CAF50,color:#fff
+    style n5 fill:#4CAF50,color:#fff
+```
+
+### Pasul 5 — desfacem `F(15, 1)`
+
+`a * b` este `15`, deci intram. `a` este **impar**: intai `F(1, 2)`, apoi `cout << 5`.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    n2 --> n3["F(1546, 3)"]
+    n2 --> c7["cout << 7"]
+    n3 --> c6["cout << 6"]
+    n3 --> n4["F(154, 2)"]
+    n4 --> c4["cout << 4"]
+    n4 --> n5["F(15, 1)"]
+    n5 --> n6["F(1, 2)"]
+    n5 --> c5["cout << 5"]
+    style n6 fill:#4CAF50,color:#fff
+    style c5 fill:#4CAF50,color:#fff
+```
+
+### Pasul 6 — desfacem `F(1, 2)`
+
+`a * b` este `2`, deci intram. `a` este **impar**: intai `F(0, 3)`, apoi `cout << 1`.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    n2 --> n3["F(1546, 3)"]
+    n2 --> c7["cout << 7"]
+    n3 --> c6["cout << 6"]
+    n3 --> n4["F(154, 2)"]
+    n4 --> c4["cout << 4"]
+    n4 --> n5["F(15, 1)"]
+    n5 --> n6["F(1, 2)"]
+    n5 --> c5["cout << 5"]
+    n6 --> n7["F(0, 3)"]
+    n6 --> c1["cout << 1"]
+    style n7 fill:#4CAF50,color:#fff
+    style c1 fill:#4CAF50,color:#fff
+```
+
+### Pasul 7 — desfacem `F(0, 3)`
+
+`a * b` este `0`, deci **nu** intram in `if`. Apelul se termina fara sa execute nimic: nodul ramane **frunza**, fara niciun fiu. Aici s-a oprit recursia, deci desenul este gata.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    n2 --> n3["F(1546, 3)"]
+    n2 --> c7["cout << 7"]
+    n3 --> c6["cout << 6"]
+    n3 --> n4["F(154, 2)"]
+    n4 --> c4["cout << 4"]
+    n4 --> n5["F(15, 1)"]
+    n5 --> n6["F(1, 2)"]
+    n5 --> c5["cout << 5"]
+    n6 --> n7["F(0, 3) — cazul de baza"]
+    n6 --> c1["cout << 1"]
+    style n7 fill:#9E9E9E,color:#fff
+```
+
+### Citirea raspunsului
+
+Acum nu mai avem nimic de calculat: parcurgem arborele **de la stanga la dreapta**, coborand de fiecare data pe fiul din stanga inainte de cel din dreapta, si citim doar frunzele `cout`.
+
+```mermaid
+flowchart TB
+    r["F(154678, 3)"] --> c8["cout << 8"]
+    r --> n2["F(15467, 2)"]
+    n2 --> n3["F(1546, 3)"]
+    n2 --> c7["cout << 7"]
+    n3 --> c6["cout << 6"]
+    n3 --> n4["F(154, 2)"]
+    n4 --> c4["cout << 4"]
+    n4 --> n5["F(15, 1)"]
+    n5 --> n6["F(1, 2)"]
+    n5 --> c5["cout << 5"]
+    n6 --> n7["F(0, 3) — cazul de baza"]
+    n6 --> c1["cout << 1"]
+    style c8 fill:#FFD600,color:#000
+    style c6 fill:#FFD600,color:#000
+    style c4 fill:#FFD600,color:#000
+    style c1 fill:#FFD600,color:#000
+    style c5 fill:#FFD600,color:#000
+    style c7 fill:#FFD600,color:#000
+    style n7 fill:#9E9E9E,color:#fff
+```
+
+| Ordinea | Frunza `cout` | Din apelul | Cifra |
+|---|---|---|---|
+| 1 | `cout << 8` | `F(154678, 3)` | `8` |
+| 2 | `cout << 6` | `F(1546, 3)` | `6` |
+| 3 | `cout << 4` | `F(154, 2)` | `4` |
+| 4 | `cout << 1` | `F(1, 2)` | `1` |
+| 5 | `cout << 5` | `F(15, 1)` | `5` |
+| 6 | `cout << 7` | `F(15467, 2)` | `7` |
+
+**Afisare:**
+```
+864157
+```
+
+> [!NOTE] Observatie
+> Cifra `7` se afiseaza **ultima**, desi apelul `F(15467, 2)` este al doilea din tot programul. Motivul se vede in arbore: `cout << 7` este fiul din dreapta, deci se executa dupa intreg subarborele fratelui sau din stanga.
+
+### Programul complet
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void F(long a, int b)
+{
+    if (a * b != 0)
+        if (a % 2 == 0)
+        {
+            cout << a % 10;
+            F(a / 10, b - 1);
+        }
+        else
+        {
+            F(a / 10, b + 1);
+            cout << a % 10;
+        }
+}
+int main()
+{
+    F(154678, 3);
+    return 0;
+}
+```
+
+**Afisare:**
+```
+864157
+```
+
+### De ce functioneaza metoda
+
+Arborele desenat de tine este chiar **arborele apelurilor**: fiecare nod-apel este un cadru care apare pe stiva, iar fiii lui sunt exact ce executa acel cadru cat timp se afla pe stiva. Parcurgerea de la stanga la dreapta este chiar ordinea in care programul executa instructiunile.
+
+Regasesti aici si ideea din sectiunea [Inainte si dupa apelul recursiv](#inainte-si-dupa-apelul-recursiv):
+- ramura `if` (`a` par) are `cout` **inainte** de apel, deci scrie **la coborare** — cifra apare devreme;
+- ramura `else` (`a` impar) are `cout` **dupa** apel, deci scrie **la urcare** — cifra apare tarziu.
+
+> [!TIP] Sfat
+> Reteta, pe scurt, pentru orice exercitiu de tipul "ce afiseaza apelul...":
+> 1. Scrie apelul initial ca radacina.
+> 2. Pentru nodul curent, verifica daca se intra in functie; daca nu, e frunza si treci mai departe.
+> 3. Daca se intra, scrie-i ca fii instructiunile executate, **in ordinea din cod**.
+> 4. Repeta pentru fiecare fiu care este apel, pana cand nu mai ai ce desface.
+> 5. Citeste frunzele `cout` de la stanga la dreapta.
+
+---
+
 ## De retinut
 
 - O functie recursiva se apeleaza pe ea insasi; fiecare apel are propriii parametri si propriul cadru pe stiva.
@@ -723,3 +987,4 @@ error: return-statement with a value, in function returning 'void'
 - Apelul recursiv se face pentru o problema **mai mica**, care se apropie de cazul de baza.
 - Instructiunile de **inainte** de apelul recursiv se executa la coborare, cele de **dupa** el la urcare — adica in ordine inversa.
 - Fara caz de baza (sau fara apropiere de el) se ajunge la recursie infinita si **stack overflow**.
+- La exercitiile de tipul "ce afiseaza apelul...", deseneaza **arborele de executie**: radacina este apelul initial, fiii unui nod sunt instructiunile executate in acel apel, iar raspunsul se citeste parcurgand frunzele `cout` de la stanga la dreapta.
