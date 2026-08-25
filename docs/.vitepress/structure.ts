@@ -120,6 +120,13 @@ export const categories: Category[] = [
           { text: 'Recursie', link: '/cpp/algoritmi/clasa-a-10a/recursie' },
         ],
       },
+      {
+        text: 'Divide et Impera',
+        collapsed: false,
+        items: [
+          { text: 'Metoda divide et impera', link: '/cpp/algoritmi/clasa-a-10a/divide-et-impera' },
+        ],
+      },
       { text: 'Struct', link: '/cpp/algoritmi/clasa-a-10a/struct' },
       {
         text: 'Siruri de caractere',
