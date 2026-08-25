@@ -59,4 +59,5 @@ export const titluri: Record<string, string> = {
   'lista-dublata': '1 2 3 1 2 3 — cele doua jumatati sunt identice',
   'parametri-copie': 'x se dubleaza, dar a ramane 5',
   'stiva-apeluri': 'main apeleaza cub, cub apeleaza patrat',
+  'suma-divide-impera': 'suma(1, 4) — arborele are 7 apeluri, dar pe stiva sunt cel mult 3 deodata',
 }
