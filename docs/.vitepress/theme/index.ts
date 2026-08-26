@@ -5,6 +5,7 @@ import ClassIndex from './ClassIndex.vue'
 import LeeVisual from './LeeVisual.vue'
 import DreptunghiVisual from './DreptunghiVisual.vue'
 import DebuggerVisual from './DebuggerVisual.vue'
+import InterclasareVisual from './InterclasareVisual.vue'
 
 export default {
   extends: DefaultTheme,
@@ -13,5 +14,6 @@ export default {
     app.component('LeeVisual', LeeVisual)
     app.component('DreptunghiVisual', DreptunghiVisual)
     app.component('DebuggerVisual', DebuggerVisual)
+    app.component('InterclasareVisual', InterclasareVisual)
   },
 } satisfies Theme
