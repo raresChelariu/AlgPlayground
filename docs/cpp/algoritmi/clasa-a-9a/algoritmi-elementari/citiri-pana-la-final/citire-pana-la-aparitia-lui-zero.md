@@ -1,7 +1,7 @@
 # Citire pana la aparitia lui zero
 
 ```cpp
-// citire pana la aparitia lui zero.cpp
+// citire pana la aparitia lui zero
 #include <iostream>
 using namespace std;
 int n, suma;
@@ -12,6 +12,26 @@ int main()
     {
         // Aduna numarul citit la suma
         suma += n;
+    }
+
+    cout << "Suma numerelor citite este: " << suma << endl;
+    return 0;
+}
+```
+
+Algoritmul de mai sus poate fi scris si ca
+
+```cpp
+#include <iostream>
+using namespace std;
+int n, suma;
+int main()
+{
+    cin >> n;
+    while (n != 0)
+    {
+        suma += n;
+        cin >> n;
     }
 
     cout << "Suma numerelor citite este: " << suma << endl;
