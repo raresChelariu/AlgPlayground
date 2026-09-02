@@ -27,7 +27,9 @@ Pentru a insera valoarea `val` pe pozitia `p`:
 
 ```cpp
 for (j = n; j >= p; j--)
+{
     v[j + 1] = v[j];
+}
 v[p] = val;
 n++;
 ```
@@ -53,14 +55,18 @@ int main()
         if (v[i] % 7 == 0)
         {
             for (j = n; j >= i + 1; j--)
+            {
                 v[j + 1] = v[j];
+            }
             v[i + 1] = -v[i];
             n++;
             i++;
         }
     }
     for (i = 1; i <= n; i++)
+    {
         cout << v[i] << " ";
+    }        
     return 0;
 }
 ```
@@ -114,13 +120,18 @@ Anastasia (pozitia 3) vrea sa plece. Persoanele din dreapta ei (B, I, R) se muta
 
 **Ordinea mutarilor conteaza:** incepem de langa gol (B) si mergem spre dreapta. Daca am incepe de la dreapta, am suprascrie persoana din stanga inainte de a o fi mutat.
 
+> [!NOTE] Observatie
+> Daca sterg de la pozitia p, cei ce se muta (cu o pozitie la stanga) sunt cei din dreapta, adica cei de la pozitia p + 1 pana la n.
+
 ### Algoritmul de stergere
 
 Pentru a sterge elementul de pe pozitia `p`:
 
 ```cpp
-for (j = p; j < n; j++)
-    v[j] = v[j + 1];
+for (j = p + 1; j <= n; j++)
+{
+    v[j - 1] = v[j];
+}    
 n--;
 ```
 
@@ -145,13 +156,17 @@ int main()
         if (v[i] % 7 == 0)
         {
             for (j = i; j < n; j++)
+            {
                 v[j] = v[j + 1];
+            }
             n--;
             i--;
         }
     }
     for (i = 1; i <= n; i++)
+    {
         cout << v[i] << " ";
+    }
     return 0;
 }
 ```
