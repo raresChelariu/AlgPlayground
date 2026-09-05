@@ -72,7 +72,7 @@ La fiecare pas comparam `a[i]` cu `b[j]`, scriem in `c` valoarea mai mica si **a
 
 ## Vezi cum avanseaza indicii
 
-Apasa **Inainte** ca sa avansezi pas cu pas. Sagetile `i` si `j` arata unde suntem in fiecare vector, banda din mijloc arata comparatia facuta chiar acum, iar in codul din dreapta se aprinde linia care se executa. Celulele deja folosite se sting, iar cele din `c` isi pastreaza culoarea vectorului din care au venit.
+Apasa **Inainte** ca sa avansezi pas cu pas. Sagetile `i` si `j` arata unde suntem in fiecare vector, iar banda din mijloc arata comparatia facuta chiar acum. Celulele deja folosite se sting, iar cele din `c` isi pastreaza culoarea vectorului din care au venit.
 
 <InterclasareVisual
   a="1 4 7 9"

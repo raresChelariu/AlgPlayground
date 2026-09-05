@@ -17,7 +17,6 @@ const props = withDefaults(
 
 type Operatie = 'interclasare' | 'reuniune' | 'intersectie' | 'diferenta'
 type Faza = 'init' | 'principal' | 'iesire' | 'coadaA' | 'coadaB' | 'gata'
-type Zona = 'init' | 'principal' | 'ramA' | 'ramB' | 'ramEg' | 'coadaA' | 'coadaB' | 'gata'
 type Actiune = '' | 'iaA' | 'iaB' | 'iaComun' | 'sarA' | 'sarB' | 'sarAmbii'
 type Sursa = 'a' | 'b' | 'ambii'
 
@@ -31,18 +30,10 @@ interface Cadru {
   j: number
   c: Valoare[]
   faza: Faza
-  zona: Zona
   semn: string // '<', '>' sau '=' — gol cand nu comparam nimic
   comparam: boolean
   actiune: Actiune
-  coadaActiva: 'a' | 'b' | 'niciuna' // completat doar la iesirea din while-ul principal
   mesaj: string
-}
-
-interface LinieCod {
-  text: string
-  zone: Zona[]
-  coada?: 'a' | 'b' // marcheaza cele doua while-uri finale, ca sa le pot stinge
 }
 
 const operatie = computed<Operatie>(() => {
@@ -108,13 +99,6 @@ function decide(op: Operatie, semn: string): Actiune {
   return 'sarAmbii'
 }
 
-function zonaPentru(semn: string, op: Operatie): Zona {
-  if (op === 'interclasare') return semn === '<' ? 'ramA' : 'ramB'
-  if (semn === '<') return 'ramA'
-  if (semn === '>') return 'ramB'
-  return 'ramEg'
-}
-
 function explica(actiune: Actiune, va: number, vb: number, semn: string): string {
   const cmp = `${va} ${semn === '=' ? '==' : semn} ${vb}`
   if (actiune === 'iaA') return `${cmp}, deci valoarea mai mica este in a: o scriu in c si avansez i.`
@@ -150,24 +134,21 @@ const cadre = computed<Cadru[]>(() => {
 
   // Fiecare cadru arata starea de DINAINTEA actiunii: indicii stau exact pe cele
   // doua valori comparate, iar mesajul spune ce urmeaza sa se intample.
-  const instantaneu = (faza: Faza, zona: Zona, mesaj: string, extra: Partial<Cadru> = {}): void => {
+  const instantaneu = (faza: Faza, mesaj: string, extra: Partial<Cadru> = {}): void => {
     lista.push({
       i,
       j,
       c: [...c],
       faza,
-      zona,
       semn: '',
       comparam: false,
       actiune: '',
-      coadaActiva: 'niciuna',
       mesaj,
       ...extra,
     })
   }
 
   instantaneu(
-    'init',
     'init',
     'Pornim cu i = 1 si j = 1, adica de la primul element al fiecarui vector. Vectorul c este gol.'
   )
@@ -177,7 +158,7 @@ const cadre = computed<Cadru[]>(() => {
     const semn = va[i] < vb[j] ? '<' : va[i] > vb[j] ? '>' : '='
     const actiune = decide(op, semn)
 
-    instantaneu('principal', zonaPentru(semn, op), explica(actiune, va[i], vb[j], semn), {
+    instantaneu('principal', explica(actiune, va[i], vb[j], semn), {
       semn,
       comparam: true,
       actiune,
@@ -246,12 +227,11 @@ const cadre = computed<Cadru[]>(() => {
       'Ce a ramas nu mai poate ajunge in rezultat, pentru ca nu mai are cu ce sa fie comparat: ' +
       'aceasta operatie nu are cozi de copiat.'
 
-  instantaneu('iesire', 'principal', mesajIesire, { coadaActiva })
+  instantaneu('iesire', mesajIesire)
 
   while (regula.copiazaA && i <= nn)
   {
     instantaneu(
-      'coadaA',
       'coadaA',
       `Copiez a[${i}] = ${va[i]} in c. In b nu mai exista nimic, deci nu mai am ce compara: ` +
         'tot ce a ramas in a este oricum mai mare decat orice am scris pana acum.'
@@ -264,7 +244,6 @@ const cadre = computed<Cadru[]>(() => {
   {
     instantaneu(
       'coadaB',
-      'coadaB',
       `Copiez b[${j}] = ${vb[j]} in c. In a nu mai exista nimic, deci nu mai am ce compara: ` +
         'tot ce a ramas in b este oricum mai mare decat orice am scris pana acum.'
     )
@@ -274,7 +253,6 @@ const cadre = computed<Cadru[]>(() => {
 
   const rezultat = c.map((x) => x.valoare).join(' ')
   instantaneu(
-    'gata',
     'gata',
     c.length === 0
       ? 'Am terminat. Rezultatul este vid: nicio valoare nu respecta conditia.'
@@ -289,11 +267,9 @@ const cadruGol: Cadru = {
   j: 1,
   c: [],
   faza: 'init',
-  zona: 'init',
   semn: '',
   comparam: false,
   actiune: '',
-  coadaActiva: 'niciuna',
   mesaj: '',
 }
 
@@ -379,130 +355,6 @@ const etichetaFaza = computed(() => {
   }
 })
 
-// Codul afisat langa vectori este exact cel din lectie, ca sa se vada pe ce linie
-// se afla executia la fiecare pas.
-const codPrincipal: Record<Operatie, LinieCod[]> = {
-  interclasare: [
-    { text: 'while (i <= n && j <= m)', zone: ['principal', 'ramA', 'ramB'] },
-    { text: '{', zone: ['principal', 'ramA', 'ramB'] },
-    { text: '    if (a[i] < b[j])', zone: ['ramA', 'ramB'] },
-    { text: '    {', zone: ['ramA'] },
-    { text: '        k++;', zone: ['ramA'] },
-    { text: '        c[k] = a[i];', zone: ['ramA'] },
-    { text: '        i++;', zone: ['ramA'] },
-    { text: '    }', zone: ['ramA'] },
-    { text: '    else', zone: ['ramB'] },
-    { text: '    {', zone: ['ramB'] },
-    { text: '        k++;', zone: ['ramB'] },
-    { text: '        c[k] = b[j];', zone: ['ramB'] },
-    { text: '        j++;', zone: ['ramB'] },
-    { text: '    }', zone: ['ramB'] },
-    { text: '}', zone: ['principal', 'ramA', 'ramB'] },
-  ],
-  reuniune: [
-    { text: 'while (i <= n && j <= m)', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-    { text: '{', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-    { text: '    if (a[i] < b[j])', zone: ['ramA', 'ramB', 'ramEg'] },
-    { text: '    {', zone: ['ramA'] },
-    { text: '        k++;', zone: ['ramA'] },
-    { text: '        c[k] = a[i];', zone: ['ramA'] },
-    { text: '        i++;', zone: ['ramA'] },
-    { text: '    }', zone: ['ramA'] },
-    { text: '    else if (a[i] > b[j])', zone: ['ramB', 'ramEg'] },
-    { text: '    {', zone: ['ramB'] },
-    { text: '        k++;', zone: ['ramB'] },
-    { text: '        c[k] = b[j];', zone: ['ramB'] },
-    { text: '        j++;', zone: ['ramB'] },
-    { text: '    }', zone: ['ramB'] },
-    { text: '    else', zone: ['ramEg'] },
-    { text: '    {', zone: ['ramEg'] },
-    { text: '        k++;', zone: ['ramEg'] },
-    { text: '        c[k] = a[i];', zone: ['ramEg'] },
-    { text: '        i++;', zone: ['ramEg'] },
-    { text: '        j++;', zone: ['ramEg'] },
-    { text: '    }', zone: ['ramEg'] },
-    { text: '}', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-  ],
-  intersectie: [
-    { text: 'while (i <= n && j <= m)', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-    { text: '{', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-    { text: '    if (a[i] < b[j])', zone: ['ramA', 'ramB', 'ramEg'] },
-    { text: '        i++;', zone: ['ramA'] },
-    { text: '    else if (a[i] > b[j])', zone: ['ramB', 'ramEg'] },
-    { text: '        j++;', zone: ['ramB'] },
-    { text: '    else', zone: ['ramEg'] },
-    { text: '    {', zone: ['ramEg'] },
-    { text: '        k++;', zone: ['ramEg'] },
-    { text: '        c[k] = a[i];', zone: ['ramEg'] },
-    { text: '        i++;', zone: ['ramEg'] },
-    { text: '        j++;', zone: ['ramEg'] },
-    { text: '    }', zone: ['ramEg'] },
-    { text: '}', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-  ],
-  diferenta: [
-    { text: 'while (i <= n && j <= m)', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-    { text: '{', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-    { text: '    if (a[i] < b[j])', zone: ['ramA', 'ramB', 'ramEg'] },
-    { text: '    {', zone: ['ramA'] },
-    { text: '        k++;', zone: ['ramA'] },
-    { text: '        c[k] = a[i];', zone: ['ramA'] },
-    { text: '        i++;', zone: ['ramA'] },
-    { text: '    }', zone: ['ramA'] },
-    { text: '    else if (a[i] > b[j])', zone: ['ramB', 'ramEg'] },
-    { text: '        j++;', zone: ['ramB'] },
-    { text: '    else', zone: ['ramEg'] },
-    { text: '    {', zone: ['ramEg'] },
-    { text: '        i++;', zone: ['ramEg'] },
-    { text: '        j++;', zone: ['ramEg'] },
-    { text: '    }', zone: ['ramEg'] },
-    { text: '}', zone: ['principal', 'ramA', 'ramB', 'ramEg'] },
-  ],
-}
-
-const coadaLuiA: LinieCod[] = [
-  { text: 'while (i <= n)', zone: ['coadaA'], coada: 'a' },
-  { text: '{', zone: ['coadaA'] },
-  { text: '    k++;', zone: ['coadaA'] },
-  { text: '    c[k] = a[i];', zone: ['coadaA'] },
-  { text: '    i++;', zone: ['coadaA'] },
-  { text: '}', zone: ['coadaA'] },
-]
-
-const coadaLuiB: LinieCod[] = [
-  { text: 'while (j <= m)', zone: ['coadaB'], coada: 'b' },
-  { text: '{', zone: ['coadaB'] },
-  { text: '    k++;', zone: ['coadaB'] },
-  { text: '    c[k] = b[j];', zone: ['coadaB'] },
-  { text: '    j++;', zone: ['coadaB'] },
-  { text: '}', zone: ['coadaB'] },
-]
-
-const cod = computed<LinieCod[]>(() => {
-  const regula = reguli[operatie.value]
-  const linii: LinieCod[] = [
-    { text: 'i = 1;', zone: ['init'] },
-    { text: 'j = 1;', zone: ['init'] },
-    { text: 'k = 0;', zone: ['init'] },
-    { text: '', zone: [] },
-    ...codPrincipal[operatie.value],
-  ]
-  if (regula.copiazaA) linii.push({ text: '', zone: [] }, ...coadaLuiA)
-  if (regula.copiazaB) linii.push({ text: '', zone: [] }, ...coadaLuiB)
-  return linii
-})
-
-function claseLinie(linie: LinieCod) {
-  const c = cadru.value
-  return {
-    'ic-cod__linie--activa': linie.zone.indexOf(c.zona) !== -1,
-    // La iesirea din while-ul principal aratam care dintre cele doua cozi porneste
-    // si care are conditia falsa inca de la prima verificare.
-    'ic-cod__linie--armata': c.faza === 'iesire' && linie.coada === c.coadaActiva,
-    'ic-cod__linie--stinsa':
-      c.faza === 'iesire' && linie.coada !== undefined && linie.coada !== c.coadaActiva,
-  }
-}
-
 const numeOperatie = computed(() => reguli[operatie.value].nume)
 </script>
 
@@ -518,99 +370,89 @@ const numeOperatie = computed(() => reguli[operatie.value].nume)
         <span class="ic__faza" :class="`ic__faza--${cadru.faza}`">{{ etichetaFaza }}</span>
       </div>
 
-      <div class="ic__corp">
-        <div class="ic__scena">
-          <div class="ic-rand">
-            <span class="ic-rand__eticheta ic-rand__eticheta--a">a</span>
-            <div class="ic-celule">
-              <div v-for="el in celuleA" :key="el.idx" class="ic-slot">
-                <span class="ic-slot__index">{{ el.idx }}</span>
-                <div
-                  class="ic-celula ic-celula--a"
-                  :class="{
-                    'ic-celula--consumata': el.consumat,
-                    'ic-celula--curenta': el.curent,
-                    'ic-celula--luata': el.seIa,
-                    'ic-celula--aruncata': el.seArunca,
-                  }"
-                >
-                  {{ el.valoare }}
-                </div>
-                <span class="ic-slot__cursor" :class="{ 'ic-slot__cursor--activ': el.curent }">
-                  &#9650; i
-                </span>
+      <div class="ic__scena">
+        <div class="ic-rand">
+          <span class="ic-rand__eticheta ic-rand__eticheta--a">a</span>
+          <div class="ic-celule">
+            <div v-for="el in celuleA" :key="el.idx" class="ic-slot">
+              <span class="ic-slot__index">{{ el.idx }}</span>
+              <div
+                class="ic-celula ic-celula--a"
+                :class="{
+                  'ic-celula--consumata': el.consumat,
+                  'ic-celula--curenta': el.curent,
+                  'ic-celula--luata': el.seIa,
+                  'ic-celula--aruncata': el.seArunca,
+                }"
+              >
+                {{ el.valoare }}
               </div>
-            </div>
-          </div>
-
-          <div class="ic-comparatie">
-            <template v-if="cadru.comparam">
-              <span class="ic-comparatie__parte ic-comparatie__parte--a">
-                a[{{ cadru.i }}] = {{ a[cadru.i] }}
+              <span class="ic-slot__cursor" :class="{ 'ic-slot__cursor--activ': el.curent }">
+                &#9650; i
               </span>
-              <span class="ic-comparatie__semn">{{ cadru.semn === '=' ? '==' : cadru.semn }}</span>
-              <span class="ic-comparatie__parte ic-comparatie__parte--b">
-                b[{{ cadru.j }}] = {{ b[cadru.j] }}
-              </span>
-            </template>
-            <span v-else class="ic-comparatie__gol">nu se compara nimic la acest pas</span>
-          </div>
-
-          <div class="ic-rand">
-            <span class="ic-rand__eticheta ic-rand__eticheta--b">b</span>
-            <div class="ic-celule">
-              <div v-for="el in celuleB" :key="el.idx" class="ic-slot">
-                <span class="ic-slot__index">{{ el.idx }}</span>
-                <div
-                  class="ic-celula ic-celula--b"
-                  :class="{
-                    'ic-celula--consumata': el.consumat,
-                    'ic-celula--curenta': el.curent,
-                    'ic-celula--luata': el.seIa,
-                    'ic-celula--aruncata': el.seArunca,
-                  }"
-                >
-                  {{ el.valoare }}
-                </div>
-                <span class="ic-slot__cursor" :class="{ 'ic-slot__cursor--activ': el.curent }">
-                  &#9650; j
-                </span>
-              </div>
             </div>
-          </div>
-
-          <div class="ic__separator"></div>
-
-          <div class="ic-rand">
-            <span class="ic-rand__eticheta ic-rand__eticheta--c">c</span>
-            <div class="ic-celule">
-              <div v-for="(el, idx) in cadru.c" :key="idx" class="ic-slot">
-                <span class="ic-slot__index">{{ idx + 1 }}</span>
-                <div class="ic-celula" :class="`ic-celula--${el.sursa}`">{{ el.valoare }}</div>
-                <span class="ic-slot__cursor"></span>
-              </div>
-              <div v-if="cadru.c.length === 0" class="ic-slot">
-                <span class="ic-slot__index">&nbsp;</span>
-                <div class="ic-celula ic-celula--goala">&mdash;</div>
-                <span class="ic-slot__cursor"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="ic__legenda">
-            <span><i class="ic-pastila ic-pastila--a"></i> luat din a</span>
-            <span><i class="ic-pastila ic-pastila--b"></i> luat din b</span>
-            <span><i class="ic-pastila ic-pastila--ambii"></i> exista in amandoi</span>
           </div>
         </div>
 
-        <pre class="ic-cod"><code><span
-          v-for="(linie, idx) in cod"
-          :key="idx"
-          class="ic-cod__linie"
-          :class="claseLinie(linie)"
-        >{{ linie.text || ' ' }}
-</span></code></pre>
+        <div class="ic-comparatie">
+          <template v-if="cadru.comparam">
+            <span class="ic-comparatie__parte ic-comparatie__parte--a">
+              a[{{ cadru.i }}] = {{ a[cadru.i] }}
+            </span>
+            <span class="ic-comparatie__semn">{{ cadru.semn === '=' ? '==' : cadru.semn }}</span>
+            <span class="ic-comparatie__parte ic-comparatie__parte--b">
+              b[{{ cadru.j }}] = {{ b[cadru.j] }}
+            </span>
+          </template>
+          <span v-else class="ic-comparatie__gol">nu se compara nimic la acest pas</span>
+        </div>
+
+        <div class="ic-rand">
+          <span class="ic-rand__eticheta ic-rand__eticheta--b">b</span>
+          <div class="ic-celule">
+            <div v-for="el in celuleB" :key="el.idx" class="ic-slot">
+              <span class="ic-slot__index">{{ el.idx }}</span>
+              <div
+                class="ic-celula ic-celula--b"
+                :class="{
+                  'ic-celula--consumata': el.consumat,
+                  'ic-celula--curenta': el.curent,
+                  'ic-celula--luata': el.seIa,
+                  'ic-celula--aruncata': el.seArunca,
+                }"
+              >
+                {{ el.valoare }}
+              </div>
+              <span class="ic-slot__cursor" :class="{ 'ic-slot__cursor--activ': el.curent }">
+                &#9650; j
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ic__separator"></div>
+
+        <div class="ic-rand">
+          <span class="ic-rand__eticheta ic-rand__eticheta--c">c</span>
+          <div class="ic-celule">
+            <div v-for="(el, idx) in cadru.c" :key="idx" class="ic-slot">
+              <span class="ic-slot__index">{{ idx + 1 }}</span>
+              <div class="ic-celula" :class="`ic-celula--${el.sursa}`">{{ el.valoare }}</div>
+              <span class="ic-slot__cursor"></span>
+            </div>
+            <div v-if="cadru.c.length === 0" class="ic-slot">
+              <span class="ic-slot__index">&nbsp;</span>
+              <div class="ic-celula ic-celula--goala">&mdash;</div>
+              <span class="ic-slot__cursor"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ic__legenda">
+          <span><i class="ic-pastila ic-pastila--a"></i> luat din a</span>
+          <span><i class="ic-pastila ic-pastila--b"></i> luat din b</span>
+          <span><i class="ic-pastila ic-pastila--ambii"></i> exista in amandoi</span>
+        </div>
       </div>
 
       <p class="ic__mesaj">{{ cadru.mesaj }}</p>
@@ -689,15 +531,7 @@ const numeOperatie = computed(() => reguli[operatie.value].nume)
   background-color: hsl(145, 45%, 70%);
 }
 
-.ic__corp {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: flex-start;
-}
-
 .ic__scena {
-  flex: 1 1 340px;
   min-width: 0;
 }
 
@@ -892,51 +726,6 @@ const numeOperatie = computed(() => reguli[operatie.value].nume)
 
 .ic-pastila--ambii {
   background-color: hsl(145, 45%, 72%);
-}
-
-.ic-cod {
-  flex: 0 1 300px;
-  margin: 0;
-  padding: 12px 0;
-  border-radius: 8px;
-  background-color: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-divider);
-  overflow-x: auto;
-  font-size: 0.76rem;
-  line-height: 1.5;
-}
-
-.ic-cod code {
-  font-family: var(--vp-font-family-mono);
-  padding: 0;
-  background: none;
-}
-
-.ic-cod__linie {
-  display: block;
-  padding: 0 12px;
-  white-space: pre;
-  color: var(--vp-c-text-2);
-  border-left: 3px solid transparent;
-}
-
-.ic-cod__linie--activa {
-  background-color: rgba(100, 160, 255, 0.16);
-  border-left-color: var(--vp-c-brand-1);
-  color: var(--vp-c-text-1);
-  font-weight: 600;
-}
-
-.ic-cod__linie--armata {
-  background-color: rgba(60, 160, 90, 0.18);
-  border-left-color: var(--vp-c-success-1);
-  color: var(--vp-c-text-1);
-  font-weight: 600;
-}
-
-.ic-cod__linie--stinsa {
-  opacity: 0.4;
-  text-decoration: line-through;
 }
 
 .ic__mesaj {
