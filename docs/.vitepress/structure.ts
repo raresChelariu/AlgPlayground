@@ -201,6 +201,7 @@ export const categories: Category[] = [
           { text: 'Pentru in cat timp', link: '/cpp/pseudocod/conversii/pentru-in-cat-timp' },
           { text: 'Pentru in repeta pana cand', link: '/cpp/pseudocod/conversii/pentru-in-repeta-pana-cand' },
           { text: 'Repeta in cat timp', link: '/cpp/pseudocod/conversii/repeta-in-cat-timp' },
+          { text: 'Repeta in executa cat timp', link: '/cpp/pseudocod/conversii/repeta-in-executa-cat-timp' },
         ],
       },
     ],
