@@ -7,6 +7,26 @@ Acum schimbam rolurile: **indicele va fi valoarea**, iar in vector tinem informa
 - daca tinem **de cate ori** apare fiecare valoare, vectorul se numeste **vector de frecventa**
 - daca tinem doar **daca** apare sau nu fiecare valoare, vectorul se numeste **vector caracteristic**
 
+Cele doua se folosesc la fel si se scriu aproape la fel. Tabelul de mai jos le pune fata in fata — restul lectiei doar detaliaza ce vezi aici.
+
+---
+
+## Cele doua tipuri de vector, fata in fata
+
+|                                    | **Vector de frecventa**                                                                                                                                                                        | **Vector caracteristic**                                                              |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **La ce intrebare raspunde**       | de cate ori?<br>(de `k` ori, unde `k` este `0`, `1`, `2`, ...)                                                                                                                                   | daca?<br>(da / nu)                                                                      |
+| **Tipul**                          | `int`                                                                                                                                                                                            | `bool`                                                                                  |
+| **Declararea**                     | `int f[101];`                                                                                                                                                                                    | `bool c[101];`                                                                          |
+| **Ce scriu cand il gasesc pe `x`** | `f[x]++;`<br>(s-a mai intamplat inca o data pentru `x`)                                                                                                                                          | `c[x] = 1;`<br>(s-a intamplat pentru `x`)                                               |
+| **Cum citesc rezultatul**          | `f[x] == k` — l-am gasit pe `x` de `k` ori<br>`f[x] == 0` — nu l-am gasit deloc pe `x`<br>`f[x] == 1` — l-am gasit pe `x` o data<br>`f[x] >= 2` — l-am gasit pe `x` de cel putin 2 ori | `c[x] == 1` — s-a intamplat pentru `x`<br>`c[x] == 0` — nu l-am gasit deloc pe `x` |
+
+> [!IMPORTANT] Important
+> in ambele cazuri, `x` **nu** este o pozitie din sirul citit, ci o **valoare** din sir. De aceea nu scriem `f[i]`, ci `f[x]`.
+
+> [!TIP] Sfat
+> vectorul de frecventa poate face tot ce face cel caracteristic (`f[x] != 0` inseamna "`x` apare"). Alegem vectorul caracteristic cand chiar nu avem nevoie de numarul de aparitii: ocupa mai putina memorie si arata mai clar ce ne intereseaza.
+
 ---
 
 ## Vectorul de frecventa
@@ -33,8 +53,8 @@ f[x]++;
 
 Citim tabelul asa: `f[3]` este `3`, deci valoarea `3` apare de 3 ori. `f[4]` este `0`, deci valoarea `4` nu apare deloc.
 
-> [!TIP] Sfat
-> indicele unui vector de frecventa **nu** este o pozitie din sirul citit, ci o valoare din sir. De aceea nu scriem `f[i]`, ci `f[x]`, unde `x` este valoarea curenta.
+> [!NOTE] Observatie
+> s-au citit 8 numere, dar in tabel nu vedem 8 pozitii. Pozitiile sunt **valorile posibile** (`0`, `1`, `2`, ...), iar suma tuturor frecventelor este `8`, adica exact cate numere s-au citit.
 
 ---
 
@@ -99,19 +119,8 @@ while (cin >> x)
 }
 ```
 
----
-
-## Interpretarea valorilor din vectorul de frecventa
-
-Dupa citire, `f` ne raspunde la orice intrebare despre aparitii, fara sa mai parcurgem datele de intrare:
-
-| Conditia    | Ce inseamna                              |
-| ----------- | ---------------------------------------- |
-| `f[x] == 0` | valoarea `x` nu apare deloc              |
-| `f[x] == 1` | valoarea `x` apare exact o data          |
-| `f[x] == 2` | valoarea `x` apare exact de doua ori     |
-| `f[x] >= 2` | valoarea `x` apare de cel putin doua ori |
-| `f[x] != 0` | valoarea `x` apare (cel putin o data)    |
+> [!TIP] Sfat
+> dupa citire, `f` ne raspunde la orice intrebare despre aparitii, fara sa mai parcurgem datele de intrare. Revezi randul **"Cum citesc rezultatul"** din tabelul de la inceputul lectiei.
 
 ---
 
@@ -170,20 +179,6 @@ int main()
 
 > [!NOTE] Observatie
 > desi valoarea `3` a fost citita de 3 ori, atribuirea `c[3] = 1` s-a facut de 3 ori cu acelasi efect. De aceea fiecare valoare se afiseaza o singura data.
-
----
-
-## Cand folosesc fiecare
-
-|                 | Vector de frecventa     | Vector caracteristic |
-| --------------- | ----------------------- | -------------------- |
-| Intrebarea      | de cate ori apare `x`?  | apare `x`?           |
-| Tipul           | `int`                   | `bool`               |
-| Cand gasesc `x` | `f[x]++;`               | `c[x] = 1;`          |
-| Valori posibile | `0`, `1`, `2`, `3`, ... | doar `0` sau `1`     |
-
-> [!TIP] Sfat
-> vectorul de frecventa poate face tot ce face cel caracteristic (`f[x] != 0` inseamna "`x` apare"). Alegem vectorul caracteristic cand chiar nu avem nevoie de numarul de aparitii: ocupa mai putina memorie si arata mai clar ce ne intereseaza.
 
 ---
 
