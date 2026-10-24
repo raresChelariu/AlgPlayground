@@ -194,7 +194,6 @@ Exemple de caractere albe:
 #include <iostream>
 #include <fstream>
 using namespace std;
-ifstream fin("f.in");
 char c1, c2, c3, c4;
 
 int main()
@@ -260,7 +259,7 @@ int main()
 
 **Intrare:**
 ```
-z  abc
+z abc
 ```
 
 **Afisare**:
