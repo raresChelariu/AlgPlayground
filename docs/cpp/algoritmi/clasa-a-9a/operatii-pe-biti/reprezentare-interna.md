@@ -137,6 +137,129 @@ Fiecare pozitie are ponderea `2^pozitie`. Valoarea numarului este suma ponderilo
 > [!TIP] Sfat
 > `11111111(2) = 2^8 - 1`. In general, un numar format din `k` cifre de `1` in baza 2 este egal cu `2^k - 1`. Gandeste-te la baza 10: `999 = 10^3 - 1`.
 
+### In C++: memorare si afisare
+
+Memoram numerele de mai sus in variabile `unsigned char` si le afisam:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+unsigned char a, b, c, d;
+
+int main()
+{
+    a = 5;
+    b = 50;
+    c = 109;
+    d = 255;
+    cout << (int)a << endl;
+    cout << (int)b << endl;
+    cout << (int)c << endl;
+    cout << (int)d << endl;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+(programul nu citeste nimic)
+```
+
+**Afisare:**
+```
+5
+50
+109
+255
+```
+
+Fiecare variabila ocupa un singur byte, iar in memorie bitii sunt cei din tabelul de mai sus: `a` contine `00000101`, `b` contine `00110010`, `c` contine `01101101`, iar `d` contine `11111111`.
+
+### De ce `(int)`?
+
+`unsigned char` este un tip **de caractere**. Fara `(int)`, `cout` interpreteaza cei 8 biti ca **cod ASCII** si afiseaza caracterul corespunzator, nu numarul:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+unsigned char b, c;
+
+int main()
+{
+    b = 50;
+    c = 109;
+    cout << b << endl;
+    cout << c << endl;
+    cout << (int)b << endl;
+    cout << (int)c << endl;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+(programul nu citeste nimic)
+```
+
+**Afisare:**
+```
+2
+m
+50
+109
+```
+
+Caracterul `'2'` are codul ASCII 50, iar caracterul `'m'` are codul ASCII 109. Bitii din memorie sunt aceiasi in ambele cazuri. Difera doar felul in care `cout` ii afiseaza.
+
+> [!IMPORTANT] Important
+> `(int)x` transforma valoarea lui `x` in `int` inainte de afisare. Pentru variabilele `char`, `unsigned char` si `signed char`, foloseste **intotdeauna** `(int)` cand vrei sa afisezi numarul.
+
+### Citirea
+
+Aceeasi problema apare la citire: `cin >> x`, cu `x` de tip `unsigned char`, citeste **un caracter**, nu un numar. Pentru intrarea `109`, `x` primeste caracterul `'1'`, adica valoarea 49.
+
+De aceea citim numarul intr-o variabila `int` si abia apoi il copiem in `unsigned char`:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n;
+unsigned char x;
+
+int main()
+{
+    cin >> n;
+    x = n;
+    cout << (int)x << endl;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+109
+```
+
+**Afisare:**
+```
+109
+```
+
+**Intrare:**
+```
+300
+```
+
+**Afisare:**
+```
+44
+```
+
+Numarul 300 nu incape in 8 biti, asa ca in `x` ajung doar ultimii 8 biti ai lui. Vedem mai jos, la numerele pe 2 bytes, de ce acestia formeaza exact numarul `44`.
+
 ---
 
 ## Numere naturale pe 2 bytes
@@ -165,6 +288,44 @@ Numarul 300 nu incape pe un singur byte (300 > 255), asa ca are nevoie de doi.
 
 > [!IMPORTANT] Important
 > Pe `k` biti se pot memora numerele naturale de la `0` la `2^k - 1`, adica `2^k` valori diferite. Asa se explica randurile `unsigned` din tabel: 2^8 - 1 = 255, 2^16 - 1 = 65535, 2^32 - 1 = 4294967295.
+
+### In C++
+
+`unsigned short` nu este un tip de caractere, deci `cout` il afiseaza direct ca numar, fara `(int)`:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+unsigned short x, y;
+
+int main()
+{
+    x = 300;
+    y = 65535;
+    cout << x << endl;
+    cout << y << endl;
+    cout << sizeof(x) << endl;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+(programul nu citeste nimic)
+```
+
+**Afisare:**
+```
+300
+65535
+2
+```
+
+`y` contine 16 biti de `1`, adica cea mai mare valoare a tipului, iar `sizeof(x)` confirma ca variabila ocupa 2 bytes.
+
+> [!NOTE] Observatie
+> Acum se vede de ce, mai sus, `300` copiat intr-un `unsigned char` a devenit `44`. Din cei doi bytes ai lui 300 (`00000001 00101100`) a ramas doar byte-ul din dreapta, `00101100 = 44 = 300 % 256`.
 
 ---
 
@@ -236,7 +397,46 @@ Deci pe 8 biti, in cod complementar, se pot memora numerele intregi de la **-128
 > [!NOTE] Observatie
 > De ce avem -128, dar nu si +128? Cele 256 de combinatii de biti se impart in doua: 128 incep cu `0` si 128 incep cu `1`. Cele care incep cu `0` reprezinta numerele de la 0 la 127 (0 "ocupa" o combinatie), iar cele care incep cu `1` reprezinta numerele de la -1 la -128. Pentru +128 nu mai ramane nicio combinatie.
 
-### Verificare in C++
+### In C++: memorare si afisare
+
+Memoram valorile din tabelul de mai sus in variabile `signed char`. Ca la `unsigned char`, afisam cu `(int)`:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+signed char a, b, c, d;
+
+int main()
+{
+    a = 127;
+    b = -1;
+    c = -5;
+    d = -128;
+    cout << (int)a << endl;
+    cout << (int)b << endl;
+    cout << (int)c << endl;
+    cout << (int)d << endl;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+(programul nu citeste nimic)
+```
+
+**Afisare:**
+```
+127
+-1
+-5
+-128
+```
+
+In memorie, cele patru variabile contin `01111111`, `11111111`, `11111011` si `10000000`.
+
+### Aceiasi biti, cititi altfel
 
 Daca punem `-5` intr-o variabila `signed char` si apoi copiem bitii intr-o variabila `unsigned char`, bitii raman aceiasi, doar ca sunt cititi ca numar natural:
 
@@ -267,9 +467,6 @@ int main()
 ```
 
 `11111011` citit ca numar natural este `128 + 64 + 32 + 16 + 8 + 2 + 1 = 251`.
-
-> [!NOTE] Observatie
-> `(int)y` transforma valoarea in `int` inainte de afisare. Fara el, `cout` ar afisa caracterul cu codul 251, nu numarul.
 
 > [!TIP] Sfat
 > Observa ca `251 = 256 - 5`. In general, pe 8 biti, numarul negativ `-x` are aceiasi biti ca numarul natural `256 - x`.
