@@ -1,13 +1,17 @@
 # Introducere in grafuri
 
-Multe probleme vorbesc despre **obiecte** si despre **legaturile** dintre ele: orase legate prin sosele, elevi care sunt prieteni intre ei, pagini web care au link-uri unele spre altele. Pentru toate aceste situatii folosim acelasi model: **graful**.
+Multe probleme vorbesc despre **obiecte** si despre **legaturile** dintre ele: 
+
+- orase legate prin sosele
+- elevi care sunt prieteni intre ei
+- pagini web care au link-uri unele spre altele. 
+
+Pentru toate aceste situatii folosim acelasi model: **graful**.
 
 Legaturile pot fi de doua feluri:
 
-- **in ambele sensuri** — daca Ion este prieten cu Maria, atunci si Maria este prietena cu Ion; o sosea cu dublu sens poate fi parcursa in ambele directii. Pentru astfel de legaturi folosim un **graf neorientat**.
-- **intr-un singur sens** — o strada cu sens unic, un link de pe o pagina spre alta (pagina la care ajungi nu are neaparat un link inapoi). Pentru astfel de legaturi folosim un **graf orientat**.
-
-In aceasta lectie le invatam pe amandoua **in paralel**: fiecare notiune apare intai la grafurile neorientate, apoi la grafurile orientate.
+- **mereu in ambele sensuri** — daca Ion este vecin cu Maria, atunci si Maria este vecina cu Ion. Pentru astfel de legaturi folosim un **graf neorientat**.
+- **posibil si intr-un singur sens** — o strada poate avea sens unic, dar si sens dublu; un link de pe o pagina spre alta (pagina la care ajungi nu are neaparat un link inapoi). Pentru astfel de legaturi folosim un **graf orientat**.
 
 ---
 
