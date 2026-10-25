@@ -177,6 +177,19 @@ export const categories: Category[] = [
     landing: '/cpp/algoritmi/clasa-a-11a/',
     items: [
       { text: 'Backtracking', link: '/cpp/algoritmi/clasa-a-11a/backtracking' },
+      {
+        text: 'Grafuri',
+        collapsed: false,
+        items: [
+          {
+            text: 'Notiuni de baza',
+            collapsed: false,
+            items: [
+              { text: 'Introducere', link: '/cpp/algoritmi/clasa-a-11a/grafuri/introducere' },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
