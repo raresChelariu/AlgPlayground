@@ -13,6 +13,9 @@ Fiecare cutie are un **nume** (eticheta) si un **tip** (ce fel de valoare poate 
 | `char` | Un singur caracter | `'A'`, `'z'`, `'3'` | un caracter ASCII |
 | `bool` | Adevarat / Fals | `1`, `0` | doar 1 (`adevarat`) sau 0 (`fals`)|
 
+> [!NOTE] Observatie
+> Un tabel complet, cu numarul de bytes ocupat de fiecare tip si cu domeniile exacte (inclusiv tipurile `short` si `unsigned`), gasesti in lectia [Reprezentarea interna a numerelor](../operatii-pe-biti/reprezentare-interna.md).
+
 > [!IMPORTANT] Important
 > In C++ folosim **punct** pentru zecimale, nu virgula: `3.14`, nu `3,14`.
 
