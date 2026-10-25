@@ -384,3 +384,184 @@ int main()
 
 > [!TIP] Sfat
 > Folosim o variabila separata `zecimal` ca sa pastram rezultatul intermediar. Asa nu ne incurcam: `x` se "consuma" in primul `while`, iar `zecimal` se "consuma" in al doilea.
+
+---
+
+## Conversie intre baza b si baza b^k
+
+Cand una dintre baze este **putere a celeilalte** (ex. `4 = 2^2`, `8 = 2^3`, `16 = 2^4`, `9 = 3^2`), nu mai avem nevoie de baza 10 ca punte. Conversia se face direct, **grupand cifre**.
+
+**Ideea:** o cifra din baza `b^k` se scrie exact cu `k` cifre in baza `b`.
+
+> **Ex:** Cifra `3` din baza 4 se scrie `11` in baza 2 (doua cifre, pentru ca `4 = 2^2`). Cifra `5` din baza 8 se scrie `101` in baza 2 (trei cifre, pentru ca `8 = 2^3`).
+
+Tabelul pentru baza 2 si baza 4 (`k = 2`):
+
+| baza 4 | baza 2 |
+|--------|--------|
+| 0      | 00     |
+| 1      | 01     |
+| 2      | 10     |
+| 3      | 11     |
+
+### Din baza b in baza b^k
+
+Pasi:
+1. Impartim cifrele lui `x` in grupe de cate `k`, **incepand de la dreapta**.
+2. Daca la stanga ultima grupa are mai putin de `k` cifre, o completam cu zerouri la stanga.
+3. Fiecare grupa se converteste intr-o singura cifra din baza `b^k`.
+
+**Exemplu:** `110101(2)` in baza 4 (`k = 2`, grupe de cate 2 cifre):
+
+| grupe  | 11 | 01 | 01 |
+|--------|----|----|----|
+| cifra in baza 4 | 3  | 1  | 1  |
+
+Rezultat: `110101(2) = 311(4)`.
+
+Verificare: `110101(2) = 53(10)` si `311(4) = 3·16 + 1·4 + 1 = 53(10)`. ✓
+
+**Exemplu cu completare:** `10111(2)` in baza 4. Avem 5 cifre, deci ultima grupa (din stanga) are o singura cifra si o completam cu un zero:
+
+| grupe  | 01 | 01 | 11 |
+|--------|----|----|----|
+| cifra in baza 4 | 1  | 1  | 3  |
+
+Rezultat: `10111(2) = 113(4)`.
+
+> [!WARNING] Atentie
+> Grupele se formeaza **de la dreapta la stanga**, nu de la stanga la dreapta. Daca grupam `10111` de la stanga, obtinem `10 11 1` si rezultatul gresit.
+
+**Exemplu cu `k = 3`:** `1101011(2)` in baza 8. Grupam cate 3 cifre de la dreapta: `001 101 011` (am completat cu doua zerouri la stanga).
+
+| grupe  | 001 | 101 | 011 |
+|--------|-----|-----|-----|
+| cifra in baza 8 | 1   | 5   | 3   |
+
+Rezultat: `1101011(2) = 153(8)`.
+
+### Din baza b^k in baza b
+
+Procedam invers: **fiecare cifra** a lui `x` se inlocuieste cu cele `k` cifre ale ei in baza `b` (completate cu zerouri la stanga pana ajung la `k` cifre). La final, zerourile de la inceputul rezultatului se sterg.
+
+**Exemplu:** `132(4)` in baza 2:
+
+| cifra in baza 4 | 1  | 3  | 2  |
+|-----------------|----|----|----|
+| grupa in baza 2 | 01 | 11 | 10 |
+
+Rezultat: `011110`, adica `132(4) = 11110(2)` (am sters zeroul din fata).
+
+Verificare: `132(4) = 16 + 12 + 2 = 30(10)` si `11110(2) = 16 + 8 + 4 + 2 = 30(10)`. ✓
+
+> [!TIP] Sfat
+> Conversia intre baza 2 si baza 8 sau 16 este foarte folosita in practica, pentru ca un numar binar lung devine mult mai scurt si mai usor de citit. Merita sa memorezi tabelul pentru baza 2 -> baza 4 si baza 2 -> baza 8.
+
+### Programul — din baza b in baza b^k
+
+Citim `x` (scris in baza `b`), `b` si `k`. La fiecare pas din `while`, luam urmatoarele `k` cifre ale lui `x` (de la dreapta) si le transformam intr-o singura cifra a rezultatului. Cand `x` se epuizeaza inainte sa luam toate cele `k` cifre, `x % 10` este `0`, deci completarea cu zerouri se face automat.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int x, b, k, rez, putere10, grupa, putereB, j;
+
+int main()
+{
+    cin >> x >> b >> k;
+    rez = 0;
+    putere10 = 1;
+    while (x != 0)
+    {
+        grupa = 0;
+        putereB = 1;
+        for (j = 1; j <= k; j++)
+        {
+            grupa += (x % 10) * putereB;
+            putereB *= b;
+            x /= 10;
+        }
+        rez += grupa * putere10;
+        putere10 *= 10;
+    }
+    cout << rez;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+110101 2 2
+```
+
+**Afisare:**
+```
+311
+```
+
+### Trasare cod
+
+Pentru `x = 110101, b = 2, k = 2`:
+
+| pas | cifrele luate din x (de la dreapta) | grupa | rez | putere10 | x ramas |
+|-----|-------------------------------------|-------|-----|----------|---------|
+| start | -                                 | -     | 0   | 1        | 110101  |
+| 1   | 1, 0 (adica `01`)                   | 1     | 1   | 10       | 1101    |
+| 2   | 1, 0 (adica `01`)                   | 1     | 11  | 100      | 11      |
+| 3   | 1, 1 (adica `11`)                   | 3     | 311 | 1000     | 0       |
+
+> [!IMPORTANT] Important
+> Programul afiseaza corect doar daca `b^k <= 10`, adica fiecare grupa devine o cifra de la 0 la 9 (ex. baza 2 -> baza 4, baza 2 -> baza 8, baza 3 -> baza 9). Pentru baza 16 ar fi nevoie de litere.
+
+### Programul — din baza b^k in baza b
+
+Citim `x` (scris in baza `b^k`), `b` si `k`. Fiecare cifra a lui `x` o scriem cu `k` cifre in baza `b`, folosind aceeasi idee ca la Metoda 1 (`% b` si `/ b`), dar de exact `k` ori. Zerourile din fata nu apar, pentru ca adunam zerouri la `rez`.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int x, b, k, rez, putere10, cifra, j;
+
+int main()
+{
+    cin >> x >> b >> k;
+    rez = 0;
+    putere10 = 1;
+    while (x != 0)
+    {
+        cifra = x % 10;
+        for (j = 1; j <= k; j++)
+        {
+            rez += (cifra % b) * putere10;
+            putere10 *= 10;
+            cifra /= b;
+        }
+        x /= 10;
+    }
+    cout << rez;
+    return 0;
+}
+```
+
+**Intrare:**
+```
+132 2 2
+```
+
+**Afisare:**
+```
+11110
+```
+
+### Trasare cod
+
+Pentru `x = 132, b = 2, k = 2`:
+
+| pas | cifra | cele `k` cifre in baza 2 (de la dreapta) | rez   | putere10 | x ramas |
+|-----|-------|------------------------------------------|-------|----------|---------|
+| start | -   | -                                        | 0     | 1        | 132     |
+| 1   | 2     | 0, 1                                     | 10    | 100      | 13      |
+| 2   | 3     | 1, 1                                     | 1110  | 10000    | 1       |
+| 3   | 1     | 1, 0                                     | 11110 | 1000000  | 0       |
