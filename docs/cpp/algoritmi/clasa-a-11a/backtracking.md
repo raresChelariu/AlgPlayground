@@ -442,6 +442,110 @@ Doua lucruri de observat:
 
 ---
 
+## Exemplu — submultimi
+
+Se citeste un numar natural `n`. Sa se afiseze, in ordine lexicografica, toate submultimile nevide ale multimii `{1, 2, ..., n}`, fiecare cu elementele in ordine crescatoare.
+
+Pornim de la combinari si pastram aceeasi idee: solutia este **strict crescatoare**, deci pe pozitia `k` incerc doar valorile de la `sol[k - 1] + 1` pana la `n`. Ca si acolo, o submultime apare o singura data, in forma ei crescatoare.
+
+Diferenta este ca acum submultimile **nu mai au toate aceeasi dimensiune**. `1`, `1 2` si `1 2 3` sunt toate solutii. Asta inseamna ca **orice solutie partiala este si o solutie completa**: de fiecare data cand pun o valoare pe pozitia `k`, `sol[1..k]` este o submultime buna, pe care o afisez pe loc. Apoi incerc sa o prelungesc cu `bkt(k + 1)`.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int n, sol[11];
+
+void afisare(int k)
+{
+    int i;
+
+    for (i = 1; i <= k; i++)
+    {
+        cout << sol[i] << " ";
+    }
+    cout << "\n";
+}
+void bkt(int k)
+{
+    int i;
+
+    for (i = sol[k - 1] + 1; i <= n; i++)
+    {
+        sol[k] = i;
+        afisare(k);
+        bkt(k + 1);
+    }
+}
+int main()
+{
+    cin >> n;
+    bkt(1);
+    return 0;
+}
+```
+
+**Intrare:**
+```
+3
+```
+
+**Afisare:**
+```
+1
+1 2
+1 2 3
+1 3
+2
+2 3
+3
+```
+
+Doua lucruri s-au schimbat fata de sablon:
+
+**Afisarea se face in `for`, nu in cazul de baza.** Nu mai astept sa ajung la un anumit pas: fiecare valoare pusa in solutie produce imediat o submultime noua. De aceea `afisare` primeste ca parametru pe `k`, ca sa stie cate elemente sa afiseze.
+
+**Nu mai exista conditia `k == n + 1`.** Oprirea se face singura: daca `sol[k - 1]` este deja `n`, intervalul `n + 1 .. n` este gol, `for`-ul nu se executa deloc, iar `bkt(k)` se incheie fara alt apel recursiv. Cel mai departe se ajunge la `bkt(n + 1)`, dupa submultimea `1 2 ... n`.
+
+### Arborele de cautare
+
+```mermaid
+flowchart TB
+    r["start"] --> a["1"]
+    r --> b["2"]
+    r --> c["3"]
+    a --> a2["1 2"]
+    a --> a3["1 3"]
+    a2 --> a23["1 2 3"]
+    b --> b3["2 3"]
+    style a fill:#4CAF50,color:#fff
+    style b fill:#4CAF50,color:#fff
+    style c fill:#4CAF50,color:#fff
+    style a2 fill:#4CAF50,color:#fff
+    style a3 fill:#4CAF50,color:#fff
+    style a23 fill:#4CAF50,color:#fff
+    style b3 fill:#4CAF50,color:#fff
+```
+
+Aici **toate nodurile sunt verzi**: fiecare nod al arborelui este o submultime afisata. Ordinea de afisare este ordinea in care sunt vizitate nodurile — mai intai nodul, apoi tot ce este sub el, de la stanga la dreapta.
+
+> [!NOTE] Observatie
+> Multimea `{1, 2, ..., n}` are `2` la puterea `n` submultimi, dintre care una este multimea vida. Programul nu o afiseaza, pentru ca afisarea se face doar dupa ce am pus macar un element in `sol`. Pentru `n = 3` sunt `2^3 - 1 = 7` submultimi nevide, exact cate apar mai sus.
+
+> [!TIP] Sfat
+> Daca problema cere submultimile **grupate dupa numarul de elemente** (intai cele cu un element, apoi cele cu doua etc.), nu ai nevoie de un program nou: in `main` apelezi programul de la [combinari](#exemplu-—-combinari) pentru fiecare dimensiune pe rand:
+>
+> ```cpp
+> for (m = 1; m <= n; m++)
+> {
+>     bkt(1);
+> }
+> ```
+>
+> unde `m` este variabila globala care da dimensiunea solutiei in `bkt`.
+
+---
+
 ## Cat de rapid este backtracking-ul?
 
 Backtracking-ul genereaza **toate** solutiile, iar la multe probleme numarul lor creste ametitor. Permutarile de `n` elemente sunt `n!` (n factorial):
@@ -544,4 +648,5 @@ Programul trece mai departe in `for` si incearca sa completeze pozitia `m + 1`, 
 - Contorul `i` din `bkt` este **local**, nu global.
 - La vectorul de aparitii: **ce marchez inainte de apel, demarchez dupa apel.**
 - Cand se poate, pune conditia de validitate in limitele `for`-ului (ca la combinari, unde pornim de la `sol[k - 1] + 1`).
+- Cand **orice solutie partiala este si solutie** (ca la submultimi), afisarea se face in `for`, imediat dupa ce pui valoarea, iar conditia `k == n + 1` nu mai este necesara.
 - Numarul de solutii creste foarte repede, de aceea problemele de backtracking au mereu date de intrare mici.
