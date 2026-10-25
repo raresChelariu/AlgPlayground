@@ -24,6 +24,7 @@ Categoriile trebuie sa fie **vizibile in sidebar-ul VitePress** ([docs/.vitepres
 - **Nume de variabile in camelCase**: toate variabilele din doua sau mai multe cuvinte se scriu `camelCase` (ex. `ultimaCol`, `totiDistincti`), niciodata cu underscore. Vectorii de deplasare/directie se numesc mereu `dLin` si `dCol` si se indexeaza de la `1`.
 - **Stil Allman pentru acolade**: toate buclele `for` si `while`, functiile si blocurile cu mai multe instructiuni au acolada de deschidere pe linie noua. `if`/`else` fara acolade daca corpul e pe o singura linie.
 - **Siruri de caractere**: `char nume[N]` citite cu `cin >> x`. Nu folosim `std::string`, nu folosim `cin.getline` / `cin.get`. In exemple numele sunt dintr-un singur cuvant (`Ion`, `Maria`), ca sa nu amestecam citirea.
+- **`1` / `0` in loc de `true` / `false`**: in cod si in text folosim `1` pentru adevarat si `0` pentru fals (`return 1;`, `return 0;`, `folosit[i] = 1;`, `if (gasit == 0)`). Nu scriem `true` / `false`, nici in variabilele de tip `bool`.
 - **Terminologie pentru instructiuni repetitive**: in textul lectiilor nu folosi cuvantul generic "bucla". Spune **`for`-ul** sau **`while`-ul** atunci cand stii despre care din ele e vorba. Cand referirea e generica (valabila pentru orice tip de repetare), foloseste **"instructiunea repetitiva"**.
 
 ## Conventii de formatare pentru lectii `.md`
