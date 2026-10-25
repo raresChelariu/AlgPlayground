@@ -8,12 +8,13 @@ Fiecare lectie apartine **uneia** din urmatoarele categorii:
 
 - **Clasa a IX-a** — folder `docs/cpp/algoritmi/clasa-a-9a/`
 - **Clasa a X-a** — folder `docs/cpp/algoritmi/clasa-a-10a/`
+- **Clasa a XI-a** — folder `docs/cpp/algoritmi/clasa-a-11a/`
 - **Clasa a XII-a** — folder `docs/cpp/algoritmi/clasa-a-12a/`
 - **Pseudocod** - folder `docs/cpp/algoritmi/pseudocod/`
 
 Categoriile trebuie sa fie **vizibile in sidebar-ul VitePress** ([docs/.vitepress/config.mts](docs/.vitepress/config.mts)) ca sectiuni separate de nivel superior (nu o lista plata "Lectii" care amesteca toate clasele).
 
-**Regula pentru Claude:** cand user-ul cere o lectie noua si **nu** specifica categoria (IX, X sau XII), intreaba-l explicit **inainte** sa creezi fisierul — nu ghici pe baza continutului.
+**Regula pentru Claude:** cand user-ul cere o lectie noua si **nu** specifica categoria (IX, X, XI sau XII), intreaba-l explicit **inainte** sa creezi fisierul — nu ghici pe baza continutului.
 
 ## Conventii de cod in exemple
 

@@ -106,6 +106,15 @@ export const categories: Category[] = [
           { text: 'Vecini in matrice', link: '/cpp/algoritmi/clasa-a-9a/matrici/vecini-in-matrice' },
         ],
       },
+      {
+        text: 'Operatii pe biti',
+        collapsed: false,
+        items: [
+          { text: 'Reprezentare interna', link: '/cpp/algoritmi/clasa-a-9a/operatii-pe-biti/reprezentare-interna' },
+          { text: 'Operatori pe biti', link: '/cpp/algoritmi/clasa-a-9a/operatii-pe-biti/operatori-pe-biti' },
+          { text: 'Probleme rezolvate', link: '/cpp/algoritmi/clasa-a-9a/operatii-pe-biti/probleme-rezolvate' },
+        ],
+      },
     ],
   },
   {
@@ -160,6 +169,14 @@ export const categories: Category[] = [
           { text: 'Algoritmi de fill', link: '/cpp/algoritmi/clasa-a-10a/algoritmi-de-fill' },
         ],
       },
+    ],
+  },
+  {
+    id: 'clasa-a-11a',
+    text: 'Clasa a XI-a',
+    landing: '/cpp/algoritmi/clasa-a-11a/',
+    items: [
+      { text: 'Backtracking', link: '/cpp/algoritmi/clasa-a-11a/backtracking' },
     ],
   },
   {

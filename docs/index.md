@@ -11,6 +11,9 @@ hero:
     - theme: brand
       text: Clasa a X-a
       link: /cpp/algoritmi/clasa-a-10a/
+    - theme: brand
+      text: Clasa a XI-a
+      link: /cpp/algoritmi/clasa-a-11a/
     - theme: alt
       text: Pseudocod
       link: /cpp/pseudocod/
