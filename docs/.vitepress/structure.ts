@@ -186,6 +186,7 @@ export const categories: Category[] = [
             collapsed: false,
             items: [
               { text: 'Introducere', link: '/cpp/algoritmi/clasa-a-11a/grafuri/introducere' },
+              { text: 'Gradul unui nod', link: '/cpp/algoritmi/clasa-a-11a/grafuri/gradul-unui-nod' },
             ],
           },
         ],
