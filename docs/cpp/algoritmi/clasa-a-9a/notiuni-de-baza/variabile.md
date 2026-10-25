@@ -40,12 +40,12 @@ int main()
 {
     varsta = 16;           // initializare (acum are valoarea 16)
     char initiala = 'M';
-    bool esteElev = true;
+    bool esteElev = 1;
 
     cout << varsta << endl;       // 16
     cout << inaltime << endl;     // 1.75
     cout << initiala << endl;     // M
-    cout << esteElev << endl;     // 1 (true se afiseaza ca 1)
+    cout << esteElev << endl;     // 1
 
     return 0;
 }

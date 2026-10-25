@@ -171,7 +171,7 @@ c.push(p);          // (3, 5) intra la sfarsitul cozii
 p = c.first();      // citim prima pozitie, fara sa o scoatem
 p = c.pop();        // o citim si o scoatem: p.lin = 3, p.col = 5
 
-if (c.areElemente() == false)
+if (c.areElemente() == 0)
     cout << "Coada este vida";
 ```
 

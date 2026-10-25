@@ -654,7 +654,7 @@ int n, i, v[101];
 bool ordonat(int st, int dr)
 {
     if (st == dr)
-        return true;
+        return 1;
 
     int mij;
     bool stanga, dreapta;

@@ -125,16 +125,19 @@ char dinCifraInCaracter(int x)  { return x + '0'; }
 
 Biblioteca `<cctype>` contine functii gata facute pentru verificarea si conversia caracterelor.
 
-| Functie      | Returneaza                                  |
-|--------------|---------------------------------------------|
-| `isalpha(c)` | `true` daca `c` este litera (mare sau mica) |
-| `isupper(c)` | `true` daca `c` este litera mare            |
-| `islower(c)` | `true` daca `c` este litera mica            |
-| `isdigit(c)` | `true` daca `c` este cifra (`'0'`..`'9'`)   |
-| `isalnum(c)` | `true` daca `c` este litera sau cifra       |
-| `isspace(c)` | `true` daca `c` este caracter alb           |
-| `toupper(c)` | varianta majuscula a lui `c`                |
-| `tolower(c)` | varianta minuscula a lui `c`                |
+| Functie      | Returneaza                                         |
+|--------------|----------------------------------------------------|
+| `isalpha(c)` | nenul daca `c` este litera (mare sau mica), altfel `0` |
+| `isupper(c)` | nenul daca `c` este litera mare, altfel `0`        |
+| `islower(c)` | nenul daca `c` este litera mica, altfel `0`        |
+| `isdigit(c)` | nenul daca `c` este cifra (`'0'`..`'9'`), altfel `0` |
+| `isalnum(c)` | nenul daca `c` este litera sau cifra, altfel `0`   |
+| `isspace(c)` | nenul daca `c` este caracter alb, altfel `0`       |
+| `toupper(c)` | varianta majuscula a lui `c`                       |
+| `tolower(c)` | varianta minuscula a lui `c`                       |
+
+> [!WARNING] Atentie
+> Functiile `isalpha`, `isdigit` etc. nu intorc neaparat `1` cand raspunsul este "da" — pot intoarce orice valoare diferita de `0` (de exemplu `1024`). Scrie `if (isdigit(c))`, nu `if (isdigit(c) == 1)`.
 
 ```cpp
 #include <iostream>

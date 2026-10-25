@@ -115,9 +115,9 @@ bool valid(int k, int x)
     for (i = 1; i < k; i++)
     {
         if (sol[i] == x)
-            return false;
+            return 0;
     }
-    return true;
+    return 1;
 }
 void bkt(int k)
 {
@@ -221,7 +221,7 @@ Pentru `n = 3`, primele doua solutii se obtin asa:
 
 ## Varianta cu vector de aparitii
 
-Functia `valid` de mai sus parcurge la fiecare verificare toata solutia partiala. Putem raspunde instantaneu la intrebarea "a mai fost folosita valoarea `i`?" daca tinem un [vector caracteristic](../clasa-a-9a/vectori/vector-de-frecventa) `folosit`, unde `folosit[i]` este `true` daca valoarea `i` se afla deja in solutie.
+Functia `valid` de mai sus parcurge la fiecare verificare toata solutia partiala. Putem raspunde instantaneu la intrebarea "a mai fost folosita valoarea `i`?" daca tinem un [vector caracteristic](../clasa-a-9a/vectori/vector-de-frecventa) `folosit`, unde `folosit[i]` este `1` daca valoarea `i` se afla deja in solutie.
 
 ```cpp
 #include <iostream>
@@ -255,9 +255,9 @@ void bkt(int k)
         if (!folosit[i])
         {
             sol[k] = i;
-            folosit[i] = true;
+            folosit[i] = 1;
             bkt(k + 1);
-            folosit[i] = false;
+            folosit[i] = 0;
         }
     }
 }
@@ -285,7 +285,7 @@ int main()
 ```
 
 > [!IMPORTANT] Important
-> Linia `folosit[i] = false;` de **dupa** apelul recursiv este obligatorie. Cand `bkt(k + 1)` se termina, valoarea `i` **iese** din solutie (pe pozitia `k` urmeaza sa pun alta valoare), deci trebuie marcata din nou ca libera. Regula de memorat: **ce marchez inainte de apel, demarchez dupa apel.**
+> Linia `folosit[i] = 0;` de **dupa** apelul recursiv este obligatorie. Cand `bkt(k + 1)` se termina, valoarea `i` **iese** din solutie (pe pozitia `k` urmeaza sa pun alta valoare), deci trebuie marcata din nou ca libera. Regula de memorat: **ce marchez inainte de apel, demarchez dupa apel.**
 
 > [!NOTE] Observatie
 > La `sol[k]` nu e nevoie de "demarcare", pentru ca valoarea de pe pozitia `k` se suprascrie la urmatoarea iteratie a `for`-ului. La `folosit` insa, `i` si urmatoarea valoare sunt pozitii **diferite** in vector, deci nimeni nu sterge marcajul in locul nostru.
@@ -332,9 +332,9 @@ void bkt(int k)
         if (!folosit[i])
         {
             sol[k] = i;
-            folosit[i] = true;
+            folosit[i] = 1;
             bkt(k + 1);
-            folosit[i] = false;
+            folosit[i] = 0;
         }
     }
 }
@@ -617,9 +617,9 @@ La pasul `n` pozitia `sol[n]` **inca nu a fost completata**. Pentru `n = 3`, pro
 
 ```cpp
 sol[k] = i;
-folosit[i] = true;
+folosit[i] = 1;
 bkt(k + 1);
-// lipseste: folosit[i] = false;
+// lipseste: folosit[i] = 0;
 ```
 
 Dupa prima solutie, `1 2 3`, toate valorile raman marcate ca folosite si nu mai pot fi puse nicaieri. Programul afiseaza doar prima permutare.

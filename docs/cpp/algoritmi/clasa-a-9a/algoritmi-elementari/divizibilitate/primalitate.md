@@ -502,4 +502,4 @@ int main()
 > Compara cele doua variante: cu functia `prim` scrisa o singura data, `main` devine mult mai scurt si mai usor de citit. Acesta este castigul principal al functiilor — nu viteza, ci claritatea si refolosirea codului.
 
 > [!NOTE] Observatie
-> `if (prim(x))` este acelasi lucru cu `if (prim(x) == 1)`. Functia intoarce deja `true` / `false`, deci nu mai e nevoie de comparatie.
+> `if (prim(x))` este acelasi lucru cu `if (prim(x) == 1)`. Functia intoarce deja `1` / `0`, deci nu mai e nevoie de comparatie.
