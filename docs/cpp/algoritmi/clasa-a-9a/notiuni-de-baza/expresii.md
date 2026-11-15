@@ -173,9 +173,8 @@ Cand intr-o expresie avem mai multi operatori diferiti, ordinea de evaluare este
 | | 3 | `+`, `-` |
 | **Comparatii** | 4 | `<`, `<=`, `>`, `>=` |
 | | 5 | `==`, `!=` |
-| **Logica** (se evalueaza ultima) | 6 | `!` (negatie) |
-| | 7 | `&&` (SI) |
-| | 8 | `\|\|` (SAU) |
+| **Logica** (se evalueaza ultima) | 6 | `&&` (SI) |
+| | 7 | `\|\|` (SAU) |
 
 > [!TIP] Sfat
 > Retine cele 3 grupe in ordine: **aritmetica** → **comparatii** → **logica**. In caz de dubiu, pune **paranteze**.
