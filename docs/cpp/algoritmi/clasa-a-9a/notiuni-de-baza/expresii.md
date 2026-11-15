@@ -179,9 +179,6 @@ Cand intr-o expresie avem mai multi operatori diferiti, ordinea de evaluare este
 > [!TIP] Sfat
 > Retine cele 3 grupe in ordine: **aritmetica** → **comparatii** → **logica**. In caz de dubiu, pune **paranteze**.
 
-> [!NOTE] Observatie
-> In cadrul logicii: `!` se aplica primul, apoi `&&`, apoi `||`. Deci `a || b && c` se evalueaza ca `a || (b && c)`.
-
 ---
 
 ## Legile lui DeMorgan
